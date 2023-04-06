@@ -1,24 +1,22 @@
-import { Table, Column, Model, HasMany } from 'sequelize-typescript'
+import { Table, Column, Model } from "sequelize-typescript";
 
 @Table
 export class Tasks extends Model {
-  
   @Column
-  name: string
+  name: string;
 
   @Column
-  description: string
+  description: string;
 
   @Column
   createdate: string;
 
   @Column
-  updateddate: string
+  updateddate: string;
 
   @Column
   createdBy: string;
 
   @Column
   updatedBy: string;
-  
 }
