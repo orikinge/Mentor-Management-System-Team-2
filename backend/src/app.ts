@@ -1,5 +1,5 @@
 import * as bodyParser from "body-parser";
-import * as express from "express";
+import express, { Application } from "express";
 import "dotenv/config";
 import { APILogger } from "./logger/api.logger";
 import * as fs from "fs";
@@ -7,21 +7,21 @@ import { getAllModelsInDir } from "./utils";
 import * as path from "path";
 
 class App {
-  public express: express.Application;
+  public express: Application;
   public logger: APILogger;
 
   /* Swagger files start */
-  private swaggerFile: any = process.cwd() + "/swagger/swagger.json";
+  private swaggerFile: any = process.cwd() + "/src/swagger/swagger.json";
   private swaggerData: any = fs.readFileSync(this.swaggerFile, "utf8");
   private customCss: any = fs.readFileSync(
-    process.cwd() + "/swagger/swagger.css",
+    process.cwd() + "/src/swagger/swagger.css",
     "utf8",
   );
   private swaggerDocument = JSON.parse(this.swaggerData);
   /* Swagger files end */
 
   constructor() {
-    this.express = express.default();
+    this.express = express();
     this.middleware();
     this.routes();
     this.logger = new APILogger();
@@ -39,9 +39,7 @@ class App {
   }
 
   private routes(): void {
-    const { modelsArray } = getAllModelsInDir(
-      path.join(__dirname, "../routes"),
-    );
+    const { modelsArray } = getAllModelsInDir(path.join(__dirname, "./routes"));
     modelsArray.forEach((route: any) => {
       this.express.use("/api", route);
     });

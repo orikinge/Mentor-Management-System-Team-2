@@ -1,15 +1,15 @@
-import * as pine from "pine";
+import pine from "pine";
 
 const logger = pine();
 
 export class APILogger {
-  info(message, data) {
+  info(message: string, data: unknown) {
     logger.info(
       `${message}   ${undefined != data ? JSON.stringify(data) : ""}`,
     );
   }
 
-  error(message) {
+  error(message: string) {
     logger.error(message);
   }
 }
