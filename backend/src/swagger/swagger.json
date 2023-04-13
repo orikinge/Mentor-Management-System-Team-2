@@ -55,10 +55,10 @@
         ],
         "summary": "Save the task",
         "description": "Save the task",
-        "produces": [
+        "consumes": [
           "application/json"
         ],
-        "consumes": [
+        "produces": [
           "application/json"
         ],
         "parameters": [
@@ -289,6 +289,76 @@
           }
         }
       }
+    },
+    "notification_settings/{user_id}": {
+      "get": {
+        "tags": [
+          "Notification Settings"
+        ],
+        "summary": "Get user notification settings",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "user id that's needed to get user settings",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/notificationSettingsResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Notification Settings"
+        ],
+        "summary": "Update user notification settings",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "user id that's needed to update user settings",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "notification settings object",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "profiles": {
+                  "type": "object",
+                  "$ref": "#/definitions/NotificationSettings"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/notificationSettingsResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -339,7 +409,7 @@
     "profilesResponse": {
       "type": "object",
       "properties": {
-        "_id": {
+        "id": {
           "type": "integer"
         },
         "user_id": {
@@ -368,6 +438,29 @@
         }
       }
     },
+    "notificationSettingsResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "user_id": {
+          "type": "integer"
+        },
+        "generalNotifications": {
+          "type": "object"
+        },
+        "discussionNotifications": {
+          "type": "object"
+        },
+        "updatedAt": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        }
+      }
+    },
     "Profiles": {
       "type": "object",
       "properties": {
@@ -392,6 +485,30 @@
         }
       }
     },
+    "NotificationSettings": {
+      "type": "object",
+      "properties": {
+        "notification_settings": {
+          "type": {
+            "user_id": {
+              "type": "integer"
+            },
+            "generalNotifications": {
+              "type": "object"
+            },
+            "discussionNotifications": {
+              "type": "object"
+            },
+            "updatedAt": {
+              "type": "string"
+            },
+            "createdAt": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
     "InvalidResponse": {
       "type": "object",
       "properties": {
@@ -408,6 +525,10 @@
     {
       "name": "Profiles",
       "description": "Endpoints for Profiles"
+    },
+    {
+      "name": "Notification Settings",
+      "description": "Endpoints for Notification Settings"
     },
     {
       "name": "Tasks",
