@@ -12,15 +12,22 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   },
-  "schemes": ["http"],
+  "schemes": [
+    "http"
+  ],
   "host": "localhost:3081",
   "basePath": "/api",
   "paths": {
     "/tasks": {
       "get": {
+        "tags": [
+          "Tasks"
+        ],
         "summary": "Get all the tasks",
         "description": "Get all the tasks",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -43,10 +50,17 @@
     },
     "/task": {
       "post": {
+        "tags": [
+          "Tasks"
+        ],
         "summary": "Save the task",
         "description": "Save the task",
-        "produces": ["application/json"],
-        "consumes": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "body",
@@ -85,9 +99,14 @@
     },
     "/task/": {
       "put": {
+        "tags": [
+          "Tasks"
+        ],
         "summary": "Update the tasks",
         "description": "Update the tasks",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -133,9 +152,14 @@
     },
     "/task/{id}": {
       "delete": {
+        "tags": [
+          "Tasks"
+        ],
         "summary": "Delete the task",
         "description": "Delete the task",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -154,6 +178,108 @@
                 "$ref": "#/definitions/todosResponse"
               }
             }
+          },
+          "400": {
+            "description": "Invalid status value",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/profiles/{id}": {
+      "get": {
+        "tags": [
+          "Profiles"
+        ],
+        "summary": "Get the profile",
+        "description": "Get the profile",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "profile id that needs to be displayed",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/profilesResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Profiles"
+        ],
+        "summary": "update the profiles",
+        "description": "update the profiles",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "profile id that needs to be updated",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "profile object",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "profiles": {
+                  "type": "object",
+                  "$ref": "#/definitions/Profiles"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/profilesResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Profiles"
+        ],
+        "summary": "Get all profiles",
+        "description": "Get all profiles",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "profile id that needs to be deleted",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
           },
           "400": {
             "description": "Invalid status value",
@@ -210,6 +336,62 @@
         }
       }
     },
+    "profilesResponse": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "integer"
+        },
+        "user_id": {
+          "type": "integer"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "bio": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        },
+        "deletedAt": {
+          "type": "string"
+        }
+      }
+    },
+    "Profiles": {
+      "type": "object",
+      "properties": {
+        "profiles": {
+          "type": {
+            "user_id": {
+              "type": "integer"
+            },
+            "first_name": {
+              "type": "string"
+            },
+            "last_name": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "bio": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
     "InvalidResponse": {
       "type": "object",
       "properties": {
@@ -221,5 +403,15 @@
         }
       }
     }
-  }
+  },
+  "tags": [
+    {
+      "name": "Profiles",
+      "description": "Endpoints for Profiles"
+    },
+    {
+      "name": "Tasks",
+      "description": "Endpoints for Tasks"
+    }
+  ]
 }

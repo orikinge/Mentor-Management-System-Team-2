@@ -1,5 +1,6 @@
 import * as bodyParser from "body-parser";
 import express, { Application } from "express";
+import swaggerUi from "swagger-ui-express";
 import "dotenv/config";
 import { APILogger } from "./logger/api.logger";
 import * as fs from "fs";
@@ -38,11 +39,21 @@ class App {
     });
   }
 
-  private routes(): void {
-    const { modelsArray } = getAllModelsInDir(path.join(__dirname, "./routes"));
+  private async routes(): Promise<void> {
+    const { modelsArray } = await getAllModelsInDir(
+      path.join(__dirname, "./routes"),
+    );
     modelsArray.forEach((route: any) => {
       this.express.use("/api", route);
     });
+
+    // handle swagger route
+    this.express.use(
+      "/api/docs",
+      swaggerUi.serve,
+      swaggerUi.setup(this.swaggerDocument),
+    );
+
     // handle undefined routes
     this.express.use("*", (req, res) => {
       res.send("Make sure url is correct!!!");
