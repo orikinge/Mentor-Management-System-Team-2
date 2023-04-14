@@ -30,17 +30,39 @@ export default class AuthenticationController {
           code: nanoid(),
         }
       )
-      const url = `${Env.get("FRONTEND_URL")}?token=${token.toJSON().code}`
+      const url = `${Env.get('FRONTEND_URL')}?token=${token.toJSON().code}`
       await Mail.send((message) => {
-        message
-          .from('MMM2@example.com')
-          .to(email)
-          .subject('Welcome Onboard!')
+        message.from('MMM2@example.com').to(email).subject('Welcome Onboard!')
           .html(`Hello ${user?.name}\n
           Use the link below to reset your password ${url}`)
       })
       return token
     } catch (error) {}
     return { message: 'Password reset token as been sent to your email' }
+  }
+
+  async resetPassword({ request, response }: HttpContextContract) {
+    try {
+      const token = request.qs().token
+      const { password } = request.only(['password'])
+
+      const tokenRes = await Token.findByOrFail('code', token)
+      if (tokenRes.type !== 'forget_password') {
+        throw new Error('Invalid token')
+      }
+      if (tokenRes.expiresAt < DateTime.now()) {
+        throw new Error('Token is expired')
+      }
+
+      const user = await User.findOrFail(tokenRes.userId)
+      user.password = password
+      await user.save()
+
+      await tokenRes.delete()
+
+      return { message: 'Password reset successful' }
+    } catch (error) {
+      return response.status(400).send({ message: error.message })
+    }
   }
 }
