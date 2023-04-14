@@ -1,0 +1,198 @@
+.profileImage_main {
+  width: 16rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.profileImage_card {
+  width: 73px;
+  height: 73px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.profileImage_card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profileImage_sub_upload {
+  position: absolute;
+  top: 5.5rem;
+  left: 28.5rem;
+}
+
+.profileImage_sub_upload p {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  color: #333;
+  margin: 30px 0 4px 0;
+}
+
+.profileImage_upload_button {
+  padding: 1px 15px;
+  background-color: #058b94;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.profileImage_upload_button input[type="file"] {
+  display: none;
+}
+
+.Name_div {
+  padding-top: 3rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.lastName,
+.firstName {
+  width: 265px;
+  height: 50px;
+  font-weight: 400;
+  font-size: 16px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+}
+
+.fullName_div {
+  padding-top: 0.5rem;
+}
+
+.social_name_div label,
+.web_sub_div label,
+.cityname_div label,
+.countryname_div label,
+.div_about label,
+.fullName_div label {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.bio {
+  width: 600px;
+  height: 100px;
+  font-weight: 400;
+  font-size: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.site {
+  width: 600px;
+  height: 50px;
+  font-weight: 400;
+  font-size: 16px;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.city_select,
+.country_select {
+  width: 210px;
+  height: 50px;
+  font-weight: 400;
+  font-size: 16px;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  border: 1px solid #e6e6e6;
+}
+
+.twitter,
+.instagram,
+.linkdein,
+.gitHub {
+  width: 180px;
+  height: 50px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 5px;
+}
+
+.vertical_line {
+  height: 50px;
+  border-left: 1px solid #e6e6e6;
+  transform: rotate(180deg);
+}
+
+.twitter:focus,
+.instagram:focus,
+.linkdein:focus,
+.gitHub:focus,
+.site:focus,
+.city_select:focus,
+.country_select:focus,
+.bio:focus,
+.lastName:focus,
+.firstName:focus {
+  outline: none;
+}
+
+.main_social_div,
+.web_div,
+.select_div,
+.main_div_about {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.social_sub_img_1,
+.social_sub_img {
+  display: flex;
+  flex-direction: row;
+  width: 260px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  justify-content: space-evenly;
+  border: 1px solid #e6e6e6;
+  background-color: white;
+}
+
+.social_sub_img_1,
+.social_sub_img1 {
+  margin-top: 0.2rem;
+}
+
+.button {
+  width: 173px;
+  height: 47px;
+  font-size: 1.2rem;
+  background-color: #058b94;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 2rem;
+  margin-left: 35rem;
+}
+
+.button:hover {
+  background-color: #058b94;
+}
+
+.form {
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+  max-width: 800px;
+  flex-grow: 1;
+  margin: 1rem;
+  padding: 2rem;
+}
