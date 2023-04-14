@@ -30,5 +30,10 @@ Route.group(()=>{
         Route.post('/forgetpassword', 'AuthenticationController.forgetPassword')
         Route.post('/resetpassword', 'AuthenticationController.resetPassword')
     }).prefix('auth')
-}).prefix('api/v1')
 
+  Route.group(() => {
+    Route.get('/:userId', 'ProfilesController.getByUserId')
+    Route.put('/:userId', 'ProfilesController.update')
+    Route.put('/delete/:userId', 'ProfilesController.delete')
+  }).prefix('profile')
+}).prefix('api/v1')

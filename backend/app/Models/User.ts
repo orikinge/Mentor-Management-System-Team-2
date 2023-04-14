@@ -9,23 +9,28 @@ export default class User extends BaseModel {
   @column()
   public email: string
 
-  
   @column()
   public firstName: string
 
-  
   @column()
   public lastName: string
 
-  
   @column()
   public meta: string
 
+  @column()
+  public bio: string
+
+  @column()
+  public profilePictureUrl: string
+
+  @column()
+  public socialMediaLinks: string
 
   @column({ serializeAs: null })
   public password: string
 
-  @hasMany(()=>User, {foreignKey: "id"})
+  @hasMany(() => User, { foreignKey: 'id' })
   public userId: HasMany<typeof User>
 
   @column()
@@ -37,8 +42,11 @@ export default class User extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
+  @column()
+  public deletedAt: DateTime
+
   @beforeSave()
-  public static async hashPassword (user: User) {
+  public static async hashPassword(user: User) {
     if (user.$dirty.password) {
       user.password = await Hash.make(user.password)
     }
