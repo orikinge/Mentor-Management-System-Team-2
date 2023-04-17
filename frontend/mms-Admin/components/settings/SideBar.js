@@ -20,9 +20,11 @@ const SideBar = () => {
     () => menuItems.find((menu) => menu.link === router.pathname),
     [router.pathname]
   );
-    return (
+
+
+  return (
       <div className={styles.sidebar}>
-       <span className={styles.sidebar_span}>Settings</span>
+       <span className={styles.sidebar_span}></span>
       <div className={styles.item_div}>
       {menuItems.map(({ ...menu }) => {
         const isActive = menu.link === activeMenu?.link;

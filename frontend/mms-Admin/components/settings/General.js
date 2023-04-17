@@ -38,12 +38,16 @@ function General() {
     <form onSubmit={handleSubmit} className={styles.form}>
     <div className={styles.profileImage_main}>
       <div className={styles.profileImage_card} >
-      {file && (
+      {file ? (
        <img 
          src={URL.createObjectURL(file)}
          alt="Selected image"
           />
-        )}
+        ) : <img 
+           src={"/assets/images/avatar.svg"}
+           alt="Selected image"
+         />
+        }
       </div>
       <div className={styles.profileImage_sub_upload}>
         <p>
@@ -159,8 +163,8 @@ function General() {
             <div className={styles.social_sub_img}>
               <Icon
                 icon={"/assets/images/Gitlogo.svg"}
-                width={"18px"}
-                height={"18px"}
+                width={"15px"}
+                height={"10px"}
                />
               <span className={styles.sub_img_span1}>GitHub</span>
               <div className={styles.vertical_line}></div>
@@ -178,8 +182,8 @@ function General() {
             <div className={styles.social_sub_img_1}>
               <Icon
                 icon={"/assets/images/Linkeinlogo.svg"}
-                width={"20px"}
-                height={"20px"}
+                width={"15px"}
+                height={"15px"}
               />
               <span className={styles.sub_img_span2}>Linkdein</span>
               <div className={styles.vertical_line}></div>
@@ -199,8 +203,8 @@ function General() {
             <div className={styles.social_sub_img}>
                 <Icon
                   icon={"/assets/images/instagramlogo.svg"}
-                  width={"20px"}
-                  height={"20px"}
+                  width={"15px"}
+                  height={"15px"}
                 />
                 <span className={styles.sub_img_span3}>Instagram</span>
                 <div className={styles.vertical_line}></div>
@@ -218,8 +222,8 @@ function General() {
             <div className={styles.social_sub_img_1}>
                 <Icon
                   icon={"/assets/images/Twitterlogo.svg"}
-                  width={"20px"}
-                  height={"20px"}
+                  width={"15px"}
+                  height={"15px"}
                 />
                 <span className={styles.sub_img_span4}>Twitter</span>
                 <div className={styles.vertical_line}></div>

@@ -1,9 +1,11 @@
-import { capitalize } from "utils/capitalize";
+import { capitalize } from "../../utils/capitalize";
+import styles from "styles/navheader.module.css";
 
-const NavHeader = ({ title }) => {
+const NavHeader = ({ title, children }) => {
   return (
-    <header className="module-header">
-      {/* <h2 className="title text-dark">{capitalize(title)}</h2> */}
+    <header className={styles.module_header}>
+      <h2 className={styles.module_header_title}>{capitalize(title)}</h2>
+      <div>{children}</div> 
     </header>
   );
 };

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Menu, Layout, Typography } from "antd";
-import { Icon } from "components/Icon/Icon";
+import { Icon } from "../../Icon/Icon";
 
 const SideBar = ({ user }) => {
   const [state, setState] = useState({ name: "James", role: "Admin" });

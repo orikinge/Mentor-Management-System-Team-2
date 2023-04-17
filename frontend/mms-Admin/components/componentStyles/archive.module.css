@@ -1,0 +1,60 @@
+.main_sub_div {
+  box-sizing: border-box;
+  max-width: 740px;
+  height: 71px;
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+  display: flex;
+}
+
+.main_sub_icon {
+  margin: 10px 0 0 5px;
+  width: 48px;
+}
+
+/* .main_sub_content {
+ display: block;
+} */
+
+.main_sub_content p {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  color: #333;
+  padding-left: 35px;
+  padding-top: 10px;
+  height: 10px;
+}
+
+.main_sub_content_timeicon {
+  padding-left: 35px;
+  padding-top: 10px;
+}
+
+.main_sub_content_time {
+  padding-left: 10px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  color: #808080;
+  padding-top: 13px;
+}
+
+.main_sub_content_timeicon1 {
+  padding-left: 65px;
+  padding-top: 10px;
+}
+
+.main_sub_con_main {
+  height: 10px;
+  display: flex;
+}
+
+.main_sub_con {
+  display: flex;
+}
+
+.main_sub_content_archor {
+  padding-left: 23rem;
+}

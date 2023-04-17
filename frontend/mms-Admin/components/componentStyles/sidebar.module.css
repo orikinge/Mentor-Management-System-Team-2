@@ -1,6 +1,5 @@
 .sidebar {
   height: 100vh;
-  padding-top: 2rem;
   display: flex;
   color: black;
   justify-content: flex-start;
@@ -9,9 +8,7 @@
 }
 
 .sidebar_span {
-  position: absolute;
-  left: 28px;
-  top: 13px;
+  position: relative;
   font-style: normal;
   font-weight: 600;
   font-size: 24px;
@@ -40,5 +37,5 @@
 }
 
 .item_div {
-  margin-top: 3rem;
+  margin-top: 1rem;
 }

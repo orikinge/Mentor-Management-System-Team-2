@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Icon } from "components/Icon/Icon";
+import { Icon } from "../../Icon/Icon";
 import { Avatar, Badge, Col, Input, Row } from "antd";
 
 const NavBar = () => {
