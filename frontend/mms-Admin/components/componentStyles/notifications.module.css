@@ -1,0 +1,107 @@
+.discussion_div {
+  margin-top: 3rem;
+  width: 60%;
+}
+
+.general_div {
+  width: 60%;
+}
+
+.discussion_div p,
+.general_div p {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  color: #333;
+}
+
+.noti_span {
+  float: right;
+}
+
+.email_span {
+  margin-right: 2.5rem;
+  font-weight: 600;
+  font-size: 18px;
+  color: #333;
+}
+
+.inapp_span {
+  font-weight: 600;
+  font-size: 18px;
+  color: #333;
+}
+
+.item_dis,
+.item {
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+}
+
+.item_dis4,
+.item_dis3,
+.item_dis2,
+.item_dis1,
+.item4,
+.item3,
+.item2,
+.item1 {
+  margin-bottom: 2rem;
+}
+
+.item_span1 {
+  margin-right: 2.5rem;
+  margin-left: 11rem;
+}
+
+.item_dis_span1 {
+  margin-right: 2.5rem;
+  margin-left: 7.6rem;
+}
+
+.item1_span1 {
+  margin-right: 2.5rem;
+  margin-left: 14.3rem;
+}
+
+.item_dis1_span1 {
+  margin-right: 2.5rem;
+  margin-left: 16.5rem;
+}
+
+.item2_span1 {
+  margin-right: 2.5rem;
+  margin-left: 16.5rem;
+}
+
+.item_dis2_span1 {
+  margin-right: 2.5rem;
+  margin-left: 13.7rem;
+}
+
+.item3_span1 {
+  margin-right: 2.5rem;
+  margin-left: 9.8rem;
+}
+
+.item_dis3_span1 {
+  margin-right: 2.5rem;
+  margin-left: 14.5rem;
+}
+
+.item4_span1 {
+  margin-right: 2.5rem;
+  margin-left: 15.4rem;
+}
+
+.item_dis4_span1 {
+  margin-right: 2.5rem;
+  margin-left: 11.4rem;
+}
+
+.head {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  color: #333;
+}
