@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "npm install &&  cd ../../ && husky install",
-    "precommit": "npm run prepare && npm run lint && npm run build"
+    "prepare": "npm install",
+    "precommit": "cd ../../ && husky install && npm run lint && npm run build"
   },
   "dependencies": {
     "@emotion/styled": "^11.10.6",
