@@ -16,7 +16,7 @@
     "mm": "node ace make:migration",
     "model": "node ace make:model",
     "prepare": "cd ../../ && husky install",
-    "precommit": "npm prepare && npm run lint && npm run build"
+    "precommit": "npm run prepare && npm run lint && npm run build"
   },
   "eslintConfig": {
     "extends": [
