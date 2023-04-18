@@ -2,7 +2,7 @@ import React from "react"
 import styles from "../componentStyles/faq.module.css";
 import Icon from "../Icon";
 import { Collapse } from "antd";
-import { CiCircleRemove } from "react-icons/Ci";
+import { CiCircleRemove } from "react-icons/ci";
 const { Panel } = Collapse;
 const text = `
   A dog is a type of domesticated animal.

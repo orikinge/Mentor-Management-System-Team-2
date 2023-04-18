@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import styles from "../componentStyles/archive.module.css";
 import Icon from "../Icon";
-import { Input } from "antd";
 
 function Archive({ searchData }) {
     
