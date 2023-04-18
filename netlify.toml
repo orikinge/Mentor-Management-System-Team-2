@@ -1,6 +1,2 @@
-[build]
-    command = "yarn build:front"
-    publish = "front/.next"
-
 [[plugins]]
     package = "@netlify/plugin-nextjs"
