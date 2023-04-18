@@ -7,7 +7,6 @@ import { Layout, Input } from "antd";
 import Pagination from "../Pagination"
 import { extractTitleFromUrl } from "../../utils/extractTitleFromUrl"
 import styles from "styles/layout.module.css";
-import Pagination from "../Pagination"
 
 const AppLayout = ({ children }) => {
   const [headerTitle, setHeaderTitle] = useState("");

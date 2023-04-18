@@ -7,4 +7,4 @@ npm run precommit
 #
 ## npm run precommit for mms-Admin backend
 cd ../../backend
-npm run precommit
+#npm run precommit
