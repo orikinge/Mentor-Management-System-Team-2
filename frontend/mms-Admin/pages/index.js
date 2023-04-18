@@ -1,5 +1,4 @@
 const Profile = () => {
-
   return (
     <>
       <h2>/</h2>

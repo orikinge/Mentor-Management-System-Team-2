@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import styles from "./componentStyles/splashscreen.module.css"
+import styles from "./componentStyles/splashscreen.module.css";
 
 function SplashScreen() {
   return (
@@ -13,11 +13,7 @@ function SplashScreen() {
           alt="site_logo"
         />
       </div>
-      <p
-       className={styles.logo_text}
-       >
-        Mentor Management System
-      </p>
+      <p className={styles.logo_text}>Mentor Management System</p>
     </div>
   );
 }

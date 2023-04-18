@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import SplashScreen from "../components/SplashScreen";
-import { Col, Row, Button, Input } from "antd";
+import { Col, Row } from "antd";
 
 import AdminLogin from "../components/admin/Login";
 import PasswordComponents from "../components/PasswordReset";

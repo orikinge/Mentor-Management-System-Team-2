@@ -1,8 +1,6 @@
-import { useState } from 'react';
-import Link from 'next/link';
-import styles from "./componentStyles/pagination.module.css"
+import { useState } from "react";
+import styles from "./componentStyles/pagination.module.css";
 import Icon from "./Icon";
-
 
 const PAGE_SIZE = 10;
 
@@ -28,17 +26,20 @@ const Pagination = ({ total }) => {
 
   return (
     <div className={styles.container}>
-      <button className={styles.button1} disabled={currentPage === 1} onClick={handlePreviousClick}>
-       <Icon
-        icon={"/assets/images/Backward.svg"}
-        width={"20px"}
-        height={"20px"}
-       />
-      <Icon
-       icon={"/assets/images/Backward-sign.svg"}
-       width={"20px"}
-       height={"20px"}
-      />
+      <button
+        className={styles.button1}
+        disabled={currentPage === 1}
+        onClick={handlePreviousClick}>
+        <Icon
+          icon={"/assets/images/Backward.svg"}
+          width={"20px"}
+          height={"20px"}
+        />
+        <Icon
+          icon={"/assets/images/Backward-sign.svg"}
+          width={"20px"}
+          height={"20px"}
+        />
       </button>
       <div className={styles.indextotal}>
         {startIndex} - {endIndex} of {total}
@@ -48,16 +49,19 @@ const Pagination = ({ total }) => {
           <a className={i + 1 === currentPage ? 'active' : ''}>{i + 1}</a>
         </Link>
       ))*/}
-      <button className={styles.button2} disabled={currentPage === totalPages} onClick={handleNextClick}>
+      <button
+        className={styles.button2}
+        disabled={currentPage === totalPages}
+        onClick={handleNextClick}>
         <Icon
-         icon={"/assets/images/forward-sign.svg"}
-         width={"20px"}
-         height={"20px"}
+          icon={"/assets/images/forward-sign.svg"}
+          width={"20px"}
+          height={"20px"}
         />
         <Icon
-         icon={"/assets/images/Forward.svg"}
-         width={"20px"}
-         height={"20px"}
+          icon={"/assets/images/Forward.svg"}
+          width={"20px"}
+          height={"20px"}
         />
       </button>
     </div>

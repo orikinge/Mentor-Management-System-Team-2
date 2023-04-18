@@ -24,7 +24,9 @@ const NavBar = () => {
             src={"/assets/images/logo_small.png"}
             alt="logo"
           />
-          <span className={styles.logo_text}>Mentor&apos;s Managers System</span>
+          <span className={styles.logo_text}>
+            Mentor&apos;s Managers System
+          </span>
         </div>
 
         <div className={styles.navbar_right}>
@@ -38,30 +40,30 @@ const NavBar = () => {
           </div>
           <div className={styles.navbar_icons}>
             <div>
-            <Link href="/home">
-              <a>
-                <Badge>
-                  <Icon name="Chat" />
-                </Badge>
-              </a>
-            </Link>
-          </div>
-          <div>
-            <Link href="/home">
-              <a>
-                <Badge count={notificationCount(recentNotifications?.length)}>
-                  <Icon name="Notification" />
-                </Badge>
-              </a>
-            </Link>
-          </div>
-          <div>
-            <Link href="/profile">
-              <a>
-                <Avatar src="/assets/images/user.png" />
-              </a>
-            </Link>
-          </div>
+              <Link href="/home">
+                <a>
+                  <Badge>
+                    <Icon name="Chat" />
+                  </Badge>
+                </a>
+              </Link>
+            </div>
+            <div>
+              <Link href="/home">
+                <a>
+                  <Badge count={notificationCount(recentNotifications?.length)}>
+                    <Icon name="Notification" />
+                  </Badge>
+                </a>
+              </Link>
+            </div>
+            <div>
+              <Link href="/profile">
+                <a>
+                  <Avatar src="/assets/images/user.png" />
+                </a>
+              </Link>
+            </div>
           </div>
         </div>
       </div>

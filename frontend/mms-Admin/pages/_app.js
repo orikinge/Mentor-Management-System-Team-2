@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import WithAuth from "../components/WithAuth"
+import WithAuth from "../components/WithAuth";
 
 import "antd/dist/reset.css";
 import "styles/globals.css";
@@ -12,9 +12,12 @@ const App = ({ Component, pageProps }) => {
     <>
       <Head>
         <title>MMS - Mentor&apos;s Managers System</title>
-        <style>{ styles }</style>
+        <style>{styles}</style>
       </Head>
-      <WithAuth component={<Component {...pageProps} />} route={router?.route} />
+      <WithAuth
+        component={<Component {...pageProps} />}
+        route={router?.route}
+      />
     </>
   );
 };

@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import Icon from "../Icon";
-import { CustomInput, CustomButton, Label } from "../formInputs/CustomInput.js";
+import React from "react";
+import { CustomButton, CustomInput, Label } from "../formInputs/CustomInput.js";
 import styles from "../componentStyles/password.module.css";
-import { Row, Col } from "antd";
+import { Col, Row } from "antd";
 
 function Password() {
   return (

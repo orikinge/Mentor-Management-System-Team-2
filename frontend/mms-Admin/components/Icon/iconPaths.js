@@ -1,4 +1,5 @@
 import Image from "next/image";
+
 export const iconPaths = {
   Notification: () => {
     return (
@@ -120,7 +121,7 @@ export const iconPaths = {
       </svg>
     );
   },
-  Task: ({color="#808080", width="16", height="16"}) => {
+  Task: ({ color = "#808080", width = "16", height = "16" }) => {
     return (
       <svg
         width={width}
@@ -136,7 +137,7 @@ export const iconPaths = {
       </svg>
     );
   },
-  Report: ({color="#808080", width="16", height="16"}) => {
+  Report: ({ color = "#808080", width = "16", height = "16" }) => {
     return (
       <svg
         width={width}
@@ -144,7 +145,8 @@ export const iconPaths = {
         viewBox="0 0 18 22"
         fill="none"
         xmlns="http://www.w3.org/2000/svg">
-        <path d="M5 5H13M5 9H13M5 13H8M3 21H15C16.1046 21 17 20.1046 17 19V3C17 1.89543 16.1046 1 15 1H3C1.89543 1 1 1.89543 1 3V19C1 20.1046 1.89543 21 3 21Z"
+        <path
+          d="M5 5H13M5 9H13M5 13H8M3 21H15C16.1046 21 17 20.1046 17 19V3C17 1.89543 16.1046 1 15 1H3C1.89543 1 1 1.89543 1 3V19C1 20.1046 1.89543 21 3 21Z"
           stroke={color}
           strokeWidth="2"
           strokeLinecap="round"
@@ -153,18 +155,18 @@ export const iconPaths = {
       </svg>
     );
   },
-  Location: ({color="#058B94", width="24", height="28"}) => {
+  Location: ({ color = "#058B94", width = "24", height = "28" }) => {
     return (
-      <svg width={width}
+      <svg
+        width={width}
         height={height}
         viewBox="0 0 24 28"
         fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+        xmlns="http://www.w3.org/2000/svg">
         <path
           d="M4.54049 18.1091L12 26.5L19.4595 18.1091C25.1807 11.6735 20.6116 1.5 12 1.5C3.38835 1.5 -1.18077 11.6735 4.54049 18.1091Z"
           stroke={color}
-          strokeWidth="2" 
+          strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
@@ -178,7 +180,7 @@ export const iconPaths = {
       </svg>
     );
   },
-  Person: ({color="#808080", width="16", height="16"}) => {
+  Person: ({ color = "#808080", width = "16", height = "16" }) => {
     return (
       <svg
         width={width}
@@ -203,7 +205,7 @@ export const iconPaths = {
       </svg>
     );
   },
-  People: ({color="#808080", width="16", height="16"}) => {
+  People: ({ color = "#808080", width = "16", height = "16" }) => {
     return (
       <svg
         width={width}

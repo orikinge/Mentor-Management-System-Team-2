@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, Input, Space, Form } from "antd";
+import { Button, Form, Input } from "antd";
 import Icon from "../Icon";
 import styles from "../componentStyles/login.module.css";
 
@@ -32,11 +32,7 @@ const Login = ({ showPassword, setShowPassword }) => {
           required
         />
         <div className={styles.login_button_container}>
-          <Button
-           
-            className={styles.login_button}>
-            Login
-          </Button>
+          <Button className={styles.login_button}>Login</Button>
         </div>
         <p
           className={styles.forgot_password_text}
@@ -44,9 +40,7 @@ const Login = ({ showPassword, setShowPassword }) => {
           Forgot Password?
         </p>
         <div className={styles.login_button_container}>
-          <Button
-           
-            className={styles.google_login_button}>
+          <Button className={styles.google_login_button}>
             <Icon
               icon={"/assets/images/google_logo.png"}
               width={"38px"}

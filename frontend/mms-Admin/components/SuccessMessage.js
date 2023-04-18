@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import { Button, Modal } from "antd";
 import styles from "./componentStyles/splashscreen.module.css";

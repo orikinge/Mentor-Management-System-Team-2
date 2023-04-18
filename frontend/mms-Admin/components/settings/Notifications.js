@@ -1,6 +1,6 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
 import styles from "../componentStyles/notifications.module.css";
-import { Switch } from 'antd';
+import { Switch } from "antd";
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 
 function Notifications() {
@@ -93,35 +93,35 @@ function Notifications() {
       <div className={styles.general_div}>
         <p>General Notifications</p>
         <div className={styles.noti_span}>
-         <span className={styles.email_span}>Email</span>
-         <span className={styles.inapp_span}>In-app</span>
+          <span className={styles.email_span}>Email</span>
+          <span className={styles.inapp_span}>In-app</span>
         </div>
         <div className={styles.item}>
           <span className={styles.head}>All Notifications</span>
           <span className={styles.item_span1}>
             <Switch
-            checkedChildren={
-                <AiOutlineCheck size={10} style={{marginTop: "6px"}}/>
-            }
-            unCheckedChildren={
-                <AiOutlineClose size={10} style={{marginTop: "6px"}}/>
-            }
-            style={{ backgroundColor: checked ? '#058B94' : '#B3B3B3' }}
-            checked={checked}
-            onChange={handleChange}
+              checkedChildren={
+                <AiOutlineCheck size={10} style={{ marginTop: "6px" }} />
+              }
+              unCheckedChildren={
+                <AiOutlineClose size={10} style={{ marginTop: "6px" }} />
+              }
+              style={{ backgroundColor: checked ? "#058B94" : "#B3B3B3" }}
+              checked={checked}
+              onChange={handleChange}
             />
           </span>
           <span className={styles.item_span2}>
             <Switch
-            checkedChildren={
-                <AiOutlineCheck size={10} style={{marginTop: "6px"}}/>
-            }
-            unCheckedChildren={
-                <AiOutlineClose size={10} style={{marginTop: "6px"}}/>
-            }
-            style={{ backgroundColor: checked1 ? '#058B94' : '#B3B3B3' }}
-            checked={checked1}
-            onChange={handleChange1}
+              checkedChildren={
+                <AiOutlineCheck size={10} style={{ marginTop: "6px" }} />
+              }
+              unCheckedChildren={
+                <AiOutlineClose size={10} style={{ marginTop: "6px" }} />
+              }
+              style={{ backgroundColor: checked1 ? "#058B94" : "#B3B3B3" }}
+              checked={checked1}
+              onChange={handleChange1}
             />
           </span>
         </div>
@@ -129,86 +129,86 @@ function Notifications() {
           <span className={styles.head}>Programs</span>
           <span className={styles.item1_span1}>
             <Switch
-            checkedChildren={
-                <AiOutlineCheck size={10} style={{marginTop: "6px"}}/>
-            }
-            unCheckedChildren={
-                <AiOutlineClose size={10} style={{marginTop: "6px"}}/>
-            }
-            style={{ backgroundColor: checked2 ? '#058B94' : '#B3B3B3' }}
-            checked={checked2}
-            onChange={handleChange2}
+              checkedChildren={
+                <AiOutlineCheck size={10} style={{ marginTop: "6px" }} />
+              }
+              unCheckedChildren={
+                <AiOutlineClose size={10} style={{ marginTop: "6px" }} />
+              }
+              style={{ backgroundColor: checked2 ? "#058B94" : "#B3B3B3" }}
+              checked={checked2}
+              onChange={handleChange2}
             />
           </span>
           <span className={styles.item1_span2}>
             <Switch
-            checkedChildren={
-                <AiOutlineCheck size={10} style={{marginTop: "6px"}}/>
-            }
-            unCheckedChildren={
-                <AiOutlineClose size={10} style={{marginTop: "6px"}}/>
-            }
-            style={{ backgroundColor: checked3 ? '#058B94' : '#B3B3B3' }}
-            checked={checked3}
-            onChange={handleChange3}
+              checkedChildren={
+                <AiOutlineCheck size={10} style={{ marginTop: "6px" }} />
+              }
+              unCheckedChildren={
+                <AiOutlineClose size={10} style={{ marginTop: "6px" }} />
+              }
+              style={{ backgroundColor: checked3 ? "#058B94" : "#B3B3B3" }}
+              checked={checked3}
+              onChange={handleChange3}
             />
           </span>
         </div>
         <div className={styles.item2}>
-           <span className={styles.head}>Tasks</span>
-           <span className={styles.item2_span1}>
+          <span className={styles.head}>Tasks</span>
+          <span className={styles.item2_span1}>
             <Switch
-            checkedChildren={
-                <AiOutlineCheck size={10} style={{marginTop: "6px"}}/>
-            }
-            unCheckedChildren={
-                <AiOutlineClose size={10} style={{marginTop: "6px"}}/>
-            }
-            style={{ backgroundColor: checked4 ? '#058B94' : '#B3B3B3' }}
-            checked={checked4}
-            onChange={handleChange4}
+              checkedChildren={
+                <AiOutlineCheck size={10} style={{ marginTop: "6px" }} />
+              }
+              unCheckedChildren={
+                <AiOutlineClose size={10} style={{ marginTop: "6px" }} />
+              }
+              style={{ backgroundColor: checked4 ? "#058B94" : "#B3B3B3" }}
+              checked={checked4}
+              onChange={handleChange4}
             />
           </span>
           <span className={styles.item2_span2}>
             <Switch
-            checkedChildren={
-                <AiOutlineCheck size={10} style={{marginTop: "6px"}}/>
-            }
-            unCheckedChildren={
-                <AiOutlineClose size={10} style={{marginTop: "6px"}}/>
-            }
-            style={{ backgroundColor: checked5 ? '#058B94' : '#B3B3B3' }}
-            checked={checked5}
-            onChange={handleChange5}
+              checkedChildren={
+                <AiOutlineCheck size={10} style={{ marginTop: "6px" }} />
+              }
+              unCheckedChildren={
+                <AiOutlineClose size={10} style={{ marginTop: "6px" }} />
+              }
+              style={{ backgroundColor: checked5 ? "#058B94" : "#B3B3B3" }}
+              checked={checked5}
+              onChange={handleChange5}
             />
           </span>
         </div>
         <div className={styles.item3}>
-           <span className={styles.head}>Approval Requests</span>
-           <span className={styles.item3_span1}>
+          <span className={styles.head}>Approval Requests</span>
+          <span className={styles.item3_span1}>
             <Switch
-            checkedChildren={
-                <AiOutlineCheck size={10} style={{marginTop: "6px"}}/>
-            }
-            unCheckedChildren={
-                <AiOutlineClose size={10} style={{marginTop: "6px"}}/>
-            }
-            style={{ backgroundColor: checked6 ? '#058B94' : '#B3B3B3' }}
-            checked={checked6}
-            onChange={handleChange6}
+              checkedChildren={
+                <AiOutlineCheck size={10} style={{ marginTop: "6px" }} />
+              }
+              unCheckedChildren={
+                <AiOutlineClose size={10} style={{ marginTop: "6px" }} />
+              }
+              style={{ backgroundColor: checked6 ? "#058B94" : "#B3B3B3" }}
+              checked={checked6}
+              onChange={handleChange6}
             />
           </span>
           <span className={styles.item3_span2}>
             <Switch
-            checkedChildren={
-                <AiOutlineCheck size={10} style={{marginTop: "6px"}}/>
-            }
-            unCheckedChildren={
-                <AiOutlineClose size={10} style={{marginTop: "6px"}}/>
-            }
-            style={{ backgroundColor: checked7 ? '#058B94' : '#B3B3B3' }}
-            checked={checked7}
-            onChange={handleChange7}
+              checkedChildren={
+                <AiOutlineCheck size={10} style={{ marginTop: "6px" }} />
+              }
+              unCheckedChildren={
+                <AiOutlineClose size={10} style={{ marginTop: "6px" }} />
+              }
+              style={{ backgroundColor: checked7 ? "#058B94" : "#B3B3B3" }}
+              checked={checked7}
+              onChange={handleChange7}
             />
           </span>
         </div>
@@ -216,28 +216,28 @@ function Notifications() {
           <span className={styles.head}>Reports</span>
           <span className={styles.item4_span1}>
             <Switch
-            checkedChildren={
-                <AiOutlineCheck size={10} style={{marginTop: "6px"}}/>
-            }
-            unCheckedChildren={
-                <AiOutlineClose size={10} style={{marginTop: "6px"}}/>
-            }
-            style={{ backgroundColor: checked8 ? '#058B94' : '#B3B3B3' }}
-            checked={checked8}
-            onChange={handleChange8}
+              checkedChildren={
+                <AiOutlineCheck size={10} style={{ marginTop: "6px" }} />
+              }
+              unCheckedChildren={
+                <AiOutlineClose size={10} style={{ marginTop: "6px" }} />
+              }
+              style={{ backgroundColor: checked8 ? "#058B94" : "#B3B3B3" }}
+              checked={checked8}
+              onChange={handleChange8}
             />
           </span>
           <span className={styles.item4_span2}>
             <Switch
-            checkedChildren={
-                <AiOutlineCheck size={10} style={{marginTop: "6px"}}/>
-            }
-            unCheckedChildren={
-                <AiOutlineClose size={10} style={{marginTop: "6px"}}/>
-            }
-            style={{ backgroundColor: checked9 ? '#058B94' : '#B3B3B3' }}
-            checked={checked9}
-            onChange={handleChange9}
+              checkedChildren={
+                <AiOutlineCheck size={10} style={{ marginTop: "6px" }} />
+              }
+              unCheckedChildren={
+                <AiOutlineClose size={10} style={{ marginTop: "6px" }} />
+              }
+              style={{ backgroundColor: checked9 ? "#058B94" : "#B3B3B3" }}
+              checked={checked9}
+              onChange={handleChange9}
             />
           </span>
         </div>
@@ -245,35 +245,35 @@ function Notifications() {
       <div className={styles.discussion_div}>
         <p>Discussion Notifications</p>
         <div className={styles.noti_span}>
-         <span className={styles.email_span}>Email</span>
-         <span className={styles.inapp_span}>In-app</span>
+          <span className={styles.email_span}>Email</span>
+          <span className={styles.inapp_span}>In-app</span>
         </div>
         <div className={styles.item_dis}>
           <span className={styles.head}>Comments on my post</span>
           <span className={styles.item_dis_span1}>
             <Switch
-            checkedChildren={
-                <AiOutlineCheck size={10} style={{marginTop: "6px"}}/>
-            }
-            unCheckedChildren={
-                <AiOutlineClose size={10} style={{marginTop: "6px"}}/>
-            }
-            style={{ backgroundColor: checkedIn ? '#058B94' : '#B3B3B3' }}
-            checked={checkedIn}
-            onChange={handleChangeIn}
+              checkedChildren={
+                <AiOutlineCheck size={10} style={{ marginTop: "6px" }} />
+              }
+              unCheckedChildren={
+                <AiOutlineClose size={10} style={{ marginTop: "6px" }} />
+              }
+              style={{ backgroundColor: checkedIn ? "#058B94" : "#B3B3B3" }}
+              checked={checkedIn}
+              onChange={handleChangeIn}
             />
           </span>
           <span className={styles.item_dis_span2}>
             <Switch
-            checkedChildren={
-                <AiOutlineCheck size={10} style={{marginTop: "6px"}}/>
-            }
-            unCheckedChildren={
-                <AiOutlineClose size={10} style={{marginTop: "6px"}}/>
-            }
-            style={{ backgroundColor: checkedIn1 ? '#058B94' : '#B3B3B3' }}
-            checked={checkedIn1}
-            onChange={handleChangeIn1}
+              checkedChildren={
+                <AiOutlineCheck size={10} style={{ marginTop: "6px" }} />
+              }
+              unCheckedChildren={
+                <AiOutlineClose size={10} style={{ marginTop: "6px" }} />
+              }
+              style={{ backgroundColor: checkedIn1 ? "#058B94" : "#B3B3B3" }}
+              checked={checkedIn1}
+              onChange={handleChangeIn1}
             />
           </span>
         </div>
@@ -281,86 +281,86 @@ function Notifications() {
           <span className={styles.head}>Posts</span>
           <span className={styles.item_dis1_span1}>
             <Switch
-            checkedChildren={
-                <AiOutlineCheck size={10} style={{marginTop: "6px"}}/>
-            }
-            unCheckedChildren={
-                <AiOutlineClose size={10} style={{marginTop: "6px"}}/>
-            }
-            style={{ backgroundColor: checkedIn2 ? '#058B94' : '#B3B3B3' }}
-            checked={checkedIn2}
-            onChange={handleChangeIn2}
+              checkedChildren={
+                <AiOutlineCheck size={10} style={{ marginTop: "6px" }} />
+              }
+              unCheckedChildren={
+                <AiOutlineClose size={10} style={{ marginTop: "6px" }} />
+              }
+              style={{ backgroundColor: checkedIn2 ? "#058B94" : "#B3B3B3" }}
+              checked={checkedIn2}
+              onChange={handleChangeIn2}
             />
           </span>
           <span className={styles.item_dis1_span2}>
             <Switch
-            checkedChildren={
-                <AiOutlineCheck size={10} style={{marginTop: "6px"}}/>
-            }
-            unCheckedChildren={
-                <AiOutlineClose size={10} style={{marginTop: "6px"}}/>
-            }
-            style={{ backgroundColor: checkedIn3 ? '#058B94' : '#B3B3B3' }}
-            checked={checkedIn3}
-            onChange={handleChangeIn3}
+              checkedChildren={
+                <AiOutlineCheck size={10} style={{ marginTop: "6px" }} />
+              }
+              unCheckedChildren={
+                <AiOutlineClose size={10} style={{ marginTop: "6px" }} />
+              }
+              style={{ backgroundColor: checkedIn3 ? "#058B94" : "#B3B3B3" }}
+              checked={checkedIn3}
+              onChange={handleChangeIn3}
             />
           </span>
         </div>
         <div className={styles.item_dis2}>
-           <span className={styles.head}>Comments</span>
-           <span className={styles.item_dis2_span1}>
+          <span className={styles.head}>Comments</span>
+          <span className={styles.item_dis2_span1}>
             <Switch
-            checkedChildren={
-                <AiOutlineCheck size={10} style={{marginTop: "6px"}}/>
-            }
-            unCheckedChildren={
-                <AiOutlineClose size={10} style={{marginTop: "6px"}}/>
-            }
-            style={{ backgroundColor: checkedIn4 ? '#058B94' : '#B3B3B3' }}
-            checked={checkedIn4}
-            onChange={handleChangeIn4}
+              checkedChildren={
+                <AiOutlineCheck size={10} style={{ marginTop: "6px" }} />
+              }
+              unCheckedChildren={
+                <AiOutlineClose size={10} style={{ marginTop: "6px" }} />
+              }
+              style={{ backgroundColor: checkedIn4 ? "#058B94" : "#B3B3B3" }}
+              checked={checkedIn4}
+              onChange={handleChangeIn4}
             />
           </span>
           <span className={styles.item_dis2_span2}>
             <Switch
-            checkedChildren={
-                <AiOutlineCheck size={10} style={{marginTop: "6px"}}/>
-            }
-            unCheckedChildren={
-                <AiOutlineClose size={10} style={{marginTop: "6px"}}/>
-            }
-            style={{ backgroundColor: checkedIn5 ? '#058B94' : '#B3B3B3' }}
-            checked={checkedIn5}
-            onChange={handleChangeIn5}
+              checkedChildren={
+                <AiOutlineCheck size={10} style={{ marginTop: "6px" }} />
+              }
+              unCheckedChildren={
+                <AiOutlineClose size={10} style={{ marginTop: "6px" }} />
+              }
+              style={{ backgroundColor: checkedIn5 ? "#058B94" : "#B3B3B3" }}
+              checked={checkedIn5}
+              onChange={handleChangeIn5}
             />
           </span>
         </div>
         <div className={styles.item_dis3}>
-           <span className={styles.head}>Mentions</span>
-           <span className={styles.item_dis3_span1}>
+          <span className={styles.head}>Mentions</span>
+          <span className={styles.item_dis3_span1}>
             <Switch
-            checkedChildren={
-                <AiOutlineCheck size={10} style={{marginTop: "6px"}}/>
-            }
-            unCheckedChildren={
-                <AiOutlineClose size={10} style={{marginTop: "6px"}}/>
-            }
-            style={{ backgroundColor: checkedIn6 ? '#058B94' : '#B3B3B3' }}
-            checked={checkedIn6}
-            onChange={handleChangeIn6}
+              checkedChildren={
+                <AiOutlineCheck size={10} style={{ marginTop: "6px" }} />
+              }
+              unCheckedChildren={
+                <AiOutlineClose size={10} style={{ marginTop: "6px" }} />
+              }
+              style={{ backgroundColor: checkedIn6 ? "#058B94" : "#B3B3B3" }}
+              checked={checkedIn6}
+              onChange={handleChangeIn6}
             />
           </span>
           <span className={styles.item_dis3_span2}>
             <Switch
-            checkedChildren={
-                <AiOutlineCheck size={10} style={{marginTop: "6px"}}/>
-            }
-            unCheckedChildren={
-                <AiOutlineClose size={10} style={{marginTop: "6px"}}/>
-            }
-            style={{ backgroundColor: checkedIn7 ? '#058B94' : '#B3B3B3' }}
-            checked={checkedIn7}
-            onChange={handleChangeIn7}
+              checkedChildren={
+                <AiOutlineCheck size={10} style={{ marginTop: "6px" }} />
+              }
+              unCheckedChildren={
+                <AiOutlineClose size={10} style={{ marginTop: "6px" }} />
+              }
+              style={{ backgroundColor: checkedIn7 ? "#058B94" : "#B3B3B3" }}
+              checked={checkedIn7}
+              onChange={handleChangeIn7}
             />
           </span>
         </div>
@@ -368,34 +368,34 @@ function Notifications() {
           <span className={styles.head}>Direct Message</span>
           <span className={styles.item_dis4_span1}>
             <Switch
-            checkedChildren={
-                <AiOutlineCheck size={10} style={{marginTop: "6px"}}/>
-            }
-            unCheckedChildren={
-                <AiOutlineClose size={10} style={{marginTop: "6px"}}/>
-            }
-            style={{ backgroundColor: checkedIn8 ? '#058B94' : '#B3B3B3' }}
-            checked={checkedIn8}
-            onChange={handleChangeIn8}
+              checkedChildren={
+                <AiOutlineCheck size={10} style={{ marginTop: "6px" }} />
+              }
+              unCheckedChildren={
+                <AiOutlineClose size={10} style={{ marginTop: "6px" }} />
+              }
+              style={{ backgroundColor: checkedIn8 ? "#058B94" : "#B3B3B3" }}
+              checked={checkedIn8}
+              onChange={handleChangeIn8}
             />
           </span>
           <span className={styles.item_dis4_span2}>
             <Switch
-            checkedChildren={
-                <AiOutlineCheck size={10} style={{marginTop: "6px"}}/>
-            }
-            unCheckedChildren={
-                <AiOutlineClose size={10} style={{marginTop: "6px"}}/>
-            }
-            style={{ backgroundColor: checkedIn9 ? '#058B94' : '#B3B3B3' }}
-            checked={checkedIn9}
-            onChange={handleChangeIn9}
+              checkedChildren={
+                <AiOutlineCheck size={10} style={{ marginTop: "6px" }} />
+              }
+              unCheckedChildren={
+                <AiOutlineClose size={10} style={{ marginTop: "6px" }} />
+              }
+              style={{ backgroundColor: checkedIn9 ? "#058B94" : "#B3B3B3" }}
+              checked={checkedIn9}
+              onChange={handleChangeIn9}
             />
           </span>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Notifications
+export default Notifications;

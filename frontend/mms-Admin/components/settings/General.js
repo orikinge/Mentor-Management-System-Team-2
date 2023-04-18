@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import Icon from "../Icon";
 import styles from "../componentStyles/general.module.css";
-import { Input, Space, Select, Row, Avatar, Button, Col } from "antd";
+import { Avatar, Button, Col, Input, Row, Select } from "antd";
 import {
-  CustomInput,
   CustomButton,
+  CustomInput,
   CustomTextArea,
 } from "components/formInputs/CustomInput";
 
@@ -31,7 +31,7 @@ function General() {
           </div>
         </div>
       </Row>
-     
+
       <Row className={styles.container}>
         <div className={styles.label}>
           <label>Full Name</label>
@@ -115,7 +115,7 @@ function General() {
       </div>
       <div className={styles.select_container}>
         <Col span={2}></Col>
-        <Col span={10} >
+        <Col span={10}>
           <div className={styles.socials_container}>
             <div className={styles.social_icons}>
               <div>
@@ -133,7 +133,7 @@ function General() {
             />
           </div>
         </Col>
-        <Col span={9} >
+        <Col span={9}>
           <div className={styles.socials_container}>
             <div className={styles.social_icons}>
               <div>
