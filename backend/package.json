@@ -14,7 +14,9 @@
     "seed": "echo 'running seed' | node ace db:seed",
     "db": "npm run migration && npm run seed",
     "mm": "node ace make:migration",
-    "model": "node ace make:model"
+    "model": "node ace make:model",
+    "prepare": "cd ../../ && husky install",
+    "precommit": "npm prepare && npm run lint && npm run build"
   },
   "eslintConfig": {
     "extends": [
@@ -54,6 +56,7 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-adonis": "^2.1.1",
     "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.3",
     "pino-pretty": "^10.0.0",
     "prettier": "^2.8.7",
     "typescript": "~4.6",
