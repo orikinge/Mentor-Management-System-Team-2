@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "cd ../../ && husky install",
+    "prepare": "npm install &&  cd ../../ && husky install",
     "precommit": "npm run prepare && npm run lint && npm run build"
   },
   "dependencies": {
