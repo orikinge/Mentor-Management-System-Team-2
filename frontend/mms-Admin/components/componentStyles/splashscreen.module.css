@@ -8,3 +8,27 @@
   line-height: 53.18px;
   color: #fff;
 }
+
+.modal {
+  height: 350px;
+  width: 600px;
+  border-radius: 20px;
+}
+
+.modal_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 20px 28px 20px;
+  border-radius: 20px;
+}
+
+.modal_text {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 40px;
+  text-align: center;
+  color: #141414;
+}

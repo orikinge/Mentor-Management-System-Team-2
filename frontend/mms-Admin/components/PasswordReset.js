@@ -1,25 +1,46 @@
-import React from "react";
-import {  Button, Input } from "antd";
+import React, {useState} from "react";
+import { Button, Input } from "antd";
 import styles from "./componentStyles/passwordreset.module.css";
+import SuccessMessage from "./SuccessMessage";
 
 function NewPassword() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleClick = (e) => {
+    e.preventDefault();
+    setIsModalOpen(true)   
+    
+  };
   return (
-    <div className={styles.container}>
-      <p className={styles.set_password_text}>Set New Password?</p>
+    <>
+      <div className={styles.container}>
+        <p className={styles.set_password_text}>Set New Password?</p>
 
-      <Input.Password
-        size="large"
-        className={styles.input}
-        placeholder="Password"
-        required
-      />
+        <Input.Password
+          size="large"
+          className={styles.input}
+          placeholder="Password"
+          required
+        />
 
-      <p className={styles.password_warning_text}>
-        *Your new password must be different from previously used password.
-      </p>
+        <p className={styles.password_warning_text}>
+          *Your new password must be different from previously used password.
+        </p>
 
-      <Button className={styles.button}>Reset Password</Button>
-    </div>
+        <Button onClick={handleClick} className={styles.button}>
+          Reset Password
+        </Button>
+      </div>
+      {isModalOpen && (
+        <SuccessMessage
+          image={"/assets/images/success.png"}
+          message={"Password Reset Successful"}
+          width={"220px"}
+          height={"165px"}
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+        />
+      )}
+    </>
   );
 }
 

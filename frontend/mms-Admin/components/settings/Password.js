@@ -1,94 +1,63 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
+import Icon from "../Icon";
+import { CustomInput, CustomButton, Label } from "../formInputs/CustomInput.js";
 import styles from "../componentStyles/password.module.css";
-import Link from "next/link";
-import { Input } from "antd";
+import { Row, Col } from "antd";
 
 function Password() {
-    const [formData, setFormData] = useState({
-        currentPassword: '',
-        newPassword: '',
-        confirmNewPassword: ''
-    });
+  return (
+    <div className={styles.container}>
+      <Row className={styles.sub_container}>
+        <Col sm={6}>
+          <Label title={"Current Password"} />
+        </Col>
+        <Col xs={18} sm={17}>
+          <CustomInput
+            type={"password"}
+            placeholder="Must be at least 8 characters"
+            size={"small"}
+          />
+        </Col>
+      </Row>
 
-    const handleInputChange = (event) => {
-        setFormData({
-          ...formData,
-          [event.target.name]: event.target.value,
-        });
-    };
+      <Row className={styles.sub_container}>
+        <Col sm={6}>
+          <Label title={"New Password"} />
+        </Col>
+        <Col xs={18} sm={17}>
+          <CustomInput
+            type={"password"}
+            placeholder="Must be at least 8 characters"
+            size={"small"}
+          />
+        </Col>
+      </Row>
+      <Row className={styles.sub_container}>
+        <Col sm={6}>
+          <Label title={"Confirm New Password"} />
+        </Col>
+        <Col xs={18} sm={17}>
+          <CustomInput
+            type={"password"}
+            placeholder="Must be at least 8 characters"
+            size={"small"}
+          />
+        </Col>
+      </Row>
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        // Handle form submission
-    };
+      <Row className={styles.btn_container}>
+        <Col sm={22} className={styles.btn_sub}>
+          <CustomButton className={styles.button}>
+            Save New Password
+          </CustomButton>
+        </Col>
+      </Row>
 
-    return (
-        <div className={styles.password_main}>
-         <form onSubmit={handleSubmit} className={styles.form}>
-            <div className={styles.current_sub_div}>
-                <div className={styles.current_label_div}>
-                   <label htmlFor="current password">Current password</label>
-                </div>
-                <div className={styles.firstpassword_div}>
-                    <Input
-                    type="password"
-                    id="currentPassword"
-                    name="currentPassword"
-                    value={formData.currentPassword}
-                    onChange={handleInputChange}
-                    required
-                    className={styles.currentPassword}
-                    placeholder="Your current password"
-                    />
-                </div>
-            </div>
-            <div className={styles.new_sub_div}>
-                <div className={styles.new_label_div}>
-                   <label htmlFor="new password">New password</label>
-                </div>
-                <div className={styles.newpassword_div}>
-                    <Input
-                    type="password"
-                    id="newPassword"
-                    name="newPassword"
-                    value={formData.newPassword}
-                    onChange={handleInputChange}
-                    required
-                    className={styles.newPassword}
-                    placeholder="Must be at least 8 characters"
-                    />
-                </div>
-            </div>
-            <div className={styles.con_new_sub_div}>
-                <div className={styles.con_new_label_div}>
-                   <label htmlFor="con new password">Confirm new password</label>
-                </div>
-                <div className={styles.con_newpassword_div}>
-                    <Input
-                    type="password"
-                    id="confirmNewPassword"
-                    name="confirmNewPassword"
-                    value={formData.confirmNewPassword}
-                    onChange={handleInputChange}
-                    required
-                    className={styles.confirmNewPassword}
-                    placeholder="Must match your new password"
-                    />
-                </div>
-            </div>
-            <button type="submit" className={styles.button}>
-               Save new password
-            </button>
-         </form>
-         <Link href="#">
-              <a className={styles.sub_div_link}>
-               <span>
-                  Forgot password?
-               </span>
-              </a>
-            </Link>
-        </div>
-    )
+      <div className={styles.forgot_password_text}>
+        <p>Forgot Password?</p>
+      </div>
+    </div>
+  );
 }
 
 export default Password;
