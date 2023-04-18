@@ -38,4 +38,9 @@ Route.group(()=>{
     Route.put('/:userId', 'ProfilesController.update')
     Route.put('/delete/:userId', 'ProfilesController.delete')
   }).prefix('profile')
+
+  Route.group(() => {
+    Route.get('/', 'SupportRequestsController.index')
+    Route.post('/', 'SupportRequestsController.createRequest')
+  }).prefix('support-request')
 }).prefix('api/v1')
