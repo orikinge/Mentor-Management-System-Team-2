@@ -4,13 +4,9 @@ import NavBar from "./NavBar/NavBar";
 import SideBar from "./SideBar/SideBar";
 import NavHeader from "../NavHeader/NavHeader";
 import { Layout, Input } from "antd";
-import { extractTitleFromUrl } from "utils/extractTitleFromUrl"
-import styles from "../componentStyles/login.module.css";
-import Pagination from "../Pagination"
-
-import { extractTitleFromUrl } from "utils/extractTitleFromUrl";
-
+import { extractTitleFromUrl } from "../../utils/extractTitleFromUrl"
 import styles from "styles/layout.module.css";
+import Pagination from "../Pagination"
 
 const AppLayout = ({ children }) => {
   const [headerTitle, setHeaderTitle] = useState("");
