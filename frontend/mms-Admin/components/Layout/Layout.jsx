@@ -8,6 +8,10 @@ import { extractTitleFromUrl } from "utils/extractTitleFromUrl"
 import styles from "../componentStyles/login.module.css";
 import Pagination from "../Pagination"
 
+import { extractTitleFromUrl } from "utils/extractTitleFromUrl";
+
+import styles from "styles/layout.module.css";
+
 const AppLayout = ({ children }) => {
   const [headerTitle, setHeaderTitle] = useState("");
   const router = useRouter();
@@ -21,10 +25,10 @@ const AppLayout = ({ children }) => {
   }, [router]);
 
   return (
-    <Layout className="app-layout">
+    <Layout className={styles.app_layout}>
       <NavBar />
       <Content>
-        <Layout className="app-layout">
+        <Layout className={styles.app_layout}>
           <SideBar />
           <Content className="app-layout-content">
             <div className={[styles.div_input]}>
