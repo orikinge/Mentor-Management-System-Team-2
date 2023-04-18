@@ -66,33 +66,32 @@ export default class AuthenticationController {
     }
   }
 
-  async redirectToGoogle({ally}: HttpContextContract){
-      return ally.use('google').redirect();
+  async redirectToGoogle({ ally }: HttpContextContract) {
+    return ally.use('google').redirect()
   }
 
-  async googleLogin({auth, ally, response}: HttpContextContract){
+  async googleLogin({ auth, ally, response }: HttpContextContract) {
     try {
       const google = ally.use('google')
       if (google.accessDenied()) {
         return 'Access was denied'
       }
-  
+
       if (google.stateMisMatch()) {
         return 'Request expired. Retry again'
       }
-  
+
       if (google.hasError()) {
         return google.getError()
       }
-  
-      const googleUser = await google.user()
-     const user = await User.findByOrFail('email', googleUser.email)
-     const token = await auth.use('api').generate(user, {
-      expiresIn: '30 days',
-    })
 
-    return { token, user: await auth.user }
-     
+      const googleUser = await google.user()
+      const user = await User.findByOrFail('email', googleUser.email)
+      const token = await auth.use('api').generate(user, {
+        expiresIn: '30 days',
+      })
+
+      return { token, user: await auth.user }
     } catch (error) {
       response.unauthorized({ message: 'Invalid Credentials', status: 'Error', error })
     }

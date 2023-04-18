@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, BelongsTo, belongsTo} from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, BelongsTo, belongsTo } from '@ioc:Adonis/Lucid/Orm'
 import User from './User'
 
 export default class Token extends BaseModel {
@@ -17,7 +17,7 @@ export default class Token extends BaseModel {
 
   @column()
   public meta?: string
-  
+
   @column.dateTime({ autoCreate: false })
   public expiresAt: DateTime
 
@@ -26,6 +26,4 @@ export default class Token extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
-
-
 }

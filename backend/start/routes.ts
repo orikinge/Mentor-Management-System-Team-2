@@ -24,14 +24,14 @@ Route.get('/', async () => {
   return { hello: 'world' }
 })
 
-Route.group(()=>{
-    Route.group(()=>{
-        Route.post('/login', 'AuthenticationController.login')
-        Route.post('/forgetpassword', 'AuthenticationController.forgetPassword')
-        Route.post('/resetpassword', 'AuthenticationController.resetPassword')
-        Route.get('/google/redirect', 'AuthenticationController.redirectToGoogle')
-        Route.get('/google', 'AuthenticationController.googleLogin')
-    }).prefix('auth')
+Route.group(() => {
+  Route.group(() => {
+    Route.post('/login', 'AuthenticationController.login')
+    Route.post('/forgetpassword', 'AuthenticationController.forgetPassword')
+    Route.post('/resetpassword', 'AuthenticationController.resetPassword')
+    Route.get('/google/redirect', 'AuthenticationController.redirectToGoogle')
+    Route.get('/google', 'AuthenticationController.googleLogin')
+  }).prefix('auth')
 
   Route.group(() => {
     Route.get('/:userId', 'ProfilesController.getByUserId')

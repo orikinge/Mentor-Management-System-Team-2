@@ -12,22 +12,16 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   },
-  "schemes": [
-    "http"
-  ],
+  "schemes": ["http"],
   "host": "localhost:3081",
   "basePath": "/api",
   "paths": {
     "/tasks": {
       "get": {
-        "tags": [
-          "Tasks"
-        ],
+        "tags": ["Tasks"],
         "summary": "Get all the tasks",
         "description": "Get all the tasks",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [],
         "responses": {
           "200": {
@@ -50,17 +44,11 @@
     },
     "/task": {
       "post": {
-        "tags": [
-          "Tasks"
-        ],
+        "tags": ["Tasks"],
         "summary": "Save the task",
         "description": "Save the task",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "body",
@@ -99,14 +87,10 @@
     },
     "/task/": {
       "put": {
-        "tags": [
-          "Tasks"
-        ],
+        "tags": ["Tasks"],
         "summary": "Update the tasks",
         "description": "Update the tasks",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -152,14 +136,10 @@
     },
     "/task/{id}": {
       "delete": {
-        "tags": [
-          "Tasks"
-        ],
+        "tags": ["Tasks"],
         "summary": "Delete the task",
         "description": "Delete the task",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -190,14 +170,10 @@
     },
     "/profiles/{id}": {
       "get": {
-        "tags": [
-          "Profiles"
-        ],
+        "tags": ["Profiles"],
         "summary": "Get the profile",
         "description": "Get the profile",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -218,14 +194,10 @@
         }
       },
       "put": {
-        "tags": [
-          "Profiles"
-        ],
+        "tags": ["Profiles"],
         "summary": "update the profiles",
         "description": "update the profiles",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -260,14 +232,10 @@
         }
       },
       "delete": {
-        "tags": [
-          "Profiles"
-        ],
+        "tags": ["Profiles"],
         "summary": "Get all profiles",
         "description": "Get all profiles",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -292,13 +260,9 @@
     },
     "notification_settings/{user_id}": {
       "get": {
-        "tags": [
-          "Notification Settings"
-        ],
+        "tags": ["Notification Settings"],
         "summary": "Get user notification settings",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "user_id",
@@ -319,13 +283,9 @@
         }
       },
       "put": {
-        "tags": [
-          "Notification Settings"
-        ],
+        "tags": ["Notification Settings"],
         "summary": "Update user notification settings",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "user_id",

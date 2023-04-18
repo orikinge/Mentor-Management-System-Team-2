@@ -1,5 +1,5 @@
-import { Model } from "sequelize";
+import { Model } from 'sequelize'
 
-export class BaseModel extends Model {  
-  declare deletedAt: Date | null;
+export class BaseModel extends Model {
+  declare deletedAt: Date | null
 }

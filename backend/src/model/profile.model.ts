@@ -1,17 +1,17 @@
-import { DataTypes } from "sequelize";
-import { BaseModel } from "./base/base.model";
-import { sequelize } from "../config/db.config";
+import { DataTypes } from 'sequelize'
+import { BaseModel } from './base/base.model'
+import { sequelize } from '../config/db.config'
 
 export class Profile extends BaseModel {
-  declare user_id: number;
+  declare user_id: number
 
-  declare first_name: string;
+  declare first_name: string
 
-  declare last_name: string;
+  declare last_name: string
 
-  declare email: string;
+  declare email: string
 
-  declare bio: string;
+  declare bio: string
 }
 Profile.init(
   {
@@ -42,15 +42,15 @@ Profile.init(
     },
     createdAt: {
       type: DataTypes.DATE,
-      allowNull: false
+      allowNull: false,
     },
     updatedAt: {
       type: DataTypes.DATE,
-      allowNull: false
+      allowNull: false,
     },
     deletedAt: {
       type: DataTypes.DATE,
     },
   },
-  { tableName: "profiles", sequelize },
-);
+  { tableName: 'profiles', sequelize }
+)

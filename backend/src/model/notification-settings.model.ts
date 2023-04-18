@@ -1,17 +1,17 @@
-import { DataTypes } from "sequelize";
-import { BaseModel } from "./base/base.model";
+import { DataTypes } from 'sequelize'
+import { BaseModel } from './base/base.model'
 import {
   DiscussionNotifications,
   GeneralNotifications,
-} from "./interfaces/notification-settings.interface";
-import { sequelize } from "../config/db.config";
+} from './interfaces/notification-settings.interface'
+import { sequelize } from '../config/db.config'
 
 export class NotificationSettings extends BaseModel {
-  declare user_id: number;
+  declare user_id: number
 
-  declare generalNotifications: GeneralNotifications;
+  declare generalNotifications: GeneralNotifications
 
-  declare discussionNotifications: DiscussionNotifications;
+  declare discussionNotifications: DiscussionNotifications
 }
 
 NotificationSettings.init(
@@ -42,5 +42,5 @@ NotificationSettings.init(
       allowNull: false,
     },
   },
-  { tableName: "notification_settings", sequelize },
-);
+  { tableName: 'notification_settings', sequelize }
+)
