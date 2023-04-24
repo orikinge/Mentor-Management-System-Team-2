@@ -1,0 +1,48 @@
+name: ALX_Team_2
+
+# Trigger deployment only on push to master branch
+on:
+  push:
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  deploy:
+    name: Deploy to EC2 on develop branch
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the files
+        uses: actions/checkout@v2
+      
+      - name: get env var
+        uses: actions/github-script@v5
+        id: result
+        with:
+          script: |
+            const fs = require('fs');
+
+            function getFileContent(filePath) {
+              return new Promise((resolve, reject) => {
+                fs.readFile(filePath, 'utf8', (err, data) => {
+                  if (err) {
+                    reject(err);
+                  } else {
+                    resolve(data);
+                  }
+                });
+              });
+            }
+
+            const result = await getFileContent('./ec2.txt')
+            return result
+          result-encoding: string
+
+      - name: Deploy to Server 1
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{steps.result.outputs.result}}
+          REMOTE_HOST: ec2-13-52-212-109.us-west-1.compute.amazonaws.com
+          REMOTE_USER: ec2-user
+          TARGET: /home/ec2-user
