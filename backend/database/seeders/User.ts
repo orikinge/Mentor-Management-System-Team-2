@@ -10,7 +10,15 @@ export default class extends BaseSeeder {
         password: 'test12345678',
         firstName: 'aliyu',
         lastName: 'Olad',
+        bio: "I don't have a bio"
       },
+      {
+        email: 'test@gmail.com',
+        password: 'test12345678',
+        firstName: 'aliyu',
+        lastName: 'Olad',
+        bio: "I don't have a bio"
+      }
     ])
   }
 }
