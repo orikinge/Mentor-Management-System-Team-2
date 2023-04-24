@@ -34,6 +34,13 @@ Route.group(() => {
   }).prefix('auth')
 
   Route.group(() => {
+    Route.get('/mentors', 'UserController.getAllMentors')
+    Route.get('/mentor-managers', 'UserController.getAllMentors')
+  }).prefix('user')
+
+
+
+  Route.group(() => {
     Route.get('/:userId', 'ProfilesController.getByUserId')
     Route.put('/:userId', 'ProfilesController.update')
     Route.put('/delete/:userId', 'ProfilesController.delete')
@@ -46,6 +53,16 @@ Route.group(() => {
     Route.get('/:taskId', 'TaskController.show')
     Route.delete('/delete/:taskId', 'TaskController.delete')
   }).prefix('task').middleware('auth')
+
+  Route.group(()=>{
+    Route.get('/', 'TaskReportController.getAllReports')
+    Route.post('/:taskId/', 'TaskReportController.createTaskReport')
+    Route.get('/:reportId', 'TaskReportController.getReport')
+    Route.get('/:reportId/pdf', 'TaskReportController.downloadReportPDF')
+    Route.post('/:reportId/pdf', 'TaskReportController.shareReport')
+    Route.delete('/:reportId','TaskReportController.deleteReport' )
+  }).prefix('task-reports')
+  
   Route.group(() => {
     Route.get('/', 'NotificationSettingsController.getUserNotificationSettings')
     Route.put('/', 'NotificationSettingsController.updateUserNotificationSettings')

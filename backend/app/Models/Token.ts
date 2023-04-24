@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, BelongsTo, belongsTo } from '@ioc:Adonis/Lucid/Orm'
 import User from './User'
 
 export default class Token extends BaseModel {
@@ -14,6 +14,9 @@ export default class Token extends BaseModel {
 
   @column()
   public userId: number
+
+  @belongsTo(() => User)
+  public user: BelongsTo<typeof User>
 
   @column()
   public meta?: string

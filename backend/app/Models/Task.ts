@@ -3,6 +3,7 @@ import { BaseModel, column, belongsTo, BelongsTo, hasMany, HasMany, manyToMany, 
 import User from './User'
 import TaskMentor from './TaskMentor'
 import TaskMentorManager from './TaskMentorManager'
+import TaskReport from './TaskReport'
 
 export default class Task extends BaseModel {
   @column({ isPrimary: true })
@@ -46,6 +47,9 @@ export default class Task extends BaseModel {
 
   @hasMany(() => TaskMentorManager)
   public taskMentorManagers: HasMany<typeof TaskMentorManager>
+
+  @hasMany(() => TaskReport)
+  public taskReports: HasMany<typeof TaskReport>
 
   
   @manyToMany(() => User, {

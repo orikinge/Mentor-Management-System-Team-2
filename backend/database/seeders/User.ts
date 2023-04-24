@@ -18,6 +18,13 @@ export default class extends BaseSeeder {
         firstName: 'aliyu',
         lastName: 'Olad',
         bio: "I don't have a bio"
+      },
+      {
+        email: 'dim2though@gmail.com',
+        password: 'test12345678',
+        firstName: 'Segun',
+        lastName: 'Oyinlola',
+        bio: "I don't have a bio"
       }
     ])
   }
