@@ -1,0 +1,19 @@
+@import "./variables.module.scss";
+
+.button {
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 6px 15px;
+
+  &.primary {
+    background: $theme-primary;
+    color: $theme-light;
+  }
+
+  &.default {
+    background: $theme-light;
+    color: $theme-primary;
+  }
+}

@@ -1,0 +1,146 @@
+@import "../variables.module.scss";
+
+.card {
+  background: #e6fdfe;
+  border-radius: $primary-radius;
+  padding: 14px;
+
+  p {
+    margin: 0;
+  }
+
+  .paragraph {
+    margin-left: 1em;
+    display: inline-block;
+
+    p {
+      margin: 0;
+      font-size: 20px;
+    }
+  }
+}
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  .space {
+    margin-top: 1em;
+  }
+
+  .task_status_card {
+    background: $theme-primary;
+    border-radius: $primary-radius;
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    p {
+      font-size: 20px;
+      color: $theme-light;
+      margin: 0;
+    }
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: 20% auto;
+
+    @media (max-width: 1080px) {
+      display: block;
+    }
+
+    .active_program_card {
+      background: $theme-primary;
+      border-radius: 7px;
+      padding: 12px;
+      width: 250px;
+
+      .header {
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .text_container {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-end;
+
+        .title {
+          color: #fff;
+          margin-right: 12px;
+          margin-bottom: 0;
+        }
+
+        .paragraph {
+          margin: 0;
+
+          p {
+            color: $theme-light;
+            margin: 0;
+            width: 80%;
+            font-weight: 500;
+            font-size: 20px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.stats_card {
+  background: #e6fdfe;
+  border-radius: $primary-radius;
+  padding: 14px;
+  display: flex;
+  justify-content: space-between;
+  width: 230px;
+}
+
+.card_header_text {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.top_cards {
+  display: flex;
+  justify-content: space-between;
+
+  @media (max-width: 1550px) {
+    display: grid;
+    grid-template-columns: 230px 230px 230px 230px;
+    gap: 2em;
+  }
+}
+
+.card_container::-webkit-scrollbar {
+  display: contents;
+  opacity: 0;
+  width: 5px;
+  height: 5px;
+}
+
+.cardcontainer::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 10px;
+}
+
+.card_container:hover::-webkit-scrollbar-thumb {
+  background: #e6fdfe;
+}
+
+.card_container:hover::-webkit-scrollbar {
+  display: block;
+}
+
+.card_container {
+  background: $theme-light;
+  border-radius: $primary-radius;
+  padding: 12px;
+  overflow: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

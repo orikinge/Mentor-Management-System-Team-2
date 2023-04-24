@@ -1,7 +1,9 @@
-import { Button, Typography } from "antd";
-import { Icon } from "components/Icon/Icon";
+import Statistics from "components/admin/dashboard/Statistics";
+import Programs from "components/admin/dashboard/Programs";
+import Reports from "components/admin/dashboard/Reports";
 
-import styles from "styles/admin/dashboard.module.css";
+import styles from "styles/admin/dashboard.module.scss";
+import Tasks from "components/admin/dashboard/Tasks";
 
 const stats = [
   {
@@ -26,67 +28,64 @@ const stats = [
   },
 ];
 
+const programs = [
+  {
+    name: "GADS Program 2022",
+    level: "50%",
+    date: "Apr 21, 2023",
+  },
+  {
+    name: "GADS Program 2022",
+    level: "50%",
+    date: "Apr 21, 2023",
+  },
+  {
+    name: "GADS Program 2022",
+    level: "50%",
+    date: "Apr 21, 2023",
+  },
+];
+
+const reports = [
+  {
+    title: "Google Africa Scholarship",
+    author: "Ibrahim Kabir",
+    date: "25th Aug 2022",
+  },
+  {
+    title: "Google Africa Scholarship",
+    author: "Ibrahim Kabir",
+    date: "25th Aug 2022",
+  },
+  {
+    title: "Google Africa Scholarship",
+    author: "Ibrahim Kabir",
+    date: "25th Aug 2022",
+  },
+]
+
+const tasks = [
+  {
+    title: "Room library article",
+    daysLeft: 2,
+  },
+  {
+    title: "Room library article",
+    daysLeft: 2
+  },
+  {
+    title: "Room library article",
+    daysLeft: 2
+  },
+]
+
 const Dashboard = () => {
-  const { Paragraph, Title } = Typography;
   return (
-    <div className="dashboard">
-      <div className={styles.stats}>
-        <div
-          style={{
-            background: "#058b94",
-            borderRadius: "7px",
-            padding: "12px",
-            width: "250px",
-          }}>
-          <div>
-            <div style={{ display: "flex", justifyContent: "end" }}>
-              <Button>View</Button>
-            </div>
-            <Typography
-              style={{
-                display: "flex",
-                justifyContent: "start",
-                alignItems: "end",
-              }}>
-              <Title
-                level={6}
-                style={{ color: "#fff", marginRight: "12px", marginBottom: 0 }}>
-                12
-              </Title>
-              <Paragraph style={{ margin: 0 }}>
-                <p
-                  style={{
-                    color: "#f7feff",
-                    margin: 0,
-                    width: "80%",
-                    fontWeight: 500,
-                    fontSize: "20px",
-                  }}>
-                  Active Programs
-                </p>
-              </Paragraph>
-            </Typography>
-          </div>
-        </div>
-        <div className={styles.card_container}>
-          <div className={styles.top_cards}>
-            {stats.map((stat) => (
-              <div className={styles.card} key={stat.title}>
-                <Paragraph style={{ margin: 0 }}>
-                  <p style={{ margin: 0, fontSize: "20px" }}>{stat.title}</p>
-                  <p style={{ margin: 0, fontSize: "20px" }}>{stat.value}</p>
-                </Paragraph>
-                <Icon
-                  name={`${stat.icon}`}
-                  color="#058b94"
-                  width="32"
-                  height="32"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+    <div className={styles.dashboard}>
+      <Statistics stats={stats} />
+      <Programs programs={programs} />
+      <Reports reports={reports} />
+      <Tasks tasks={tasks} />
     </div>
   );
 };

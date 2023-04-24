@@ -8,6 +8,7 @@ import Pagination from "../Pagination";
 import { extractTitleFromUrl } from "../../utils/extractTitleFromUrl";
 import styles from "styles/layout.module.css";
 
+
 const AppLayout = ({ children }) => {
   const [headerTitle, setHeaderTitle] = useState("");
   const router = useRouter();
@@ -26,7 +27,7 @@ const AppLayout = ({ children }) => {
       <Content>
         <Layout className={styles.app_layout}>
           <SideBar />
-          <Content className="app-layout-content">
+          <Content className={styles.app_layout_content}>
             <div className={[styles.div_input]}>
               <NavHeader title={headerTitle} />
               {router?.pathname === "/settings/archive" && (
