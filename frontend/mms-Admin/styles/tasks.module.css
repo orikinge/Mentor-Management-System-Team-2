@@ -1,0 +1,190 @@
+.main_div {
+  display: flex;
+}
+
+.main_container {
+  margin-top: 1.5rem;
+  margin-left: 2rem;
+  width: 757px;
+  height: 538px;
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+}
+
+.side_container_task {
+  width: 100%;
+  height: 70px;
+  border: none;
+  display: flex;
+  margin-top: 0.1rem;
+  margin-bottom: 1rem;
+}
+
+.side_div_item_task {
+  padding-left: 15px;
+  padding-top: 0.8rem;
+}
+
+.side_div_item_task p {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  color: #333;
+  height: 1px;
+}
+
+.side_div_item_div_task {
+  display: flex;
+  padding-top: 5px;
+}
+
+.side_div_item_date_task {
+  padding-top: 3px;
+  padding-left: 6px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  color: #808080;
+}
+
+.side_div_logo_task {
+  padding-top: 0.8rem;
+  padding-left: 1.5rem;
+}
+
+.side_div_item_des {
+  background: #f7feff;
+}
+
+.side_div_item_des p {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  color: #808080;
+  padding-left: 1.5rem;
+  padding-right: 1rem;
+}
+
+.taskbutton {
+  color: #fff;
+  background-color: #058b94;
+  margin-left: 6rem;
+  padding: 1px 15px;
+}
+
+.taskbutton1 {
+  color: #fff;
+  background-color: #058b94;
+  padding: 1px 15px;
+}
+
+.taskbuttonspan {
+  padding-top: 0.7rem;
+}
+
+.side_div_item_des1 {
+  display: flex;
+  justify-content: space-between;
+  background: #e6fdfe;
+  margin-right: 1.5rem;
+  margin-left: 1rem;
+}
+
+.side_div_item_des2 {
+  display: flex;
+  justify-content: space-between;
+  background: #e6fdfe;
+  margin-top: 1.4rem;
+  margin-left: 1rem;
+  margin-right: 1.5rem;
+}
+
+.side_div_mentor_managers1 {
+  padding-left: 0.7rem;
+  padding-top: 0.8rem;
+  height: 4px;
+}
+
+.side_div_mentor_managers2 {
+  padding-right: 4rem;
+  padding-bottom: 0.9rem;
+  padding-top: 0.5rem;
+  display: flex;
+}
+
+.side_div_mentor_managers2_1 {
+  padding-right: 4rem;
+  padding-bottom: 0.9rem;
+  padding-top: 0.5rem;
+  display: flex;
+}
+
+.amount_mentor_managers {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  color: #333;
+  padding-top: 3px;
+  padding-left: 4px;
+}
+
+.amount_mentor_managers2 {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  color: #333;
+  padding-top: 3px;
+  padding-right: 1.5rem;
+}
+
+.program_mentor_managers {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  color: #333;
+  padding-left: 1.5rem;
+  padding-top: 0.7rem;
+}
+
+.program_mentor_managers2 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  color: #333;
+  padding-right: 11rem;
+  padding-top: 0.7rem;
+}
+
+.program_mentor_managers3 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  color: #333;
+  padding-right: 22.5rem;
+  padding-top: 0.7rem;
+}
+
+.button_div_icon {
+  color: #cc000e;
+  background-color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+}
+
+.button_div {
+  display: flex;
+  margin-top: 3rem;
+  float: right;
+  margin-right: 2rem;
+}
+
+@media (max-width: 992px) {
+  .main_container {
+    display: none;
+  }
+}

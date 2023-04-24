@@ -1,0 +1,137 @@
+.modal {
+  height: 300px;
+  width: 600px;
+  border-radius: 20px;
+  margin-top: 1rem;
+}
+
+.modal_container_task {
+  margin-top: 1rem;
+  display: flex;
+}
+
+.modal_container_item_task p {
+  font-size: 14;
+  margin-left: 0.5rem;
+  height: 0;
+}
+
+.modal_container_div_task {
+  display: flex;
+  margin-top: 1.2rem;
+  margin-left: 0.5rem;
+}
+
+.modal_container_item_date_task {
+  margin-left: 0.5rem;
+  color: #808080;
+}
+
+.div_item_des {
+  margin-top: 1rem;
+  color: #808080;
+  background-color: #f7feff;
+}
+
+.div_item_des2,
+.div_item_des1 {
+  display: flex;
+  margin-top: 1rem;
+  background: #e6fdfe;
+}
+
+.div_mentor_managers2_1,
+.div_mentor_managers2 {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 0.5rem;
+}
+
+.amount_mentor_managers2,
+.amount_mentor_managers {
+  font-weight: 700;
+  color: black;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.program_mentor_managers3,
+.program_mentor_managers2,
+.program_mentor_managers {
+  color: black;
+  font-size: 12px;
+  margin-right: 0.5rem;
+}
+
+.taskbutton {
+  color: white;
+  background-color: #058b94;
+  border: none;
+}
+
+.taskbutton1 {
+  color: white;
+  background-color: #058b94;
+  border: none;
+  margin-left: 0.5rem;
+}
+
+.taskbutton2 {
+  margin-left: 7.6rem;
+  color: white;
+  background-color: #058b94;
+  border: none;
+}
+
+.taskbuttonspan {
+  width: 63px;
+}
+
+.button_div_icon {
+  color: #cc000e;
+  background-color: #fff;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+}
+
+.button_div {
+  display: flex;
+  margin-top: 1rem;
+  justify-content: space-between;
+}
+
+.button_div_custom {
+  color: white;
+  background-color: #058b94;
+  border: none;
+  margin-left: 7.8rem;
+}
+
+.div_mentor_managers1 {
+  margin-top: 0.5rem;
+}
+
+@media (min-width: 480px) and (max-width: 992px) {
+  .modal {
+    width: 600px;
+  }
+
+  .taskbutton2 {
+    margin-left: 16.9rem;
+  }
+
+  .button_div_custom {
+    margin-left: 18rem;
+  }
+
+  .taskbutton1 {
+    margin-left: 9.8rem;
+  }
+
+  .taskbutton {
+    margin-left: 6.8rem;
+  }
+}
