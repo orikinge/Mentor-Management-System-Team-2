@@ -35,12 +35,12 @@ const programs = [
     date: "Apr 21, 2023",
   },
   {
-    name: "GADS Program 2022",
+    name: "GADS Program 2023",
     level: "50%",
     date: "Apr 21, 2023",
   },
   {
-    name: "GADS Program 2022",
+    name: "GADS Program 2024",
     level: "50%",
     date: "Apr 21, 2023",
   },
@@ -53,12 +53,12 @@ const reports = [
     date: "25th Aug 2022",
   },
   {
-    title: "Google Africa Scholarship",
+    title: "Google Africa Scholarship 2",
     author: "Ibrahim Kabir",
     date: "25th Aug 2022",
   },
   {
-    title: "Google Africa Scholarship",
+    title: "Google Africa Scholarship 3",
     author: "Ibrahim Kabir",
     date: "25th Aug 2022",
   },
@@ -70,11 +70,11 @@ const tasks = [
     daysLeft: 2,
   },
   {
-    title: "Room library article",
+    title: "Room library article 2",
     daysLeft: 2
   },
   {
-    title: "Room library article",
+    title: "Room library article 3",
     daysLeft: 2
   },
 ]

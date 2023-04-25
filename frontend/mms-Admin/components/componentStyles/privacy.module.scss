@@ -1,0 +1,16 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  width: 50%;
+
+  @media (max-width: 1220px) {
+    width: 100%;
+  }
+  
+  .label {
+    font-weight: 400;
+    font-size: 20px;
+    color: #333;
+  }
+}

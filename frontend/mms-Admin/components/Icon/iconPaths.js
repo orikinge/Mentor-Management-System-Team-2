@@ -1,17 +1,17 @@
 import Image from "next/image";
 
 export const iconPaths = {
-  Notification: () => {
+  Notification: ({ color = "#F7FEFF", width = "26", height = "27" }) => {
     return (
       <svg
-        width="26"
-        height="27"
+        width={width}
+        height={height}
         viewBox="0 0 26 27"
         fill="none"
         xmlns="http://www.w3.org/2000/svg">
         <path
           d="M5 10.8225V9.5C5 5.08172 8.58172 1.5 13 1.5C17.4183 1.5 21 5.08171 21 9.5V10.8225C21 13.6979 21.8311 16.512 23.3932 18.9261L24.25 20.25H1.75L2.60674 18.926C4.1689 16.512 5 13.6979 5 10.8225Z"
-          stroke="#F7FEFF"
+          stroke={color}
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -26,17 +26,17 @@ export const iconPaths = {
       </svg>
     );
   },
-  Chat: () => {
+  Chat: ({ color = "#F7FEFF", width = "26", height = "25" }) => {
     return (
       <svg
-        width="26"
-        height="25"
+        width={width}
+        height={height}
         viewBox="0 0 26 25"
         fill="none"
         xmlns="http://www.w3.org/2000/svg">
         <path
           d="M21.75 1.75H4.25C2.86929 1.75 1.75 2.86929 1.75 4.25V16.75C1.75 18.1307 2.86929 19.25 4.25 19.25H8L12.558 23.808C12.8021 24.0521 13.1979 24.0521 13.442 23.808L18 19.25H21.75C23.1307 19.25 24.25 18.1307 24.25 16.75V4.25C24.25 2.86929 23.1307 1.75 21.75 1.75Z"
-          stroke="#F7FEFF"
+          stroke={color}
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -44,17 +44,17 @@ export const iconPaths = {
       </svg>
     );
   },
-  Search: () => {
+  Search: ({ color = "#808080", width = "22", height = "22" }) => {
     return (
       <svg
-        width="22"
-        height="22"
+        width={width}
+        height={height}
         viewBox="0 0 22 22"
         fill="none"
         xmlns="http://www.w3.org/2000/svg">
         <path
           d="M16 16L21 21M18.5 9.75C18.5 14.5825 14.5825 18.5 9.75 18.5C4.91751 18.5 1 14.5825 1 9.75C1 4.91751 4.91751 1 9.75 1C14.5825 1 18.5 4.91751 18.5 9.75Z"
-          stroke="#808080"
+          stroke={color}
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"

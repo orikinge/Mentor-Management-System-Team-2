@@ -28,9 +28,18 @@
   padding: 8px 100px 10px 100px;
 }
 
-.active,
-.sidebar_sub_div:hover {
+.sidebar_sub_div {
+  &:hover {
+    background-color: white;
+  }
+}
+
+.active {
   background-color: white;
+
+  span {
+    font-weight: 600;
+  }
 }
 
 .sidebar_sub_div_link {
@@ -38,4 +47,8 @@
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
+
+  &:hover {
+    color: inherit;
+  }
 }

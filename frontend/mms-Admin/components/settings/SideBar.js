@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useMemo } from "react";
 import Link from "next/link";
-import styles from "../componentStyles/sidebar.module.css";
+import styles from "../componentStyles/sidebar.module.scss";
 
 const menuItems = [
   { id: 1, label: "General", link: "/settings" },

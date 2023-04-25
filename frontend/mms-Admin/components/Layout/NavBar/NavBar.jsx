@@ -60,7 +60,7 @@ const NavBar = () => {
             <div>
               <Link href="/profile">
                 <a>
-                  <Avatar src="/assets/images/user.png" />
+                  <Avatar src="/assets/images/admin_avatar.png" size={42} />
                 </a>
               </Link>
             </div>

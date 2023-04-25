@@ -1,14 +1,25 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { Layout, Menu, Typography } from "antd";
 import { Icon } from "components/Icon/Icon";
 import { SidebarMenu } from "components/SidebarMenu";
+
+import { clsx } from "clsx";
 import styles from "styles/sidebar.module.scss";
 
 const SideBar = ({ user }) => {
+  const router = useRouter();
   const [state, setState] = useState({ name: "James", role: "Admin" });
+  const [activeMenu, setActiveMenu] = useState("");
+
   const { Sider } = Layout;
   const { Paragraph } = Typography;
+
+  useEffect(() => {
+    const pathname = router.pathname?.split('/')[1];
+    setActiveMenu(pathname)
+  }, [router.pathname]);
 
   return (
     <Sider
@@ -30,7 +41,7 @@ const SideBar = ({ user }) => {
         {SidebarMenu.map((menu, idx) => (
           <Menu.Item
             key={`${idx}`}
-            className={styles.item}
+            className={clsx(styles.item, menu.path.match(activeMenu) ? styles.active : "")}
             icon={<Icon name={`${menu.icon}`} />}>
             <Link href={`${menu.path}`}>
               <a className={styles.link}>{menu.name}</a>
