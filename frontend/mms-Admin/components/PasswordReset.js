@@ -69,7 +69,6 @@ function PasswordComponents({
   showPassword,
   forgetPassword,
 }) {
-  console.log(showPassword);
   return (
     <>
       {showPassword && !forgetPassword && (

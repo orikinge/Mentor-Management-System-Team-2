@@ -1,0 +1,21 @@
+.row_width {
+  width: 95%;
+}
+
+.space_container {
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.avatar_container {
+  width: 98%;
+  display: flex;
+  justify-content: flex-end;
+  margin: 6rem auto;
+}
+
+.avatar {
+  background-color: #e6fdfe;
+  flex: 1;
+}

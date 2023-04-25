@@ -51,7 +51,7 @@ function General() {
           <label>About</label>
         </div>
 
-        <CustomTextArea placeholder="Your Bio" rows={6} />
+        <CustomTextArea placeholder="Your Bio" rows={4} />
       </Row>
       <Row className={styles.container}>
         <div className={styles.label}>

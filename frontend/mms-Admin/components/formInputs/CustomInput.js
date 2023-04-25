@@ -41,12 +41,14 @@ export function CustomButton({ children, ...props }) {
     <Button className={styles.button} {...props}>
       <span className={styles.btn_text}>{children}</span>
     </Button>
-  );
+  ); 
 }
 
-export function Label({ title }) {
+export function Label({ title, weight }) {
+  const classN = clsx(styles.label, { [styles.label_bold]: weight == "bold" });
+
   return (
-    <div className={styles.label}>
+    <div className={classN}>
       <label>{title}</label>
     </div>
   );
