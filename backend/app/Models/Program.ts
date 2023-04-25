@@ -2,7 +2,7 @@ import { DateTime } from 'luxon'
 import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
 import User from './User'
 
-export default class SupportRequest extends BaseModel {
+export default class Program extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
@@ -10,13 +10,13 @@ export default class SupportRequest extends BaseModel {
   public userId: number
 
   @column()
-  public email: string
+  public name: string
 
   @column()
-  public title: string
+  public description: string
 
   @column()
-  public body: string
+  public isArchive: boolean
 
   @belongsTo(() => User)
   public user: BelongsTo<typeof User>
