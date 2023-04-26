@@ -32,3 +32,22 @@
   text-align: center;
   color: #141414;
 }
+
+.modal_b2 {
+  width: 121px;
+  height: 50px;
+  background-color: #058b94;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  margin-left: 0.4rem;
+}
+
+.modal_b1 {
+  width: 121px;
+  height: 50px;
+  border-radius: 10px;
+  color: #023c40;
+  border: 1px solid #023c40;
+  margin-right: 0.4rem;
+}

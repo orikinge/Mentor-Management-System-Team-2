@@ -10,6 +10,9 @@ const NavHeader = ({ title, children }) => {
       ) : (
         <h2 className={styles.module_header_title}>{capitalize(title)}</h2>
       )}
+      {title === "messages" ? (
+        <h2 className={styles.module_header_title}>{capitalize("Chats")}</h2>
+      ) : ""}
       <div>{children}</div>
     </header>
   );

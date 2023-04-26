@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import WithAuth from "../components/WithAuth";
 
+
 import "antd/dist/reset.css";
 import "styles/globals.css";
 import { styles } from "styles/_app";

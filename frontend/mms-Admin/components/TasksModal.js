@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./componentStyles/tasksmodal.module.css";
 import { Button, Modal } from "antd";
 import Icon from "./Icon";
 import { CustomButton } from "./formInputs/CustomInput";
+import moment from 'moment';
+import DeleteTask from "./DeleteTask"
 
 export default function TasksModal({ 
     isModalOpen,
     isModelClose,
+    data
 }) {
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const handleClickDelete = (e) => {
+    e.preventDefault();
+    setIsDeleteOpen(true);
+  };
   return (
     <>
       <Modal
@@ -29,7 +37,7 @@ export default function TasksModal({
                 </div>
                 <div className={styles.modal_container_item_task}>
                     <p>
-                        Room library article written
+                    {data?.title?.slice(0, 29)}...
                     </p>
                     <div className={styles.modal_container_div_task}>
                         <Icon
@@ -38,7 +46,7 @@ export default function TasksModal({
                         height={"16.5px"}
                         className={styles.modal_container_item_icon_task}
                         />
-                        <div className={styles.modal_container_item_date_task}>3 days from now</div>
+                        <div className={styles.modal_container_item_date_task}>{moment(data?.endDate).diff(moment(), 'days')} days from now</div>
                     </div>
                  </div>
                </div> 
@@ -46,8 +54,7 @@ export default function TasksModal({
             <div>
             <div className={styles.div_item_des}>
               <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. 
-              Pellentesque sit amet sapien fringilla, mattis ligula consectetur,
+              {data?.description}
               </p>
               <div className={styles.div_item_des1}>
                 <div className={styles.div_mentor_managers1}>
@@ -60,7 +67,7 @@ export default function TasksModal({
                 </div>
                 <div className={styles.div_mentor_managers2}>
                       <div className={styles.amount_mentor_managers}>
-                        10
+                      {data?.mentorManagerCount}
                       </div>
                       <span className={styles.program_mentor_managers}>
                         Mentor Managers assigned to this program
@@ -83,7 +90,7 @@ export default function TasksModal({
                   </div>
                   <div className={styles.div_mentor_managers2_1}>
                   <div className={styles.amount_mentor_managers2}>
-                    80
+                   {data?.mentorCount}
                   </div>
                   <span className={styles.program_mentor_managers2}>
                     Mentors assigned to this program
@@ -108,7 +115,7 @@ export default function TasksModal({
                   </div>
                   <div className={styles.div_mentor_managers2_1}>
                   <div className={styles.amount_mentor_managers2}>
-                    45
+                    {data?.taskReportCount}
                   </div>
                   <span className={styles.program_mentor_managers3}>
                     Task reports
@@ -122,7 +129,7 @@ export default function TasksModal({
               </div>
             </div>
             <div className={styles.button_div}>
-                <button className={styles.button_div_icon}>
+                <button className={styles.button_div_icon} onClick={handleClickDelete}>
                 <Icon 
                 icon={"/assets/images/Delete.svg"}
                 width={"30px"}
@@ -136,6 +143,17 @@ export default function TasksModal({
             </div>
         </div>
       </Modal>
+      {isDeleteOpen && (
+        <DeleteTask
+          image={"/assets/images/deleteTask.svg"}
+          message={"Task Deleted Successfully"}
+          width={"600px"}
+          height={"350px"}
+          isDeleteOpen={isDeleteOpen}
+          setIsDeleteOpen={setIsDeleteOpen}
+          data={data}
+        />
+      )}
     </>
   );
 }

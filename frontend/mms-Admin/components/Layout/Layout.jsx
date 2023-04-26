@@ -67,6 +67,23 @@ const AppLayout = ({ children }) => {
                   </span>
               </>
             )}
+            {router?.pathname === "/messages" && (
+              <>
+              <div className={[styles.task_icon]}>
+                  <div className={[styles.msg_search_icon]}>
+                    <Icon
+                      icon={"/assets/images/search.svg"}
+                      width={"20px"}
+                      height={"20px"} />
+                  </div>
+                </div>
+                  <span className={[styles.task_create]}>
+                    <CustomButton className={styles.taskbutton}>
+                     Send Broadcast Message
+                    </CustomButton>
+                  </span>
+              </>
+            )}
             </div>
             {children}
           </Content>
