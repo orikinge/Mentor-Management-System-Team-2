@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useContext  } from "react";
+import { SearchDataContext } from "../searchDataContext";
 import styles from "../componentStyles/archive.module.css";
 import Icon from "../Icon";
+import moment from 'moment';
 
-function Archive({ searchData }) {
+function Archive() {
+  const searchData = useContext(SearchDataContext);
+  console.log(searchData, "searchData")
   return (
     <div className={styles.main_div}>
-      <div className={styles.main_sub_div}>
+     {searchData.map(data => (
+      <div className={styles.main_sub_div} key={data?.id}>
         <div className={styles.main_sub_icon}>
           <Icon
             icon={"/assets/images/BlackGoogleLogo.svg"}
@@ -14,7 +19,7 @@ function Archive({ searchData }) {
           />
         </div>
         <div className={styles.main_sub_content}>
-          <p>Google Africa Scholarship Program</p>
+          <p>{data?.name}</p>
           <div className={styles.main_sub_con_main}>
             <div className={styles.main_sub_con}>
               <span className={styles.main_sub_content_timeicon}>
@@ -24,7 +29,7 @@ function Archive({ searchData }) {
                   height={"16.5px"}
                 />
               </span>
-              <div className={styles.main_sub_content_time}>Dec 12, 2022</div>
+              <div className={styles.main_sub_content_time}>{moment(data?.DateTime, 'YYYY-MM-DD')}</div>
             </div>
             <div className={styles.main_sub_con}>
               <span className={styles.main_sub_content_timeicon1}>
@@ -34,7 +39,7 @@ function Archive({ searchData }) {
                   height={"18px"}
                 />
               </span>
-              <div className={styles.main_sub_content_time}>8:00 pm</div>
+              <div className={styles.main_sub_content_time}>{moment(data?.DateTime, 'HH:mm:ss')}</div>
             </div>
             <div className={styles.main_sub_con}>
               <span className={styles.main_sub_content_archor}>
@@ -48,6 +53,7 @@ function Archive({ searchData }) {
           </div>
         </div>
       </div>
+      ))}
     </div>
   );
 }

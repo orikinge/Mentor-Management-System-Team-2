@@ -4,20 +4,20 @@ import Icon from "./Icon";
 
 const PAGE_SIZE = 10;
 
-const Pagination = ({ total }) => {
-  const [currentPage, setCurrentPage] = useState(1);
+const Pagination = ({ total, currentPage, onPageChange }) => {
+  
 
   const totalPages = Math.ceil(total / PAGE_SIZE);
 
   const handlePreviousClick = () => {
     if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
+      onPageChange(currentPage - 1);
     }
   };
 
   const handleNextClick = () => {
     if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
+      onPageChange(currentPage + 1);
     }
   };
 
