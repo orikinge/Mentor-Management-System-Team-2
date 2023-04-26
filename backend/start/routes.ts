@@ -40,14 +40,14 @@ Route.group(() => {
   }).prefix('user')
 
   Route.group(() => {
-    Route.get('/:userId', 'ProfilesController.getByUserId')
-    Route.put('/:userId', 'ProfilesController.update')
+    Route.get('/', 'ProfilesController.getByUserId')
+    Route.put('/', 'ProfilesController.update')
     Route.put('/delete/:userId', 'ProfilesController.delete')
   })
     .prefix('profile')
     .middleware('auth')
 
-  Route.group(()=>{
+  Route.group(() => {
     Route.get('/', 'TaskController.index')
     Route.post('/', 'TaskController.create')
     Route.put('/:taskId', 'TaskController.update')
@@ -66,20 +66,20 @@ Route.group(() => {
     Route.delete('/:reportId', 'TaskReportController.deleteReport')
   }).prefix('task-reports')
 
-  Route.group(()=>{
+  Route.group(() => {
     Route.get('/', 'PostController.getAllPosts')
     Route.post('/', 'PostController.createPost')
     Route.put('/:postId', 'PostController.updatePost')
-    Route.delete('/:postId','PostController.deletePost' )
-    Route.get('/:postId','PostController.getPostWithComments' )
+    Route.delete('/:postId', 'PostController.deletePost')
+    Route.get('/:postId', 'PostController.getPostWithComments')
   }).prefix('post')
 
-  Route.group(()=>{
+  Route.group(() => {
     Route.post('/:postId', 'CommentController.createComment')
     Route.put('/:postId/:commentId', 'CommentController.updateComment')
-    Route.delete('/:postId/:commentId','CommentController.deleteComment' )
+    Route.delete('/:postId/:commentId', 'CommentController.deleteComment')
   }).prefix('comment')
-  
+
   Route.group(() => {
     Route.get('/', 'NotificationSettingsController.getUserNotificationSettings')
     Route.put('/', 'NotificationSettingsController.updateUserNotificationSettings')
@@ -97,5 +97,32 @@ Route.group(() => {
   Route.group(() => {
     Route.get('/', 'SupportRequestsController.index')
     Route.post('/', 'SupportRequestsController.createRequest')
-  }).prefix('support-request').middleware('auth')
+  })
+    .prefix('support-request')
+    .middleware('auth')
+
+  Route.group(() => {
+    Route.get('/sent', 'BroadcastMessagesController.sent')
+    Route.get('/received', 'BroadcastMessagesController.received')
+    Route.post('/', 'BroadcastMessagesController.create')
+  })
+    .prefix('broadcast')
+    .middleware('auth')
+
+  Route.group(() => {
+    Route.get('/', 'ProgramsController.index')
+    Route.get('/:id', 'ProgramsController.show')
+    Route.post('/', 'ProgramsController.store')
+    Route.put('/:id', 'ProgramsController.update')
+    Route.delete('/:id', 'ProgramsController.destroy')
+  })
+    .prefix('programs')
+    .middleware('auth')
+
+  Route.group(() => {
+    Route.get('/', 'ProgramsController.allArchive')
+    Route.put('/:id', 'ProgramsController.archive')
+  })
+    .prefix('archive')
+    .middleware('auth')
 }).prefix('api/v1')

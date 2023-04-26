@@ -1,0 +1,131 @@
+.broadcast_panel {
+  margin: auto;
+  height: 34rem;
+  width: 100%;
+  padding: 2rem;
+  font-family: "Mukta", sans-serif;
+}
+
+.close_btn {
+  float: right;
+  padding: 10px 40px 35px 40px;
+  background-color: #058b94;
+  color: white;
+  font-size: 16px;
+  border-radius: 10px;
+}
+
+.close_btn:hover {
+  background-color: #035d63;
+  color: white;
+}
+
+.broadcast_title {
+  font-weight: 600;
+  font-size: 24px;
+  top: 40%;
+  position: relative;
+}
+
+.broadcast_header {
+  margin-bottom: 1rem;
+}
+
+.broadcast_board {
+  background-color: #f7feff;
+  color: black;
+  height: 30rem;
+  margin: 0.5rem 0 0.5rem 0;
+  padding: 1rem 2rem 1rem 2rem;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #06b9c6;
+}
+
+.broadcast_message {
+  top: 3.8rem;
+  left: 3.1rem;
+  right: 3.1rem;
+  margin-bottom: 1rem;
+  font-size: 20px;
+}
+
+.text_message {
+  background-color: #e6fdfe;
+  padding: 1.5rem 1.56rem 0 1.56rem;
+  margin-top: -0.5rem;
+  border-radius: 0.5rem;
+}
+
+.message {
+  color: #4d4d4d;
+}
+
+.sender {
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.time {
+  font-size: 12px;
+  float: right;
+  color: #4d4d4d;
+}
+
+.date {
+  text-align: center;
+  font-size: 12px;
+  color: #808080;
+}
+
+.double_check {
+  margin-left: 8px;
+  color: red;
+}
+
+.message_footer {
+  margin-top: 1rem;
+}
+
+.mention {
+  width: 100%;
+}
+
+/* Chrome, Edge, and Safari */
+.broadcast_board::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.broadcast_board::-webkit-scrollbar-track {
+  background: #f7feff;
+}
+
+.broadcast_board::-webkit-scrollbar-thumb {
+  background-color: #06b9c6;
+  border-radius: 20px;
+  border: 1px solid #06b9c6;
+}
+
+.textarea {
+  display: flex;
+}
+
+.text_message_area {
+  border-radius: 7px;
+  border: 1px solid #e6fdfe;
+  background: #f7feff;
+  top: 1.5rem;
+}
+
+.text_area_btn {
+  padding-top: 1.6rem;
+  flex: 0 0 5%;
+}
+
+.emoji_picker {
+  position: "absolute";
+  bottom: "80%";
+  left: "50%";
+  transform: "translate(-10%, -10px)";
+}
