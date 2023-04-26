@@ -70,7 +70,7 @@ export default class TaskController {
         return task
       })
 
-      return response.status(201).json(task)
+      return response.created({status: 'success', message: 'Task Created', task})
     } catch (error) {
       return response.status(500).send({ message: 'Error creating task.' })
     }
@@ -137,7 +137,7 @@ export default class TaskController {
         return task
       })
 
-      return response.status(200).json(task)
+      return response.status(200).json({status: 'success', message: 'Task Updated Successfully', task})
     } catch (error) {
       console.log(error)
       return response.status(500).send({ message: 'Error updating task.' })
@@ -199,7 +199,7 @@ export default class TaskController {
       }
    
 
-    return response.ok(result)
+    return response.ok({status: 'success', message: 'Task fetched Successfully', result})
   }
   async index({ auth, response, request }: HttpContextContract) {
     const adminUser = await auth.authenticate()
@@ -262,7 +262,7 @@ export default class TaskController {
         }
       })
 
-      return response.status(200).json({ data: tasksWithCounts })
+      return response.status(200).json({ status: 'success', message: 'Tasks fetched successfully', data: tasksWithCounts })
     } catch (error) {
       return response.status(500).send({ message: 'Error retrieving tasks.' })
     }

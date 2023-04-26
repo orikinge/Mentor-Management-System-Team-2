@@ -33,12 +33,12 @@ export default class AuthenticationController {
       const url = `${Env.get('FRONTEND_URL')}?token=${token.toJSON().code}`
       await Mail.send((message) => {
         message.from('MMM2@example.com').to(email).subject('Welcome Onboard!')
-          .html(`Hello ${user?.firstName}\n
+          .html(`Hello ${user?.firstName},\n
           Use the link below to reset your password ${url}`)
       })
-      return token
+      return {status: 'success', message: 'Password reset token as been sent to your email', token: token }
     } catch (error) {}
-    return { message: 'Password reset token as been sent to your email' }
+    
   }
 
   async resetPassword({ request, response }: HttpContextContract) {
@@ -60,7 +60,7 @@ export default class AuthenticationController {
 
       await tokenRes.delete()
 
-      return { message: 'Password reset successful' }
+      return { status: 'success', message: 'Password reset successful' }
     } catch (error) {
       return response.status(400).send({ message: error.message })
     }

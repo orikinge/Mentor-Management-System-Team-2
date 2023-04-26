@@ -20,12 +20,53 @@ export default class extends BaseSeeder {
         bio: "I don't have a bio"
       },
       {
-        email: 'dim2though@gmail.com',
+        email: 'test2@gmail.com',
         password: 'test12345678',
         firstName: 'Segun',
         lastName: 'Oyinlola',
         bio: "I don't have a bio"
-      }
+      },
+
+      {
+        email: 'test3@gmail.com',
+        password: 'test12345678',
+        firstName: 'Another',
+        lastName: 'User',
+        bio: "I don't have a bio"
+      },
+
+      {
+        email: 'test4@gmail.com',
+        password: 'test12345678',
+        firstName: 'Annoying',
+        lastName: 'User',
+        bio: "I don't have a bio"
+      },
+
+      {
+        email: 'test5@gmail.com',
+        password: 'test12345678',
+        firstName: 'Just Another',
+        lastName: 'User',
+        bio: "I don't have a bio"
+      },
+
+      {
+        email: 'test6@gmail.com',
+        password: 'test12345678',
+        firstName: 'Dan',
+        lastName: 'Mike',
+        bio: "I don't have a bio"
+      },
+      
+      {
+        email: 'test7@gmail.com',
+        password: 'test12345678',
+        firstName: 'Test',
+        lastName: 'Test',
+        bio: "I don't have a bio"
+      },
+
     ])
   }
 }

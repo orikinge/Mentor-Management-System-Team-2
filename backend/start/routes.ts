@@ -34,11 +34,10 @@ Route.group(() => {
   }).prefix('auth')
 
   Route.group(() => {
+    Route.get('/', 'UserController.getAllUsers')
     Route.get('/mentors', 'UserController.getAllMentors')
-    Route.get('/mentor-managers', 'UserController.getAllMentors')
+    Route.get('/mentor-managers', 'UserController.getAllMentorManagers')
   }).prefix('user')
-
-
 
   Route.group(() => {
     Route.get('/:userId', 'ProfilesController.getByUserId')
@@ -56,6 +55,7 @@ Route.group(() => {
     Route.delete('/delete/:taskId', 'TaskController.delete')
   }).prefix('task').middleware('auth')
 
+  
   Route.group(()=>{
     Route.get('/', 'TaskReportController.getAllReports')
     Route.post('/:taskId/', 'TaskReportController.createTaskReport')
@@ -65,6 +65,20 @@ Route.group(() => {
     Route.delete('/:reportId','TaskReportController.deleteReport' )
   }).prefix('task-reports')
 
+  Route.group(()=>{
+    Route.get('/', 'PostController.getAllPosts')
+    Route.post('/', 'PostController.createPost')
+    Route.put('/:postId', 'PostController.updatePost')
+    Route.delete('/:postId','PostController.deletePost' )
+    Route.get('/:postId','PostController.getPostWithComments' )
+  }).prefix('post')
+
+  Route.group(()=>{
+    Route.post('/:postId', 'CommentController.createComment')
+    Route.put('/:postId/:commentId', 'CommentController.updateComment')
+    Route.delete('/:postId/:commentId','CommentController.deleteComment' )
+  }).prefix('comment')
+  
   Route.group(() => {
     Route.get('/', 'NotificationSettingsController.getUserNotificationSettings')
     Route.put('/', 'NotificationSettingsController.updateUserNotificationSettings')
