@@ -1,6 +1,6 @@
 import { axiosInstance } from "./axiosInstance";
 
-const baseURL = "http://localhost:3333/api/v1";
+const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export default {
   get(url, options) {

@@ -1,6 +1,6 @@
 import { fetchWrapper } from "../lib/fetch-wrapper";
 
-const baseUrl = `http://127.0.0.1:3333/api/v1`; //TODO: to be moved to the .env
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL; //TODO: to be moved to the .env
 
 function send(message, token) {
   return fetchWrapper
