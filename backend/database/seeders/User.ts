@@ -10,21 +10,21 @@ export default class extends BaseSeeder {
         password: 'test12345678',
         firstName: 'aliyu',
         lastName: 'Olad',
-        bio: "I don't have a bio"
+        bio: "I don't have a bio",
       },
       {
         email: 'test@gmail.com',
         password: 'test12345678',
         firstName: 'aliyu',
         lastName: 'Olad',
-        bio: "I don't have a bio"
+        bio: "I don't have a bio",
       },
       {
         email: 'test2@gmail.com',
         password: 'test12345678',
         firstName: 'Segun',
         lastName: 'Oyinlola',
-        bio: "I don't have a bio"
+        bio: "I don't have a bio",
       },
 
       {
@@ -32,7 +32,7 @@ export default class extends BaseSeeder {
         password: 'test12345678',
         firstName: 'Another',
         lastName: 'User',
-        bio: "I don't have a bio"
+        bio: "I don't have a bio",
       },
 
       {
@@ -40,7 +40,7 @@ export default class extends BaseSeeder {
         password: 'test12345678',
         firstName: 'Annoying',
         lastName: 'User',
-        bio: "I don't have a bio"
+        bio: "I don't have a bio",
       },
 
       {
@@ -48,7 +48,7 @@ export default class extends BaseSeeder {
         password: 'test12345678',
         firstName: 'Just Another',
         lastName: 'User',
-        bio: "I don't have a bio"
+        bio: "I don't have a bio",
       },
 
       {
@@ -56,17 +56,16 @@ export default class extends BaseSeeder {
         password: 'test12345678',
         firstName: 'Dan',
         lastName: 'Mike',
-        bio: "I don't have a bio"
+        bio: "I don't have a bio",
       },
-      
+
       {
         email: 'test7@gmail.com',
         password: 'test12345678',
         firstName: 'Test',
         lastName: 'Test',
-        bio: "I don't have a bio"
+        bio: "I don't have a bio",
       },
-
     ])
   }
 }

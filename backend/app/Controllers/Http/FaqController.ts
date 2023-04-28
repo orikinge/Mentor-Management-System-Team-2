@@ -1,5 +1,4 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import Database from '@ioc:Adonis/Lucid/Database'
 import Faq from 'App/Models/Faq'
 import { schema } from '@ioc:Adonis/Core/Validator'
 

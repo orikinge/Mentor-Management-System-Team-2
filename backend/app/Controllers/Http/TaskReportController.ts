@@ -8,7 +8,7 @@ import generatePdfFile from 'Helpers/index'
 import stream from 'stream'
 
 export default class TaskReportController {
-  async createTaskReport({ auth, params, request, response }: HttpContextContract) {
+  public async createTaskReport({ auth, params, request, response }: HttpContextContract) {
     try {
       const { achievement, blocker, recommendation } = request.only([
         'achievement',
@@ -32,7 +32,9 @@ export default class TaskReportController {
       if (!task) {
         return response.notFound({ message: 'Task not found', status: 'Error' })
       }
-      const isMentorManager = task.mentorManagers.some((mentorManager) => mentorManager.id === user.id)
+      const isMentorManager = task.mentorManagers.some(
+        (mentorManager) => mentorManager.id === user.id
+      )
       if (!isMentorManager) {
         return response.unauthorized({ message: 'You are not authorized to perform this action' })
       }
@@ -62,7 +64,9 @@ export default class TaskReportController {
           endDate: task.endDate,
         },
       }
-      return response.status(201).json({ status: 'success', message: 'Tasks report successfully created',responseData})
+      return response
+        .status(201)
+        .json({ status: 'success', message: 'Tasks report successfully created', responseData })
     } catch (error) {
       response.badRequest({ message: 'Error Creating Report', status: 'Error' })
     }
@@ -74,15 +78,16 @@ export default class TaskReportController {
       if (!user || !user.isAdmin) {
         return response.unauthorized({ error: 'You must be an admin to view task reports' })
       }
-      const { page, limit, search} = request.qs()
+      const { page, limit, search } = request.qs()
       const taskReports = await TaskReport.query()
-        .orderBy('created_at', 'desc').if(search, (q) => {
+        .orderBy('created_at', 'desc')
+        .if(search, (q) => {
           q.whereHas('task', (taskQuery) => {
             taskQuery.where('title', 'like', `%${search}%`)
           })
         })
         .paginate(page || 1, limit || 10)
-      
+
       const responseData = await Promise.all(
         taskReports.all().map(async (report) => {
           const task = await Task.query()
@@ -116,7 +121,11 @@ export default class TaskReportController {
         })
       )
 
-      return response.ok({ status: 'success', message: 'All Task reports fetched successfully', responseData})
+      return response.ok({
+        status: 'success',
+        message: 'All Task reports fetched successfully',
+        responseData,
+      })
     } catch (error) {
       response.badRequest({ message: 'Error getting report', status: 'Error' })
     }
@@ -161,7 +170,7 @@ export default class TaskReportController {
         },
       }
       await trx.commit()
-      return response.ok({ status: 'success', message: 'Report fetched successfully', result})
+      return response.ok({ status: 'success', message: 'Report fetched successfully', result })
     } catch (error) {
       await trx.rollback()
       response.badRequest({ message: 'Error getting request', status: 'Error' })
@@ -189,7 +198,7 @@ export default class TaskReportController {
       const mentor = await User.findOrFail(report.mentorId)
 
       await trx.commit()
-      return generatePdfFile(response, report, task, mentor);
+      return generatePdfFile(response, report, task, mentor)
     } catch (error) {
       await trx.rollback()
       response.badRequest({ message: 'Error getting request', status: 'Error' })
@@ -218,10 +227,10 @@ export default class TaskReportController {
       const mentor = await User.findOrFail(report.mentorId)
       const writable = new stream.Duplex()
 
-      const doc = await generatePdfFile({response: writable}, report, task, mentor)
+      await generatePdfFile({ response: writable }, report, task, mentor)
       const readable = new stream.Readable()
       readable.pipe(writable)
-   
+
       await Mail.send((message) => {
         message
           .from('MMM2@example.com')
@@ -232,7 +241,8 @@ export default class TaskReportController {
           Find the attached report for your perusal\n
           Kind regards,\n
           ${user.firstName}`
-          ).attachData(readable, {filename: 'report.pdf'})
+          )
+          .attachData(readable, { filename: 'report.pdf' })
       })
     } catch (error) {
       console.log(error)
@@ -247,17 +257,15 @@ export default class TaskReportController {
       if (!user || !user.isAdmin) {
         return response.unauthorized({ error: 'You must be an admin to delete reports' })
       }
-  
+
       const reportId = params.reportId
       const report = await TaskReport.findOrFail(reportId)
-  
+
       await report.delete()
-  
+
       return response.ok({ message: 'Task Report deleted successfully' })
     } catch (error) {
       response.badRequest({ message: 'Error deleting report', status: 'Error' })
     }
   }
-  
-
 }
