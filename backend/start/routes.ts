@@ -31,7 +31,7 @@ Route.group(() => {
     Route.post('/reset-password', 'AuthenticationController.resetPassword')
     Route.get('/google/redirect', 'AuthenticationController.redirectToGoogle')
     Route.post('/google', 'AuthenticationController.googleLogin')
-  }).prefix('auth') 
+  }).prefix('auth')
 
   Route.group(() => {
     Route.get('/', 'UserController.getAllUsers')
@@ -80,6 +80,7 @@ Route.group(() => {
     Route.put('/:postId/:commentId', 'CommentController.updateComment')
     Route.delete('/:postId/:commentId', 'CommentController.deleteComment')
   }).prefix('comment')
+
 
   Route.group(() => {
     Route.get('/', 'NotificationSettingsController.getUserNotificationSettings')
