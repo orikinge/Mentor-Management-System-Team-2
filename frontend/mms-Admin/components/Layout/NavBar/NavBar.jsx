@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from 'react'
 import Link from "next/link";
 import Image from "next/image";
 import { Icon } from "components/Icon/Icon";
 import { Avatar, Badge, Input } from "antd";
 
 import styles from "styles/navbar.module.css";
+import { BarsOutlined } from '@ant-design/icons'
+import { GlobalContext } from '../../../Context/store'
 
 const NavBar = () => {
   const [recentNotifications, setRecentNotifications] = useState([]);
+  const { isMobileSideBarOpen, setMobileSideBarState } = useContext(GlobalContext);
 
   const notificationCount = (count) => {
     if (count == 20) return "20+";
@@ -37,6 +40,11 @@ const NavBar = () => {
               prefix={<Icon name="Search" />}
               size="large"
             />
+          </div>
+          <div className={styles.navbar_icons_size}>
+                <Badge>
+                  <BarsOutlined onClick={()=> setMobileSideBarState(!isMobileSideBarOpen)}  />
+                </Badge>
           </div>
           <div className={styles.navbar_icons}>
             <div>

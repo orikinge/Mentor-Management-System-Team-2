@@ -9,9 +9,9 @@ import { extractTitleFromUrl } from "../../utils/extractTitleFromUrl";
 import styles from "styles/layout.module.css";
 import Icon from "../Icon";
 import { CustomButton } from "../formInputs/CustomInput";
-import { SearchDataContext } from "../searchDataContext";
-import axios from '../../pages/api/axios';
-
+import { SearchDataContext } from "../../Context/searchDataContext";
+import { GlobalContextProvider } from "../../Context/store";
+import axios from "../../pages/api/axios";
 
 const AppLayout = ({ children }) => {
   const [headerTitle, setHeaderTitle] = useState("");
@@ -58,74 +58,83 @@ const AppLayout = ({ children }) => {
   }, [currentPage]);
 
   return (
-    <SearchDataContext.Provider value={searchData}>
-    <Layout className={styles.app_layout}>
-      <NavBar />
-      <Content>
+    <GlobalContextProvider>
+      <SearchDataContext.Provider value={searchData}>
         <Layout className={styles.app_layout}>
-          <SideBar />
-          <Content className={styles.app_layout_content}>
-            <div className={[styles.div_input]}>
-            <NavHeader title={headerTitle} />
-            {router?.pathname === "/settings/archive" && (
-              <>
-               <Input
-                  className={[styles.archive_input]}
-                  size="large"
-                  placeholder="Search Archive"
-                  type="archive"
-                  required 
-                />
-               <Pagination total={20} currentPage={currentPage} onPageChange={handlePageChange} />
-              </>
-            )}
-            {router?.pathname === "/tasks" && (
-              <>
-              <div className={[styles.task_icon]}>
-                  <div className={[styles.task_search_icon]}>
-                    <Icon
-                      icon={"/assets/images/search.svg"}
-                      width={"20px"}
-                      height={"20px"} />
-                  </div>
-                  <div className={[styles.task_filter_icon]}>
-                    <Icon
-                      icon={"/assets/images/filter.svg"}
-                      width={"25px"}
-                      height={"25px"} />
-                  </div>
+          <NavBar />
+          <Content>
+            <Layout className={styles.app_layout}>
+              <SideBar />
+              <Content className={styles.app_layout_content}>
+                <div className={[styles.div_input]}>
+                  <NavHeader title={headerTitle} />
+                  {router?.pathname === "/settings/archive" && (
+                    <>
+                      <Input
+                        className={[styles.archive_input]}
+                        size="large"
+                        placeholder="Search Archive"
+                        type="archive"
+                        required
+                      />
+                      <Pagination
+                        total={20}
+                        currentPage={currentPage}
+                        onPageChange={handlePageChange}
+                      />
+                    </>
+                  )}
+                  {router?.pathname === "/tasks" && (
+                    <>
+                      <div className={[styles.task_icon]}>
+                        <div className={[styles.task_search_icon]}>
+                          <Icon
+                            icon={"/assets/images/search.svg"}
+                            width={"20px"}
+                            height={"20px"}
+                          />
+                        </div>
+                        <div className={[styles.task_filter_icon]}>
+                          <Icon
+                            icon={"/assets/images/filter.svg"}
+                            width={"25px"}
+                            height={"25px"}
+                          />
+                        </div>
+                      </div>
+                      <span className={[styles.task_create]}>
+                        <CustomButton className={styles.taskbutton}>
+                          Create New Task
+                        </CustomButton>
+                      </span>
+                    </>
+                  )}
+                  {router?.pathname === "/messages" && (
+                    <>
+                      <div className={[styles.task_icon]}>
+                        <div className={[styles.msg_search_icon]}>
+                          <Icon
+                            icon={"/assets/images/search.svg"}
+                            width={"20px"}
+                            height={"20px"}
+                          />
+                        </div>
+                      </div>
+                      <span className={[styles.task_create]}>
+                        <CustomButton className={styles.taskbutton}>
+                          Send Broadcast Message
+                        </CustomButton>
+                      </span>
+                    </>
+                  )}
                 </div>
-                  <span className={[styles.task_create]}>
-                    <CustomButton className={styles.taskbutton}>
-                    Create New Task
-                    </CustomButton>
-                  </span>
-              </>
-            )}
-            {router?.pathname === "/messages" && (
-              <>
-              <div className={[styles.task_icon]}>
-                  <div className={[styles.msg_search_icon]}>
-                    <Icon
-                      icon={"/assets/images/search.svg"}
-                      width={"20px"}
-                      height={"20px"} />
-                  </div>
-                </div>
-                  <span className={[styles.task_create]}>
-                    <CustomButton className={styles.taskbutton}>
-                     Send Broadcast Message
-                    </CustomButton>
-                  </span>
-              </>
-            )}
-            </div>
-            {children}
+                {children}
+              </Content>
+            </Layout>
           </Content>
         </Layout>
-      </Content>
-    </Layout>
-  </SearchDataContext.Provider>
+      </SearchDataContext.Provider>
+    </GlobalContextProvider>
   );
 };
 

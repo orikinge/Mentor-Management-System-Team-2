@@ -1,17 +1,19 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from 'react'
 import { Layout, Menu, Typography } from "antd";
 import { Icon } from "components/Icon/Icon";
 import { SidebarMenu } from "components/SidebarMenu";
 
 import { clsx } from "clsx";
 import styles from "styles/sidebar.module.scss";
+import { GlobalContext } from '../../../Context/store'
 
 const SideBar = ({ user }) => {
   const router = useRouter();
   const [state, setState] = useState({ name: "James", role: "Admin" });
   const [activeMenu, setActiveMenu] = useState("");
+  const { isMobileSideBarOpen } = useContext(GlobalContext);
 
   const { Sider } = Layout;
   const { Paragraph } = Typography;
@@ -27,7 +29,9 @@ const SideBar = ({ user }) => {
       style={{ background: "#f7feff" }}
       width={250}
       breakpoint="lg"
+      collapsed={isMobileSideBarOpen}
       collapsedWidth="0"
+      trigger={null}
       onBreakpoint={() => {}}
       onCollapse={(collapsed, type) => {}}>
       <Typography className={styles.welcome_text_header}>

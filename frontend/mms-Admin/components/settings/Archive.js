@@ -1,12 +1,12 @@
 import React, { useContext  } from "react";
-import { SearchDataContext } from "../searchDataContext";
+import { SearchDataContext } from "../../Context/searchDataContext";
 import styles from "../componentStyles/archive.module.css";
 import Icon from "../Icon";
 import moment from 'moment';
 
 function Archive() {
   const searchData = useContext(SearchDataContext);
-  console.log(searchData, "searchData")
+
   return (
     <div className={styles.main_div}>
      {searchData.map(data => (

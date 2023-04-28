@@ -6,6 +6,7 @@
   align-items: center;
   justify-content: space-between;
   z-index: 100;
+  display: flex;
 }
 
 .ant-input-search-button {
@@ -16,6 +17,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 }
 
 .navbar_right,
@@ -51,20 +53,33 @@
   }
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 768px) {
   .header {
+    padding: 10px;
     height: 100%;
   }
-
-  .logo_text {
-    display: none;
-  }
-
   .navbar_search {
     width: 320px;
   }
 
   .navbar_icons {
+    display: none;
+  }
+}
+
+.navbar_icons_size svg {
+  width: 2rem;
+  height: 2rem;
+  fill: #fff
+}
+
+@media (min-width: 768px) {
+  .navbar_icons_size {
+    display: none;
+  }
+}
+@media (max-width: 1000px) {
+  .logo_text {
     display: none;
   }
 }
