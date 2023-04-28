@@ -4,6 +4,7 @@ const user = {
   lastName: '',
   email: '',
   role: null,
+  settings: {},
 };
 
 export default user;

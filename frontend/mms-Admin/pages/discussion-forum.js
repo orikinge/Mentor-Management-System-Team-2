@@ -54,8 +54,6 @@ function DiscussionForum() {
         <SuccessMessage
           image={"/assets/images/success.png"}
           message={"Post Created Successfully"}
-          width={"220px"}
-          height={"165px"}
           isModalOpen={success}
           setIsModalOpen={setSuccess}
         />

@@ -98,8 +98,6 @@ function Support() {
         <SuccessMessage
           image={"/assets/images/success.png"}
           message={"Ticket Successfully Created"}
-          width={"220px"}
-          height={"165px"}
           isModalOpen={isSuccess}
           setIsModalOpen={setIsSuccess}
         />

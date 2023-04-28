@@ -7,6 +7,11 @@ const userReducer = (user, action) => {
         ...user,
         ...action.payload
       };
+    case UserTypes.UPDATE_PRIVACY_SETTINGS:
+      return {
+        ...user,
+        settings: action.payload
+      };
     default:
       return user;
   }

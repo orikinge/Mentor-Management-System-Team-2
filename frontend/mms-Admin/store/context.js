@@ -1,8 +1,8 @@
-import { useContext, useReducer } from 'react';
+import { useContext, useReducer,createContext } from 'react';
 import mainReducer from './providers/mainReducer';
 import initialState from './providers/initialState';
 
-export const StateContext = React.createContext();
+export const StateContext = createContext();
 
 const ContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(mainReducer, initialState);

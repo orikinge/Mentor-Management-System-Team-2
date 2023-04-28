@@ -83,8 +83,6 @@ function NewPassword() {
         <SuccessMessage
           image={"/assets/images/success.png"}
           message={"Password Reset Successful"}
-          width={"220px"}
-          height={"165px"}
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
           redirectLogin

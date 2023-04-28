@@ -9,12 +9,9 @@ import { useRouter } from "next/router";
 function SuccessMessage({
   image,
   message,
-  width,
-  height,
   isModalOpen,
   setIsModalOpen,
   redirectLogin
-
 }) {
   
   const router = useRouter()
@@ -23,7 +20,6 @@ function SuccessMessage({
     if(redirectLogin){
       setIsModalOpen(false);
       router.push("/login")
-
     }
     else{
       setIsModalOpen(false);
@@ -47,7 +43,7 @@ function SuccessMessage({
           </div>
 
           <div>
-            <Image src={image} width={width} height={height} />;
+            <Image src={image} width="220" height="165" />;
           </div>
           <div>
             <CustomButton onClick={handleOk}>Done</CustomButton>

@@ -38,6 +38,7 @@ const Programs = ({ programs, loading }) => {
         {programs_?.map((program) => {
           return (
             <Col md={8} sm={12} xs={24} key={program.name}>
+            {loading ? <Loader /> : (
               <div className={styles.card}>
                 <Image
                   src={"/assets/images/program_overview.png"}
@@ -53,7 +54,7 @@ const Programs = ({ programs, loading }) => {
                   </Row>
                 </Paragraph>
                 <p>{program.date}</p>
-              </div>
+              </div>)}
             </Col>
           )})}
       </Row>
