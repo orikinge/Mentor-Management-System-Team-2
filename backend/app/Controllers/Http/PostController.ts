@@ -1,5 +1,6 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Post from 'App/Models/Post'
+import { schema } from '@ioc:Adonis/Core/Validator'
 
 export default class PostsController {
   public async createPost({ auth, request, response }: HttpContextContract) {
@@ -8,15 +9,28 @@ export default class PostsController {
       return response.unauthorized({ error: 'You must be logged in to create a report' })
     }
 
-    const post = new Post()
-    post.title = request.input('title')
-    post.description = request.input('description')
-    post.userId = user.id
-    post.emoji = request.input('emoji')?.toString() || ''
-    post.imageUrl = request.input('imageUrl')?.toString() || ''
-    await post.save()
+    const payload = await request.validate({
+      schema: schema.create({
+        imageUrl: schema.file({
+          size: '2mb',
+          extnames: ['jpg', 'png'],
+        }),
+        title: schema.string(),
+        description: schema.string(),
+        emoji: schema.string(),
+      }),
+    })
+    const postImage = request.file('imageUrl')
+    // Written to the "images" directory
+    await postImage?.moveToDisk('upload_file')
 
-    return response.created({status: 'success', message: 'Post successfully created', post})
+    const post = await Post.create({
+      ...payload,
+      imageUrl: postImage?.fileName,
+      userId: user.id,
+    })
+
+    return response.created({ status: 'success', message: 'Post successfully created', post })
   }
 
   public async updatePost({ auth, params, request, response }: HttpContextContract) {
@@ -42,7 +56,9 @@ export default class PostsController {
     post.imageUrl = request.input('imageUrl')?.toString() || ''
     await post.save()
 
-    return response.status(201).json({ status: 'success', message: 'Post updated successfully', post})
+    return response
+      .status(201)
+      .json({ status: 'success', message: 'Post updated successfully', post })
   }
 
   public async getAllPosts({ auth, request, response }: HttpContextContract) {
@@ -65,7 +81,7 @@ export default class PostsController {
 
     const posts = await query.paginate(page || 1, limit || 10)
 
-    return response.ok({ status: 'success', message: 'Posts fetched successfully', posts})
+    return response.ok({ status: 'success', message: 'Posts fetched successfully', posts })
   }
 
   public async getPostWithComments({ auth, params, response }: HttpContextContract) {
@@ -89,7 +105,11 @@ export default class PostsController {
       throw new Error('Post not found')
     }
 
-    return response.ok({ status: 'success', message: 'Post with comments fetched successfully', post})
+    return response.ok({
+      status: 'success',
+      message: 'Post with comments fetched successfully',
+      post,
+    })
   }
 
   public async deletePost({ auth, params, response }: HttpContextContract) {
