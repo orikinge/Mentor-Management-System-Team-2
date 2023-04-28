@@ -1,6 +1,8 @@
 cd ../
 
-pm2 reload all
+ls
+
+sudo pm2 reload all
 
 sudo ./ngrok config add-authtoken 1PtDeQ85j9zN4zlTYP0LvAf39TV_6nQYvXrABzsuh52SZrpjY
 
