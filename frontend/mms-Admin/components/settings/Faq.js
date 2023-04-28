@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../componentStyles/faq.module.css";
 import Icon from "../Icon";
 import { Collapse } from "antd";
 import { CiCircleRemove } from "react-icons/ci";
+import axios from '../../pages/api/axios';
 
 const { Panel } = Collapse;
 const text = `
@@ -12,6 +13,8 @@ const text = `
 `;
 
 function Faq() {
+  const [general, setGeneral] = useState([]);
+  const [technical, setTechnical] = useState([]);
   const onChange = (key) => {};
   const CustomPanelHeader = ({ title, ...panelProps }) => {
     const customIcon = panelProps.isActive ? (
@@ -26,73 +29,63 @@ function Faq() {
       </div>
     );
   };
+  const loadData = () => {
+      
+    const token = 'MQ.L2oPLG2ZM5TOHnsFTg3O_w91QgAzBmYezYuHH-eK6yJ2q8KLR84cuXu5dn3x';
+
+    axios.get('faq', {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+      .then(response => {
+        setGeneral(response?.data?.general);
+        setTechnical(response?.data?.technical)
+      })
+      .catch(error => {
+        console.error('Error loading more items:', error);
+      });
+  };
+  
+  useEffect(() => {
+    loadData()
+  }, [])
   return (
     <div className={styles.main_div}>
       <div className={styles.sub_div1}>
         <p className={styles.head}>General FAQ</p>
-        <Collapse
+        {general.map(data => (
+          <Collapse
           onChange={onChange}
           className={styles.accordion_div1}
           expandIcon={(panelProps) => <CustomPanelHeader {...panelProps} />}
           size="large">
           <Panel
-            header="General Frequently Asked Question?"
-            key="1"
+            header={data.title}
+            key={data.id}
             className={styles.panel}>
-            <p>{text}</p>
-          </Panel>
-          <Panel
-            header="General Frequently Asked Question?"
-            key="2"
-            className={styles.panel}>
-            <p>{text}</p>
-          </Panel>
-          <Panel
-            header="General Frequently Asked Question?"
-            key="3"
-            className={styles.panel}>
-            <p>{text}</p>
-          </Panel>
-          <Panel
-            header="General Frequently Asked Question?"
-            key="4"
-            className={styles.panel}>
-            <p>{text}</p>
+            <p>{data.body}</p>
           </Panel>
         </Collapse>
+        ))}
+        
       </div>
       <div className={styles.sub_div2}>
         <p className={styles.head1}>Technical FAQ</p>
-        <Collapse
+        {technical.map(data => (
+          <Collapse
           onChange={onChange}
           className={styles.accordion_div1}
           expandIcon={(panelProps) => <CustomPanelHeader {...panelProps} />}
           size="large">
           <Panel
-            header="Technical Frequently Asked Question?"
-            key="1"
+            header={data.title}
+            key={data.id}
             className={styles.panel}>
-            <p>{text}</p>
+            <p>{data.body}</p>
           </Panel>
-          <Panel
-            header="Technical Frequently Asked Question?"
-            key="2"
-            className={styles.panel}>
-            <p>{text}</p>
-          </Panel>
-          <Panel
-            header="Technical Frequently Asked Question?"
-            key="3"
-            className={styles.panel}>
-            <p>{text}</p>
-          </Panel>
-          <Panel
-            header="Technical Frequently Asked Question?"
-            key="4"
-            className={styles.panel}>
-            <p>{text}</p>
-          </Panel>
-        </Collapse>
+         </Collapse>
+        ))}
       </div>
     </div>
   );

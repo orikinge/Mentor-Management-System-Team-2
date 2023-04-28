@@ -10,7 +10,7 @@
   font-size: 16px;
 }
 
-.panel:last-child {
+.accordion_div1 > .panel:last-child {
   border-radius: 0;
 }
 

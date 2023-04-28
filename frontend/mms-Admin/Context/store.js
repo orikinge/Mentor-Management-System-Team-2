@@ -18,3 +18,4 @@ export const GlobalContextProvider = ({ children }) => {
 };
 
 export const useGlobalContext = () => useContext(GlobalContext);
+

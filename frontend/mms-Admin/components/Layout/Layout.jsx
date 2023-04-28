@@ -30,12 +30,14 @@ const AppLayout = ({ children }) => {
     else setHeaderTitle(extractTitleFromUrl(pathname?.slice(1)));
   }, [router]);
 
-  const [searchData, setsearchData] = useState([]);
+
+  const [searchData, setSearchData] = useState([]);
   
 
   const loadMore = () => {
       
-    const token = 'OA.YWauKgOJ1E1AB7PBhAt5vlGbS4qrTxVPyyBKffhg3Dcqll0OnN2ZyfA8hKxe';
+
+    const token = 'MQ.L2oPLG2ZM5TOHnsFTg3O_w91QgAzBmYezYuHH-eK6yJ2q8KLR84cuXu5dn3x';
 
     axios.get(`archive?page=${currentPage}&limit=${pageSize}`, {
       headers: {
@@ -43,7 +45,8 @@ const AppLayout = ({ children }) => {
       }
     })
       .then(response => {
-        setsearchData(response?.data?.data);
+        const newItems = response?.data?.data;
+        setSearchData(newItems);
       })
       .catch(error => {
         console.error('Error loading more items:', error);

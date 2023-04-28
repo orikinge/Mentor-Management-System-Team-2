@@ -127,4 +127,8 @@ Route.group(() => {
   })
     .prefix('archive')
     .middleware('auth')
+
+  Route.resource('faq', 'FaqController').middleware({
+    store: ['auth'],
+  })
 }).prefix('api/v1')
