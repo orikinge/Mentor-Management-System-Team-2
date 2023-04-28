@@ -4,9 +4,16 @@ import PrivacySetting from 'App/Models/PrivacySetting'
 export default class PrivacySettingsController {
   async getUserPrivacySettings({ auth, response }: HttpContextContract) {
     try {
-      const user = auth.user
-      const privacySettings = await PrivacySetting.findBy('user_id', user)
+      if(auth.user?.id){
+      const userId = auth.user.id
+      const privacySettings = await PrivacySetting.findBy('user_id', userId)
+      if (!privacySettings?.userId) {
+        const createSettings = new PrivacySetting()
+        createSettings.userId = userId
+        return await createSettings?.save()
+      }
       return response.json(privacySettings ? privacySettings : {})
+    }
     } catch (error) {
       response.unauthorized({ message: 'No Permissions', status: 'Error' })
     }
@@ -14,7 +21,7 @@ export default class PrivacySettingsController {
 
   async updateUserPrivacySettings({ auth, request, response }) {
     try {
-      const user = await auth.User
+      const user = await auth.user.id
       const privacySettings = await PrivacySetting.findBy('user_id', user)
 
       if (privacySettings) {

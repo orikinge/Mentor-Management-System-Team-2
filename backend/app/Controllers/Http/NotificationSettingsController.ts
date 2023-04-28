@@ -4,9 +4,16 @@ import NotificationSetting from 'App/Models/NotificationSetting'
 export default class NotificationSettingsController {
   async getUserNotificationSettings({ auth, response }: HttpContextContract) {
     try {
-      const user = auth.user
-      const notificationSettings = await NotificationSetting.findBy('user_id', user)
-      return response.json(notificationSettings ? notificationSettings : {})
+      if (auth.user?.id) {
+        const userId = auth.user?.id
+        const notificationSettings = await NotificationSetting.findBy('user_id', userId)
+        if (!notificationSettings?.userId) {
+          const createSettings = new NotificationSetting()
+          createSettings.userId = userId
+          return await createSettings?.save()
+        }
+        return response.json(notificationSettings ? notificationSettings : {})
+      }
     } catch (error) {
       response.unauthorized({ message: 'No Permissions', status: 'Error' })
     }
@@ -14,8 +21,8 @@ export default class NotificationSettingsController {
 
   async updateUserNotificationSettings({ auth, request, response }) {
     try {
-      const user = await auth.user
-      const notificationSettings = await NotificationSetting.findBy('user_id', user)
+      const userId = await auth.user.id
+      const notificationSettings = await NotificationSetting.findBy('user_id', userId)
 
       if (notificationSettings) {
         notificationSettings.settings = Object.assign(
