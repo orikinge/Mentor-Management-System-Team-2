@@ -16,3 +16,4 @@ jobs:
           heroku_app_name: "team-2" #Must be unique in Heroku
           heroku_email: "ecomje@gmail.com"
           appdir: "backend"
+          env_file: "backend/.env.prod"
