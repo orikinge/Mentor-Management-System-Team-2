@@ -3,6 +3,7 @@ function get(url, token) {
     method: "GET",
     headers: { Authorization: token },
   };
+  console.log(requestOptions)
   return fetch(url, requestOptions)
     .then(handleResponse)
     .catch((e) => e);

@@ -15,7 +15,7 @@ const Broadcast = ({ message, sender, time, date }) => {
           <Col span={8} offset={8}>
             <p className={styles.time}>
               {time}
-              <span class={styles.double_check}>
+              <span className={styles.double_check}>
                 <Icon name="DoubleCheck" />
               </span>
             </p>

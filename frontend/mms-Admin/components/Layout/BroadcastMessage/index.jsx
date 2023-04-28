@@ -6,45 +6,41 @@ import BroadcastTextArea from "components/formInputs/BroadcastTextArea";
 import styles from "../../componentStyles/broadcast.module.css";
 import { broadcastService } from "../../../services/broadcast.service";
 
-// TODO: integrate with backend
-
 const BroadcastMessage = () => {
-  const [messages, setMessages] = useState(undefined);
+  const [messages, setMessages] = useState();
   const [loading, setLoading] = useState(false);
   const [users, setUsers] = useState([]);
   const [userToken, setUserToken] = useState(undefined);
+  const [page, setPage] = useState(1);
   const ref = useRef();
-  const headers = {
-    "User-Agent": "request",
-  };
-  const loadUsers = (key) => {
+  
+  const loadUsers = (key) => { 
+    // TODO: Get users
     if (!key) {
       setUsers([]);
       return;
     }
-    fetch(`https://api.github.com/search/users?q=${key}`, { headers })
-      .then((res) => res.json())
+    broadcastService
+      .searchProfile(key, userToken)
+      .then((res) => res)
       .then(({ items = [] }) => {
         if (ref.current !== key) return;
-
         setLoading(false);
+        console.log({items})
         setUsers(items.slice(0, 10));
+        console.log(items.slice(0, 10))
       });
   };
   useEffect(() => {
     const user = localStorage.getItem("user");
     const userObject = JSON.parse(user);
-    setUserToken(`${userObject.token.type} ${userObject.token.token}`);
-    setUserId(userObject.user.id)
-  });
-
-  useEffect(() => {
-    loadMessages(userToken);
-  }, [messages]);
+    const token = `${userObject.token.type} ${userObject.token.token}`;
+    setUserToken(token);
+    loadMessages(token);
+  }, []);
 
   const loadMessages = (token) => {
-    broadcastService.sent(token).then((res) => {
-      console.log(res);
+    broadcastService.index(page, token).then((res) => {
       setMessages(res.data);
     });
   };
@@ -61,9 +57,9 @@ const BroadcastMessage = () => {
   };
 
   const handleSubmit = (text) => {
-    const recipient = [10]
+    const recipient = [10];
     const message = { message: text, recipient };
-    broadcastService.send(message, userToken)
+    broadcastService.send(message, userToken);
     //TODO: upload files and message text
   };
   return (
@@ -73,16 +69,16 @@ const BroadcastMessage = () => {
           <BroadcastHeader />
           <Mentions loading={loading} users={users} onSearch={onSearch} />
           <div className={styles.broadcast_board}>
-            {messages && messages.map((message) => (
-                  <Broadcast
-                    key={message.id}
-                    message={message.message}
-                    sender={message.user_id}
-                    time={message.created_at.split("T")[1].split(".")[0]}
-                    date={message.created_at.split("T")[0]}
-                  />
-                ))
-              }
+            {messages &&
+              messages.map((message) => (
+                <Broadcast
+                  key={message.id}
+                  message={message.message}
+                  sender={`${message.user.first_name} ${message.user.last_name}`}
+                  time={message.created_at.split("T")[1].split(".")[0]}
+                  date={message.created_at.split("T")[0]}
+                />
+              ))}
           </div>
           <BroadcastTextArea handleSubmit={handleSubmit} />
         </div>
