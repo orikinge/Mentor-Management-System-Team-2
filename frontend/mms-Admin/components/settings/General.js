@@ -32,7 +32,7 @@ function General() {
   useEffect(()=>{
     (async()=>{
       const profile = await getProfile(token)
-      setProfileData(profile?.data)
+      setProfileData(profile?.data || {})
     })()
   }, [])
 
