@@ -15,7 +15,7 @@ export default class AuthenticationController {
     } catch (error) {
       response.unauthorized({ message: 'Invalid Credentials', status: 'Error', error })
     }
-  }
+  } 
 
   async forgetPassword({ request }: HttpContextContract) {
     try {
@@ -33,7 +33,7 @@ export default class AuthenticationController {
       const url = `${Env.get('FRONTEND_URL')}?token=${token.toJSON().code}`
       await Mail.send((message) => {
         message.from('MMM2@example.com').to(email).subject('Welcome Onboard!')
-          .html(`Hello ${user?.firstName},\n
+          .html(`Hello ${user?.firstName}\n
           Use the link below to reset your password ${url}`)
       })
       return {status: 'success', message: 'Password reset token as been sent to your email', token: token }

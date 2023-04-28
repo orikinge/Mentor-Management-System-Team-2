@@ -2,51 +2,35 @@ import React, { useState } from "react";
 import { Button, Input } from "antd";
 import styles from "./componentStyles/passwordreset.module.css";
 import SuccessMessage from "./SuccessMessage";
-
-function NewPassword() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const handleClick = (e) => {
-    e.preventDefault();
-    setIsModalOpen(true);
-  };
-  return (
-    <>
-      <div className={styles.container}>
-        <p className={styles.set_password_text}>Set New Password?</p>
-
-        <Input.Password
-          size="large"
-          className={styles.input}
-          placeholder="Password"
-          required
-        />
-
-        <p className={styles.password_warning_text}>
-          *Your new password must be different from previously used password.
-        </p>
-
-        <Button onClick={handleClick} className={styles.button}>
-          Reset Password
-        </Button>
-      </div>
-      {isModalOpen && (
-        <SuccessMessage
-          image={"/assets/images/success.png"}
-          message={"Password Reset Successful"}
-          width={"220px"}
-          height={"165px"}
-          isModalOpen={isModalOpen}
-          setIsModalOpen={setIsModalOpen}
-        />
-      )}
-    </>
-  );
-}
+import { validateInputs } from "utils/validateInputs";
+import { passwordForgot } from "utils/http";
+import { useRouter } from "next/router";
 
 function ForgetPassword({ setForgetPassword, forgetPassword }) {
-  const handleChangePassword = (e) => {
+  const [email, setEmail] = useState("");
+  const router = useRouter();
+  const handleChange = (e) => {
     e.preventDefault();
-    setForgetPassword(!forgetPassword);
+    setEmail(e.target.value);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const valid = validateInputs({ email });
+    if (valid) {
+      try {
+        const response = await passwordForgot({ email });
+        if (response.status === 200) {
+          setForgetPassword(!forgetPassword);
+          router.push("/reset-password");
+        }
+
+        if (response.status === 401 || response.status === 400) {
+          throw response;
+        }
+      } catch (e) {}
+    }
   };
 
   return (
@@ -57,7 +41,17 @@ function ForgetPassword({ setForgetPassword, forgetPassword }) {
         Follow the link to reset your password.
       </p>
 
-      <Button onClick={handleChangePassword} className={styles.button}>
+      <Input
+        size="large"
+        className={styles.login_input}
+        name="email"
+        placeholder="Email"
+        required
+        value={email}
+        onChange={handleChange}
+      />
+
+      <Button onClick={handleSubmit} className={styles.button}>
         Done
       </Button>
     </div>
@@ -77,7 +71,6 @@ function PasswordComponents({
           forgetPassword={forgetPassword}
         />
       )}
-      {forgetPassword && <NewPassword />}
     </>
   );
 }

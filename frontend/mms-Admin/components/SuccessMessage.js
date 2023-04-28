@@ -3,6 +3,8 @@ import Image from "next/image";
 import { Button, Modal } from "antd";
 import styles from "./componentStyles/splashscreen.module.css";
 import { CustomButton } from "./formInputs/CustomInput";
+import { useRouter } from "next/router";
+
 
 function SuccessMessage({
   image,
@@ -11,9 +13,22 @@ function SuccessMessage({
   height,
   isModalOpen,
   setIsModalOpen,
+  redirectLogin
+
 }) {
+  
+  const router = useRouter()
+  
   const handleOk = () => {
-    setIsModalOpen(false);
+    if(redirectLogin){
+      setIsModalOpen(false);
+      router.push("/login")
+
+    }
+    else{
+      setIsModalOpen(false);
+
+    }
   };
 
   return (

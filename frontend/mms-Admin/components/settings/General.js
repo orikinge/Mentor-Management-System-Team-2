@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Icon from "../Icon";
 import styles from "../componentStyles/general.module.css";
 import { Avatar, Button, Col, Input, Row, Select } from "antd";
@@ -7,8 +7,69 @@ import {
   CustomInput,
   CustomTextArea,
 } from "components/formInputs/CustomInput";
+import { validateInputs } from "../../utils/validateInputs";
+import { setProfile } from "../../utils/http";
+import SuccessMessage from "../SuccessMessage";
 
 function General() {
+  const [profileData, setProfileData] = useState({
+    first_name: "",
+    last_name: "",
+    bio: "",
+  });
+
+  const [sMedia, setSmedia] = useState({
+    instagram: "",
+    github: "",
+    twitter: "",
+    linkedin: "",
+  });
+  const [token, setToken] = useState("");
+  const [success, setSuccess] = useState(false);
+
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem("token"))) {
+      setToken(JSON.parse(localStorage.getItem("token")));
+    }
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const valid = validateInputs(profileData);
+    if (valid && token) {
+      try {
+        const response = await setProfile(profileData, sMedia, token);
+        if (response.status === 200) {
+          setSuccess(true);
+        }
+
+        if (
+          response.status === 401 ||
+          response.status === 400 ||
+          response.status === 404
+        ) {
+          throw response;
+        }
+      } catch (e) {}
+    }
+  };
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    setProfileData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSocials = (e) => {
+    e.preventDefault();
+    setSmedia((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
   return (
     <div>
       <Row>
@@ -38,10 +99,20 @@ function General() {
         </div>
         <div className={styles.input_container}>
           <div className={styles.input_div}>
-            <CustomInput placeholder="First Name" />
+            <CustomInput
+              value={profileData.first_name}
+              onChange={handleChange}
+              placeholder="First Name"
+              name="first_name"
+            />
           </div>
           <div className={styles.input_div}>
-            <CustomInput placeholder="Second Name" />
+            <CustomInput
+              value={profileData.last_name}
+              onChange={handleChange}
+              placeholder="Second Name"
+              name="last_name"
+            />
           </div>
         </div>
       </Row>
@@ -51,7 +122,13 @@ function General() {
           <label>About</label>
         </div>
 
-        <CustomTextArea placeholder="Your Bio" rows={4} />
+        <CustomTextArea
+          value={profileData.bio}
+          name="bio"
+          onChange={handleChange}
+          placeholder="Your Bio"
+          rows={4}
+        />
       </Row>
       <Row className={styles.container}>
         <div className={styles.label}>
@@ -91,7 +168,13 @@ function General() {
               </div>
               <div className={styles.icon_text}>GitHub</div>
             </div>
-            <Input className={styles.input_border} placeholder="@githubuser" />
+            <Input
+              name="github"
+              value={sMedia.github}
+              onChange={handleSocials}
+              className={styles.input_border}
+              placeholder="@githubuser"
+            />
           </div>
         </Col>
         <Col span={9}>
@@ -107,6 +190,9 @@ function General() {
               <div className={styles.icon_text}>instagram</div>
             </div>
             <Input
+              name="instagram"
+              value={sMedia.instagram}
+              onChange={handleSocials}
               className={styles.input_border}
               placeholder="@instagramuser"
             />
@@ -128,6 +214,9 @@ function General() {
               <div className={styles.icon_text}>linkedIn</div>
             </div>
             <Input
+              name="linkedin"
+              value={sMedia.linkedin}
+              onChange={handleSocials}
               className={styles.input_border}
               placeholder="@linkedInuser"
             />
@@ -145,15 +234,31 @@ function General() {
               </div>
               <div className={styles.icon_text}>Twitter</div>
             </div>
-            <Input className={styles.input_border} placeholder="@twitteruser" />
+            <Input
+              name="twitter"
+              value={sMedia.twitter}
+              onChange={handleSocials}
+              className={styles.input_border}
+              placeholder="@twitteruser"
+            />
           </div>
         </Col>
       </div>
       <div className={styles.btn_container}>
-        <CustomButton>
+        <CustomButton onClick={handleSubmit}>
           <span className={styles.btn_text}>Save Changes</span>
         </CustomButton>
       </div>
+      {success && (
+        <SuccessMessage
+          image={"/assets/images/success.png"}
+          message={"Password Reset Successful"}
+          width={"220px"}
+          height={"165px"}
+          isModalOpen={success}
+          setIsModalOpen={setSuccess}
+        />
+      )}
     </div>
   );
 }

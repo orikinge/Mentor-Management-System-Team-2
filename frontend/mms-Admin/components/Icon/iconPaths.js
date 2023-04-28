@@ -366,8 +366,10 @@ export const iconPaths = {
         xmlns="http://www.w3.org/2000/svg">
         <path
           d="M14.0161 9.0161L14 9M8.01611 9.0161L8 9M7 14C7 14 7.12514 14.2503 7.4197 14.5738C7.9578 15.1647 9.0613 16 11 16C12.9387 16 14.0422 15.1647 14.5803 14.5738C14.8749 14.2503 15 14 15 14M11 21C5.47715 21 1 16.5228 1 11C1 5.47715 5.47715 1 11 1C16.5228 1 21 5.47715 21 11C21 16.5228 16.5228 21 11 21Z"
-          stroke="black" />
-          </svg>)
+          stroke="black"
+        />
+      </svg>
+    );
   },
   Location: ({ color = "#058B94", width = "24", height = "28" }) => {
     return (
@@ -398,26 +400,27 @@ export const iconPaths = {
     return (
       <svg
         width={width}
-        height={height}
+        height={width}
         viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg">
         <path
           d="M3 6C3 4.89543 3.89543 4 5 4H19C20.1046 4 21 4.89543 21 6V20C21 21.1046 20.1046 22 19 22H5C3.89543 22 3 21.1046 3 20V6Z"
+          stroke="black"
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
           d="M3 10H21"
-          stroke={color}
+          stroke="black"
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
           d="M16 2V6"
-          stroke={color}
+          stroke="black"
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -483,9 +486,11 @@ export const iconPaths = {
         xmlns="http://www.w3.org/2000/svg">
         <path
           d="M19 9.0265L10.8445 17.289C8.5925 19.5707 4.94113 19.5707 2.68905 17.289C0.436983 15.0074 0.436983 11.3081 2.68905 9.0265L9.4853 2.14106C10.9867 0.619972 13.4209 0.619972 14.9223 2.14106C16.4236 3.66215 16.4236 6.12832 14.9223 7.64941L8.126 14.5348C7.37535 15.2954 6.15824 15.2954 5.40754 14.5348C4.65685 13.7743 4.65685 12.5412 5.40754 11.7807L12.2038 4.89524"
-          stroke="black" />
-          </svg>
-    )},
+          stroke="black"
+        />
+      </svg>
+    );
+  },
   Mail: ({ color = "#058B94", width = "24", height = "28" }) => {
     return (
       <svg
@@ -540,9 +545,9 @@ export const iconPaths = {
         <path
           d="M11 21C16.5228 21 21 16.5228 21 11C21 5.47715 16.5228 1 11 1C5.47715 1 1 5.47715 1 11C1 13.663 2.04094 16.0829 3.73812 17.875L1.72681 20.1705C1.44361 20.4937 1.67314 21 2.10288 21H11Z"
           stroke={color}
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     );
