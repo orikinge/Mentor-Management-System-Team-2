@@ -3,10 +3,5 @@
     "next/babel",
     "next/core-web-vitals",
     "plugin:prettier/recommended"
-  ],
-  "rules": {
-    "at-rule-no-unknown": [true, {
-      "ignoreAtRules": ["tailwind", "apply", "variants", "responsive", "screen"]
-    }]
-  }
+  ]
 }

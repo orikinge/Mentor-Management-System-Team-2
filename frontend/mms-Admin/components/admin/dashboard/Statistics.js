@@ -1,10 +1,12 @@
 import { Typography } from "antd";
 import { Icon } from "components/Icon/Icon";
 import { Button } from "components/Button";
+import { Loader } from "components/Loader";
 import styles from "styles/admin/dashboard.module.scss";
 
-const Statistics = ({ stats }) => {
+const Statistics = ({ stats, loading }) => {
   const { Title, Paragraph } = Typography;
+
   return (
     <div className={styles.stats}>
       <div className={styles.active_program_card}>
@@ -24,16 +26,19 @@ const Statistics = ({ stats }) => {
         <div className={styles.top_cards}>
           {stats?.map((stat) => (
             <div className={styles.stats_card} key={stat.title}>
-              <Paragraph style={{ margin: 0 }}>
-                <p>{stat.title}</p>
-                <p>{stat.value}</p>
-              </Paragraph>
-              <Icon
-                name={`${stat.icon}`}
-                color="#058b94"
-                width="32"
-                height="32"
-              />
+              {loading ? <Loader /> : (
+              <>
+                <Paragraph style={{ margin: 0 }}>
+                  <p className={styles.paragraph}>{stat.title}</p>
+                  <p className={styles.paragraph}>{stat.total}</p>
+                </Paragraph>
+                <Icon
+                  name={`${stat.icon}`}
+                  color="#058b94"
+                  width="32"
+                  height="32"
+                />
+                </>)}
             </div>
           ))}
         </div>

@@ -22,6 +22,9 @@ export const styles = `
   .ant-layout{
     background-color: #fff;
   }
+  .navbar_navbar_search__yIy6C .ant-input-prefix {
+    margin-inline-end: 20px !important;
+  }
   @media (max-width: 992px) {
     .ant-layout-sider {
       position: absolute !important;

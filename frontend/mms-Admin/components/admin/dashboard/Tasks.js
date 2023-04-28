@@ -1,9 +1,10 @@
 import { Col, Row, Space, Typography } from "antd";
 import { Button } from "components/Button";
 import { Icon } from "components/Icon/Icon";
+import { Loader } from "components/Loader";
 import styles from "styles/admin/dashboard.module.scss";
 
-const Tasks = ({ tasks }) => {
+const Tasks = ({ tasks, loading }) => {
   const { Paragraph } = Typography;
   return (
     <div className={styles.card_container}>
@@ -26,12 +27,12 @@ const Tasks = ({ tasks }) => {
             return (
               <Col md={8} sm={12} xs={24} key={task.title}>
                 <div className={styles.card}>
-                  <Icon name="Report" width={25} height={33} color="#058b94" />
+                  <Icon name="Task" width={25} height={33} color="#058b94" />
                   <Paragraph className={styles.paragraph}>
                     <p>{task.title}</p>
                     <small>
-                      <Icon name="Calendar" />
-                      {task.daysLeft} days from now
+                      <Icon name="Calendar" width={18} height={18} />
+                      {task.daysLeft} 2 days from now
                     </small>
                   </Paragraph>
                 </div>

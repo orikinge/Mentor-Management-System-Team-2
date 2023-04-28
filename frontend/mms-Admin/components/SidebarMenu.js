@@ -1,6 +1,6 @@
 export const SidebarMenu = [
   {
-    path: "/",
+    path: "/profile",
     name: "Profile",
     icon: "Profile",
   },

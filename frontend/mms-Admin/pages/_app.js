@@ -14,6 +14,7 @@ const App = ({ Component, pageProps, session }) => {
     <>
       <Head>
         <title>MMS - Mentor&apos;s Managers System</title>
+        <link rel="icon" href="/favicon.png" />
         <style>{styles}</style>
       </Head>
       <SessionProvider session={session}>

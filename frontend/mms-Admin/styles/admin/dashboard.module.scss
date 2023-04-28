@@ -52,6 +52,20 @@
       display: block;
     }
 
+    .stats_card {
+      background: #e6fdfe;
+      border-radius: $primary-radius;
+      padding: 14px;
+      display: flex;
+      justify-content: space-between;
+      width: 230px;
+
+      p {
+        margin: 0;
+        font-size: 20px;
+      }
+    }
+
     .active_program_card {
       background: $theme-primary;
       border-radius: 7px;
@@ -88,15 +102,6 @@
       }
     }
   }
-}
-
-.stats_card {
-  background: #e6fdfe;
-  border-radius: $primary-radius;
-  padding: 14px;
-  display: flex;
-  justify-content: space-between;
-  width: 230px;
 }
 
 .card_header_text {
