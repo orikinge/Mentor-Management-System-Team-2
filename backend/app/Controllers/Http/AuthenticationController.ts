@@ -15,7 +15,7 @@ export default class AuthenticationController {
     } catch (error) {
       response.unauthorized({ message: 'Invalid Credentials', status: 'Error', error })
     }
-  } 
+  }
 
   async forgetPassword({ request }: HttpContextContract) {
     try {
@@ -30,7 +30,7 @@ export default class AuthenticationController {
           code: nanoid(),
         }
       )
-      const url = `${Env.get('FRONTEND_URL')}?token=${token.toJSON().code}`
+      const url = `${Env.get('FRONTEND_URL_RESET_PASSWORD')}?token=${token.toJSON().code}`
       await Mail.send((message) => {
         message.from('MMM2@example.com').to(email).subject('Welcome Onboard!')
           .html(`Hello ${user?.firstName}\n
@@ -38,7 +38,7 @@ export default class AuthenticationController {
       })
       return {status: 'success', message: 'Password reset token as been sent to your email', token: token }
     } catch (error) {}
-    
+
   }
 
   async resetPassword({ request, response }: HttpContextContract) {
