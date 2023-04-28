@@ -1,5 +1,6 @@
 import React from "react";
-import { CustomButton, CustomInput, Label } from "../formInputs/CustomInput.js";
+import { Button } from "components/Button.js";
+import {  CustomInput, Label } from "../formInputs/CustomInput.js";
 import styles from "../componentStyles/password.module.css";
 import { Col, Row } from "antd";
 
@@ -46,9 +47,9 @@ function Password() {
 
       <Row className={styles.btn_container}>
         <Col sm={22} className={styles.btn_sub}>
-          <CustomButton className={styles.button}>
+          <Button className={styles.button}>
             Save New Password
-          </CustomButton>
+          </Button>
         </Col>
       </Row>
 

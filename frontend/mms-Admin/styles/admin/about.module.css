@@ -1,4 +1,6 @@
 .button {
+  border: 0;
+  cursor: pointer;
   width: 156px;
   height: 47px;
   background: #058b94;

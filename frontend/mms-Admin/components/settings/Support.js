@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Col, Row, Space } from "antd";
 import {
-  CustomButton,
   CustomInput,
   CustomTextArea,
   Label,
 } from "../formInputs/CustomInput";
 import { Icon } from "components/Icon/Icon";
+import { Button } from "components/Button";
 import styles from "../componentStyles/support.module.css";
 import { supportRequest } from "utils/http";
 import { validateInputs } from "utils/validateInputs";
@@ -90,7 +90,7 @@ function Support() {
         />
         <Row className={styles.space_container}>
           <Icon name="Pin" />
-          <CustomButton onClick={handleSubmit}>Send</CustomButton>
+          <Button type="primary" size="large" onClick={handleSubmit}>Send</Button>
         </Row>
       </Space>
 

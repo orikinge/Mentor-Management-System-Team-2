@@ -1,4 +1,4 @@
-import { Avatar, Button, Col, Row } from "antd";
+import { Avatar, Col, Row } from "antd";
 import React, { useEffect, useState } from "react";
 import styles from "../styles/admin/about.module.css";
 import Icon from "../components/Icon.js";
@@ -7,7 +7,8 @@ import IconWithText from "components/Icon/IconWithText";
 import { Icon as Iconn } from "components/Icon/Icon";
 import { getProfile } from "utils/http";
 import { capitalize } from "utils/capitalize";
-import { Spin } from "antd";
+import { Loader } from "components/Loader";
+import { Button } from "components/Button";
 import { useRouter } from "next/router";
 import { useLogin } from '../hooks/useLogin'
 
@@ -51,7 +52,7 @@ function About() {
   if (loading) {
     return (
       <div className={styles.spin}>
-        <Spin tip="Loading" size="large" />
+        <Loader size="large" />
       </div>
     );
   }

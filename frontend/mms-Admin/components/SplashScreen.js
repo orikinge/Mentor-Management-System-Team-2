@@ -8,7 +8,7 @@ function SplashScreen() {
       <div className={styles.container}>
         <Image
           src="/assets/images/logo.png"
-          width="224.27px"
+          width="210px"
           height="200px"
           alt="site_logo"
         />

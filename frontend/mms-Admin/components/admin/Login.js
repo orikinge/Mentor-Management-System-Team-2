@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
+import { Button } from "components/Button";
 
-import { Button, Form, Input } from "antd";
-import axios from "axios";
-import Cookie from "js-cookie";
+import { Form, Input } from "antd";
 
 import Icon from "../Icon";
 import styles from "../componentStyles/login.module.css";
@@ -13,6 +12,7 @@ import { validateInputs } from "../../utils/validateInputs";
 import { useLogin } from '../../hooks/useLogin'
 
 const Login = ({ showPassword, setShowPassword }) => {
+  const [loading, setLoading] = useState(false);
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -41,8 +41,9 @@ const Login = ({ showPassword, setShowPassword }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const valid = validateInputs(loginData);
+    setLoading(true);
 
+    const valid = validateInputs(loginData);
     if (valid) {
       try {
         const response = await postLogin(loginData);
@@ -56,6 +57,7 @@ const Login = ({ showPassword, setShowPassword }) => {
         if (response.status === 401 || response.status === 400) {
           setMessage(response.message);
         }
+        setLoading(false);
       } catch (e) {}
     }
   };
@@ -93,7 +95,7 @@ const Login = ({ showPassword, setShowPassword }) => {
           onChange={handleOnchange}
         />
         <div className={styles.login_button_container}>
-          <Button onClick={handleSubmit} className={styles.login_button}>
+          <Button onClick={handleSubmit} className={styles.login_button} attribute={loading ? { disabled: "disabled" } : ""}>
             Login
           </Button>
         </div>
@@ -114,11 +116,9 @@ const Login = ({ showPassword, setShowPassword }) => {
               height={"38px"}
             />
 
-            <div className={styles.signin_text}>signin with Google</div>
+            <div className={styles.signin_text}>Sign in with Google</div>
           </Button>
         </div>
-
-        <p className={styles.signup}>New User? Signup</p>
       </Form>
     </div>
   );

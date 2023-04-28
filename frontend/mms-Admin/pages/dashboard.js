@@ -44,7 +44,7 @@ const initialState = {
 
 const Dashboard = () => {
   const [state, setState] = useState(initialState);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getData = async () => {

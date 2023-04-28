@@ -2,7 +2,7 @@ import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import styles from "components/componentStyles/loader.module.scss";
 
-export const Loader = () => {
+export const Loader = ({ size="medium" }) => {
     const icon = (
     <LoadingOutlined
       style={{
@@ -12,5 +12,5 @@ export const Loader = () => {
     />
   );
   
-  return <div className={styles.loader}><Spin indicator={icon} size="medium" /></div>;
+  return <div className={styles.loader}><Spin indicator={icon} size={size} /></div>;
 };

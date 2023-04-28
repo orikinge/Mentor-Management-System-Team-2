@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Icon from "../Icon";
 import styles from "../componentStyles/general.module.css";
-import { Avatar, Button, Col, Input, Row, Select } from "antd";
+import { Avatar, Col, Input, Row, Select } from "antd";
+import { Button } from "components/Button";
 import {
   CustomButton,
   CustomInput,
@@ -276,9 +277,9 @@ function General() {
         </Col>
       </div>
       <div className={styles.btn_container}>
-        <CustomButton onClick={handleSubmit}>
+        <Button type="primary" size="large" onClick={handleSubmit}>
           <span className={styles.btn_text}>Save Changes</span>
-        </CustomButton>
+        </Button>
       </div>
       {success && (
         <SuccessMessage

@@ -2,9 +2,8 @@
 
 .button {
   border: 0;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
-  font-size: 12px;
   padding: 6px 15px;
 
   &.primary {
@@ -15,5 +14,16 @@
   &.default {
     background: $theme-light;
     color: $theme-primary;
+  }
+
+  &.medium {
+    font-weight: 500;
+    padding: 12px 35px;
+  }
+
+  &.large {
+    font-size: 16px;
+    font-weight: 500;
+    padding: 18px 65px;
   }
 }

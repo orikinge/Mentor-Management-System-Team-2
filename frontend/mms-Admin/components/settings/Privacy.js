@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import debounce from "lodash.debounce";
 import styles from "../componentStyles/privacy.module.scss"
 import ToggleInput from "components/ToggleInput";
+import SuccessMessage from "components/SuccessMessage";
+
+import { fetchPrivacySettings, updatePrivacySettings } from "pages/api/setting";
+import { useStateValue } from "store/context";
 
 import { fetchPrivacySettings, updatePrivacySettings } from "pages/api/setting";
 import { useStateValue } from "store/context";
@@ -30,6 +34,7 @@ const inputFields = [
 ];
 const Privacy = () => {
   const [settings, setSettings] = useState({});
+  const [modalOpen, setModalOpen] = useState(false);
   const [_, dispatch] = Object.values(useStateValue());
 
   useEffect(() => {
@@ -52,6 +57,10 @@ const Privacy = () => {
     handleUpdate();
   };
 
+  const handleModal = () => {
+    setModalOpen(!modalOpen);
+  };
+
   const handleUpdate = debounce(async () => {
     const payload = {
       privacy: settings
@@ -63,6 +72,7 @@ const Privacy = () => {
           type: "UPDATE_PRIVACY_SETTINGS",
           payload: response?.data
         });
+        setModalOpen(true);
       }
     } catch (error) {}
   }, 2000);
@@ -76,6 +86,13 @@ const Privacy = () => {
           checked={settings[field.name]}
           handleChange={() => handleChange(field.name)} />
       ))}
+
+      <SuccessMessage
+        image={"/assets/images/success.png"}
+        message={"Notification Settings Saved Successfully"}
+        isModalOpen={modalOpen}
+        setIsModalOpen={handleModal}
+      />
     </div>
   );
 }

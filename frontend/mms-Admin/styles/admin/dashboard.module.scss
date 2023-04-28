@@ -27,6 +27,11 @@
 
   .space {
     margin-top: 1em;
+
+    button {
+      border-radius: 5px;
+      font-size: 12px;
+    }
   }
 
   .task_status_card {
@@ -47,6 +52,7 @@
   .stats {
     display: grid;
     grid-template-columns: 20% auto;
+    gap: 1em;
 
     @media (max-width: 1080px) {
       display: block;
@@ -70,11 +76,16 @@
       background: $theme-primary;
       border-radius: 7px;
       padding: 12px;
-      width: 250px;
+      width: 230px;
 
       .header {
         display: flex;
         justify-content: flex-end;
+
+        button {
+          border-radius: 5px;
+          font-size: 12px;
+        }
       }
 
       .text_container {
@@ -96,7 +107,7 @@
             margin: 0;
             width: 80%;
             font-weight: 500;
-            font-size: 20px;
+            font-size: 18px;
           }
         }
       }

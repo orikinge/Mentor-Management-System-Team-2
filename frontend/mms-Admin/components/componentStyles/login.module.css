@@ -46,6 +46,9 @@
 
 .login_button {
   background-color: #058b94;
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
   height: 50px;
   font-weight: 600;
   font-size: 18px;
@@ -53,7 +56,14 @@
   width: 90%;
 }
 
+.login_button:disabled {
+  background-color: #058b94a8;
+  cursor: not-allowed;
+}
+
 .google_login_button {
+  border: 1px solid #023c40;
+  cursor: pointer;
   display: flex;
   height: 50px;
   flex-direction: row;
@@ -61,7 +71,7 @@
   align-items: center;
   justify-content: center;
   width: 90%;
-  border-radius: 10;
+  border-radius: 10px;
   border-color: #023c40;
 }
 
@@ -94,4 +104,5 @@
   color: #023c40;
   display: flex;
   align-items: center;
+  margin-left: 1em;
 }

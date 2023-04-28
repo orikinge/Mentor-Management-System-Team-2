@@ -39,6 +39,7 @@ const NavBar = () => {
               placeholder="Search for anything"
               prefix={<Icon name="Search" />}
               size="large"
+              type="search"
             />
           </div>
           <div className={styles.navbar_icons_size}>
