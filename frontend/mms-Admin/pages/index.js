@@ -1,14 +1,10 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import Dashboard from './dashboard'
+import { useLogin } from '../hooks/useLogin'
 
 const Index = () => {
-  const router = useRouter();
-
-  useEffect(() => {
-    router.push("/profile");
-  }, []);
-
-  return (<></>);
+  return <Dashboard />
 };
 
 export default Index;

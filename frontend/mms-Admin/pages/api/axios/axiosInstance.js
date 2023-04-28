@@ -13,7 +13,7 @@ const settings = {
 const generateHeader = () => {
   let token = '';
   try {
-    token = LS.get('token');
+    token = localStorage.getItem('token')
   } catch (error) {}
   return token ? `Bearer ${token}` : '';
 };

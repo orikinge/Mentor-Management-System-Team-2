@@ -4,9 +4,10 @@ import Icon from "./Icon";
 import TasksModal from "./TasksModal";
 import axios from '../pages/api/axios';
 import moment from 'moment';
+import { useLogin } from '../hooks/useLogin'
 
 function TasksSidebar(props) {
-
+  const {token} = useLogin()
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(10);
     const [items, setItems] = useState([]);
@@ -15,7 +16,6 @@ function TasksSidebar(props) {
 
     const loadMore = () => {
       
-      const token = 'OA.YWauKgOJ1E1AB7PBhAt5vlGbS4qrTxVPyyBKffhg3Dcqll0OnN2ZyfA8hKxe';
 
       axios.get(`task?page=${currentPage}&limit=${pageSize}`, {
         headers: {

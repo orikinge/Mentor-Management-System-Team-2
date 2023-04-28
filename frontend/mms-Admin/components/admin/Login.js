@@ -10,22 +10,23 @@ import styles from "../componentStyles/login.module.css";
 import { postLogin } from "utils/http";
 import { useRouter } from "next/router";
 import { validateInputs } from "../../utils/validateInputs";
+import { useLogin } from '../../hooks/useLogin'
 
 const Login = ({ showPassword, setShowPassword }) => {
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
   });
+  const {setToken, token} = useLogin()
+
 
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState("");
-  const [token, setToken] = useState("");
   const router = useRouter();
   const { data, status } = useSession();
 
   useEffect(() => {
-    if (JSON.parse(localStorage.getItem("token"))) {
-      setToken(JSON.parse(localStorage.getItem("token")));
+    if (token) {
       router.push("/dashboard");
     }
   }, []);
@@ -47,12 +48,8 @@ const Login = ({ showPassword, setShowPassword }) => {
         const response = await postLogin(loginData);
 
         if (response.status === 200) {
-          localStorage.setItem(
-            "token",
-            JSON.stringify(response.data.token.token),
-          );
+          setToken(response.data.token.token);
           localStorage.setItem("userid", JSON.stringify(response.data.user.id));
-          setToken(response.data);
           router.push("/dashboard");
         }
 
