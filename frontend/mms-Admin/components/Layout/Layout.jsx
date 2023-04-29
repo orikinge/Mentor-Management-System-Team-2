@@ -9,19 +9,25 @@ import { extractTitleFromUrl } from "../../utils/extractTitleFromUrl";
 import styles from "styles/layout.module.css";
 import Icon from "../Icon";
 import { CustomButton } from "../formInputs/CustomInput";
-import { SearchDataContext } from "../../Context/searchDataContext";
+import { useStateValue } from "store/context";
 import { GlobalContextProvider } from "../../Context/store";
 import axios from "../../pages/api/axios";
+import { fetchArchive } from "pages/api/archive"
+import { convertToURLQuery } from "utils/extractTitleFromUrl"
+
 
 const AppLayout = ({ children }) => {
   const [headerTitle, setHeaderTitle] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
   const router = useRouter();
+  const [loading, setLoading] = useState(false)
+  const [total, setTotal] = useState({});
   const { Content } = Layout;
+  const { dispatch } = useStateValue();
 
   const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
+    setPage(newPage);
   };
 
   useEffect(() => {
@@ -29,37 +35,28 @@ const AppLayout = ({ children }) => {
     if (pathname === "/") setHeaderTitle("");
     else setHeaderTitle(extractTitleFromUrl(pathname?.slice(1)));
   }, [router]);
-
-
-  const [searchData, setSearchData] = useState([]);
   
-
-  const loadMore = () => {
-      
-
-    const token = 'MQ.L2oPLG2ZM5TOHnsFTg3O_w91QgAzBmYezYuHH-eK6yJ2q8KLR84cuXu5dn3x';
-
-    axios.get(`archive?page=${currentPage}&limit=${pageSize}`, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
-      .then(response => {
-        const newItems = response?.data?.data;
-        setSearchData(newItems);
+  const loadMore = async () => {
+    const query = { page, limit }
+    try {
+      setLoading(true)
+      const { data } = await fetchArchive(convertToURLQuery(query))
+      const newData = data;
+      setTotal(data?.meta)
+      dispatch({
+        type: 'ARCHIVE_SEARCH',
+        payload: newData
       })
-      .catch(error => {
-        console.error('Error loading more items:', error);
-      });
+      setLoading(false)
+    } catch (error) {}
   };
 
   useEffect(() => {
     loadMore()
-  }, [currentPage]);
+  }, [page]);
 
   return (
     <GlobalContextProvider>
-      <SearchDataContext.Provider value={searchData}>
         <Layout className={styles.app_layout}>
           <NavBar />
           <Content>
@@ -78,8 +75,8 @@ const AppLayout = ({ children }) => {
                         required
                       />
                       <Pagination
-                        total={20}
-                        currentPage={currentPage}
+                        total={total?.total}
+                        currentPage={page}
                         onPageChange={handlePageChange}
                       />
                     </>
@@ -133,7 +130,6 @@ const AppLayout = ({ children }) => {
             </Layout>
           </Content>
         </Layout>
-      </SearchDataContext.Provider>
     </GlobalContextProvider>
   );
 };

@@ -16,7 +16,7 @@
 
 .div_input {
   display: flex;
-  /* padding-top: 2rem; */
+  margin-bottom: 1rem;
 }
 
 .task_icon {

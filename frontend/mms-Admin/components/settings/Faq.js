@@ -3,18 +3,16 @@ import styles from "../componentStyles/faq.module.css";
 import Icon from "../Icon";
 import { Collapse } from "antd";
 import { CiCircleRemove } from "react-icons/ci";
-import axios from '../../pages/api/axios';
+import { fetchFaqs } from "pages/api/faq";
+import { Loader } from "components/Loader";
+
 
 const { Panel } = Collapse;
-const text = `
-  A dog is a type of domesticated animal.
-  Known for its loyalty and faithfulness,
-  it can be found as a welcome guest in many households across the world.
-`;
 
 function Faq() {
   const [general, setGeneral] = useState([]);
   const [technical, setTechnical] = useState([]);
+  const [loading, setLoading] = useState(false)
   const onChange = (key) => {};
   const CustomPanelHeader = ({ title, ...panelProps }) => {
     const customIcon = panelProps.isActive ? (
@@ -29,27 +27,32 @@ function Faq() {
       </div>
     );
   };
-  const loadData = () => {
-      
-    const token = 'MQ.L2oPLG2ZM5TOHnsFTg3O_w91QgAzBmYezYuHH-eK6yJ2q8KLR84cuXu5dn3x';
 
-    axios.get('faq', {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
-      .then(response => {
-        setGeneral(response?.data?.general);
-        setTechnical(response?.data?.technical)
-      })
-      .catch(error => {
-        console.error('Error loading more items:', error);
-      });
+  const loadData = async () => {
+    setLoading(true)
+    try {
+      setLoading(true)
+      const { data } = await fetchFaqs()
+      setGeneral(data?.general);
+      setTechnical(data?.technical)
+      setLoading(false)
+    } catch (error) {
+      console.error("An error occurred while loading data:", error);
+      setLoading(false)
+    }
   };
   
   useEffect(() => {
     loadData()
   }, [])
+
+  if (loading) {
+    return (
+      <div className={styles.spin}>
+        <Loader size="large" />
+      </div>
+    );
+  }
   return (
     <div className={styles.main_div}>
       <div className={styles.sub_div1}>
@@ -58,6 +61,7 @@ function Faq() {
           <Collapse
           onChange={onChange}
           className={styles.accordion_div1}
+          key={data.id}
           expandIcon={(panelProps) => <CustomPanelHeader {...panelProps} />}
           size="large">
           <Panel
@@ -76,6 +80,7 @@ function Faq() {
           <Collapse
           onChange={onChange}
           className={styles.accordion_div1}
+          key={data.id}
           expandIcon={(panelProps) => <CustomPanelHeader {...panelProps} />}
           size="large">
           <Panel

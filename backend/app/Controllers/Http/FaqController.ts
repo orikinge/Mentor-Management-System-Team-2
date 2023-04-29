@@ -8,7 +8,7 @@ export default class FaqController {
     const technical = await Faq.query().where('type', 'techincal_faq')
     return {
       general,
-      technical
+      technical,
     }
   }
 
