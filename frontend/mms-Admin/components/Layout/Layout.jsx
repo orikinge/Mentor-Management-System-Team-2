@@ -103,7 +103,7 @@ const AppLayout = ({ children }) => {
                         </div>
                       </div>
                       <span className={[styles.task_create]}>
-                        <CustomButton className={styles.taskbutton}>
+                        <CustomButton className={styles.taskbutton} onClick={() => router.push("/tasks/new")}>
                           Create New Task
                         </CustomButton>
                       </span>

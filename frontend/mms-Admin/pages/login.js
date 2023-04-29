@@ -5,7 +5,7 @@ import { Col, Row } from "antd";
 import AdminLogin from "../components/admin/Login";
 import PasswordComponents from "../components/PasswordReset";
 
-import styles from "../styles/admin/login.module.css";
+import styles from "../styles/admin/login.module.scss";
 
 function login() {
   const [showPassword, setShowPassword] = useState(false);

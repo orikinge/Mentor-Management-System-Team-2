@@ -1,13 +1,13 @@
-import React from "react";
+import { Row, Col } from "antd";
 import Sidebar from "./settings/SideBar";
 import styles from "./componentStyles/settingslayout.module.css";
 
 const SettingsLayout = ({ children }) => {
   return (
-    <div className={styles.main_div}>
-      <Sidebar />
-      <div className={styles.sub_div}>{children}</div>
-    </div>
+    <Row justify={"space-between"}>
+      <Col span={4}><Sidebar /></Col>
+      <Col span={18}><div className={styles.sub_div}>{children}</div></Col>
+    </Row>
   );
 };
 

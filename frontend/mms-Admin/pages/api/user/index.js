@@ -13,3 +13,8 @@ export const fetchUserProfile = async () => {
   const url = "/profile";
   return await http.get(url);
 };
+
+export const updateUserProfile = async (payload) => {
+  const url = "/profile";
+  return await http.put(url, payload);
+};

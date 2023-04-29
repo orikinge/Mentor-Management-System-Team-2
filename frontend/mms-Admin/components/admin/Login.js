@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSession, signIn, signOut } from "next-auth/react";
-import { Button } from "components/Button";
 
-import { Form, Input } from "antd";
+import { Form, Input, Button } from "antd";
 
 import Icon from "../Icon";
 import styles from "../componentStyles/login.module.css";
@@ -95,8 +94,11 @@ const Login = ({ showPassword, setShowPassword }) => {
           onChange={handleOnchange}
         />
         <div className={styles.login_button_container}>
-          <Button onClick={handleSubmit} className={styles.login_button} attribute={loading ? { disabled: "disabled" } : ""}>
-            Login
+          <Button
+            onClick={handleSubmit}
+            className={styles.login_button}
+            loading={loading}>
+              Login
           </Button>
         </div>
         <p

@@ -6,6 +6,11 @@
   cursor: pointer;
   padding: 6px 15px;
 
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
   &.primary {
     background: $theme-primary;
     color: $theme-light;
@@ -25,5 +30,11 @@
     font-size: 16px;
     font-weight: 500;
     padding: 18px 65px;
+  }
+}
+
+.pseudo {
+  &:active {
+    outline: 4px solid #b9dade;
   }
 }

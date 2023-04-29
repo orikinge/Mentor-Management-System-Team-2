@@ -12,7 +12,8 @@ export const Button = ({
 }) => {
   const classNames = clsx([className ? className : styles.button,
     type === "primary" ? styles.primary : styles.default,
-    size === "medium" ? styles.medium : (size === "large" ? styles.large : "")
+    size === "medium" ? styles.medium : (size === "large" ? styles.large : ""),
+    styles.pseudo,
   ])
   return (
     <button

@@ -24,6 +24,13 @@
   margin-left: 36px;
 }
 
+.btn {
+  background-color: #058b94;
+  color: #fff;
+  height: 50px;
+  padding: 12px 40px;
+}
+
 .button_text {
   width: 74px;
   height: 20px;

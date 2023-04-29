@@ -1,13 +1,6 @@
-.main_div {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  background-color: white;
-}
-
 .sub_div {
   flex-grow: 1;
-  max-width: 80%;
+  max-width: 90%;
   padding: 2rem;
   margin-left: 1rem;
   color: black;

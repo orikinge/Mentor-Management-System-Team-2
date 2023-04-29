@@ -1,5 +1,5 @@
 import { Avatar, Card, Space, Col, Row } from "antd";
-import cardStyle from "../styles/admin/about.module.css";
+import cardStyle from "../styles/admin/about.module.scss";
 import Icon from "./Icon";
 import { Icon as Iconn } from "./Icon/Icon";
 import styles from "./componentStyles/customCard.module.css";

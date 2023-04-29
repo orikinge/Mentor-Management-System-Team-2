@@ -1,4 +1,7 @@
 export const styles = `
+  .ant-btn-default:hover {
+    color: #fff !important;
+  }
   .ant-menu-item-selected {
     color: #808080 !important;
     background-color: #fff !important;
