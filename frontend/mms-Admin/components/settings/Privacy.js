@@ -7,9 +7,6 @@ import SuccessMessage from "components/SuccessMessage";
 import { fetchPrivacySettings, updatePrivacySettings } from "pages/api/setting";
 import { useStateValue } from "store/context";
 
-import { fetchPrivacySettings, updatePrivacySettings } from "pages/api/setting";
-import { useStateValue } from "store/context";
-
 const inputFields = [
   {
     name: "show_contact_info",
@@ -35,7 +32,7 @@ const inputFields = [
 const Privacy = () => {
   const [settings, setSettings] = useState({});
   const [modalOpen, setModalOpen] = useState(false);
-  const [_, dispatch] = Object.values(useStateValue());
+  const { dispatch } = useStateValue();
 
   useEffect(() => {
     const getSettings = async () => {

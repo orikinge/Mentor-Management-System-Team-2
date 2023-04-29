@@ -1,6 +1,6 @@
-import Http from "../axios/axiosClient";
+import http from "services/axios";
 
 export const fetchTasks = async (query) => {
   const url = "/task";
-  return await Http.get(url);
+  return await http.get(url);
 };

@@ -5,7 +5,7 @@ import Icon from "../components/Icon.js";
 import { NG } from "country-flag-icons/react/3x2";
 import IconWithText from "components/Icon/IconWithText";
 import { Icon as Iconn } from "components/Icon/Icon";
-import { getProfile } from "utils/http";
+import { fetchUserProfile } from "pages/api/user";
 import { capitalize } from "utils/capitalize";
 import { Loader } from "components/Loader";
 import { Button } from "components/Button";
@@ -24,11 +24,9 @@ function About() {
   }, []);
 
   const fetch = async () => {
-
-
     try {
 
-      const response = await getProfile(token);
+      const response = await fetchUserProfile();
       if (response.status === 200) {
         setData(response.data);
 
@@ -81,10 +79,10 @@ function About() {
               <p className={styles.about_name}>
                 {capitalize(data.first_name) + " " + capitalize(data.last_name)}
                 <span>
-                  <NG title="Nigeria" className={styles.flag} />
+                  {/* <NG title="Nigeria" className={styles.flag} /> */}
                 </span>
               </p>
-              <p className={styles.about_role}>Admin</p>
+              <p className={styles.about_role}>{data.isAdmin ? "Admin" : ""}</p>
             </div>
           </div>
         </Col>
@@ -110,7 +108,7 @@ function About() {
                 container={styles.icon_container}
                 color={styles.icon_color}
                 styles={styles.icon}
-                text={"peculiah@andela.com"}>
+                text={data?.email}>
                 <Iconn name="Mail" />
               </IconWithText>
             </Col>
