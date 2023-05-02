@@ -5,6 +5,7 @@ import { fetchNotificationSettings , updateNotificationSettings } from "pages/ap
 import { Loader } from "components/Loader";
 import debounce from "lodash.debounce";
 import { useStateValue } from "store/context";
+import SuccessMessage from "components/SuccessMessage";
 
 function Notifications() {
 
@@ -78,6 +79,7 @@ function Notifications() {
   const [disSettings, setDisSettings] = useState({});
   const [_, dispatch] = Object.values(useStateValue());
   const [loading, setLoading] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   
   const loadNotificationSettings = async () => {
     setLoading(true)
@@ -97,13 +99,32 @@ function Notifications() {
     loadNotificationSettings()
   }, [])
 
-  const handleUpdateGen = debounce(async () => {
+  const handleUpdateGen = debounce(async (updatedSettings) => {
     const payload = {
-      general_notification: settings
+      general: { notifications: updatedSettings },
+    };
+    console.log(payload);
+    try {
+      const response = await updateNotificationSettings(payload);
+      if (response.status === 200) {
+        setModalOpen(true);
+        dispatch({
+          type: "UPDATE_NOTIFICATION_SETTINGS",
+          payload: response?.data,
+        });
+      }
+    } catch (error) {}
+  }, 2000);
+  
+
+  const handleUpdateDis = debounce(async (updatedSettings) => {
+    const payload = {
+      discussion: { notifications: updatedSettings }
     };
     try {
       const response = await updateNotificationSettings(payload);
       if (response.status === 200) {
+        setModalOpen(true);
         dispatch({
           type: "UPDATE_NOTIFICATION_SETTINGS",
           payload: response?.data
@@ -112,37 +133,38 @@ function Notifications() {
     } catch (error) {}
   }, 2000);
 
-  const handleUpdateDis = debounce(async () => {
-    const payload = {
-      discussion_notification: disSettings
-    };
-    try {
-      const response = await updateNotificationSettings(payload);
-      if (response.status === 200) {
-        dispatch({
-          type: "UPDATE_NOTIFICATION_SETTINGS",
-          payload: response?.data
-        });
-      }
-    } catch (error) {}
-  }, 2000);
-
-  const handleChange = (name,type) => {
+  const handleChange = ({ name, type, action }) => {
     setSettings((prevState) => {
-      return {
-        ...prevState, [name]: {...prevState[name], [type]:!prevState[name][type]}
-      }
+      const updatedSettings = {
+        ...prevState,
+        [name]: {
+          ...prevState[name],
+          [type]: action,
+        },
+      };
+      handleUpdateGen(updatedSettings);
+      return updatedSettings;
     });
-    handleUpdateGen();
   };
-  const handleChangeDis = (name,type) => {
+
+  const handleChangeDis = ({ name, type, action }) => {
     setDisSettings((prevState) => {
-      return {
-        ...prevState, [name]: {...prevState[name], [type]:!prevState[name][type]}
-      }
+      const updatedSettings = {
+        ...prevState,
+        [name]: {
+          ...prevState[name],
+          [type]: action,
+        },
+      };
+      handleUpdateDis(updatedSettings);
+      return updatedSettings;
     });
-    handleUpdateDis();
+  };  
+
+  const handleModal = () => {
+    setModalOpen(!modalOpen);
   };
+
   if (loading) {
     return (
       <div className={styles.spin}>
@@ -168,19 +190,24 @@ function Notifications() {
               <ToggleInput
                 key={field.name}
                 checked={settings[field.name]?.email}
-                handleChange={() => handleChange(field.name,field.email)} />
+                handleChange={(action) => handleChange({...field, action, type: field.email})} />
                 </span>
                 <span className={styles.item_span2}>
                 <ToggleInput
                   key={field.name}
                   checked={settings[field.name]?.push}
-                  handleChange={() => handleChange(field.name, field.push)} />
+                  handleChange={(action) => handleChange({...field, action, type: field.push})} />
                 </span>
             </div>
            </div>
         ))}
       </div>
-        
+        <SuccessMessage
+        image={"/assets/images/success.png"}
+          message={"Notification Settings Saved Successfully"}
+          isModalOpen={modalOpen}
+          setIsModalOpen={handleModal}
+        />
       </div>
       <div className={styles.discussion_div}>
         <p>Discussion Notifications</p>
@@ -197,18 +224,24 @@ function Notifications() {
               <ToggleInput
                 key={field.name}
                 checked={disSettings[field.name]?.email}
-                handleChange={() => handleChangeDis(field.name,field.email)} />
+                handleChange={(action) => handleChangeDis({...field, action, type: field.email})} />
                 </span>
                 <span className={styles.item_span2}>
                 <ToggleInput
                   key={field.name}
                   checked={disSettings[field.name]?.push}
-                  handleChange={() => handleChangeDis(field.name, field.push)} />
+                  handleChange={(action) => handleChangeDis({...field, action, type: field.push})} />
                 </span>
             </div>
            </div>
         ))}
       </div>
+        <SuccessMessage
+          image={"/assets/images/user_phone.svg"}
+            message={"Notification Settings Saved Successfully"}
+            isModalOpen={modalOpen}
+            setIsModalOpen={handleModal}
+        />
       </div>
     </div>
   );

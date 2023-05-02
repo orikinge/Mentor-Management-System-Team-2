@@ -53,4 +53,8 @@ jobs:
           REMOTE_USER: ubuntu
           TARGET: /home/ubuntu/dev
           SOURCE: /backend
+<<<<<<< HEAD
+          SCRIPT_AFTER: cd dev/backend && ls && sudo ./start.sh
+=======
           SCRIPT_AFTER: cd dev/backend && ls && chmod +x ./deploy.sh && chmod +x ./start.sh && sudo ./deploy.sh && sudo ./start.sh
+>>>>>>> 6f276ea22de82eeae1f6a2530c201f0fd61d4dc1

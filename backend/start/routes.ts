@@ -81,7 +81,6 @@ Route.group(() => {
     Route.delete('/:postId/:commentId', 'CommentController.deleteComment')
   }).prefix('comment')
 
-
   Route.group(() => {
     Route.get('/', 'NotificationSettingsController.getUserNotificationSettings')
     Route.put('/', 'NotificationSettingsController.updateUserNotificationSettings')
