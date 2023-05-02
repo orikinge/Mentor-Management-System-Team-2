@@ -6,22 +6,20 @@ export default class PostsController {
   public async createPost({ auth, request, response }: HttpContextContract) {
     const user = auth.user
     if (!user) {
-      return response.unauthorized({ error: 'You must be logged in to create a report' })
+      return response.unauthorized({ error: 'You must be logged in to create a post' })
     }
-
     const payload = await request.validate({
       schema: schema.create({
-        imageUrl: schema.file({
+        imageUrl: schema.file.optional({
           size: '2mb',
           extnames: ['jpg', 'png'],
         }),
         title: schema.string(),
         description: schema.string(),
-        emoji: schema.string(),
+        emoji: schema.string.optional(),
       }),
     })
     const postImage = request.file('imageUrl')
-    // Written to the "images" directory
     await postImage?.moveToDisk('upload_file')
 
     const post = await Post.create({
@@ -50,14 +48,32 @@ export default class PostsController {
       return response.unauthorized({ error: 'You are not authorized to edit this post' })
     }
 
-    post.title = request.input('title')
-    post.description = request.input('description')
-    post.emoji = request.input('emoji')?.toString() || ''
-    post.imageUrl = request.input('imageUrl')?.toString() || ''
+    const payload = await request.validate({
+      schema: schema.create({
+        imageUrl: schema.file.optional({
+          size: '2mb',
+          extnames: ['jpg', 'png'],
+        }),
+        title: schema.string.optional(),
+        description: schema.string.optional(),
+        emoji: schema.string.optional(),
+      }),
+    })
+
+    post.description = payload.description ?? post.description
+    post.title = payload.title ?? post.title
+    post.emoji = payload.emoji ?? post.emoji
+
+    if (payload.imageUrl) {
+      const postImage = request.file('imageUrl')
+      await postImage?.moveToDisk('upload_file')
+      post.imageUrl = postImage?.fileName ?? post.imageUrl
+    }
+
     await post.save()
 
     return response
-      .status(201)
+      .status(200)
       .json({ status: 'success', message: 'Post updated successfully', post })
   }
 
@@ -76,8 +92,6 @@ export default class PostsController {
     if (search) {
       query.where('title', 'like', `%${search}%`)
     }
-
-    console.log(query)
 
     const posts = await query.paginate(page || 1, limit || 10)
 

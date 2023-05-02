@@ -36,9 +36,12 @@ export default class AuthenticationController {
           .html(`Hello ${user?.firstName}\n
           Use the link below to reset your password ${url}`)
       })
-      return {status: 'success', message: 'Password reset token as been sent to your email', token: token }
+      return {
+        status: 'success',
+        message: 'Password reset token as been sent to your email',
+        token: token,
+      }
     } catch (error) {}
-
   }
 
   async resetPassword({ request, response }: HttpContextContract) {
@@ -63,6 +66,34 @@ export default class AuthenticationController {
       return { status: 'success', message: 'Password reset successful' }
     } catch (error) {
       return response.status(400).send({ message: error.message })
+    }
+  }
+
+  async changePassword({ auth, request, response }: HttpContextContract) {
+    try {
+      const user = auth.user!
+      if (!user) {
+        return response.unauthorized({ error: 'You must be logged in to change your password' })
+      }
+      const { oldPassword, newPassword } = request.only(['oldPassword', 'newPassword'])
+
+      const isOldPasswordValid = await auth.attempt(user.email, oldPassword)
+      if (!isOldPasswordValid) {
+        return response.badRequest({ error: 'Old password is not valid' })
+      }
+
+      if (oldPassword === newPassword) {
+        return response.badRequest({ error: 'New password cannot be the same as the old password' })
+      }
+
+      user.password = newPassword
+      await user.save()
+
+      await auth.logout()
+
+      return { status: 'success', message: 'Password changed successfully' }
+    } catch (error) {
+      return response.status(400).send({ message: 'Invalid Credentials', status: 'Error' })
     }
   }
 

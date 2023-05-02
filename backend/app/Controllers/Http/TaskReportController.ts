@@ -24,7 +24,7 @@ export default class TaskReportController {
       const taskId = params.taskId
       const task = await Task.query()
         .where('id', taskId)
-        .preload('mentorManagers')
+        .preload('mentors')
         .preload('user', (query) => {
           query.select(['firstName', 'lastName'])
         })
@@ -32,9 +32,8 @@ export default class TaskReportController {
       if (!task) {
         return response.notFound({ message: 'Task not found', status: 'Error' })
       }
-      const isMentorManager = task.mentorManagers.some(
-        (mentorManager) => mentorManager.id === user.id
-      )
+
+      const isMentorManager = task.mentors.some((mentorManager) => mentorManager.id === user?.id)
       if (!isMentorManager) {
         return response.unauthorized({ message: 'You are not authorized to perform this action' })
       }

@@ -70,7 +70,7 @@ export default class TaskController {
         return task
       })
 
-      return response.created({status: 'success', message: 'Task Created', task})
+      return response.created({ status: 'success', message: 'Task Created', task })
     } catch (error) {
       return response.status(500).send({ message: 'Error creating task.' })
     }
@@ -137,7 +137,9 @@ export default class TaskController {
         return task
       })
 
-      return response.status(200).json({status: 'success', message: 'Task Updated Successfully', task})
+      return response
+        .status(200)
+        .json({ status: 'success', message: 'Task Updated Successfully', task })
     } catch (error) {
       console.log(error)
       return response.status(500).send({ message: 'Error updating task.' })
@@ -166,40 +168,33 @@ export default class TaskController {
       return response.notFound({ message: 'Task not found' })
     }
 
-    console.log(task)
+    const result = {
+      id: task.id,
+      title: task.title,
+      description: task.description,
+      meta: task.meta,
+      creatorUserId: task.userId,
+      createdBy: `${task.user?.firstName} ${task.user?.lastName}`,
+      startDate: task.startDate,
+      endDate: task.endDate,
+      typeOfReport: task.typeOfReport,
+      createdAt: task.createdAt,
+      updatedAt: task.updatedAt,
+      mentors: task.mentors?.map((mentor) => ({
+        id: mentor.id,
+        firstName: mentor.firstName,
+        lastName: mentor.lastName,
+      })),
+      mentorManagers: task.mentorManagers?.map((mentorManager) => ({
+        id: mentorManager.id,
+        firstName: mentorManager.firstName,
+        lastName: mentorManager.lastName,
+      })),
+      mentorCount: task.mentors.length,
+      mentorManagerCount: task.mentorManagers.length,
+    }
 
-    const result = 
-       {
-        id: task.id,
-        title: task.title,
-        description: task.description,
-        meta: task.meta,
-        creatorUserId: task.userId,
-        createdBy: `${task.user?.firstName} ${task.user?.lastName}`,
-        startDate: task.startDate,
-        endDate: task.endDate,
-        typeOfReport: task.typeOfReport,
-        createdAt: task.createdAt,
-        updatedAt: task.updatedAt,
-        mentors: task.mentors?.map((mentor) => ({
-          id: mentor.id,
-          firstName: mentor.firstName,
-          lastName:mentor.lastName
-        })),
-        mentorManagers: task.mentorManagers?.map(
-          (mentorManager) => ({
-            id: mentorManager.id,
-            firstName: mentorManager.firstName,
-            lastName:mentorManager.lastName
-
-          })
-        ),
-        mentorCount: task.mentors.length,
-        mentorManagerCount: task.mentorManagers.length,
-      }
-   
-
-    return response.ok({status: 'success', message: 'Task fetched Successfully', result})
+    return response.ok({ status: 'success', message: 'Task fetched Successfully', result })
   }
   async index({ auth, response, request }: HttpContextContract) {
     const adminUser = await auth.authenticate()
@@ -221,7 +216,6 @@ export default class TaskController {
         })
         .paginate(page || 1, limit || 10)
 
-
       const tasksWithCounts = tasks.toJSON().data.map((task) => {
         return {
           id: task.id,
@@ -238,31 +232,31 @@ export default class TaskController {
           mentors: task.mentors?.map((mentor) => ({
             id: mentor.id,
             firstName: mentor.firstName,
-            lastName:mentor.lastName
+            lastName: mentor.lastName,
           })),
-          mentorManagers: task.mentorManagers?.map(
-            (mentorManager) =>({ 
-              id: mentorManager.id,
-              firstName: mentorManager.firstName,
-              lastName:mentorManager.lastName
-            })
-          ),
+          mentorManagers: task.mentorManagers?.map((mentorManager) => ({
+            id: mentorManager.id,
+            firstName: mentorManager.firstName,
+            lastName: mentorManager.lastName,
+          })),
           reports: task.taskReports?.map((report) => ({
             id: report.id,
             title: report.title,
             achievement: report.achievement,
-            blocker:report.blocker,
-            recommendation:report.recommendation,
+            blocker: report.blocker,
+            recommendation: report.recommendation,
             createdAt: report.createdAt,
             updatedAt: report.updatedAt,
           })),
           mentorCount: task.mentors.length,
           mentorManagerCount: task.mentorManagers.length,
-          taskReportCount:task.taskReports.length,
+          taskReportCount: task.taskReports.length,
         }
       })
 
-      return response.status(200).json({ status: 'success', message: 'Tasks fetched successfully', data: tasksWithCounts })
+      return response
+        .status(200)
+        .json({ status: 'success', message: 'Tasks fetched successfully', data: tasksWithCounts })
     } catch (error) {
       return response.status(500).send({ message: 'Error retrieving tasks.' })
     }
