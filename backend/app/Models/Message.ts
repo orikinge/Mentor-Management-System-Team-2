@@ -15,6 +15,9 @@ export default class Message extends BaseModel {
   @column()
   public body: string
 
+  @column()
+  public channelName: string
+
   
   @column.dateTime()
   public sentAt: DateTime

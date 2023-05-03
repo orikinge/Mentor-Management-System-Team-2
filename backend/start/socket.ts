@@ -13,12 +13,12 @@ Ws.io.on('connection', (socket) => {
 
   socket.emit('news', { hello: 'world' })
 
-  socket.on('hello', (data) => {
-    socket.emit('hello', { hello: 'world' })
+  socket.on('emit', (data) => {
+   // socket.emit('hello', { hello: 'world' })
     console.log(data)
   })
 })
-
+console.log("test socket")
 Ws.io.use((socket, next) => {
   const username = socket.handshake.auth.username
   if (!username) {

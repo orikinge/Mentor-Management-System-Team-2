@@ -34,4 +34,8 @@ export default Env.rules({
   FRONTEND_URL: Env.schema.string(),
   GOOGLE_CLIENT_ID: Env.schema.string(),
   GOOGLE_CLIENT_SECRET: Env.schema.string(),
+  PUSHER_APP_KEY: Env.schema.string(),
+  PUSHER_APP_SECRET: Env.schema.string(),
+  PUSHER_APP_ID: Env.schema.string(),
+  PUSHER_APP_CLUSTER: Env.schema.string(),
 })

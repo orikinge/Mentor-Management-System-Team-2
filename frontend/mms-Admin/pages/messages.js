@@ -4,8 +4,9 @@ import styles from "../styles/messages.module.css";
 import { Avatar } from "antd";
 import Icon from "../components/Icon";
 import NotificationIcon from '../components/NotificationIcon';
+import SocketProvider from 'Context/socket';
 
-function messages() {
+function Messages() {
   
   const [selectedUser, setSelectedUser] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -119,4 +120,5 @@ function messages() {
 
 }
 
-export default messages
+
+export default Messages
