@@ -6,11 +6,13 @@ import Icon from "../components/Icon.js";
 import IconWithText from "components/Icon/IconWithText";
 import { fetchUserProfile } from "pages/api/user";
 import { capitalize } from "utils/capitalize";
+import getUserRole from "utils/getUserRole";
+
 import { Loader } from "components/Loader";
 import { Button } from "components/Button";
 import { useRouter } from "next/router";
 
-function About() {
+function About() { 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -79,7 +81,7 @@ function About() {
                   {/* <NG title="Nigeria" className={styles.flag} /> */}
                 </span>
               </p>
-              <p className={styles.about_role}>{data.isAdmin ? "Admin" : ""}</p>
+              <p className={styles.about_role}>{getUserRole(data)}</p>
             </div>
           </div>
         </Col>
@@ -95,14 +97,14 @@ function About() {
             <p className={styles.about_title}>About</p>
             <div className={styles.about_desc_container}>
               <p className={styles.about_desc}>{data.bio}</p>
-            </div>
+            </div> 
           </div>
         </Col>
         <Col span={24}>
           <Paragraph className={styles.meta}>
             <div><h4>Location:</h4><p>{data?.location || "NIL"}</p></div>
-            <div><h4>Email:</h4><p>{data?.location || "NIL"}</p></div>
-            <div><h4>Website:</h4><p>{data?.meta?.website || "NIL"}</p></div>
+            <div><h4>Email:</h4><p>{data?.email || "NIL"}</p></div>
+            <div><h4>Website:</h4><p>{data?.website || "NIL"}</p></div>
            <div> <h4>Member Since:</h4><p>{moment(data?.created_at).format("ll")}</p></div>
           </Paragraph>
         </Col>

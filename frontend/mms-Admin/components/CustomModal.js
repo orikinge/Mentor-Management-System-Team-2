@@ -6,6 +6,7 @@ import {
   CustomInput,
   CustomTextArea,
 } from "./formInputs/CustomInput";
+
 import styles from "../styles/admin/discussionForum.module.css";
 import { Icon } from "./Icon/Icon";
 import EmojiPicker from "emoji-picker-react";
@@ -27,6 +28,7 @@ export const CustomFormModal = ({
     description: "",
     emoji: "happy face",
   });
+  const [message, setMessage]= useState("")
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -53,16 +55,15 @@ export const CustomFormModal = ({
   const handleSubmit = async (event) => {
     //call api here
     event.preventDefault();
-    console.log("form data");
     console.log(postData);
     try {
       if (!postData.title || !postData.description) {
-        console.log("we are here");
         setConfirmLoading(false);
         return;
       }
 
       setConfirmLoading(true);
+      setMessage("")
 
       const formData = new FormData();
       formData.append("imageUrl", file);
@@ -85,10 +86,14 @@ export const CustomFormModal = ({
         response?.status === 403
       ) {
         setConfirmLoading(false);
+        setMessage(response?.message)
         throw response;
       }
     } catch (e) {
       setConfirmLoading(false);
+      setMessage(e.message)
+      
+
     }
   };
   const handleCancel = () => {
@@ -110,7 +115,10 @@ export const CustomFormModal = ({
         confirmLoading={confirmLoading}
         closable={false}>
         <Row className={styles.modal_container}>
+        {message && <p>{message}</p>}
+
           <Row className={styles.header_row}>
+
             <div className={styles.topic}>New Topic</div>
             <div style={{ cursor: "pointer" }} onClick={handleCancel}>
               <Icon name="Close" />
@@ -143,7 +151,7 @@ export const CustomFormModal = ({
                   <Icon name="SmileyFace" />
                 </Col>
 
-                <Upload {...props} className={styles.smiley}>
+                <Upload  {...props} >
                   <Icon name="Pin" color="#058B94" />
                 </Upload>
               </Row>

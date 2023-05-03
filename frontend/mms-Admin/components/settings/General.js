@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 import Icon from "../Icon";
 import styles from "../componentStyles/general.module.css";
 import { Avatar, Col, Input, Row, Select, Button } from "antd";
-import {
-  CustomInput,
-  CustomTextArea,
-} from "components/formInputs/CustomInput";
+import { CustomInput, CustomTextArea } from "components/formInputs/CustomInput";
 import { validateInputs } from "../../utils/validateInputs";
 import SuccessMessage from "../SuccessMessage";
 import { fetchUserProfile, updateUserProfile } from "pages/api/user";
@@ -15,9 +12,9 @@ const initialProfileData = {
   last_name: "",
   email: "",
   bio: "",
-  wesite: "",
+  website: "",
   country: "",
-  city: ""
+  city: "",
 };
 
 function General() {
@@ -32,9 +29,8 @@ function General() {
   });
   const [success, setSuccess] = useState(false);
 
-
-  useEffect(()=>{
-    (async()=>{
+  useEffect(() => {
+    (async () => {
       const profile = await fetchUserProfile();
       setProfileData(profile?.data || {});
       setSmedia(profile?.data?.social_media_links);
@@ -47,19 +43,19 @@ function General() {
     const valid = validateInputs(profileData);
     if (valid) {
       try {
-        const {
+        const { bio, email, first_name, last_name, website, country, city } =
+          profileData;
+        const response = await updateUserProfile({
           bio,
           email,
           first_name,
           last_name,
           website,
           country,
-          city
-        } = profileData;
-        const response = await updateUserProfile({
-          bio, email, first_name, last_name, website, country, city, social_media_links: sMedia
+          city,
+          social_media_links: sMedia,
         });
-        console.log(response)
+        console.log(response);
         if (response.status === 200) {
           setSuccess(true);
         }
@@ -130,7 +126,7 @@ function General() {
           </div>
           <div className={styles.input_div}>
             <CustomInput
-              value={profileData.last_name}
+              value={profileData?.last_name}
               onChange={handleChange}
               placeholder="Second Name"
               name="last_name"
@@ -145,7 +141,7 @@ function General() {
         </div>
 
         <CustomTextArea
-          value={profileData.bio}
+          value={profileData.bio} 
           name="bio"
           onChange={handleChange}
           placeholder="Your Bio"
@@ -156,7 +152,13 @@ function General() {
         <div className={styles.label}>
           <label>Website</label>
         </div>
-        <Input className={styles.single_input} placeholder="www.example.com" />
+        <Input
+          onChange={handleChange}
+          value={profileData?.website}
+          className={styles.single_input}
+          placeholder="www.example.com"
+          name="website"
+        />
       </Row>
 
       <div className={styles.select_container}>
@@ -167,16 +169,16 @@ function General() {
           className={styles.select}
           options={[
             {
-              label: 'Nigeria',
-              value: 'Nigeria'
+              label: "Nigeria",
+              value: "Nigeria",
             },
             {
-              label: 'Ghana',
-              value: 'Ghana'
+              label: "Ghana",
+              value: "Ghana",
             },
             {
-              label: 'United State of America',
-              value: 'USA'
+              label: "United State of America",
+              value: "USA",
             },
           ]}
         />
@@ -187,16 +189,16 @@ function General() {
           className={styles.select}
           options={[
             {
-              label: 'Lagos',
-              value: 'Lagos'
+              label: "Lagos",
+              value: "Lagos",
             },
             {
-              label: 'Abuja',
-              value: 'Abuja'
+              label: "Abuja",
+              value: "Abuja",
             },
             {
-              label: 'Accra',
-              value: 'Accra'
+              label: "Accra",
+              value: "Accra",
             },
           ]}
         />
@@ -291,10 +293,7 @@ function General() {
         </Col>
       </div>
       <div className={styles.btn_container}>
-        <Button
-          className={styles.btn}
-          loading={loading}
-          onClick={handleSubmit}>
+        <Button className={styles.btn} loading={loading} onClick={handleSubmit}>
           <span className={styles.btn_text}>Save Changes</span>
         </Button>
       </div>

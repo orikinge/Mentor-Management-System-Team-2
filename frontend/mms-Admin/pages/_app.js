@@ -16,7 +16,6 @@ const App = ({ Component, pageProps, session }) => {
   const router = useRouter();
 
   if (!token) {
-    console.log("here");
     return (
       <>
         <ContextProvider>

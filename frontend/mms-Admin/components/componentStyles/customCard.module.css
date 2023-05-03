@@ -74,6 +74,13 @@
   align-items: flex-end;
 }
 
+.clock {
+  margin-left: 5px;
+  font-size: 12px;
+  font-weight: 400;
+  color: #808080;
+}
+
 .commentCard {
   background-color: #f7feff;
   border: solid 1px #e6fdfe;

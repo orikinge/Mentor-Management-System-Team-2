@@ -6,11 +6,9 @@ import styles from "./componentStyles/customCard.module.css";
 import { useRouter } from "next/router";
 import getUserRole from "../utils/getUserRole.js";
 import Link from "next/link";
+import moment from "moment";
 
 export const PostCard = ({ data, fullPost, names }) => {
-  console.log("from coments");
-  console.log(data);
-
   const router = useRouter();
 
   const handleCommentsClick = (e, id, name) => {
@@ -96,7 +94,10 @@ export const PostCard = ({ data, fullPost, names }) => {
           </Col>
           <Col sm={21} className={styles.clock_icon}>
             <div>
-              <Iconn name="Clock" />
+              <span>
+                <Iconn name="Clock" />
+              </span>
+              <span className={styles.clock}>{moment(data.created_at).fromNow(true)}</span>
             </div>
           </Col>
         </Row>
