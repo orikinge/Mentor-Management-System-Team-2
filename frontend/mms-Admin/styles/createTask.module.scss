@@ -1,0 +1,43 @@
+@import "./variables.module.scss";
+
+.create_task {
+  .input {
+    border: 1px solid #e6e6e6;
+    padding: 10px;
+  }
+
+  .mentor_container {
+    background-color: $theme-light;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    padding: 1em;
+    text-align: center;
+    justify-content: center;
+    gap: 5em;
+    margin-bottom: 2em;
+
+    .selected_item_text {
+      background-color: #fff;
+      padding: 2px 20px;
+      display: flex;
+      gap: 1em;
+      align-items: center;
+    }
+  }
+
+  .add_mentor_container {
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+    padding: 1em;
+    margin-bottom: 1em;
+
+    .header {
+      margin: 0;
+    }
+
+    small {
+      color: $text-light;
+    }
+  }
+}

@@ -1,4 +1,9 @@
 export const styles = `
+  .ant-layout-sider {
+    position: sticky !important;
+    top: 0 !important;
+    height: 100vh !important;
+  }
   .ant-btn-default:hover {
     color: #fff !important;
   }

@@ -1,20 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import styles from "../../styles/tasks.module.css";
-import TasksSidebar from '../../components/TasksSidebar';
-import Icon from '../../components/Icon';
-import { CustomButton } from '../../components/formInputs/CustomInput';
+import styles from "styles/tasks.module.css";
+import TasksSidebar from 'components/TasksSidebar';
+import Icon from 'components/Icon';
+import { CustomButton } from 'components/formInputs/CustomInput';
 import moment from 'moment';
 import { Card } from 'antd';
-import toast from 'react-hot-toast';
 import DeleteTask from 'components/DeleteTask';
-
-const { Meta } = Card;
 
 
 function tasks() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
-  
   
   const handleDataChange = newData => {
     setData(newData);
@@ -103,7 +99,6 @@ function tasks() {
                   </span>
                 </div>
               </div>
-
 
               <div className={styles.side_div_item_des2}>
                 <div className={styles.side_div_mentor_managers1}>

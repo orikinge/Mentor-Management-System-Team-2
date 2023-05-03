@@ -59,4 +59,9 @@ export const SidebarMenu = [
     name: "Settings",
     icon: "Settings",
   },
+  {
+    path: "/logout",
+    name: "Logout",
+    icon: "Logout",
+  },
 ];

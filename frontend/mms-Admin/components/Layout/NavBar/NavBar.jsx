@@ -1,20 +1,42 @@
-import { useContext, useState } from 'react'
+import { useContext, useState, useRef } from 'react'
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { Icon } from "components/Icon/Icon";
 import { Avatar, Badge, Input } from "antd";
 
-import styles from "styles/navbar.module.css";
+import styles from "styles/navbar.module.scss";
 import { BarsOutlined } from '@ant-design/icons'
 import { GlobalContext } from '../../../Context/store'
 
 const NavBar = () => {
+  const ref = useRef(null);
+  const [modalOpen, setModalOpen] = useState(false);
   const [recentNotifications, setRecentNotifications] = useState([]);
-  const { isMobileSideBarOpen, setMobileSideBarState } = useContext(GlobalContext);
+  const { isMobileSideBarOpen, setMobileSideBarState, logout } = useContext(GlobalContext);
+
+  const router = useRouter();
 
   const notificationCount = (count) => {
     if (count == 20) return "20+";
     else return count;
+  };
+
+  const handleDropdown = (e) => {
+    e.preventDefault();
+    setModalOpen(!modalOpen);
+  };
+
+  const handleRedirect = (e) => {
+    e.preventDefault();
+    setModalOpen(false);
+    router.push("/dashboard");
+  };
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    logout();
+    router.push("/login");
   };
 
   return (
@@ -67,11 +89,19 @@ const NavBar = () => {
               </Link>
             </div>
             <div>
-              <Link href="/profile">
-                <a>
-                  <Avatar src="/assets/images/admin_avatar.png" size={42} />
-                </a>
-              </Link>
+              <a onClick={handleDropdown}>
+                <Avatar src="/assets/images/admin_avatar.png" size={42} />
+              </a>
+              <dialog ref={ref} open={modalOpen} className={styles.dropdown}>
+                <ul>
+                  <li>
+                    <a onClick={handleRedirect}>Dashboard</a>
+                  </li>
+                  <li>
+                    <a onClick={handleLogout}>Logout</a>
+                  </li>
+                </ul>
+              </dialog>
             </div>
           </div>
         </div>

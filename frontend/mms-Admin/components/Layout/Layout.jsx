@@ -11,7 +11,6 @@ import Icon from "../Icon";
 import { CustomButton } from "../formInputs/CustomInput";
 import { useStateValue } from "store/context";
 import { GlobalContextProvider } from "../../Context/store";
-import axios from "../../pages/api/axios";
 import { fetchArchive } from "pages/api/archive"
 import { convertToURLQuery } from "utils/extractTitleFromUrl"
 
@@ -100,7 +99,7 @@ const AppLayout = ({ children }) => {
                         </div>
                       </div>
                       <span className={[styles.task_create]}>
-                        <CustomButton className={styles.taskbutton} onClick={() => router.push("/tasks/new")}>
+                        <CustomButton className={styles.taskbutton} onClick={() => router.push("/tasks/create")}>
                           Create New Task
                         </CustomButton>
                       </span>

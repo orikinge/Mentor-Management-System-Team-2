@@ -20,10 +20,9 @@ const App = ({ Component, pageProps, session }) => {
       <>
         <ContextProvider>
           <SessionProvider session={session}>
-            <Login />;
+            <Login />
           </SessionProvider>
         </ContextProvider>
-        ;
       </>
     );
   }

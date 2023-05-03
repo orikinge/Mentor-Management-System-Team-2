@@ -705,7 +705,6 @@ export const iconPaths = {
       </svg>
     );
   },
-
   Horizon: ({ color = "#058B94", width = "24", height = "24" }) => {
     return (
       <svg
@@ -735,6 +734,31 @@ export const iconPaths = {
           strokeLinecap="round"
           strokeLinejoin="round"
         />
+      </svg>
+    );
+  },
+  Logout: ({ width="20", height="20", color="#808080"}) => {
+    return (
+      <svg width={width} height={height} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 10H13" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M6 5L1 10L6 15" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M19 1V19" stroke={color} strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+
+    );
+  },
+  PlusOutLined: ({ width="20", height="20", color="#058B94" }) => {
+    return (
+      <svg width={width} height={height} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9.99967 5.83301V14.1663M5.83301 9.99967H14.1663" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M10.0003 18.3337C14.6027 18.3337 18.3337 14.6027 18.3337 10.0003C18.3337 5.39795 14.6027 1.66699 10.0003 1.66699C5.39795 1.66699 1.66699 5.39795 1.66699 10.0003C1.66699 14.6027 5.39795 18.3337 10.0003 18.3337Z" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    );
+  },
+  Check: ({ width="18", height="12", color="#058B94" }) => {
+    return (
+      <svg width={width} height={height} viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1.5 6L6.5 11L16.5 1" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     );
   },

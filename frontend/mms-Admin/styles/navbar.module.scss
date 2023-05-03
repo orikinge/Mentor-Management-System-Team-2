@@ -1,3 +1,5 @@
+@import "./variables.module.scss";
+
 .header {
   background-color: #058b94;
   height: 100px;
@@ -26,6 +28,35 @@
   justify-content: space-between;
   align-items: center;
   gap: 24px;
+  position: relative;
+
+  .dropdown {
+    border: none;
+    box-shadow: 0 3px 50px rgba(0,0,0,.06274509803921569);
+    border-radius: 5px;
+    padding: 0;
+
+    ul {
+      display: inline-block;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+
+      li {
+        margin: 1em 1.5em;
+
+        a {
+          color: $text-dark;
+          font-size: 14px;
+
+          &:hover {
+            color: $text-light;
+          }
+        }
+      }
+    }
+  }
 }
 
 .navbar_search {

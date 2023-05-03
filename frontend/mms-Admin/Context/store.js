@@ -8,6 +8,7 @@ export const GlobalContext = createContext({
   setUserData: () => "",
   isMobileSideBarOpen: false,
   setMobileSideBarState: (state) => state,
+  logout: () => {},
 });
 
 export const GlobalContextProvider = ({ children }) => {
@@ -18,6 +19,11 @@ export const GlobalContextProvider = ({ children }) => {
     setMobileSideBarState(matches)
   }, [matches])
 
+  const handleLogout = () => {
+    localStorage.clear();
+    sessionStorage.clear();
+  };
+
   return (
     <GlobalContext.Provider
       value={{
@@ -26,6 +32,7 @@ export const GlobalContextProvider = ({ children }) => {
         isMobileSideBarOpen,
         setMobileSideBarState,
         isMobile: matches,
+        logout: handleLogout,
       }}>
       {children}
     </GlobalContext.Provider>

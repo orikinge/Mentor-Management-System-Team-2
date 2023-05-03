@@ -29,8 +29,17 @@ const inputFields = [
     label: "Show Twitter",
   }
 ];
+
+const initialSettings = {
+  show_contact_info: false,
+  show_github: false,
+  show_instagram: false,
+  show_linkedin: false,
+  show_twitter: false,
+};
+
 const Privacy = () => {
-  const [settings, setSettings] = useState({});
+  const [settings, setSettings] = useState(initialSettings);
   const [modalOpen, setModalOpen] = useState(false);
   const { dispatch } = useStateValue();
 
@@ -47,18 +56,18 @@ const Privacy = () => {
   
   const handleChange = (name) => {
     setSettings((prevState) => {
+      handleUpdate({ ...prevState, [name]: !prevState[name] });
       return {
         ...prevState, [name]: !prevState[name]
       }
     });
-    handleUpdate();
   };
 
   const handleModal = () => {
     setModalOpen(!modalOpen);
   };
 
-  const handleUpdate = debounce(async () => {
+  const handleUpdate = debounce(async (settings) => {
     const payload = {
       privacy: settings
     };
@@ -72,7 +81,7 @@ const Privacy = () => {
         setModalOpen(true);
       }
     } catch (error) {}
-  }, 2000);
+  }, 4000);
 
   return (
     <div className={styles.main}>

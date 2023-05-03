@@ -13,14 +13,20 @@ const SideBar = ({ user }) => {
   const router = useRouter();
   const [state, setState] = useState({ name: "James", role: "Admin" });
   const [activeMenu, setActiveMenu] = useState("");
-  const { isMobileSideBarOpen } = useContext(GlobalContext);
+  const { isMobileSideBarOpen, logout } = useContext(GlobalContext);
 
   const { Sider } = Layout;
   const { Paragraph } = Typography;
 
   useEffect(() => {
     const pathname = router.pathname?.split('/')[1];
+    if (router.asPath === "/logout") {
+      logout();
+      return router.push("/login");
+    }
     setActiveMenu(pathname)
+
+    return () => {};
   }, [router.pathname]);
 
   return (
