@@ -41,6 +41,7 @@ Route.group(() => {
   }).prefix('user')
 
   Route.group(() => {
+    Route.get('/:channelName', 'ChatController.getAllChat')
     Route.post('/channel', 'ChatController.authChatChannel')
     Route.post('/', 'ChatController.authChatUser')
     Route.post('/:receiverId', 'ChatController.saveChat')

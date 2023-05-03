@@ -28,11 +28,8 @@ export default class ChatController {
         },
       }
        const authUser = pusher.authorizeChannel(socketId, channelName, presenceData)
-        const messages = await Message.query()
-          .where('channel_name', channelName)
-          .orderBy('created_at', 'asc')
-          .exec()
-      return { channelName, messages: messages, authUser}
+        
+      return { channelName, authUser}
     } catch (error) {
       return response.badRequest(error)
     }
@@ -77,6 +74,35 @@ export default class ChatController {
 
       return response.created({ status: 'success', message: 'Chat saved', chat })
     } catch (error) {
+      return response.badRequest(error)
+    }
+  }
+  async getAllChat({ auth, response, params }: HttpContextContract) {
+    try {
+      const user = auth.user
+      if (!user) {
+        return response.unauthorized({ error: 'You must be logged in to chat' })
+      }
+      const { channelName } = params
+
+    const channel = await Message.findBy('channel_name', channelName)
+
+    if (!channel) {
+      return response.notFound({
+        message: `No conversation for channel '${channelName}'`
+      })
+    }
+
+      const messages = await Message.query()
+          .where('channel_name', channelName)
+          .orderBy('created_at', 'asc')
+          .exec()
+          return response.ok({
+            status: 'success',
+            message: 'All Chat fetched successfully',
+            messages,
+          })
+    } catch(error){
       return response.badRequest(error)
     }
   }
