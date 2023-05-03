@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { Row, Col, Form, Input, Button, Typography, Avatar } from 'antd';
 import { fetchMentors, fetchMentorManagers } from "pages/api/user";
-import { createTask } from "pages/api/task";
+import { fetchTask, updateTask } from "pages/api/task";
 import { Icon } from "components/Icon/Icon";
 import SuccessModal from "components/SuccessMessage";
 
@@ -33,12 +33,11 @@ const AddMentor = ({ id, name, added, handleSelect }) => {
 const initialState = {
   title: "",
   description: "",
-  typeOfReport: "Task Report",
   mentors: [],
   mentorManagers: [],
 };
 
-const NewTask = () => {
+const EditTask = () => {
   const [form] = Form.useForm();
   const router = useRouter();
   const [state, setState] = useState(initialState);
@@ -46,7 +45,9 @@ const NewTask = () => {
   const [openModal, setOpenModal] = useState(false);
   const [mentors, setMentors] = useState([]);
   const [mentorManagers, setMentorManagers] = useState([]);
-  const [showMentors, setShowMentors] = useState({ show: false, type: "mentors" });
+  const [showMentors, setShowMentors] = useState({ show: true, type: "mentors" });
+
+  const taskId = router.query?.id;
 
   const handleModal = () => {
     setOpenModal(!openModal);
@@ -67,12 +68,20 @@ const NewTask = () => {
     });
   };
 
-  const fetchData = async () => {
+  const fetchData = async (id) => {
     setLoading(true);
     try {
+      const { data: { result } } = await fetchTask(id);
       const { data: { mentors } } = await fetchMentors();
       const { data: { mentorManagers } } = await fetchMentorManagers();
 
+      setState({
+        id: result?.id,
+        title: result?.title,
+        description: result?.description,
+        mentors: result?.mentors?.map((m) => m?.id),
+        mentorManagers: result?.mentorManagers?.map((mm) => mm?.id),
+      });
       setMentors(mentors);
       setMentorManagers(mentorManagers);
     } catch (e) {
@@ -91,7 +100,7 @@ const NewTask = () => {
     };
 
     try {
-      const response = await createTask(payload);
+      const response = await updateTask(taskId, payload);
       if (response.status === 200) {
         setOpenModal(true);
       }
@@ -113,8 +122,8 @@ const NewTask = () => {
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchData(taskId);
+  }, [taskId]);
 
   const checkAdded = (id) => {
     if (mentorIds.includes(id) || mentorManagerIds.includes(id)) return true;
@@ -128,7 +137,7 @@ const NewTask = () => {
     <>
       <Row justify="space-between" className={styles.create_task}>
         <Col span={show ? 16 : 24}>
-          <Form name="create-task" layout="vertical" form={form} onFinish={handleSubmit}>
+          <Form name="edit-task" layout="vertical" form={form} onFinish={handleSubmit}>
             <Form.Item
               name="title"
               label="Title"
@@ -136,7 +145,10 @@ const NewTask = () => {
               rules={[
                 { required: true, min: 3, max: 40 }
               ]}>
-              <Input placeholder="Enter a title" className={styles.input} />
+              <Input
+                placeholder={state.title}
+                className={styles.input}
+                value={state.title} />
             </Form.Item>
             <Form.Item
               name="description"
@@ -144,7 +156,10 @@ const NewTask = () => {
               rules={[
                 { required: true, min: 10 }
               ]}>
-              <Input.TextArea placeholder="Enter task details" className={styles.input} rows={10} />
+              <Input.TextArea
+                placeholder={state.description}
+                className={styles.input} rows={10}
+                value={state.description} />
             </Form.Item>
 
             <Row gutter={16}>
@@ -153,7 +168,7 @@ const NewTask = () => {
                   <Typography>
                     <h4>Add Mentor Manager</h4>
                     <span className={styles.selected_item_text}>
-                      {`${mentorManagerIds.length} selected`}
+                      {`${mentorManagerIds?.length} selected`}
                       <Image src={"/assets/images/remove_tag.png"} width={16} height={12} />
                     </span>
                   </Typography>
@@ -169,7 +184,7 @@ const NewTask = () => {
                   <Typography>
                     <h4>Add Mentor</h4>
                     <span className={styles.selected_item_text}>
-                      {`${mentorIds.length} selected`}
+                      {`${mentorIds?.length} selected`}
                       <Image src={"/assets/images/remove_tag.png"} width={16} height={12} />
                     </span>
                   </Typography>
@@ -186,7 +201,7 @@ const NewTask = () => {
               className={[buttonStyles.button, buttonStyles.primary, buttonStyles.medium]}
               htmlType="submit"
               loading={loading}>
-              Create Task
+              Edit Task
             </Button>
           </Form>
         </Col>
@@ -205,7 +220,7 @@ const NewTask = () => {
       </Row>
 
       <SuccessModal
-        message="Task created successfuly"
+        message="Task updated successfuly"
         isModalOpen={openModal}
         image={"/assets/images/task_success.png"}
         setIsModalOpen={handleModal}
@@ -215,4 +230,4 @@ const NewTask = () => {
   );
 };
 
-export default NewTask;
+export default EditTask;

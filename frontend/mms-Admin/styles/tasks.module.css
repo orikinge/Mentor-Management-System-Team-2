@@ -187,6 +187,10 @@
   border: none;
 }
 
+.edit_link_text {
+  color: #fff;
+}
+
 @media (max-width: 992px) {
   .main_container {
     display: none;

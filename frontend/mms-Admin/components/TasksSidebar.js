@@ -2,61 +2,57 @@ import React, { useState, useEffect, useRef } from "react";
 import styles from "./componentStyles/tasksidebar.module.css";
 import Icon from "./Icon";
 import TasksModal from "./TasksModal";
-import axios from "../pages/api/axios";
 import moment from "moment";
-import { useLogin } from '../hooks/useLogin';
 import { fetchTasks } from "pages/api/task";
-import { Loader } from "components/Loader";
 import { convertToURLQuery } from "utils/extractTitleFromUrl";
 
 function TasksSidebar(props) {
-  const {token} = useLogin()
-    const [page, setPage] = useState(1);
-    const [limit, setLimit] = useState(10);
-    const [items, setItems] = useState([]);
-    const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(false)
-    const containerRef = useRef(null);
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
+  const [items, setItems] = useState([]);
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false)
+  const containerRef = useRef(null);
     
 
-    const loadMore = async () => {
-      const query = { page, limit }
-      try {
-        setLoading(true)
-        const { data } = await fetchTasks(convertToURLQuery(query))
-        setData(data?.data);
-        const newItems = data?.data;
-        setItems(newItems);
-        setPage(page + 1);
-        setLoading(false)
-      } catch (error) {}
+  const loadMore = async () => {
+    const query = { page, limit }
+    try {
+      setLoading(true)
+      const { data } = await fetchTasks(convertToURLQuery(query))
+      setData(data?.data);
+      const newItems = data?.data;
+      setItems(newItems);
+      setPage(page + 1);
+      setLoading(false)
+    } catch (error) {}
+  };
+  
+  useEffect(() => {
+    loadMore()
+  }, [])
+  const handleScroll = () => {
+    const element = containerRef.current;
+    if (!element) return;
+    const { scrollTop, scrollHeight, clientHeight } = element;
+    if (scrollTop + clientHeight >= scrollHeight) {
+      loadMore();
+      setPage(currentPage += 1);
+    } else if (scrollTop === 0 && page > 1) {
+      setPage(page -= 1);
+    }
+  };
+  
+  useEffect(() => {
+    const element = containerRef.current;
+    if (element) element.addEventListener('scroll', handleScroll);
+    return () => {
+      if (element) element.removeEventListener('scroll', handleScroll);
     };
-    
-    useEffect(() => {
-      loadMore()
-    }, [])
-    const handleScroll = () => {
-      const element = containerRef.current;
-      if (!element) return;
-      const { scrollTop, scrollHeight, clientHeight } = element;
-      if (scrollTop + clientHeight >= scrollHeight) {
-        loadMore();
-        setPage(currentPage += 1);
-      } else if (scrollTop === 0 && page > 1) {
-        setPage(page -= 1);
-      }
-    };
-    
-    useEffect(() => {
-      const element = containerRef.current;
-      if (element) element.addEventListener('scroll', handleScroll);
-      return () => {
-        if (element) element.removeEventListener('scroll', handleScroll);
-      };
 
-    }, []);
-    const [isMobile, setIsMobile] = useState(false);
-    const [isModalOpen, setIsModalOpen] = useState(false);
+  }, []);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   
   React.useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 992px)");
@@ -83,13 +79,6 @@ function TasksSidebar(props) {
     props.onDataChanged(item);
   };
 
-  if (loading) {
-    return (
-      <div className={styles.spin}>
-        <Loader size="large" />
-      </div>
-    );
-  }
   return (
     <div className={styles.main_div} ref={containerRef}>
     { items.length > 0 ? (
