@@ -32,7 +32,16 @@ export default class User extends BaseModel {
   public bio: string
 
   @column()
-  public profilePictureUrl: string
+  public website: string
+
+  @column()
+  public city: string
+
+  @column()
+  public country: string
+
+  @column()
+  public profileImagePath: string
 
   @column()
   public socialMediaLinks: string

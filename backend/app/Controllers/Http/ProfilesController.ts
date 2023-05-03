@@ -22,6 +22,7 @@ export default class ProfilesController {
         const userId = auth.user?.id
         const profile = await User.findOrFail(userId)
         const updateProfile = request.body()
+        delete updateProfile['email']
         profile.merge(updateProfile)
 
         profile.save()
