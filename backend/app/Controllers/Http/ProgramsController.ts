@@ -4,9 +4,10 @@ import Program from 'App/Models/Program'
 export default class ArchivesController {
   public async index({ request, response }: HttpContextContract) {
     try {
-      const { page, limit } = request.qs()
+      const { page, limit, search } = request.qs()
       const programs = await Program.query()
         .where('is_archive', false)
+        .andWhere('name', 'like', `%${search || ''}%`)
         .orderBy('id', 'desc')
         .paginate(page || 1, limit || 10)
 
@@ -79,10 +80,11 @@ export default class ArchivesController {
 
   public async allArchive({ request, response }: HttpContextContract) {
     try {
-      const { page, limit } = request.qs()
+      const { page, limit, search } = request.qs()
       const programs = await Program.query()
         .where('is_archive', true)
-        .orderBy('created_at', 'desc')
+        .andWhere('name', 'like', `%${search || ''}%`)
+        .orderBy('id', 'desc')
         .paginate(page || 1, limit || 10)
 
       response.ok(programs)
