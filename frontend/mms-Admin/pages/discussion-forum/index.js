@@ -10,6 +10,8 @@ import usePostFetch from "../../hooks/usePostFetch";
 import { useStateValue } from "store/context";
 import { Loader } from "components/Loader";
 import { fetchPosts } from "../api/forum";
+import { useRouter } from "next/router";
+
 
 function DiscussionForum() {
   const [newTopic, setNewTopic] = useState(false);
@@ -20,11 +22,13 @@ function DiscussionForum() {
   // const { data, error, loading, hasMore } = usePostFetch(pageNumber,success);
   const { state, dispatch } = useStateValue();
   const observer = useRef();
-
+const router = useRouter()
   const [data, setData] = useState([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
   const [hasMore, setHasMore] = useState(true);
+
+   
 
   useEffect(() => {
     fetchPosts(pageNumber)
@@ -38,12 +42,12 @@ function DiscussionForum() {
         if (!res.data.posts?.meta?.next_page_url) {
           setHasMore(false);
         }
-      })
+      }) 
       .catch((e) => {
         setError(true);
         setLoading(false);
       });
-  }, [pageNumber, success]);
+  }, [pageNumber]);
 
   const lastPostElementRef = useCallback(
     (node) => {
@@ -124,6 +128,7 @@ function DiscussionForum() {
           height={"165px"}
           isModalOpen={success}
           setIsModalOpen={setSuccess}
+          success
         />
       )}
     </>

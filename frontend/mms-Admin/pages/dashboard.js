@@ -12,7 +12,7 @@ import styles from "styles/admin/dashboard.module.scss";
 import Tasks from "components/admin/dashboard/Tasks";
 
 let stats = [
-  {
+  { 
     title: "Mentors",
     total: 0,
     icon: "Person",

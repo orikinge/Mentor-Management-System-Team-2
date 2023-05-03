@@ -20,3 +20,11 @@ export const createComment = async (id, payload) => {
   const url = "/comment/" + id;
   return await http.post(url, payload);
 };
+
+//edit post
+
+export const editPost = async (id, payload) => {
+  const url = "/post/" + id;
+
+  return await http.put(url, payload);
+};

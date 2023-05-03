@@ -7,9 +7,19 @@ import { useRouter } from "next/router";
 import getUserRole from "../utils/getUserRole.js";
 import Link from "next/link";
 import moment from "moment";
+import { EditPostModal } from "./EditPostModal";
+import { useEffect, useState } from "react";
+import SuccessMessage from "./SuccessMessage";
 
 export const PostCard = ({ data, fullPost, names }) => {
+  const [showEdit, setEdit] = useState(false);
+  const [success, setSuccess] = useState(false);
+
   const router = useRouter();
+  const handleEdit = (e, data) => {
+    e.preventDefault();
+    setEdit(true);
+  };
 
   const handleCommentsClick = (e, id, name) => {
     e.preventDefault();
@@ -46,8 +56,9 @@ export const PostCard = ({ data, fullPost, names }) => {
               <p className={styles.role}>{getUserRole(data?.user)}</p>
             </div>
           </div>
-
-          <Iconn name="Horizon" />
+          <div onClick={(e) => handleEdit(e, data)}>
+            <Iconn name="Horizon" />
+          </div>
         </Row>
 
         <Link
@@ -97,11 +108,35 @@ export const PostCard = ({ data, fullPost, names }) => {
               <span>
                 <Iconn name="Clock" />
               </span>
-              <span className={styles.clock}>{moment(data.created_at).fromNow(true)}</span>
+              <span className={styles.clock}>
+                {moment(data.created_at).fromNow(true)}
+              </span>
             </div>
           </Col>
         </Row>
       </Card>
+
+      {showEdit && (
+        <EditPostModal
+          newTopic={showEdit}
+          setNewTopic={setEdit}
+          data={data}
+          // setPosts={setPosts}
+          // posts={posts}
+          setSuccess={setSuccess}
+        />
+      )}
+      {success && (
+        <SuccessMessage
+          image={"/assets/images/success.png"}
+          message={"Post Updated Successfully"}
+          width={"220px"}
+          height={"165px"}
+          isModalOpen={success}
+          setIsModalOpen={setSuccess}
+          reloadPage={data?.id}
+        />
+      )}
     </Row>
   );
 };

@@ -5,25 +5,31 @@ import styles from "./componentStyles/splashscreen.module.css";
 import { CustomButton } from "./formInputs/CustomInput";
 import { useRouter } from "next/router";
 
-
 function SuccessMessage({
   image,
   message,
   isModalOpen,
   setIsModalOpen,
-  redirectLogin
+  redirectLogin,
+  reloadPage,
+  success
 }) {
-  
-  const router = useRouter()
-  
-  const handleOk = () => {
-    if(redirectLogin){
-      setIsModalOpen(false);
-      router.push("/login")
-    }
-    else{
-      setIsModalOpen(false);
+  const router = useRouter();
 
+  const handleOk = () => {
+    if (redirectLogin) {
+      setIsModalOpen(false);
+      router.push("/login");
+    } else {
+      setIsModalOpen(false);
+    }
+
+    if (reloadPage) {
+      router.reload();
+    }
+
+    if (success) {
+      router.reload();
     }
   };
 
