@@ -15,7 +15,7 @@ export default class AuthenticationController {
     } catch (error) {
       response.unauthorized({ message: 'Invalid Credentials', status: 'Error', error })
     }
-  }
+  } 
 
   async forgetPassword({ request }: HttpContextContract) {
     try {

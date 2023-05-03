@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from "react";
 import styles from "./componentStyles/tasksidebar.module.css";
 import Icon from "./Icon";
 import TasksModal from "./TasksModal";
-import axios from '../pages/api/axios';
-import moment from 'moment';
+import axios from "../pages/api/axios";
+import moment from "moment";
 import { useLogin } from '../hooks/useLogin';
 import { fetchTasks } from "pages/api/task";
 import { Loader } from "components/Loader";
@@ -130,29 +130,27 @@ function TasksSidebar(props) {
         ))
       ) : (
         <>
-        <div className={styles.side_container} onClick={handleClick}>
-        <div className={styles.side_div_logo}>
-        <Icon
-        icon={"/assets/images/task.svg"}
-        width={"40px"}
-        height={"40px"}
-        />
-        </div>
-        <div className={styles.side_div_item}>
-        <p>
-          Room Library article write...
-        </p>
-        <div className={styles.side_div_item_div}>
-            <Icon
-            icon={"/assets/images/ClockLogo.svg"}
-            width={"16.5px"}
-            height={"16.5px"}
-            className={styles.side_div_item_icon}
-            />
-            <div className={styles.side_div_item_date}>3 days from now</div>
-        </div>
-        </div>
-        </div>
+          <div className={styles.side_container} onClick={handleClick}>
+            <div className={styles.side_div_logo}>
+              <Icon
+                icon={"/assets/images/task.svg"}
+                width={"40px"}
+                height={"40px"}
+              />
+            </div>
+            <div className={styles.side_div_item}>
+              <p>Room Library article write...</p>
+              <div className={styles.side_div_item_div}>
+                <Icon
+                  icon={"/assets/images/ClockLogo.svg"}
+                  width={"16.5px"}
+                  height={"16.5px"}
+                  className={styles.side_div_item_icon}
+                />
+                <div className={styles.side_div_item_date}>3 days from now</div>
+              </div>
+            </div>
+          </div>
         </>
       )
     }

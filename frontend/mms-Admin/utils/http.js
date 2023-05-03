@@ -6,12 +6,12 @@ import {
   get_profile,
   set_profile,
   support_request,
+  create_post,
 } from "./urls";
 
 //login
 export async function postLogin({ email, password }) {
-  
-   try {
+  try {
     const response = await axios.post(login_url, {
       email: email,
       password: password,
@@ -47,16 +47,13 @@ export async function passwordForgot({ email }) {
 }
 
 export async function newPassword({ password, token }) {
-  
   try {
     const response = await axios.post(reset_password, {
       password: password,
       token: token,
     });
     return response;
-  } 
-  
-  catch (err) {
+  } catch (err) {
     if (typeof err.response.data.message !== "undefined") {
       let errObj = {
         status: err.response.status,
@@ -130,7 +127,8 @@ export async function supportRequest(token, supportData) {
       {
         ...supportData,
       },
-      { headers: {
+      {
+        headers: {
           Authorization: "Bearer " + token,
         },
       },
@@ -146,5 +144,66 @@ export async function supportRequest(token, supportData) {
 
       return errObj;
     }
+  }
+}
+
+//gets posts
+//get all posts and display - paginate
+//get 1 post and display
+//edit post
+//comment on post
+//edit comment
+
+export async function createPost(token, fileList, postData) {
+  try {
+    console.log("file lists");
+    console.log(fileList);
+    console.log(token);
+    console.log("post data");
+    console.log(postData);
+    console.log("token", token);
+    const formData = new FormData();
+    fileList.forEach((file) => {
+      console.log("files");
+      console.log(file);
+      formData.append("image_url[]", file);
+    });
+    formData.append("data", JSON.stringify(postData));
+    
+
+    console.log(formData);
+
+    for (let key of formData.entries()) {
+      console.log(key);
+    }
+
+    console.log("****************************");
+    console.log("****************************");
+
+    const response = await axios.post(
+      create_post,
+      {
+        ...formData
+      },
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      },
+    );
+
+    console.log("inside the function");
+    console.log(response);
+    return response;
+  } catch (err) {
+    // if (typeof err.response.data.message !== "undefined") {
+    //   let errObj = {
+    //     status: err.response.status,
+    //     message: err.response.data.message,
+    //   };
+
+    // return errObj;
+    // }
+    console.log(err);
   }
 }

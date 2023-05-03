@@ -8,7 +8,7 @@ import styles from "../componentStyles/login.module.css";
 import { postLogin } from "utils/http";
 import { useRouter } from "next/router";
 import { validateInputs } from "../../utils/validateInputs";
-import { useLogin } from '../../hooks/useLogin'
+import { useLogin } from "../../hooks/useLogin";
 
 const Login = ({ showPassword, setShowPassword }) => {
   const [loading, setLoading] = useState(false);
@@ -16,19 +16,13 @@ const Login = ({ showPassword, setShowPassword }) => {
     email: "",
     password: "",
   });
-  const {setToken, token} = useLogin()
+  const { setToken, token } = useLogin();
 
 
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState("");
   const router = useRouter();
   const { data, status } = useSession();
-
-  useEffect(() => {
-    if (token) {
-      router.push("/dashboard");
-    }
-  }, []);
 
   const handleOnchange = (e) => {
     e.preventDefault();
@@ -49,15 +43,17 @@ const Login = ({ showPassword, setShowPassword }) => {
 
         if (response.status === 200) {
           setToken(response.data.token.token);
-          localStorage.setItem("userid", JSON.stringify(response.data.user.id));
-          router.push("/dashboard");
+          console.log("here we are");
+          router.back()
         }
 
         if (response.status === 401 || response.status === 400) {
           setMessage(response.message);
         }
         setLoading(false);
-      } catch (e) {}
+      } catch (e) {
+        setMessage(response.message);
+      }
     }
   };
 
@@ -72,6 +68,7 @@ const Login = ({ showPassword, setShowPassword }) => {
         <div>
           <p className={styles.welcome_header}>Welcome!</p>
           <p className={styles.login_text}>Login to continue</p>
+          <p className={styles.error}>{message}</p>
         </div>
         <Input
           className={[styles.login_input, styles.login_input_margin]}
@@ -98,7 +95,7 @@ const Login = ({ showPassword, setShowPassword }) => {
             onClick={handleSubmit}
             className={styles.login_button}
             loading={loading}>
-              Login
+            Login
           </Button>
         </div>
         <p

@@ -220,7 +220,7 @@ function General() {
             </div>
             <Input
               name="github"
-              value={sMedia.github}
+              value={sMedia?.github}
               onChange={handleSocials}
               className={styles.input_border}
             />
@@ -240,7 +240,7 @@ function General() {
             </div>
             <Input
               name="instagram"
-              value={sMedia.instagram}
+              value={sMedia?.instagram}
               onChange={handleSocials}
               className={styles.input_border}
             />
@@ -263,7 +263,7 @@ function General() {
             </div>
             <Input
               name="linkedin"
-              value={sMedia.linkedin}
+              value={sMedia?.linkedin}
               onChange={handleSocials}
               className={styles.input_border}
             />
@@ -283,7 +283,7 @@ function General() {
             </div>
             <Input
               name="twitter"
-              value={sMedia.twitter}
+              value={sMedia?.twitter}
               onChange={handleSocials}
               className={styles.input_border}
             />
