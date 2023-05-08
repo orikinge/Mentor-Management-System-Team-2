@@ -35,7 +35,7 @@ export default class User extends BaseModel {
   public website: string
 
   @column()
-  public city: string
+  public a
 
   @column()
   public country: string

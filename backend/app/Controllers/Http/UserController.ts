@@ -3,7 +3,7 @@ import User from 'App/Models/User'
 import Roles from 'App/Enums/Roles'
 
 export default class AuthenticationController {
-  public async getAllUsers({ auth, request, response }: HttpContextContract) {
+  async getAllUsers({ auth, request, response }: HttpContextContract) {
     const user = auth.user
 
     if (!user) {
@@ -26,7 +26,7 @@ export default class AuthenticationController {
     return { status: 'success', message: 'Fetched all user successful', users }
   }
 
-  public async getAllMentors({ auth, response }: HttpContextContract) {
+  async getAllMentors({ auth, response }: HttpContextContract) {
     const user = auth.user
     if (!user || !user.isAdmin) {
       response.unauthorized({ message: 'You are not authorized to access this resource.' })
@@ -38,7 +38,7 @@ export default class AuthenticationController {
     return { status: 'success', message: 'Fetched all mentors successful', mentors }
   }
 
-  public async getAllMentorManagers({ auth, response }: HttpContextContract) {
+  async getAllMentorManagers({ auth, response }: HttpContextContract) {
     const user = auth.user
     if (!user || !user.isAdmin) {
       response.unauthorized({ message: 'You are not authorized to access this resource.' })

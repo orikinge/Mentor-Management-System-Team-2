@@ -13,11 +13,13 @@ export default class Message extends BaseModel {
   public recipientId: number
 
   @column()
-  public body: string
+  public message: string
 
   @column()
   public channelName: string
 
+  @column()
+  public imageUrl: string
   
   @column.dateTime()
   public sentAt: DateTime

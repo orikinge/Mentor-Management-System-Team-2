@@ -2,7 +2,7 @@ import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
 import Faq from 'App/Models/Faq'
 
 export default class extends BaseSeeder {
-  public async run() {
+  public async kkkk() {
     // Write your database queries inside the run method
     await Faq.createMany([
       {

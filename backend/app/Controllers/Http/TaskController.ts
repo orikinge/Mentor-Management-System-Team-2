@@ -13,17 +13,25 @@ export default class TaskController {
       return response.unauthorized({ message: 'You are not authorized to perform this action' })
     }
 
-    const { title, description, meta, startDate, endDate, typeOfReport, mentors, mentorManagers } =
-      request.only([
-        'title',
-        'description',
-        'meta',
-        'startDate',
-        'endDate',
-        'typeOfReport',
-        'mentors',
-        'mentorManagers',
-      ])
+    const {
+      title,
+      description,
+      meta,
+      startDate,
+      endDate,
+      typeOfReport,
+      mentors,
+      mentorManagers,
+    } = request.only([
+      'title',
+      'description',
+      'meta',
+      'startDate',
+      'endDate',
+      'typeOfReport',
+      'mentors',
+      'mentorManagers',
+    ])
 
     try {
       const task = await Database.transaction(async (trx) => {
@@ -83,17 +91,25 @@ export default class TaskController {
       return response.unauthorized({ message: 'You are not authorized to perform this action' })
     }
 
-    const { title, description, meta, startDate, endDate, typeOfReport, mentors, mentorManagers } =
-      request.only([
-        'title',
-        'description',
-        'meta',
-        'startDate',
-        'endDate',
-        'typeOfReport',
-        'mentors',
-        'mentorManagers',
-      ])
+    const {
+      title,
+      description,
+      meta,
+      startDate,
+      endDate,
+      typeOfReport,
+      mentors,
+      mentorManagers,
+    } = request.only([
+      'title',
+      'description',
+      'meta',
+      'startDate',
+      'endDate',
+      'typeOfReport',
+      'mentors',
+      'mentorManagers',
+    ])
 
     const taskId = params.taskId
 
@@ -159,6 +175,7 @@ export default class TaskController {
       .where('id', taskId)
       .preload('mentors')
       .preload('mentorManagers')
+      .preload('taskReports')
       .preload('user', (query) => {
         query.select(['firstName', 'lastName'])
       })
@@ -190,6 +207,14 @@ export default class TaskController {
         firstName: mentorManager.firstName,
         lastName: mentorManager.lastName,
       })),
+      reports: task.taskReports?.map((report) => ({
+        id: report.id,
+        achievement: report.achievement,
+        blocker: report.blocker,
+        recommendation: report.recommendation,
+        createdAt: report.createdAt,
+        updatedAt: report.updatedAt,
+      })),
       mentorCount: task.mentors.length,
       mentorManagerCount: task.mentorManagers.length,
     }
@@ -203,10 +228,17 @@ export default class TaskController {
       return response.unauthorized({ message: 'You are not authorized to perform this action' })
     }
 
-    const { page, limit } = request.qs()
+    const { page, limit, search } = request.qs()
 
     try {
       const tasks = await Task.query()
+        .where((query) => {
+          if (search) {
+            query
+              .whereRaw('LOWER(title) LIKE ?', [`%${search.toLowerCase()}%`])
+              .orWhereRaw('LOWER(description) LIKE ?', [`%${search.toLowerCase()}%`])
+          }
+        })
         .preload('user')
         .preload('mentors')
         .preload('mentorManagers')
@@ -288,5 +320,16 @@ export default class TaskController {
     } catch (error) {
       return response.status(500).send({ message: 'Error deleting task' })
     }
+  }
+
+  async searchTask({ request, response }: HttpContextContract) {
+    const query = request.input('search')
+
+    const res = await Task.query()
+      .whereLike('title', `%${query.replaceAll("'", '')}%`)
+      .orWhereLike('description', `%${query.replaceAll("'", '')}%`)
+      .select('*')
+
+    return response.ok(res)
   }
 }

@@ -41,6 +41,20 @@ Route.group(() => {
   }).prefix('user')
 
   Route.group(() => {
+    Route.get('/', 'MentorController.getAllMentors')
+    Route.get('/:mentorId/tasks', 'MentorController.getMentorTask')
+    Route.delete('/delete/:mentorId', 'MentorController.deleteAMentor')
+    Route.delete('/:taskId/:mentorId', 'MentorController.removeMentorFromTask')
+  }).prefix('mentor')
+
+  Route.group(() => {
+    Route.get('/', 'MentorManagerController.getAllMentorManagers')
+    Route.get('/:mentorManagerId/tasks', 'MentorManagerController.getMentorManagerTask')
+    Route.delete('/delete/:mentorManagerId', 'MentorManagerController.deleteAMentorManager')
+    Route.delete('/:taskId/:mentorManagerId', 'MentorManagerController.removeMentorManagerFromTask')
+  }).prefix('mentor-manager')
+
+  Route.group(() => {
     Route.get('/:channelName', 'ChatController.getAllChat')
     Route.post('/channel', 'ChatController.authChatChannel')
     Route.post('/', 'ChatController.authChatUser')
@@ -61,6 +75,7 @@ Route.group(() => {
     Route.post('/', 'TaskController.create')
     Route.put('/:taskId', 'TaskController.update')
     Route.get('/:taskId', 'TaskController.show')
+    Route.get('/search', 'TaskController.searchTask')
     Route.delete('/delete/:taskId', 'TaskController.delete')
   })
     .prefix('task')
@@ -72,14 +87,14 @@ Route.group(() => {
     Route.get('/:reportId', 'TaskReportController.getReport')
     Route.get('/:reportId/pdf', 'TaskReportController.downloadReportPDF')
     Route.post('/:reportId/pdf', 'TaskReportController.shareReport')
-    Route.delete('/:reportId', 'TaskReportController.deleteReport')
+    Route.delete('/delete/:reportId', 'TaskReportController.deleteReport')
   }).prefix('task-reports')
 
   Route.group(() => {
     Route.get('/', 'PostController.getAllPosts')
     Route.post('/', 'PostController.createPost')
     Route.put('/:postId', 'PostController.updatePost')
-    Route.delete('/:postId', 'PostController.deletePost')
+    Route.delete('/delete/:postId', 'PostController.deletePost')
     Route.get('/:postId', 'PostController.getPostWithComments')
   }).prefix('post')
 

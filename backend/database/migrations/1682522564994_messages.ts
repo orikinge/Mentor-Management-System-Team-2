@@ -8,8 +8,9 @@ export default class extends BaseSchema {
       table.increments('id').primary()
       table.integer('sender_id').unsigned().references('id').inTable('users').onDelete('cascade')
       table.integer('recipient_id').unsigned().references('id').inTable('users').onDelete('cascade')
-      table.text('body').notNullable()
+      table.text('message').nullable()
       table.text('channel_name').notNullable()
+      table.text('image_url').nullable()
       table.timestamp('sent_at', { useTz: true })
 
       /**
