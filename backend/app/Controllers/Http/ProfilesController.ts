@@ -23,6 +23,7 @@ export default class ProfilesController {
         const profile = await User.findOrFail(userId)
         const updateProfile = request.body()
         delete updateProfile['email']
+        delete updateProfile['roleId']
         profile.merge(updateProfile)
 
         profile.save()
@@ -34,7 +35,12 @@ export default class ProfilesController {
     }
   }
 
-  async delete({ params, response }: HttpContextContract) {
+  async delete({ auth, params, response }: HttpContextContract) {
+    const user = auth.user
+    if(!user || !user.isAdmin) {
+      response.unauthorized({message: 'You are not authorized to access this resource.'})
+      return
+    }
     try {
       const profile = await User.findOrFail(params.userId)
       profile.deletedAt = DateTime.local()

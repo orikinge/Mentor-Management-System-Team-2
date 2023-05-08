@@ -36,7 +36,8 @@ export default class AuthenticationController {
     }
     const mentors = await User.query()
       .where('roleId', Roles.MENTOR)
-      .select(['id', 'firstName', 'lastName'])
+      .whereNull('deleted_at')
+      .select(['id', 'firstName', 'lastName', 'roleId'])
     return { status: 'success', message: 'Fetched all mentors successful', mentors }
   }
 
@@ -48,7 +49,8 @@ export default class AuthenticationController {
     }
     const mentorManagers = await User.query()
       .where('roleId', Roles.MENTOR_MANAGER)
-      .select(['id', 'firstName', 'lastName'])
+      .whereNull('deleted_at')
+      .select(['id', 'firstName', 'lastName', 'roleId'])
     return { status: 'success', message: 'Fetched all mentor mangers successful', mentorManagers }
   }
 
