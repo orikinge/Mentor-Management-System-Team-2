@@ -3,7 +3,7 @@ import Post from 'App/Models/Post'
 import { schema } from '@ioc:Adonis/Core/Validator'
 
 export default class PostsController {
-  public async createPost({ auth, request, response }: HttpContextContract) {
+  async createPost({ auth, request, response }: HttpContextContract) {
     const user = auth.user
     if (!user) {
       return response.unauthorized({ error: 'You must be logged in to create a post' })
@@ -31,7 +31,7 @@ export default class PostsController {
     return response.created({ status: 'success', message: 'Post successfully created', post })
   }
 
-  public async updatePost({ auth, params, request, response }: HttpContextContract) {
+  async updatePost({ auth, params, request, response }: HttpContextContract) {
     const user = auth.user
     if (!user) {
       return response.unauthorized({ error: 'You must be logged in to create a report' })
@@ -77,7 +77,7 @@ export default class PostsController {
       .json({ status: 'success', message: 'Post updated successfully', post })
   }
 
-  public async getAllPosts({ auth, request, response }: HttpContextContract) {
+  async getAllPosts({ auth, request, response }: HttpContextContract) {
     const user = auth.user
     if (!user) {
       return response.unauthorized({ error: 'You must be logged in to create a report' })
@@ -98,7 +98,7 @@ export default class PostsController {
     return response.ok({ status: 'success', message: 'Posts fetched successfully', posts })
   }
 
-  public async getPostWithComments({ auth, params, response }: HttpContextContract) {
+  async getPostWithComments({ auth, params, response }: HttpContextContract) {
     const user = auth.user
     if (!user) {
       return response.unauthorized({ error: 'You must be logged in to create a report' })
@@ -126,7 +126,7 @@ export default class PostsController {
     })
   }
 
-  public async deletePost({ auth, params, response }: HttpContextContract) {
+  async deletePost({ auth, params, response }: HttpContextContract) {
     const user = auth.user
     if (!user) {
       return response.unauthorized({ error: 'You must be logged in to create a report' })

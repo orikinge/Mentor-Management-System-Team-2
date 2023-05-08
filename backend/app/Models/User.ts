@@ -1,13 +1,27 @@
 import { DateTime } from 'luxon'
 import Hash from '@ioc:Adonis/Core/Hash'
-import { column, beforeSave, BaseModel, hasMany, HasMany, belongsTo, BelongsTo, computed, manyToMany, ManyToMany} from '@ioc:Adonis/Lucid/Orm'
+import {
+  column,
+  beforeSave,
+  BaseModel,
+  hasMany,
+  HasMany,
+  belongsTo,
+  BelongsTo,
+  computed,
+  manyToMany,
+  ManyToMany,
+} from '@ioc:Adonis/Lucid/Orm'
 import Role from './Role'
 import Roles from 'App/Enums/Roles'
 import TaskMentor from './TaskMentor'
 import TaskMentorManager from './TaskMentorManager'
 import Task from './Task'
 import TaskReport from './TaskReport'
-
+import TechnicalProficiency from './TechnicalProficiency'
+import PreviousProgram from './PreviousProgram'
+import PreviousRole from './PreviousRole'
+import Document from './Document'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -46,29 +60,53 @@ export default class User extends BaseModel {
   @column()
   public socialMediaLinks: string
 
+  @column()
+  public newProgramAvailability: string
+
+  @column()
+  public programOfInterest: string
+
+  @column()
+  public beenAMentor: string
+
+  @column()
+  public yearsOfTechnical: string
+
   @column({ serializeAs: null })
   public password: string
 
   @hasMany(() => TaskMentor, {
     foreignKey: 'userId',
-    localKey: 'id'
+    localKey: 'id',
   })
   public taskMentors: HasMany<typeof TaskMentor>
 
   @hasMany(() => TaskMentorManager, {
     foreignKey: 'userId',
-    localKey: 'id'
+    localKey: 'id',
   })
   public taskMentorManagers: HasMany<typeof TaskMentorManager>
 
   @hasMany(() => TaskReport, {
     foreignKey: 'userId',
-    localKey: 'id'
+    localKey: 'id',
   })
   public taskReport: HasMany<typeof TaskReport>
 
   @hasMany(() => User, { foreignKey: 'id' })
   public userId: HasMany<typeof User>
+
+  @hasMany(() => TechnicalProficiency)
+  public technicalProficiencies: HasMany<typeof TechnicalProficiency>
+
+  @hasMany(() => PreviousProgram)
+  public previousPrograms: HasMany<typeof PreviousProgram>
+
+  @hasMany(() => PreviousRole)
+  public previousRoles: HasMany<typeof PreviousRole>
+
+  @hasMany(() => Document)
+  public documents: HasMany<typeof Document>
 
   @column()
   public rememberMeToken: string | null
@@ -90,12 +128,12 @@ export default class User extends BaseModel {
     pivotForeignKey: 'user_id',
     pivotRelatedForeignKey: 'task_id',
     localKey: 'id',
-    relatedKey: 'id'
+    relatedKey: 'id',
   })
   public tasks: ManyToMany<typeof Task>
 
   @computed()
-  public get isAdmin(){
+  public get isAdmin() {
     return this.roleId === Roles.ADMIN
   }
 

@@ -3,11 +3,23 @@ import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 export default class extends BaseSchema {
   protected tableName = 'task_mentors'
 
-  public async up () {
+  public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id').primary()
-      table.integer('task_id').unsigned().references('id').inTable('tasks').onDelete('CASCADE').notNullable()
-      table.integer('mentor_id').unsigned().references('id').inTable('users').onDelete('CASCADE').notNullable()
+      table
+        .integer('task_id')
+        .unsigned()
+        .references('id')
+        .inTable('tasks')
+        .onDelete('CASCADE')
+        .notNullable()
+      table
+        .integer('mentor_id')
+        .unsigned()
+        .references('id')
+        .inTable('users')
+        .onDelete('CASCADE')
+        .notNullable()
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
@@ -17,7 +29,7 @@ export default class extends BaseSchema {
     })
   }
 
-  public async down () {
+  public async down() {
     this.schema.dropTable(this.tableName)
   }
 }
