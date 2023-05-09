@@ -13,8 +13,24 @@ export default class MentorManagerController {
     }
     const mentorManagers = await User.query()
       .where('roleId', Roles.MENTOR_MANAGER)
-      .select(['id', 'firstName', 'lastName'])
+      .whereNull('deleted_at')
+      .select('*')
     return { status: 'success', message: 'Fetched all mentor mangers successful', mentorManagers }
+  }
+
+  async search({ request, response }: HttpContextContract) {
+    const query = request.input('query')
+
+    const res = await User.query()
+      .where((queryBuilder) => {
+        queryBuilder
+          .whereRaw('lower(first_name) like ?', [`%${query.toLowerCase()}%`])
+          .orWhereRaw('lower(last_name) like ?', [`%${query.toLowerCase()}%`])
+      })
+      .where('roleId', Roles.MENTOR_MANAGER)
+      .whereNull('deleted_at')
+
+    return response.ok(res)
   }
 
   async getMentorManagerTask({ auth, params, request, response }: HttpContextContract) {

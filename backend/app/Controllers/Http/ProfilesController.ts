@@ -55,9 +55,11 @@ export default class ProfilesController {
     const query = request.input('query')
 
     const res = await User.query()
-      .whereLike('first_name', `%${query.replaceAll("'", '')}%`)
-      .orWhereLike('last_name', `%${query.replaceAll("'", '')}%`)
-      .select('*')
+    .where((queryBuilder) => {
+      queryBuilder
+        .whereRaw('lower(first_name) like ?', [`%${query.toLowerCase()}%`])
+        .orWhereRaw('lower(last_name) like ?', [`%${query.toLowerCase()}%`])
+    })
 
     return response.ok(res)
   }
