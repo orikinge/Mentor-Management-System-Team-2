@@ -1,10 +1,7 @@
-import BroadcastMessage from "../components/Layout/BroadcastMessage"
-const Broadcast = () => {
-    return(
-        <>
-        <BroadcastMessage />
-        </>
-    )
-}
+import BroadcastMessageScreen from "../components/Layout/BroadcastMessage";
 
-export default Broadcast
+const Broadcast = () => {
+  return <BroadcastMessageScreen />;
+};
+
+export default Broadcast;

@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import WithAuth from "../components/WithAuth";
 import { SessionProvider } from "next-auth/react";
@@ -11,18 +12,23 @@ import { styles } from "styles/_app";
 import { useLogin } from "../hooks/useLogin";
 import { useEffect } from "react";
 
+const queryClient = new QueryClient();
+
 const App = ({ Component, pageProps, session }) => {
+  const getLayout = Component.getLayout || ((page) => page);
   const { token } = useLogin();
   const router = useRouter();
 
   if (!token) {
     return (
       <>
-        <ContextProvider>
-          <SessionProvider session={session}>
-            <Login />
-          </SessionProvider>
-        </ContextProvider>
+        <QueryClientProvider client={queryClient}>
+          <ContextProvider>
+            <SessionProvider session={session}>
+              <Login />
+            </SessionProvider>
+          </ContextProvider>
+        </QueryClientProvider>
       </>
     );
   }
@@ -34,14 +40,16 @@ const App = ({ Component, pageProps, session }) => {
         <link rel="icon" href="/favicon.png" />
         <style>{styles}</style>
       </Head>
-      <ContextProvider>
-        <SessionProvider session={session}>
-          <WithAuth
-            component={<Component {...pageProps} />}
-            route={router?.route}
-          />
-        </SessionProvider>
-      </ContextProvider>
+      <QueryClientProvider client={queryClient}>
+        <ContextProvider>
+          <SessionProvider session={session}>
+            <WithAuth
+              component={getLayout(<Component {...pageProps} />)}
+              route={router?.route}
+            />
+          </SessionProvider>
+        </ContextProvider>
+      </QueryClientProvider>
     </>
   );
 };

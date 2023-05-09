@@ -4,6 +4,7 @@
 
 .app_layout_content {
   margin: 32px 24px;
+  background-color: white;
 }
 
 .archive_input {
@@ -16,7 +17,6 @@
 
 .div_input {
   display: flex;
-  margin-bottom: 1rem;
 }
 
 .task_icon {

@@ -1,7 +1,12 @@
 import http from "services/axios";
 export const fetchMentors = async () => {
-  const url = "/user/mentors";
-  return await http.get(url);
+  const response = await http.get("/mentor");
+  return response.data.mentors.data;
+};
+
+export const fetchMentorTasks = async (id) => {
+  const response = await http.get(`/mentor/${id}/tasks`);
+  return response.data.data;
 };
 
 export const fetchMentorManagers = async () => {

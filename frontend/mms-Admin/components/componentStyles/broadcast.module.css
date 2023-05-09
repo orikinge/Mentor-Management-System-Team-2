@@ -1,14 +1,23 @@
 .broadcast_panel {
-  margin: auto;
-  height: 34rem;
   width: 100%;
   padding: 2rem;
   font-family: "Mukta", sans-serif;
+  background-color: white;
+}
+
+.broadcast_panel div:not(:last-child) {
+  margin-bottom: 24px;
+}
+
+.mention_input {
+  height: 48px;
+  display: flex;
+  align-items: center;
 }
 
 .close_btn {
-  float: right;
-  padding: 10px 40px 35px 40px;
+  padding: 10px 40px;
+  height: fit-content;
   background-color: #058b94;
   color: white;
   font-size: 16px;
@@ -21,44 +30,46 @@
 }
 
 .broadcast_title {
-  font-weight: 600;
+  font-weight: 500;
   font-size: 24px;
-  top: 40%;
-  position: relative;
-}
-
-.broadcast_header {
-  margin-bottom: 1rem;
+  margin: 0;
 }
 
 .broadcast_board {
   background-color: #f7feff;
   color: black;
+  padding: 2rem 1rem;
+  border-radius: 20px;
+}
+
+.messages_container {
   height: 30rem;
-  margin: 0.5rem 0 0.5rem 0;
-  padding: 1rem 2rem 1rem 2rem;
   overflow: auto;
   scrollbar-width: thin;
   scrollbar-color: #06b9c6;
+  padding: 1rem 2rem;
 }
 
 .broadcast_message {
-  top: 3.8rem;
-  left: 3.1rem;
-  right: 3.1rem;
-  margin-bottom: 1rem;
   font-size: 20px;
+}
+
+div.broadcast_message:not(:last-child) {
+  margin-bottom: 2rem;
 }
 
 .text_message {
   background-color: #e6fdfe;
-  padding: 1.5rem 1.56rem 0 1.56rem;
-  margin-top: -0.5rem;
-  border-radius: 0.5rem;
+  padding: 1.5rem 1rem 0.5rem 1rem;
+  border-radius: 10px;
 }
 
 .message {
+  padding: 0;
   color: #4d4d4d;
+  line-height: 28px;
+  font-size: 18px;
+  font-weight: 300;
 }
 
 .sender {
@@ -69,7 +80,6 @@
 
 .time {
   font-size: 12px;
-  float: right;
   color: #4d4d4d;
 }
 
@@ -93,18 +103,20 @@
 }
 
 /* Chrome, Edge, and Safari */
-.broadcast_board::-webkit-scrollbar {
-  width: 0.5rem;
+.messages_container::-webkit-scrollbar {
+  width: 6px;
 }
 
-.broadcast_board::-webkit-scrollbar-track {
+.messages_container::-webkit-scrollbar-track {
   background: #f7feff;
+  cursor: pointer;
 }
 
-.broadcast_board::-webkit-scrollbar-thumb {
+.messages_container::-webkit-scrollbar-thumb {
   background-color: #06b9c6;
   border-radius: 20px;
   border: 1px solid #06b9c6;
+  cursor: pointer;
 }
 
 .textarea {
@@ -116,11 +128,15 @@
   border: 1px solid #e6fdfe;
   background: #f7feff;
   top: 1.5rem;
+  height: 48px;
+  display: flex;
+  align-items: center;
 }
 
-.text_area_btn {
-  padding-top: 1.6rem;
-  flex: 0 0 5%;
+.message_input {
+  height: 48px;
+  background-color: #f7feff;
+  border: 0;
 }
 
 .emoji_picker {

@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from "react";
 import { Layout, Menu, Typography } from "antd";
 import { Icon } from "components/Icon/Icon";
 import { SidebarMenu } from "components/SidebarMenu";
 
 import { clsx } from "clsx";
 import styles from "styles/sidebar.module.scss";
-import { GlobalContext } from '../../../Context/store'
+import { GlobalContext } from "../../../Context/store";
 
 const SideBar = ({ user }) => {
   const router = useRouter();
@@ -19,12 +19,12 @@ const SideBar = ({ user }) => {
   const { Paragraph } = Typography;
 
   useEffect(() => {
-    const pathname = router.pathname?.split('/')[1];
+    const pathname = router.pathname?.split("/")[1];
     if (router.asPath === "/logout") {
       logout();
       return router.push("/login");
     }
-    setActiveMenu(pathname)
+    setActiveMenu(pathname);
 
     return () => {};
   }, [router.pathname]);
@@ -41,17 +41,17 @@ const SideBar = ({ user }) => {
       onBreakpoint={() => {}}
       onCollapse={(collapsed, type) => {}}>
       <Typography className={styles.welcome_text_header}>
-        <p className={styles.welcome_text}>
-          Hi, {state?.name}
-        </p>
+        <p className={styles.welcome_text}>Hi, {state?.name}</p>
         <Paragraph>{state?.role}</Paragraph>
       </Typography>
-      <Menu
-        className={styles.sidebar_menu}>
+      <Menu className={styles.sidebar_menu}>
         {SidebarMenu.map((menu, idx) => (
           <Menu.Item
             key={`${idx}`}
-            className={clsx(styles.item, menu.path.match(activeMenu) ? styles.active : "")}
+            className={clsx(
+              styles.item,
+              menu.path.match(activeMenu) ? styles.active : "",
+            )}
             icon={<Icon name={`${menu.icon}`} />}>
             <Link href={`${menu.path}`}>
               <a className={styles.link}>{menu.name}</a>

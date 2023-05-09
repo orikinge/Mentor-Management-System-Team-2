@@ -1,0 +1,16 @@
+.mentors_list {
+  max-height: 75vh;
+  overflow-y: scroll;
+
+  > div:not(:last-child) {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.mentors_list_header {
+  margin: 1rem 0;
+}
+
+.title {
+  font-size: 1.5rem;
+}

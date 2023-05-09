@@ -1,0 +1,35 @@
+.wrapper {
+  border-radius: 5px;
+  background-color: #fff;
+  border: 1px solid #f2f2f2;
+  display: flex;
+  padding: 1rem;
+}
+
+.user_img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 1rem;
+  background-image: url("../../../public/assets/images/user_img.jpg");
+  background-position: center;
+  background-size: contain;
+}
+
+.user_name,
+.date_joined {
+  margin: 0;
+  padding: 0;
+}
+
+.user_name {
+  font-size: 1.2rem;
+  color: #141414;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.date_joined {
+  font-size: 0.8rem;
+  color: #4d4d4d;
+}

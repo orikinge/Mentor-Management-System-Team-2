@@ -1,4 +1,4 @@
-import Broadcast from "../../Messages/Broadcast";
+import BroadcastMessage from "../../Messages/Broadcast";
 import { useState, useRef, useCallback, useEffect } from "react";
 import BroadcastHeader from "components/NavHeader/BroadcastHeader";
 import { Mentions } from "antd";
@@ -10,7 +10,7 @@ import {
   searchUsers,
 } from "../../../pages/api/broadcast";
 
-const BroadcastMessage = () => {
+const BroadcastMessageScreen = () => {
   const [messages, setMessages] = useState();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
@@ -59,44 +59,46 @@ const BroadcastMessage = () => {
   };
 
   const mentionValue = (value) => {
-    return value.split("@")[0]
-  }
+    return value.split("@")[0];
+  };
+
   return (
-    <>
-      <div>
-        <div className={styles.broadcast_panel}>
-          <BroadcastHeader />
-          <Mentions
-            loading={loading}
-            options={users.map(({ id, first_name, last_name, email }) => ({
-              key: mentionValue(email),
-              value: mentionValue(email),
-              className: "antd-demo-dynamic-option",
-              label: (
-                <>
-                  <span>{`${first_name} ${last_name}`}</span>
-                </>
-              ),
-            }))}
-            onSearch={onSearch}
-          />
-          <div className={styles.broadcast_board}>
-            {messages &&
-              messages.map((message) => (
-                <Broadcast
-                  key={message.id}
-                  message={message.message}
-                  sender={`${message.user.first_name} ${message.user.last_name}`}
-                  time={message.created_at.split("T")[1].split(".")[0]}
-                  date={message.created_at.split("T")[0]}
-                />
-              ))}
-          </div>
-          <BroadcastTextArea handleSubmit={handleSubmit} />
+    <div className={styles.broadcast_panel}>
+      <BroadcastHeader />
+      <Mentions
+        className={styles.mention_input}
+        loading={loading}
+        options={users.map(({ id, first_name, last_name, email }) => ({
+          key: mentionValue(email),
+          value: mentionValue(email),
+          className: "antd-demo-dynamic-option",
+          label: (
+            <>
+              <span>{`${first_name} ${last_name}`}</span>
+            </>
+          ),
+        }))}
+        onSearch={onSearch}
+        rows={1}
+        placeholder="Select recepient"
+      />
+      <div className={styles.broadcast_board}>
+        <div className={styles.messages_container}>
+          {messages?.map((message) => (
+            <BroadcastMessage
+              key={message.id}
+              message={message.message}
+              sender={`${message.user.first_name} ${message.user.last_name}`}
+              time={message.created_at.split("T")[1].split(".")[0]}
+              date={message.created_at.split("T")[0]}
+            />
+          ))}
         </div>
       </div>
-    </>
+
+      <BroadcastTextArea handleSubmit={handleSubmit} />
+    </div>
   );
 };
 
-export default BroadcastMessage;
+export default BroadcastMessageScreen;

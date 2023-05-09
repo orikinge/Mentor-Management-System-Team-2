@@ -1,0 +1,47 @@
+.wrapper {
+  padding: 1rem 0;
+  overflow-y: scroll;
+  max-height: 62vh;
+}
+
+.task_title {
+  margin-bottom: 0.2rem;
+  font-size: 1.2rem;
+}
+
+.brief_description {
+  font-size: 0.8rem;
+  color: #808080;
+  margin-left: 1rem !important;
+}
+
+.title_area {
+  margin-left: 1rem;
+}
+
+.accordion_body {
+  padding: 1rem;
+  background-color: #f7feff;
+}
+
+.task_description {
+  color: #808080;
+  line-height: 1.5rem;
+}
+
+.task_stats {
+  background-color: #e6fdfe;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.report_stat,
+.stat_text {
+  margin-left: 1rem !important;
+}
+
+.number_of_reports {
+  font-size: 2rem;
+  margin: 0;
+  padding: 0;
+}

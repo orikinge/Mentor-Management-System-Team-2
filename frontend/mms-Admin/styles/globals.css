@@ -10,9 +10,58 @@ body {
 * {
   font-size: 16px;
   font-family: "Mukta", sans-serif;
+  box-sizing: border-box;
 }
 
 .logo-text {
   color: #fff;
   font-weight: 600;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-justify-center {
+  justify-content: center;
+}
+
+.flex-justify-end {
+  justify-content: flex-end;
+}
+
+.flex-align-end {
+  align-items: flex-end;
+}
+
+.flex-align-center {
+  align-items: center;
+}
+
+.flex-justify-between {
+  justify-content: space-between;
+}
+
+.flex-justify-around {
+  justify-content: space-around;
+}
+
+.flex-align-between {
+  align-items: space-between;
+}
+
+.gap-10 {
+  gap: 10px;
+}
+
+.relative {
+  position: relative;
 }
