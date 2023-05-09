@@ -22,6 +22,7 @@ import TechnicalProficiency from './TechnicalProficiency'
 import PreviousProgram from './PreviousProgram'
 import PreviousRole from './PreviousRole'
 import Document from './Document'
+import ProgramCertificate from './ProgramsCertificate'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -107,6 +108,9 @@ export default class User extends BaseModel {
 
   @hasMany(() => Document)
   public documents: HasMany<typeof Document>
+
+  @hasMany(() => ProgramCertificate)
+  public programCertificates: HasMany<typeof ProgramCertificate>
 
   @column()
   public rememberMeToken: string | null

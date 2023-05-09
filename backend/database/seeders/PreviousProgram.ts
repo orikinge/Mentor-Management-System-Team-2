@@ -2,7 +2,7 @@ import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
 import PreviousProgram from 'App/Models/PreviousProgram'
 
 export default class extends BaseSeeder {
-  public async run() {
+  public async eeee() {
     // Write your database queries inside the run method
     await PreviousProgram.createMany([
       {

@@ -87,20 +87,25 @@ export default class ChatController {
       return response.badRequest(error)
     }
   }
-  async getAllChat({ auth, response, request }: HttpContextContract) {
+  async getAllChat({ auth, response, params, request }: HttpContextContract) {
     try {
       const user = auth.user
       if (!user) {
         return response.unauthorized({ error: 'You must be logged in to chat' })
       }
-      const { senderId, recipientId, page, limit } = request.all()
+      const { senderId, recipientId } = params
+      const { page, limit } = request.qs()
 
       const messages = await Message.query()
-        .whereBetween('sender_id', [senderId, recipientId])
-        .andWhereBetween('recipient_id', [recipientId, senderId])
+        .where((builder) => {
+          builder
+            .where('sender_id', senderId)
+            .andWhere('recipient_id', recipientId)
+            .orWhere('sender_id', recipientId)
+            .andWhere('recipient_id', senderId)
+        })
         .orderBy('created_at', 'asc')
         .paginate(page || 1, limit || 10)
-
       if (!messages) {
         return response.notFound({
           message: `No previous conversations`,
@@ -113,6 +118,7 @@ export default class ChatController {
         messages,
       })
     } catch (error) {
+      console.log(error)
       return response.badRequest(error)
     }
   }

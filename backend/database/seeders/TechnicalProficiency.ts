@@ -2,7 +2,7 @@ import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
 import TechnicalProficiency from 'App/Models/TechnicalProficiency'
 
 export default class extends BaseSeeder {
-  public async run () {
+  public async bbbb () {
     // Write your database queries inside the run method
     await TechnicalProficiency.createMany([
       {

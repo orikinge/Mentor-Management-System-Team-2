@@ -42,6 +42,10 @@ Route.group(() => {
   }).prefix('user')
 
   Route.group(() => {
+    Route.get('/:userId/certificates', 'ProgramsCertificateController.getUserCertificates')
+  }).prefix('certificate')
+
+  Route.group(() => {
     Route.get('/', 'MentorController.getAllMentors')
     Route.get('/search', 'MentorController.search')
     Route.get('/:mentorId/tasks', 'MentorController.getMentorTask')
@@ -58,7 +62,7 @@ Route.group(() => {
   }).prefix('mentor-manager')
 
   Route.group(() => {
-    Route.get('/:channelName', 'ChatController.getAllChat')
+    Route.get('/:senderId/:recipientId', 'ChatController.getAllChat')
     Route.post('/channel', 'ChatController.authChatChannel')
     Route.post('/', 'ChatController.authChatUser')
     Route.post('/:receiverId', 'ChatController.saveChat')

@@ -16,10 +16,6 @@ class Ws {
         origin: '*',
       },
     })
-  
-    this.io.on('connection', ()=>{
-      console.log("connected")
-    })
   }
 }
 

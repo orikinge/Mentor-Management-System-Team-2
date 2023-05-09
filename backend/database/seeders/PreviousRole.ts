@@ -2,7 +2,7 @@ import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
 import PreviousRole from 'App/Models/PreviousRole'
 
 export default class extends BaseSeeder {
-  public async run () {
+  public async dddd () {
     // Write your database queries inside the run method
     await PreviousRole.createMany([
       {
