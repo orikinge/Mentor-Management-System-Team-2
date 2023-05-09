@@ -5,7 +5,7 @@ import { Row, Col, Input, Button } from "antd";
 import SplashScreen from "../components/SplashScreen";
 import SuccessMessage from "../components/SuccessMessage";
 import styles from "../components/componentStyles/passwordreset.module.css";
-import myStyles from "../styles/admin/login.module.css";
+import myStyles from "../styles/admin/login.module.scss";
 import { newPassword } from "utils/http";
 import { validateInputs } from "../utils/validateInputs";
 

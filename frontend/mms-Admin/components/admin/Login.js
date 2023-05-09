@@ -17,8 +17,6 @@ const Login = ({ showPassword, setShowPassword }) => {
     password: "",
   });
   const { setToken, token } = useLogin();
-   
-
 
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState("");
@@ -51,7 +49,9 @@ const Login = ({ showPassword, setShowPassword }) => {
           setMessage(response.message);
         }
         setLoading(false);
-      } catch (e) {}
+      } catch (e) {
+        setMessage(e.message);
+      }
     }
   };
 
