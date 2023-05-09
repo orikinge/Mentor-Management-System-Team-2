@@ -38,4 +38,5 @@ export default Env.rules({
   PUSHER_APP_SECRET: Env.schema.string(),
   PUSHER_APP_ID: Env.schema.string(),
   PUSHER_APP_CLUSTER: Env.schema.string(),
+  FRONTEND_URL_INVITATION: Env.schema.string(),
 })

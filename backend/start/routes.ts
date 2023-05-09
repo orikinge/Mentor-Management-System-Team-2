@@ -38,6 +38,7 @@ Route.group(() => {
     Route.get('/', 'UserController.getAllUsers')
     Route.get('/:userId/about', 'UserController.getAboutUser')
     Route.get('/mentor-managers', 'UserController.getAllMentorManagers')
+    Route.post('/invite', 'UserController.inviteUser')
     Route.post('/document', 'UserController.uploadDocument')
   }).prefix('user')
 

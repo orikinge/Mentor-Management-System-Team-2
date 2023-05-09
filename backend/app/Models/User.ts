@@ -111,6 +111,9 @@ export default class User extends BaseModel {
   @column()
   public rememberMeToken: string | null
 
+  @column()
+  public inviteCode: string | null
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
