@@ -47,7 +47,6 @@ Route.group(() => {
 
   Route.group(() => {
     Route.get('/', 'MentorController.getAllMentors')
-    Route.get('/search', 'MentorController.search')
     Route.get('/:mentorId/tasks', 'MentorController.getMentorTask')
     Route.delete('/delete/:mentorId', 'MentorController.deleteAMentor')
     Route.delete('/:taskId/:mentorId', 'MentorController.removeMentorFromTask')
@@ -55,7 +54,6 @@ Route.group(() => {
 
   Route.group(() => {
     Route.get('/', 'MentorManagerController.getAllMentorManagers')
-    Route.get('/search', 'MentorManagerController.search')
     Route.get('/:mentorManagerId/tasks', 'MentorManagerController.getMentorManagerTask')
     Route.delete('/delete/:mentorManagerId', 'MentorManagerController.deleteAMentorManager')
     Route.delete('/:taskId/:mentorManagerId', 'MentorManagerController.removeMentorManagerFromTask')
