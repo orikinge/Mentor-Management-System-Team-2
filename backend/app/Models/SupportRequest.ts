@@ -18,6 +18,9 @@ export default class SupportRequest extends BaseModel {
   @column()
   public body: string
 
+  @column()
+  public imageUrl: string
+
   @belongsTo(() => User)
   public user: BelongsTo<typeof User>
 
