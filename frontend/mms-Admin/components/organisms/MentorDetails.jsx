@@ -2,11 +2,12 @@ import { useRouter } from "next/router";
 import { Button } from "../atoms/Button";
 import { CustomTab } from "./CustomTab";
 import styles from "./styles/mentor_details.module.scss";
+import Image from "next/image";
 
 export const MentorDetails = ({ children }) => {
   const router = useRouter();
-  const { fullName, designation } = router.query;
-  const urlQuery = { fullName, designation };
+  const { fullName, designation, avatar } = router.query;
+  const urlQuery = { fullName, designation, avatar };
 
   const subPages = [
     {
@@ -43,8 +44,14 @@ export const MentorDetails = ({ children }) => {
     <>
       <div
         className={`flex flex-align-center flex-justify-between ${styles.wrapper}`}>
-        <div className="flex">
-          <div className={styles.user_img}></div>
+        <div className="flex gap-10">
+          <Image
+            width={90}
+            height={90}
+            src={avatar ? avatar : "/assets/images/user_img.svg"}
+            alt="User profile image"
+            className={styles.user_img}
+          />
           <div className="flex flex-justify-center flex-column">
             <h2 className={styles.user_name}>{`${fullName}`}</h2>
             <p className={styles.designation}>{designation}</p>

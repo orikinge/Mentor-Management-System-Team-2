@@ -1,10 +1,19 @@
 import React from "react";
 import { Button } from "../atoms/Button";
 import styles from "./styles/mentor_list_item.module.scss";
-import Link from "next/link";
+import { format } from "date-fns";
+import Image from "next/image";
 
 export const MentorListItem = ({ data }) => {
-  const { first_name, last_name, id, isAdmin, isMentorManager } = data;
+  const {
+    first_name,
+    last_name,
+    id,
+    isAdmin,
+    isMentorManager,
+    created_at,
+    profile_image_path,
+  } = data;
   const designation = getDesignation();
 
   const fullName = `${first_name} ${last_name}`;
@@ -17,9 +26,19 @@ export const MentorListItem = ({ data }) => {
   return (
     <div
       className={`flex flex-align-center flex-justify-between ${styles.wrapper}`}>
-      <div className="flex">
-        <UserAvatar />
-        <UserDetails name={fullName} />
+      <div className="flex gap-10">
+        <Image
+          width={60}
+          height={60}
+          src={
+            profile_image_path
+              ? profile_image_path
+              : "/assets/images/user_img.svg"
+          }
+          alt="User profile image"
+          className={styles.user_img}
+        />
+        <UserDetails name={fullName} createdAt={created_at} />
       </div>
 
       <Button
@@ -28,7 +47,11 @@ export const MentorListItem = ({ data }) => {
         size="small"
         url={{
           pathname: `/mentors/about/${id}`,
-          query: { fullName, designation },
+          query: {
+            fullName,
+            designation,
+            avatar: profile_image_path,
+          },
         }}>
         View
       </Button>
@@ -41,7 +64,9 @@ function UserDetails({ name, createdAt }) {
     <div className="flex flex-justify-center flex-column">
       {/* TODO: We need to reset padding and margin for p and all heading elements to avoid resetting them everywhere */}
       <p className={styles.user_name}>{name}</p>
-      <p className={styles.date_joined}>Added 0ct. 10 2022</p>
+      <p className={styles.date_joined}>
+        Added {format(new Date(createdAt), "MMM. dd yyyy")}
+      </p>
     </div>
   );
 }
