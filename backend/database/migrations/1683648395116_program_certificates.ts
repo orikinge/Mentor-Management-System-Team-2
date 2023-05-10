@@ -13,9 +13,10 @@ export default class extends BaseSchema {
         .inTable('users')
         .onDelete('CASCADE')
         .notNullable()
-      table.string('program_name').notNullable()
+      table.string('program_name_url').notNullable()
       table.string('certification').notNullable()
       table.string('logo_url').nullable()
+      table.string('signature').nullable()
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

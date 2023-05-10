@@ -10,13 +10,16 @@ export default class ProgramCertificate extends BaseModel {
   public userId: number
 
   @column()
-  public programName: string
-  
+  public programNameUrl: string
+
   @column()
   public certification: string
 
   @column()
   public logoUrl: string
+
+  @column()
+  public signature: string
 
   @belongsTo(() => User)
   public user: BelongsTo<typeof User>
