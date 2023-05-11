@@ -153,7 +153,7 @@ export default class ArchivesController {
       .whereHas('program', (query) => {
         query
           .where('is_archive', false)
-          .where('name', 'like', `%${search || ''}`)
+          .where('name', 'like', `%${search || ''}%`)
           .orderBy('id', 'desc')
       })
       .where('user_id', params.id)

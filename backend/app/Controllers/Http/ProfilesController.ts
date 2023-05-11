@@ -32,7 +32,7 @@ export default class ProfilesController {
             website: schema.string.optional(),
             city: schema.string.optional(),
             country: schema.string.optional(),
-            socialMediaLinks: schema.string.optional(),
+            socialMediaLinks: schema.object.optional().anyMembers(),
           }),
         })
 
@@ -40,7 +40,7 @@ export default class ProfilesController {
         profile.website = payload.website ?? profile.website
         profile.city = payload.city ?? profile.city
         profile.country = payload.country ?? profile.country
-        profile.socialMediaLinks = payload.socialMediaLinks ?? profile.socialMediaLinks
+        profile.socialMediaLinks = JSON.stringify(payload.socialMediaLinks) ?? profile.socialMediaLinks
 
         if(payload.profileImagePath){
           const profileImage = request.file('profileImagePath')
@@ -48,6 +48,11 @@ export default class ProfilesController {
           profile.profileImagePath = profileImage?.fileName ?? profile.profileImagePath
         }
 
+        profile.bio = payload.bio ?? profile.bio
+        profile.website = payload.website ?? profile.website
+        profile.city = payload.city ?? profile.city
+        profile.country = payload.country ?? profile.country
+        profile.socialMediaLinks = JSON.stringify(payload.socialMediaLinks) ?? profile.socialMediaLinks
         await profile.save()
 
         return response.ok({ status: 'success', message: 'Profile successfully updated', profile })
