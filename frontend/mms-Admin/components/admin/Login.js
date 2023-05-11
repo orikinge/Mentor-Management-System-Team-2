@@ -16,7 +16,9 @@ const Login = ({ showPassword, setShowPassword }) => {
     email: "",
     password: "",
   });
-  const { setToken, token } = useLogin();
+  const { setToken, token, setUser } = useLogin();
+   
+
 
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState("");
@@ -42,6 +44,7 @@ const Login = ({ showPassword, setShowPassword }) => {
 
         if (response.status === 200) {
           setToken(response.data.token.token);
+          setUser(response.data)
           router.push("/profile");
         }
 

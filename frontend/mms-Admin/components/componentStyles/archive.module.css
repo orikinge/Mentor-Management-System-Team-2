@@ -1,12 +1,5 @@
 .main_sub_div {
-  box-sizing: border-box;
-  max-width: 100%;
-  height: 71px;
-  background: #fff;
-  border: 1px solid #e6e6e6;
-  border-radius: 5px;
   display: flex;
-  margin-bottom: 1rem;
 }
 
 .main_sub_icon {
@@ -18,7 +11,7 @@
  display: block;
 } */
 
-.main_sub_content p {
+.main_sub_content h1 {
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
@@ -30,7 +23,7 @@
 
 .main_sub_content_timeicon {
   padding-left: 35px;
-  padding-top: 10px;
+  padding-top: 20px;
 }
 
 .main_sub_content_time {
@@ -39,12 +32,12 @@
   font-weight: 400;
   font-size: 12px;
   color: #808080;
-  padding-top: 13px;
+  padding-top: 24px;
 }
 
 .main_sub_content_timeicon1 {
   padding-left: 65px;
-  padding-top: 10px;
+  padding-top: 20px;
 }
 
 .main_sub_con_main {
@@ -58,4 +51,17 @@
 
 .main_sub_content_archor {
   padding-left: 20rem;
+}
+
+.wrapper {
+  padding: 1rem 0;
+  overflow-y: scroll;
+  max-height: 62vh;
+}
+
+.search {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  width: 50%;
+  margin-left: 25rem;
 }

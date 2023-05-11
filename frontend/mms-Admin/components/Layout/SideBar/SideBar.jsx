@@ -4,14 +4,17 @@ import { useContext, useEffect, useState } from "react";
 import { Layout, Menu, Typography } from "antd";
 import { Icon } from "components/Icon/Icon";
 import { SidebarMenu } from "components/SidebarMenu";
+import { useLogin } from "../../../hooks/useLogin";
+
 
 import { clsx } from "clsx";
 import styles from "styles/sidebar.module.scss";
 import { GlobalContext } from "../../../Context/store";
 
-const SideBar = ({ user }) => {
+const SideBar = ({  }) => {
   const router = useRouter();
-  const [state, setState] = useState({ name: "James", role: "Admin" });
+  const {user} = useLogin()
+  const [state, setState] = useState({ name: user?.first_name, role: "Admin" });
   const [activeMenu, setActiveMenu] = useState("");
   const { isMobileSideBarOpen, logout } = useContext(GlobalContext);
 

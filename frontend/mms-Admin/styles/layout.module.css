@@ -25,6 +25,18 @@
   width: 100%;
 }
 
+.mentor_icon {
+  display: flex;
+  margin-top: 0.5rem;
+  width: 20%;
+}
+
+.mentor_icon1 {
+  display: flex;
+  margin-top: 0.5rem;
+  width: 50%;
+}
+
 .task_search_icon {
   margin-right: 2rem;
   cursor: pointer;
@@ -36,6 +48,11 @@
 
 .task_create {
   margin-right: 4rem;
+}
+
+.task_memtor {
+  margin-right: 1rem;
+  display: flex;
 }
 
 .taskbutton {
@@ -52,14 +69,63 @@
   line-height: 27px;
 }
 
+.mentorbutton {
+  background-color: #058b94;
+  border-color: none;
+  box-shadow: none;
+  border-radius: 10px;
+  padding: 2px 15px;
+  color: #fff;
+  margin-top: 0.5rem;
+  border: none;
+  margin-left: 0.9rem;
+}
+
+.mentorbutton1 {
+  color: #058b94;
+  border-color: #058b94;
+  box-shadow: none;
+  border-radius: 10px;
+  padding: 2px 15px;
+  margin-top: 0.5rem;
+}
+
+.task_memtor > .mentorbutton1:hover {
+  color: #058b94;
+  border-color: #058b94;
+}
+
+.task_memtor > .mentorbutton:hover {
+  border-color: #058b94;
+  color: #fff;
+}
+
 .msg_search_icon {
   margin-left: 5rem;
+}
+
+@media (max-width: 1024px) {
+  .task_memtor {
+    display: block;
+  }
+
+  .mentorbutton {
+    margin-left: 1.6rem;
+  }
+
+  .mentor_icon {
+    width: 50%;
+  }
 }
 
 @media (max-width: 992px) {
   .task_create,
   .task_icon {
     margin-right: 0;
+    margin-top: 1rem;
+  }
+
+  .archive_input {
     margin-top: 1rem;
   }
 
@@ -72,5 +138,27 @@
 
   .msg_search_icon {
     margin-left: 0;
+  }
+
+  .mentor_icon {
+    margin-top: 1.4rem;
+  }
+
+  .task_memtor {
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .div_input {
+    display: block;
+  }
+
+  .task_memtor {
+    display: flex;
+  }
+
+  .mentorbutton {
+    margin-left: 0.2rem;
   }
 }

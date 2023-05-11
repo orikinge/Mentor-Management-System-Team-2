@@ -1,38 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { Modal } from "antd";
 import styles from "./componentStyles/splashscreen.module.css";
 import { CustomButton } from "./formInputs/CustomInput";
 import toast from 'react-hot-toast';
-import { deleteTask } from "pages/api/task";
-function DeleteTask({
+import { deleteMentor } from "pages/api/mentor";
+function DeleteMentor({
   image,
   message,
   width,
   height,
   isDeleteOpen,
   setIsDeleteOpen,
-  data
+  mentorId
 }) {
   const handleClose = () => {
     setIsDeleteOpen(false);
   };
   const [loading, setLoading] = useState(false);
 
-  const DeleteTask = async (taskId) => {
+
+  const DeleteMentor = async (mentorId) => {
     setLoading(true);
     try {
-      const response = await deleteTask(taskId);
+      const response = await deleteMentor(mentorId);
       if (response.status === 200) {
-        toast.success(response?.data?.message);
-        setIsDeleteOpen(false);
+        toast.success(response?.data?.statusText);
+        setIsDeleteOpen();
         setLoading(false);
-        useEffect(() => {
-        }, [response.status === 200])
       }
     } catch (e) {
       console.error(e);
-      toast.error(error);
+      toast.error(e);
     } finally {
       setIsDeleteOpen(false);
       setLoading(false);
@@ -59,7 +58,7 @@ function DeleteTask({
           </div>
           <div>
             <CustomButton onClick={handleClose} className={styles.modal_b1}>Undo</CustomButton>
-            <CustomButton onClick={()=> DeleteTask(data.id)} className={styles.modal_b2}>Done</CustomButton>
+            <CustomButton onClick={()=> DeleteMentor(mentorId)} className={styles.modal_b2}>Done</CustomButton>
           </div>
         </div>
       </Modal>
@@ -67,4 +66,4 @@ function DeleteTask({
   );
 }
 
-export default DeleteTask;
+export default DeleteMentor;

@@ -14,7 +14,7 @@ export const pusher = new Pusher({
 })
 
 export default class ChatController {
-  async authChatChannel({ auth, response, request }: HttpContextContract) {
+  public async authChatChannel({ auth, response, request }: HttpContextContract) {
     try {
       const user = auth.user
       if (!user) {
@@ -35,7 +35,7 @@ export default class ChatController {
       return response.badRequest(error)
     }
   }
-  async authChatUser({ auth, response, request }: HttpContextContract) {
+  public async authChatUser({ auth, response, request }: HttpContextContract) {
     try {
       const user = auth.user
       if (!user) {
@@ -54,7 +54,7 @@ export default class ChatController {
       return response.badRequest(error)
     }
   }
-  async saveChat({ auth, response, request }: HttpContextContract) {
+  public async saveChat({ auth, response, request }: HttpContextContract) {
     try {
       const user = auth.user
       if (!user) {
@@ -64,7 +64,7 @@ export default class ChatController {
         schema: schema.create({
           imageUrl: schema.file.optional({
             size: '2mb',
-            extnames: ['jpg', 'png'],
+            extnames: ['jpg', 'png', 'jpeg'],
           }),
           senderId: schema.number(),
           recipientId: schema.number(),

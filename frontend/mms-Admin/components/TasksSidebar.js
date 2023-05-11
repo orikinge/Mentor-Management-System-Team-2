@@ -3,8 +3,11 @@ import styles from "./componentStyles/tasksidebar.module.css";
 import Icon from "./Icon";
 import TasksModal from "./TasksModal";
 import moment from "moment";
-import { fetchTasks } from "pages/api/task";
-import { convertToURLQuery } from "utils/extractTitleFromUrl";
+import { useStateValue } from "store/context";
+// import { fetchTasks } from "pages/api/task";
+// import { useStateValue } from "store/context";
+// import { GlobalContextProvider } from "../Context/store";
+// import { convertToURLQuery } from "utils/extractTitleFromUrl";
 
 function TasksSidebar(props) {
   const [page, setPage] = useState(1);
@@ -13,35 +16,35 @@ function TasksSidebar(props) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false)
   const containerRef = useRef(null);
-    
+  const [ {taskSearch} ] = Object.values(useStateValue())
+  console.log(taskSearch)
 
   const loadMore = async () => {
     const query = { page, limit }
     try {
-      setLoading(true)
-      const { data } = await fetchTasks(convertToURLQuery(query))
-      setData(data?.data);
-      const newItems = data?.data;
-      setItems(newItems);
-      setPage(page + 1);
-      setLoading(false)
+      dispatch({
+        type: 'TASK_SEARCH',
+        payload: query
+      })
     } catch (error) {}
   };
+
   
   useEffect(() => {
     loadMore()
-  }, [])
+  }, [page])
+
   const handleScroll = () => {
     const element = containerRef.current;
     if (!element) return;
     const { scrollTop, scrollHeight, clientHeight } = element;
     if (scrollTop + clientHeight >= scrollHeight) {
-      loadMore();
-      setPage(currentPage += 1);
+      setPage(prevPage => prevPage + 1);
     } else if (scrollTop === 0 && page > 1) {
-      setPage(page -= 1);
+      setPage(prevPage => prevPage - 1);
     }
   };
+  
   
   useEffect(() => {
     const element = containerRef.current;
@@ -81,8 +84,8 @@ function TasksSidebar(props) {
 
   return (
     <div className={styles.main_div} ref={containerRef}>
-    { items.length > 0 ? (
-        items.map(item => (
+    { taskSearch?.data?.length > 0 ? (
+      taskSearch?.data?.map(item => (
         <>
         <div key={item.id} className={styles.side_container}>
             <div className={styles.side_div_logo} onClick={() => handleCombinedActions(item.id, item)}>

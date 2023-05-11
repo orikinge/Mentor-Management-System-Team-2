@@ -19,3 +19,8 @@ export const updateTask = async (id, payload) => {
   const url = "/task/" + id;
   return await http.put(url, payload);
 };
+
+export const deleteTask = async (taskId) => {
+  const url = "/task/delete/" + taskId;
+  return await http.delete(url);
+};

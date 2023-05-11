@@ -37,7 +37,6 @@ const initialSettings = {
   show_linkedin: false,
   show_twitter: false,
 };
-
 const Privacy = () => {
   const [settings, setSettings] = useState(initialSettings);
   const [modalOpen, setModalOpen] = useState(false);

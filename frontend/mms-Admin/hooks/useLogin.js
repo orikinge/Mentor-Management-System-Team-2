@@ -2,5 +2,6 @@ import { useLocalStorage } from 'usehooks-ts'
 
 export const useLogin = () =>  {
   const [token, setToken] = useLocalStorage('token', '')
-  return { token, setToken }
+  const [{user}, setUser] = useLocalStorage('user', '')
+  return { token, setToken, user, setUser }
 }

@@ -2,6 +2,13 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.module_header_span {
+  margin-top: 0.6rem;
+  display: inline-block;
+  margin-left: 2rem;
 }
 
 .module_header_title {

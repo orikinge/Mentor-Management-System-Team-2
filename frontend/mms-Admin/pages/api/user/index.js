@@ -23,3 +23,15 @@ export const updateUserProfile = async (payload) => {
   const url = "/profile";
   return await http.put(url, payload);
 };
+
+export const fetchUsers = async (query) => {
+  const url = "/user" + query;
+  return await http.get(url);
+};
+
+export const inviteMentor = async (payload) => {
+  const url = "/user/invite";
+  return await http.post(url, payload);
+};
+
+

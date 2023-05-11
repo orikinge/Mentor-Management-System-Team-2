@@ -1,4 +1,4 @@
-import { useContext, useReducer,createContext } from 'react';
+import { useContext, useReducer,createContext, useMemo } from 'react';
 import mainReducer from './providers/mainReducer';
 import initialState from './providers/initialState';
 
@@ -6,7 +6,7 @@ export const StateContext = createContext();
 
 const ContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(mainReducer, initialState);
-  const values = { state, dispatch };
+  const values = useMemo(() => ({ state, dispatch }), [state, dispatch]);
   return (
     <StateContext.Provider value={values}>
       {children}

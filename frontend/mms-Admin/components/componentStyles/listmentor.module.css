@@ -1,0 +1,96 @@
+.container {
+  border: 0;
+  height: 80vh;
+  overflow-y: scroll;
+}
+
+.gutter_box {
+  width: 100%;
+  height: 80px;
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+}
+
+.gutter_box_container {
+  display: flex;
+}
+
+.gutter_box_avatar {
+  margin-top: 1rem;
+  margin-left: 1rem;
+}
+
+.gutter_box_main {
+  margin-top: 1.3rem;
+  margin-left: 1rem;
+  display: flex;
+}
+
+.gutter_box_main_header {
+  font-weight: 600;
+  font-size: 20px;
+  color: #333;
+  height: 15px;
+}
+
+.gutter_box_main_p {
+  font-weight: 400;
+  font-size: 12px;
+  color: #808080;
+  height: 13px;
+}
+
+.gutter_box_main_span2,
+.gutter_box_main_span1 {
+  font-weight: 400;
+  font-size: 12px;
+  color: #4d4d4d;
+  background: #e6fdfe;
+  border-radius: 3px;
+  padding: 0 8px;
+}
+
+.gutter_box_main_span2 {
+  margin-left: 1rem;
+}
+
+.gutter_box_main_icon {
+  margin-left: 30rem;
+  display: flex;
+}
+
+.gutter_box_main_icon1 {
+  margin-bottom: 1rem;
+}
+
+.gutter_box_main_title {
+  display: flex;
+}
+
+@media (max-width: 1024px) {
+  .gutter_box_main_icon {
+    margin-left: 7rem;
+  }
+
+  .gutter_box_main_span2 {
+    margin-left: 0;
+  }
+}
+
+@media (min-width: 1280px) and (max-width: 1280px) {
+  .gutter_box_main_icon {
+    margin-left: 20rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .gutter_box_main_span1,
+  .gutter_box_main_span2 {
+    display: none;
+  }
+
+  .gutter_box_main_icon {
+    margin-left: 0;
+    display: block;
+  }
+}

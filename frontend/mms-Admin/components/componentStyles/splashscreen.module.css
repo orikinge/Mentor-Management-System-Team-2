@@ -51,3 +51,21 @@
   border: 1px solid #023c40;
   margin-right: 0.4rem;
 }
+
+.invite_input {
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.invite_input_name {
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.invite_input_name_first {
+  margin-right: 1rem;
+}
+
+.invite_input_name_btn {
+  margin-left: 4rem;
+}
