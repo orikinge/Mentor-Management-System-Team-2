@@ -2,34 +2,14 @@ import React from "react";
 import { ListItem } from "../../../components/atoms/ListItem";
 import { Icons } from "../../../components/atoms/Icons";
 import styles from "../../../styles/programs/reports.module.scss";
+import { PaginationWithFilter } from "../../../components/molecules/PaginationWithFilter";
 
 const Reports = () => {
   return (
     <div>
-      {/* TODO: Make this pagination component re-usable but filter and close icons will be conditional */}
       <div className="flex flex-justify-between flex-align-center">
         <h1 className={styles.page_title}>Reports</h1>
-        <div className={`flex flex-align-center gap-10`}>
-          <span className={`cursor-pointer`}>
-            <Icons name="double-backward" />
-          </span>
-          <span className={`cursor-pointer`}>
-            <Icons name="backward" />
-          </span>
-          <span>1 </span> - <span>10</span> of <span>20</span>
-          <span className={`cursor-pointer`}>
-            <Icons name="foward" />
-          </span>
-          <span className={`cursor-pointer`}>
-            <Icons name="double-foward" />
-          </span>
-          <span className="cursor-pointer">
-            <Icons name="filter" />
-          </span>
-          <span className={`cursor-pointer`}>
-            <Icons name="close" />
-          </span>
-        </div>
+        <PaginationWithFilter />
       </div>
       <div className={styles.program_reports}>
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => (
