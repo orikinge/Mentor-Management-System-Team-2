@@ -1,0 +1,23 @@
+.wrapper {
+  padding: 1rem 0;
+  overflow-y: scroll;
+  max-height: 62vh;
+}
+
+.task_title {
+  margin-bottom: 0.2rem;
+  font-size: 1.2rem;
+}
+
+.certificate_info {
+  width: 60%;
+  padding-bottom: 2rem;
+
+  > div {
+    margin-top: 2rem;
+  }
+}
+
+.download_format_options {
+  width: 80px;
+}

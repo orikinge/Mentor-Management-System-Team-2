@@ -12,9 +12,11 @@ export const Accordion = ({ header, body, footer, defaultOpen = false }) => {
       {open && (
         <div>
           <div className={styles.accordion_body}>{body}</div>
-          <div className={`flex flex-justify-end ${styles.accordion_footer}`}>
-            {footer}
-          </div>
+          {footer && (
+            <div className={`flex flex-justify-end ${styles.accordion_footer}`}>
+              {footer}
+            </div>
+          )}
         </div>
       )}
     </div>
