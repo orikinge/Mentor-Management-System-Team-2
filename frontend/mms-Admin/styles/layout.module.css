@@ -1,5 +1,7 @@
 .app_layout {
   background: #fff;
+  height: 100vh;
+  overflow-y: hidden;
 }
 
 .app_layout_content {

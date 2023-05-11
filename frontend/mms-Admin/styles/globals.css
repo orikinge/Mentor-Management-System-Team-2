@@ -62,6 +62,30 @@ body {
   gap: 10px;
 }
 
+.gap-16 {
+  gap: 16px;
+}
+
 .relative {
   position: relative;
+}
+
+.list_main_text {
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.list_sub_text {
+  color: #808080;
+  font-size: 0.8rem;
+  margin-bottom: 0;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.h-full {
+  height: 100%;
 }
