@@ -237,7 +237,7 @@ const AppLayout = ({ children }) => {
                         </CustomButton>
                       </span>
                      <Pagination
-                        total={mentorTotal?.total}
+                        total={mentorTotal?.total || 0}
                         currentPage={mentorPage}
                         onPageChange={handleMentorPageChange}
                       />

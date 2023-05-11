@@ -8,5 +8,5 @@ export const fetchPrograms = async () => {
 export  const getUserProgram = async (id, query) => {
   const response = await http.get(`/programs/user-programs/${id}` + query);
   console.log(response, "pp")
-  return response.data.data;
+  return response.data;
 }

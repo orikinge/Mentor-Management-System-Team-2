@@ -65,3 +65,26 @@
   width: 50%;
   margin-left: 25rem;
 }
+
+.program_description {
+  color: #808080;
+  line-height: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.program_stats {
+  background-color: #e6fdfe;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.program_stat,
+.program_stat >.stat_text {
+  margin-left: 1rem;
+}
+
+.number_of_programs {
+  font-size: 2rem;
+  margin: 0;
+  padding: 0;
+}
