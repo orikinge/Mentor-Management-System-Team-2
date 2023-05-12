@@ -6,6 +6,9 @@ import { fetchUsers } from "./api/user"
 import Icon from "../components/Icon";
 import NotificationIcon from '../components/NotificationIcon';
 import { convertToURLQuery } from "utils/extractTitleFromUrl";
+import  NoSSRWrapper from "../components/DisableSSR"
+
+
 // import SocketProvider from 'Context/socket';
 
 function Messages() {
@@ -65,6 +68,8 @@ function Messages() {
   };
 
   return (
+    <NoSSRWrapper>
+
     <div className={styles.main_div}>
         {!isMobile && (
             <div className={styles.side_div} ref={containerRef}>
@@ -162,6 +167,8 @@ function Messages() {
             </div>
         )}
     </div>
+    </NoSSRWrapper>
+
   );
 }
 

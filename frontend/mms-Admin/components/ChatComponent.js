@@ -8,6 +8,7 @@ import { authChatChannel, authChatUser, saveChat, getAllChat } from "pages/api/c
 import moment from "moment";
 import { useLogin } from '../hooks/useLogin';
 import { convertToURLQuery } from "utils/extractTitleFromUrl";
+import NoSSRWrapper from "../components/DisableSSR"
 
 
 
@@ -174,6 +175,7 @@ function ChatComponent({receiverId,isModelChatClose}) {
   }, [messages]);
 
   return (
+    <NoSSRWrapper>
     <div className={styles.main_container}>
       <div className={styles.chatBox}>
       {isMobile ? (
@@ -257,7 +259,11 @@ function ChatComponent({receiverId,isModelChatClose}) {
           </>
       </div>
     </div>
+    </NoSSRWrapper>
   )
 }
 
 export default ChatComponent
+
+
+
