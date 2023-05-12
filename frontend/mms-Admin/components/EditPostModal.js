@@ -65,7 +65,9 @@ export const EditPostModal = ({
       setMessage("");
 
       const formData = new FormData();
-      formData.append("imageUrl", file);
+      if (file) {
+        formData.append("imageUrl", file);
+      }
       formData.append("title", postData.title);
       formData.append("description", postData.description);
       formData.append("emoji", JSON.stringify(postData.emoji));
@@ -79,7 +81,11 @@ export const EditPostModal = ({
         setMessage(response.message);
       }
 
-      if ( response?.status === 401 || response?.status === 400 || response?.status === 403) {
+      if (
+        response?.status === 401 ||
+        response?.status === 400 ||
+        response?.status === 403
+      ) {
         setConfirmLoading(false);
         setMessage(response?.message);
         throw response;

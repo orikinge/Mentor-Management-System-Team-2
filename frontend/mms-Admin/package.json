@@ -31,6 +31,7 @@
     "next-auth": "^4.22.1",
     "pusher-js": "^8.0.2",
     "react": "^17.0.2",
+    "react-country-region-selector": "^3.6.1",
     "react-dom": "^17.0.2",
     "react-google-login": "^5.2.2",
     "react-hot-toast": "^2.4.0",

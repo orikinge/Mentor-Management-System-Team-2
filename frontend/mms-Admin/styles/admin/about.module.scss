@@ -170,3 +170,50 @@
   right: 0;
   margin: auto;
 }
+
+.about_container {
+  box-sizing: border-box;
+  margin-top: 20px;
+  width: 758px;
+  height: 652px;
+  border: 1px solid #E6E6E6;
+  border-radius: 10px;
+  padding: 10px 32px;
+
+
+}
+
+.title_mt {
+  margin-top: 17px;
+}
+
+.title_h4 {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 33px;
+  color: #333333;
+  margin-bottom: 15px
+}
+
+.text_desc {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 27px;
+  color: #808080;
+}
+
+.text_bold {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 33px;
+  color: #4d4d4d;
+}
+
+.bio {
+  box-sizing: border-box;
+  width: 688px;
+  background: #F7FEFF;
+  border: 1px solid #E6FDFE;
+  padding:10px 20px
+
+}

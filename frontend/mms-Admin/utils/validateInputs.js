@@ -14,5 +14,6 @@ export function validateInputs(loginData) {
     return false;
   }
 
+
   return true;
 }

@@ -45,7 +45,9 @@ const Login = ({ showPassword, setShowPassword }) => {
         if (response.status === 200) {
           setToken(response.data.token.token);
           setUser(response.data)
-          router.push("/profile");
+          setMessage("Logged In Successfully");
+
+          router.push("/");
         }
 
         if (response.status === 401 || response.status === 400) {

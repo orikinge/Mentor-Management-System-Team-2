@@ -6,11 +6,11 @@ import {
   CustomInput,
   CustomTextArea,
 } from "./formInputs/CustomInput";
-
 import styles from "../styles/admin/discussionForum.module.css";
 import { Icon } from "./Icon/Icon";
 import EmojiPicker from "emoji-picker-react";
 import { createPost } from "pages/api/forum";
+import NoSSRWrapper from "./DisableSSR";
 
 export const CustomFormModal = ({
   newTopic,
@@ -28,7 +28,7 @@ export const CustomFormModal = ({
     description: "",
     emoji: "happy face",
   });
-  const [message, setMessage]= useState("")
+  const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -63,10 +63,12 @@ export const CustomFormModal = ({
       }
 
       setConfirmLoading(true);
-      setMessage("")
+      setMessage("");
 
       const formData = new FormData();
-      formData.append("imageUrl", file);
+      if (file) {
+        formData.append("imageUrl", file);
+      }
       formData.append("title", postData.title);
       formData.append("description", postData.description);
       formData.append("emoji", JSON.stringify(postData.emoji));
@@ -86,14 +88,12 @@ export const CustomFormModal = ({
         response?.status === 403
       ) {
         setConfirmLoading(false);
-        setMessage(response?.message)
+        setMessage(response?.message);
         throw response;
       }
     } catch (e) {
       setConfirmLoading(false);
-      setMessage(e.message)
-      
-
+      setMessage(e.message);
     }
   };
   const handleCancel = () => {
@@ -102,6 +102,7 @@ export const CustomFormModal = ({
 
   return (
     <>
+    <NoSSRWrapper>
       <Modal
         className={styles.modal}
         open={newTopic}
@@ -115,10 +116,9 @@ export const CustomFormModal = ({
         confirmLoading={confirmLoading}
         closable={false}>
         <Row className={styles.modal_container}>
-        {message && <p>{message}</p>}
+          {message && <p>{message}</p>}
 
           <Row className={styles.header_row}>
-
             <div className={styles.topic}>New Topic</div>
             <div style={{ cursor: "pointer" }} onClick={handleCancel}>
               <Icon name="Close" />
@@ -151,7 +151,7 @@ export const CustomFormModal = ({
                   <Icon name="SmileyFace" />
                 </Col>
 
-                <Upload  {...props} >
+                <Upload {...props}>
                   <Icon name="Pin" color="#058B94" />
                 </Upload>
               </Row>
@@ -173,6 +173,7 @@ export const CustomFormModal = ({
           </Row>
         </Row>
       </Modal>
+      </NoSSRWrapper>
     </>
   );
 };

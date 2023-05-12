@@ -4,6 +4,8 @@ import { CustomInput, Label } from "components/formInputs/CustomInput";
 import { Icon } from "components/Icon/Icon";
 import { CustomFormModal } from "components/CustomModal";
 import SuccessMessage from "components/SuccessMessage";
+import NoSSRWrapper from "components/DisableSSR"
+
 import { PostCard } from "components/Cards";
 import styles from "styles/admin/discussionForum.module.css";
 import usePostFetch from "../../hooks/usePostFetch";
@@ -77,7 +79,8 @@ const router = useRouter()
   }
 
   return (
-    <>
+    <NoSSRWrapper>
+
       <Row span={24} className={styles.container}>
         <Label title="Discussion Forum" weight="bold" />
         <Row className={styles.mb} onClick={handleClick}>
@@ -131,7 +134,9 @@ const router = useRouter()
           success
         />
       )}
-    </>
+      
+    </NoSSRWrapper>
+    
   );
 }
 

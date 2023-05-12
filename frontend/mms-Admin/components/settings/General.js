@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Icon from "../Icon";
 import styles from "../componentStyles/general.module.css";
-import { Avatar, Col, Input, Row, Select, Button } from "antd";
+import { Avatar, Col, Input, Row, Select, Button, Upload } from "antd";
 import { CustomInput, CustomTextArea } from "components/formInputs/CustomInput";
 import { validateInputs } from "../../utils/validateInputs";
 import SuccessMessage from "../SuccessMessage";
 import { fetchUserProfile, updateUserProfile } from "pages/api/user";
+import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 
 const initialProfileData = {
   first_name: "",
@@ -16,6 +17,7 @@ const initialProfileData = {
   country: "",
   city: "",
 };
+let image_url = process.env.NEXT_PUBLIC_BASE_URL + "/uploads/upload_file/";
 
 function General() {
   const [loading, setLoading] = useState(false);
@@ -28,33 +30,61 @@ function General() {
     linkedin: "",
   });
   const [success, setSuccess] = useState(false);
+  const [country, setCountry] = useState("");
+  const [region, setRegion] = useState("");
+  const [file, setFile] = useState();
+  const [uploading, setUploading] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
+
+  const props = {
+    onRemove: (file) => {
+      // const index = fileList.indexOf(file);
+      // const newFileList = fileList.slice();
+      // newFileList.splice(index, 1);
+      setFile("");
+    },
+    beforeUpload: (file) => {
+      setFile(file);
+      setImageUrl(URL.createObjectURL(file));
+
+      return false;
+    },
+    file,
+  };
 
   useEffect(() => {
     (async () => {
       const profile = await fetchUserProfile();
       setProfileData(profile?.data || {});
       setSmedia(profile?.data?.social_media_links);
+      setCountry(profile?.data?.country);
+      setRegion(profile?.data?.city);
     })();
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    console.log(file);
     setLoading(true);
     const valid = validateInputs(profileData);
     if (valid) {
+      const formData = new FormData();
+
       try {
-        const { bio, email, first_name, last_name, website, country, city } =
-          profileData;
-        const response = await updateUserProfile({
-          bio,
-          email,
-          first_name,
-          last_name,
-          website,
-          country,
-          city,
-          social_media_links: sMedia,
-        });
+        const { bio, website } = profileData;
+        if (file) {
+          console.log("here");
+          formData.append("profileImagePath", file);
+        }
+        formData.append("bio", bio);
+        formData.append("website", website);
+        formData.append("social_media_links", JSON.stringify(sMedia));
+        formData.append("country", country);
+        formData.append("city", region);
+       
+
+        const response = await updateUserProfile(formData);
         console.log(response);
         if (response.status === 200) {
           setSuccess(true);
@@ -93,20 +123,28 @@ function General() {
       <Row>
         <div className={styles.sub_container}>
           <Avatar
-            size={73}
+            size={80}
             icon={
-              <Icon
-                icon={"/assets/images/admin_avatar.png"}
-                width={"73px"}
-                height={"73px"}
+              <img
+                src={
+                  imageUrl
+                    ? imageUrl
+                    : image_url + profileData?.profile_image_path
+                }
+              
               />
             }
           />
+
           <div className={styles.profile_text_container}>
             <p className={styles.set_pic_text}>Set Profile Picture</p>
-            <Button className={styles.small_button}>
-              <div className={styles.button_text}>Upload Picture</div>
-            </Button>
+            <Upload {...props} showUploadList={false}>
+              <Button className={styles.small_button}>
+                <div loading={uploading} className={styles.button_text}>
+                  Upload Picture
+                </div>
+              </Button>
+            </Upload>
           </div>
         </div>
       </Row>
@@ -119,17 +157,19 @@ function General() {
           <div className={styles.input_div}>
             <CustomInput
               value={profileData.first_name}
-              onChange={handleChange}
+              // onChange={handleChange}
               placeholder="First Name"
               name="first_name"
+              disabled
             />
           </div>
           <div className={styles.input_div}>
             <CustomInput
               value={profileData?.last_name}
-              onChange={handleChange}
+              // onChange={handleChange}
               placeholder="Second Name"
               name="last_name"
+              disabled
             />
           </div>
         </div>
@@ -141,7 +181,7 @@ function General() {
         </div>
 
         <CustomTextArea
-          value={profileData.bio} 
+          value={profileData.bio}
           name="bio"
           onChange={handleChange}
           placeholder="Your Bio"
@@ -163,44 +203,23 @@ function General() {
 
       <div className={styles.select_container}>
         <label className={styles.label}>Country</label>
-        <Select
-          size={"large"}
-          placeholder="Select Country"
-          className={styles.select}
-          options={[
-            {
-              label: "Nigeria",
-              value: "Nigeria",
-            },
-            {
-              label: "Ghana",
-              value: "Ghana",
-            },
-            {
-              label: "United State of America",
-              value: "USA",
-            },
-          ]}
+
+        <CountryDropdown
+          value={country}
+          onChange={(val) => setCountry(val)}
+          classes={styles.select}
+          showDefaultOption={true}
+          defaultOptionLabel={country}
         />
+
         <label className={styles.select_label}>City</label>
-        <Select
-          size={"large"}
-          placeholder="Select City"
-          className={styles.select}
-          options={[
-            {
-              label: "Lagos",
-              value: "Lagos",
-            },
-            {
-              label: "Abuja",
-              value: "Abuja",
-            },
-            {
-              label: "Accra",
-              value: "Accra",
-            },
-          ]}
+        <RegionDropdown
+          country={country}
+          value={region}
+          showDefaultOption={true}
+          defaultOptionLabel={region}
+          classes={styles.select}
+          onChange={(val) => setRegion(val)}
         />
       </div>
 
@@ -268,6 +287,7 @@ function General() {
               value={sMedia?.linkedin}
               onChange={handleSocials}
               className={styles.input_border}
+              placeholder={sMedia?.linkedin}
             />
           </div>
         </Col>

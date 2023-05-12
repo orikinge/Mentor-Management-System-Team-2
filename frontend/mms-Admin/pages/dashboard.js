@@ -56,6 +56,7 @@ const Dashboard = () => {
         const { data: { mentorManagers } } = await fetchMentorManagers();
         const { data: programs } = await fetchPrograms();
 
+
         setState((prev) => ({
           ...prev,
           mentors,
@@ -94,7 +95,7 @@ const Dashboard = () => {
       <Statistics stats={getStats()} loading={loading} />
       <Programs programs={state.programs.slice(0 ,3)} loading={loading} />
       <Reports reports={state.reports.slice(0, 3)} loading={loading} />
-      <Tasks tasks={state.tasks.slice(0, 3)} loading={loading} />
+      <Tasks tasks={state.tasks} loading={loading} />
     </div>
   );
 };

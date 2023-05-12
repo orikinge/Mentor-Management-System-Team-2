@@ -98,6 +98,7 @@ function Post() {
   }
 
   if (error) {
+    console.log(error)
     return <div>something went wrong!</div>;
   }
 

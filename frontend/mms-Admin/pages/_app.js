@@ -19,19 +19,7 @@ const App = ({ Component, pageProps, session }) => {
   const { token } = useLogin();
   const router = useRouter();
 
-  if (!token) {
-    return (
-      <>
-        <QueryClientProvider client={queryClient}>
-          <ContextProvider>
-            <SessionProvider session={session}>
-              <Login />
-            </SessionProvider>
-          </ContextProvider>
-        </QueryClientProvider>
-      </>
-    );
-  }
+ 
 
   return (
     <>

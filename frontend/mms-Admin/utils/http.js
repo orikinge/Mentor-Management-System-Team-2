@@ -86,7 +86,7 @@ export async function getProfile(token) {
       return errObj;
     }
   }
-}
+} 
 
 //update profile
 
