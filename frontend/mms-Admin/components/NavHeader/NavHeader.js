@@ -44,7 +44,8 @@ const NavHeader = ({ title, children }) => {
   return (
     <GlobalContextProvider>
     <header className={styles.module_header} style={{ display: hideItem ? 'none' : (showItem ? 'flex' : 'flex') }}>
-      {title === "profile" || title==="discussion" || title === "messages" || title === "mentors" ? (
+      {title === "profile" || title==="discussion" || title === "messages" || title === "mentors" || title === "reports" ||
+      title === "programs" ? (
         ""
       ) : (
         <h2 className={styles.module_header_title}>{capitalize(title)}</h2>
