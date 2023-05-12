@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { Row, Col, Form, Input, Button, Typography, Avatar } from 'antd';
+import { Row, Col, Form, Input, Button, Typography, Avatar } from "antd";
 import { fetchMentors, fetchMentorManagers } from "pages/api/user";
 import { createTask } from "pages/api/task";
 import { Icon } from "components/Icon/Icon";
@@ -10,10 +10,13 @@ import SuccessModal from "components/SuccessMessage";
 import buttonStyles from "styles/button.module.scss";
 import styles from "styles/createTask.module.scss";
 
-
 const AddMentor = ({ id, name, added, handleSelect }) => {
   return (
-    <Row gutter={16} justify="space-around" align="center" className={styles.add_mentor_container}>
+    <Row
+      gutter={16}
+      justify="space-around"
+      align="center"
+      className={styles.add_mentor_container}>
       <Col>
         <Avatar src="/assets/images/admin_avatar.png" size={42} />
       </Col>
@@ -46,7 +49,10 @@ const NewTask = () => {
   const [openModal, setOpenModal] = useState(false);
   const [mentors, setMentors] = useState([]);
   const [mentorManagers, setMentorManagers] = useState([]);
-  const [showMentors, setShowMentors] = useState({ show: false, type: "mentors" });
+  const [showMentors, setShowMentors] = useState({
+    show: false,
+    type: "mentors",
+  });
 
   const handleModal = () => {
     setOpenModal(!openModal);
@@ -62,7 +68,7 @@ const NewTask = () => {
     setState((prevState) => {
       return {
         ...prevState,
-        [type]: updated
+        [type]: updated,
       };
     });
   };
@@ -70,15 +76,18 @@ const NewTask = () => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const { data: { mentors } } = await fetchMentors();
-      const { data: { mentorManagers } } = await fetchMentorManagers();
+      const {
+        data: { mentors },
+      } = await fetchMentors();
+      const {
+        data: { mentorManagers },
+      } = await fetchMentorManagers();
 
       setMentors(mentors);
       setMentorManagers(mentorManagers);
     } catch (e) {
       // handleError(e?.response?.data?.message);
-    }
-    finally {
+    } finally {
       setLoading(false);
     }
   };
@@ -95,8 +104,8 @@ const NewTask = () => {
       if (response.status === 200) {
         setOpenModal(true);
       }
-    } catch (e) {}
-    finally {
+    } catch (e) {
+    } finally {
       setLoading(false);
     }
   };
@@ -109,7 +118,7 @@ const NewTask = () => {
         return mentorManagers;
       default:
         return mentors;
-    };
+    }
   };
 
   useEffect(() => {
@@ -128,23 +137,27 @@ const NewTask = () => {
     <>
       <Row justify="space-between" className={styles.create_task}>
         <Col span={show ? 16 : 24}>
-          <Form name="create-task" layout="vertical" form={form} onFinish={handleSubmit}>
+          <Form
+            name="create-task"
+            layout="vertical"
+            form={form}
+            onFinish={handleSubmit}>
             <Form.Item
               name="title"
               label="Title"
               help="The title must contain a maximum of 40 characters"
-              rules={[
-                { required: true, min: 3, max: 40 }
-              ]}>
+              rules={[{ required: true, min: 3, max: 40 }]}>
               <Input placeholder="Enter a title" className={styles.input} />
             </Form.Item>
             <Form.Item
               name="description"
               label="Details"
-              rules={[
-                { required: true, min: 10 }
-              ]}>
-              <Input.TextArea placeholder="Enter task details" className={styles.input} rows={10} />
+              rules={[{ required: true, min: 10 }]}>
+              <Input.TextArea
+                placeholder="Enter task details"
+                className={styles.input}
+                rows={10}
+              />
             </Form.Item>
 
             <Row gutter={16}>
@@ -154,7 +167,11 @@ const NewTask = () => {
                     <h4>Add Mentor Manager</h4>
                     <span className={styles.selected_item_text}>
                       {`${mentorManagerIds.length} selected`}
-                      <Image src={"/assets/images/remove_tag.png"} width={16} height={12} />
+                      <Image
+                        src={"/assets/images/remove_tag.png"}
+                        width={16}
+                        height={12}
+                      />
                     </span>
                   </Typography>
                   <Button
@@ -170,7 +187,11 @@ const NewTask = () => {
                     <h4>Add Mentor</h4>
                     <span className={styles.selected_item_text}>
                       {`${mentorIds.length} selected`}
-                      <Image src={"/assets/images/remove_tag.png"} width={16} height={12} />
+                      <Image
+                        src={"/assets/images/remove_tag.png"}
+                        width={16}
+                        height={12}
+                      />
                     </span>
                   </Typography>
                   <Button
@@ -183,7 +204,11 @@ const NewTask = () => {
             </Row>
 
             <Button
-              className={[buttonStyles.button, buttonStyles.primary, buttonStyles.medium]}
+              className={[
+                buttonStyles.button,
+                buttonStyles.primary,
+                buttonStyles.medium,
+              ]}
               htmlType="submit"
               loading={loading}>
               Create Task
@@ -199,7 +224,8 @@ const NewTask = () => {
                 name={`${profile?.first_name} ${profile?.last_name}`}
                 added={checkAdded(profile?.id)}
                 handleSelect={handleSelectMentor}
-              />))}
+              />
+            ))}
           </Col>
         ) : null}
       </Row>

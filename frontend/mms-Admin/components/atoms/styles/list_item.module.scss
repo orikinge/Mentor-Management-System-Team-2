@@ -5,10 +5,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-width: 400px;
+  min-width: 300px;
   overflow-x: auto;
 }
 
-.list_item:not(:last-child) {
+.list_item {
   margin-bottom: 1rem;
 }
