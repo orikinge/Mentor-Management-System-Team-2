@@ -17,7 +17,9 @@ const initialProfileData = {
   country: "",
   city: "",
 };
-let image_url = process.env.NEXT_PUBLIC_BASE_URL + "/uploads/upload_file/";
+let image_url =
+  process.env.NEXT_PUBLIC_BASE_URL.replace("/api/v1", "") +
+  "/uploads/upload_file/";
 
 function General() {
   const [loading, setLoading] = useState(false);
@@ -56,7 +58,7 @@ function General() {
     (async () => {
       const profile = await fetchUserProfile();
       setProfileData(profile?.data || {});
-      setSmedia(profile?.data?.social_media_links);
+      setSmedia(JSON.parse(profile?.data?.social_media_links));
       setCountry(profile?.data?.country);
       setRegion(profile?.data?.city);
     })();
@@ -79,7 +81,7 @@ function General() {
         }
         formData.append("bio", bio);
         formData.append("website", website);
-        formData.append("social_media_links", JSON.stringify(sMedia));
+        formData.append("socialMediaLinks", JSON.stringify(sMedia));
         formData.append("country", country);
         formData.append("city", region);
        
@@ -131,7 +133,6 @@ function General() {
                     ? imageUrl
                     : image_url + profileData?.profile_image_path
                 }
-              
               />
             }
           />

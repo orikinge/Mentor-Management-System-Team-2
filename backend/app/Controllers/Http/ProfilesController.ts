@@ -32,7 +32,7 @@ export default class ProfilesController {
             website: schema.string.optional(),
             city: schema.string.optional(),
             country: schema.string.optional(),
-            socialMediaLinks: schema.object.optional().anyMembers(),
+            socialMediaLinks: schema.string.optional(),
           }),
         })
 
