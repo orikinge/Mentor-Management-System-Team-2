@@ -19,6 +19,12 @@ export default class ProgramCertificate extends BaseModel {
   public logoUrl: string
 
   @column()
+  public dateOfIssue: DateTime
+
+  @column()
+  public certificateId: string
+
+  @column()
   public signature: string
 
   @belongsTo(() => User)
