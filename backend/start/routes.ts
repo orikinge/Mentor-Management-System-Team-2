@@ -141,6 +141,8 @@ Route.group(() => {
   Route.group(() => {
     Route.get('/', 'ProgramsController.index')
     Route.get('/:id', 'ProgramsController.show')
+    Route.get('/:id/mentors', 'ProgramsController.programMentor')
+    Route.get('/:id/mentor-managers', 'ProgramsController.programMentorManager')
     Route.post('/', 'ProgramsController.store')
     Route.put('/:id', 'ProgramsController.update')
     Route.delete('/:id', 'ProgramsController.destroy')

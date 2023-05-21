@@ -1,4 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Roles from 'App/Enums/Roles'
 import Program from 'App/Models/Program'
 import UserProgram from 'App/Models/UserProgram'
 
@@ -22,11 +23,27 @@ export default class ArchivesController {
     try {
       if (auth.user?.id) {
         const userId = auth.user?.id
-        const { name, description } = request.only(['name', 'description'])
+        const { name, description, mentors, mentorManagers } = request.only([
+          'name',
+          'description',
+          'mentors',
+          'mentorManagers',
+        ])
         const program = new Program()
         program.fill({ userId, name, description })
 
-        program.save()
+        await program.save()
+
+        const users = [...mentors, ...mentorManagers]
+
+        if (users && users.length > 0) {
+          const usersData = users.map((userId) => ({
+            programId: program.id,
+            userId,
+          }))
+
+          await UserProgram.createMany(usersData)
+        }
         response.created({ message: 'Program created', ...program.$attributes })
       }
     } catch (error) {
@@ -34,10 +51,22 @@ export default class ArchivesController {
     }
   }
 
-  public async show({ params, response }: HttpContextContract) {
-    const program = await Program.findOrFail(params.id)
+  public async show({ auth, params, request, response }: HttpContextContract) {
+    const user = auth.user
+    if (!user || !user.isAdmin) {
+      response.unauthorized({ message: 'You are not authorized to access this resource.' })
+      return
+    }
+    const program = await Program.query().where('id', params.id).firstOrFail()
+    const { page, limit } = request.qs()
+    const users = await UserProgram.query()
+      .preload('user')
+      .where('program_id', params.id)
+      .paginate(page || 1, limit || 10)
 
     if (!program) return response.status(404).send({ message: 'Program not found' })
+
+    program.users = users
 
     return response.ok(program)
   }
@@ -46,12 +75,28 @@ export default class ArchivesController {
     try {
       const userId = await auth.user?.id
       const program = await Program.findByOrFail('id', params.id)
-      const updateProgram = request.only(['name', 'description'])
+      const { name, description, mentors, mentorManagers } = request.only([
+        'name',
+        'description',
+        'mentors',
+        'mentorManagers',
+      ])
 
       if (!program) return response.status(404).send({ message: 'Program not Found' })
 
-      program.merge({ ...updateProgram, userId })
-      program.save()
+      program.merge({ name, description, userId })
+      await program.save()
+
+      const users = [...mentors, ...mentorManagers]
+
+      if (users && users.length > 0) {
+        const usersData = users.map((userId) => ({
+          programId: program.id,
+          userId,
+        }))
+
+        await UserProgram.createMany(usersData)
+      }
 
       response.status(200).json({ message: 'Program updated', ...program.$attributes })
     } catch (error) {
@@ -160,5 +205,51 @@ export default class ArchivesController {
       .paginate(page || 1, limit || 10)
 
     response.ok(userPrograms)
+  }
+
+  public async programMentor({ auth, params, request, response }: HttpContextContract) {
+    const user = auth.user
+    if (!user || !user.isAdmin) {
+      response.unauthorized({ message: 'You are not authorized to access this resource.' })
+      return
+    }
+    const program = await Program.query().where('id', params.id).firstOrFail()
+    const { page, limit } = request.qs()
+    const users = await UserProgram.query()
+      .whereHas('user', (query) => {
+        query.where('role_id', Roles.MENTOR)
+      })
+      .where('program_id', params.id)
+      .preload('user')
+      .paginate(page || 1, limit || 10)
+
+    if (!program) return response.status(404).send({ message: 'Program not found' })
+
+    program.users = users
+
+    return response.ok(program)
+  }
+
+  public async programMentorManager({ auth, params, request, response }: HttpContextContract) {
+    const user = auth.user
+    if (!user || !user.isAdmin) {
+      response.unauthorized({ message: 'You are not authorized to access this resource.' })
+      return
+    }
+    const program = await Program.query().where('id', params.id).firstOrFail()
+    const { page, limit } = request.qs()
+    const users = await UserProgram.query()
+      .whereHas('user', (query) => {
+        query.where('role_id', Roles.MENTOR_MANAGER)
+      })
+      .where('program_id', params.id)
+      .preload('user')
+      .paginate(page || 1, limit || 10)
+
+    if (!program) return response.status(404).send({ message: 'Program not found' })
+
+    program.users = users
+
+    return response.ok(program)
   }
 }
