@@ -1,0 +1,13 @@
+.empty_report_screen {
+  min-height: inherit;
+
+  div > h1 {
+    color: #141414;
+    margin-top: 1.5rem;
+  }
+
+  div > p {
+    color: #999;
+    margin-top: 0.5rem;
+  }
+}

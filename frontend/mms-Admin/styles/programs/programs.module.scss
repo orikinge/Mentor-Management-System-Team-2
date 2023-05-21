@@ -1,0 +1,75 @@
+.list_area {
+  width: 25%;
+}
+
+.list_wrapper {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.page_title {
+  font-size: 1.2rem;
+}
+
+.program_details {
+  padding: 0 1rem;
+  width: 75%;
+
+  > div.program_details_content {
+    border-radius: 10px;
+    border: 1px solid #e6e6e6;
+    min-height: 70vh;
+    background-color: #f7feff;
+  }
+}
+
+.details_header {
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 10px 10px 0 0;
+}
+
+.details_body {
+  background-color: #f7feff;
+  padding: 1.5rem;
+  border-radius: 0 0 10px 10px;
+
+  > section:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+
+  > section h1 {
+    color: #333;
+    font-weight: bold;
+  }
+
+  > section p {
+    color: #666;
+    line-height: 27px;
+  }
+}
+
+.compose_button_area {
+  margin-bottom: 1rem;
+}
+
+.remove_program {
+  color: #f00;
+}
+
+.stats {
+  background-color: #e6fdfe;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.stat,
+.stat_text,
+.stat_numbers {
+  margin: 0;
+  padding: 0;
+}
+
+.stat_numbers {
+  font-size: 2rem;
+}

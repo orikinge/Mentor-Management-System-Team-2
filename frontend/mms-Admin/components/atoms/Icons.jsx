@@ -311,5 +311,138 @@ export const Icons = (props) => {
     );
   }
 
+  if (props.name === "gads") {
+    return (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width={49}
+        height={50}
+        fill="none"
+        {...props}>
+        <path
+          fill="#333"
+          d="M47.747 20.385c.302 1.647.467 3.37.467 5.167 0 14.06-9.253 24.058-23.229 24.058a23.843 23.843 0 0 1-9.262-1.871 24.17 24.17 0 0 1-7.852-5.335 24.635 24.635 0 0 1-5.246-7.985 24.965 24.965 0 0 1-1.84-9.42 24.965 24.965 0 0 1 1.84-9.418 24.634 24.634 0 0 1 5.246-7.985 24.17 24.17 0 0 1 7.852-5.335A23.842 23.842 0 0 1 24.985.39c6.534 0 11.994 2.445 16.183 6.415l-6.822 6.937v-.017c-2.54-2.46-5.762-3.723-9.361-3.723-7.985 0-14.475 6.86-14.475 14.983 0 8.12 6.49 14.995 14.475 14.995 7.245 0 12.176-4.213 13.189-9.998H24.985v-9.597h22.764-.002Z"
+        />
+      </svg>
+    );
+  }
+
+  if (props.name === "timer") {
+    return (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width={20}
+        height={20}
+        fill="none"
+        {...props}>
+        <path
+          fill="#058B94"
+          d="M10.833 1.667C6.238 1.667 2.5 5.405 2.5 10c0 4.595 3.738 8.333 8.333 8.333 4.595 0 8.334-3.738 8.334-8.333 0-4.595-3.739-8.333-8.334-8.333Zm0 15A6.674 6.674 0 0 1 4.167 10a6.674 6.674 0 0 1 6.666-6.667A6.674 6.674 0 0 1 17.5 10a6.674 6.674 0 0 1-6.667 6.667Z"
+        />
+        <path fill="#058B94" d="M10.833 5.833H9.166v5h5V9.167h-3.333V5.833Z" />
+      </svg>
+    );
+  }
+
+  if (props.name === "mentor") {
+    return (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width={24}
+        height={24}
+        fill="none"
+        {...props}>
+        <path
+          stroke="#058B94"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM4 21v-4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4"
+        />
+      </svg>
+    );
+  }
+
+  if (props.name === "mentor-manager") {
+    return (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width={24}
+        height={24}
+        fill="none"
+        {...props}>
+        <path
+          stroke="#058B94"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM2 21v-4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4M16 3a4 4 0 0 1 0 7.75M19 15h1a2 2 0 0 1 2 2v4"
+        />
+      </svg>
+    );
+  }
+
+  if (props.name === "remove-tag") {
+    return (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width={19}
+        height={14}
+        fill="none"
+        {...props}>
+        <path
+          stroke="#99000A"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="m9.426 4.5-5 5m0-5 5 5m3.03-8.333L17.76 7l-5.303 5.833H2.76c-.92 0-1.667-.746-1.667-1.667V2.833c0-.92.746-1.667 1.667-1.667h9.697Z"
+        />
+      </svg>
+    );
+  }
+
+  if (props.name === "check-good") {
+    return (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width={20}
+        height={20}
+        fill="none"
+        {...props}>
+        <path
+          stroke="#058B94"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="m2.5 10 5 5 10-10"
+        />
+      </svg>
+    );
+  }
+
+  if (props.name === "circle-add") {
+    return (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width={20}
+        height={20}
+        fill="none"
+        {...props}>
+        <g
+          stroke="#058B94"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          clipPath="url(#a)">
+          <path d="M10 5.833v8.334M5.835 10h8.333M10 18.333a8.333 8.333 0 1 0 0-16.666 8.333 8.333 0 0 0 0 16.666Z" />
+        </g>
+        <defs>
+          <clipPath id="a">
+            <path fill="#fff" d="M0 0h20v20H0z" />
+          </clipPath>
+        </defs>
+      </svg>
+    );
+  }
+
   return null;
 };

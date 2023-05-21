@@ -1,0 +1,55 @@
+.page_title {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.profile_image {
+  border-radius: 50%;
+}
+
+.content_wrapper {
+  padding: 32px 0;
+}
+
+.input_area {
+  padding: 2rem 0;
+}
+
+.input_label {
+  display: block;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.text_area {
+  min-height: 200px;
+}
+
+.input {
+  height: 50px;
+}
+
+.input::placeholder {
+  color: #b3b3b3;
+}
+
+.input,
+.text_area {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #e6e6e6;
+}
+
+.main_content_area {
+  width: 100%;
+}
+
+.users_list_area {
+  min-width: 25%;
+}
+
+.users_list {
+  max-height: 80vh;
+  overflow-y: auto;
+}
