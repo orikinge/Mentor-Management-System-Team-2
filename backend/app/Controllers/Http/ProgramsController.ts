@@ -3,7 +3,7 @@ import Roles from 'App/Enums/Roles'
 import Program from 'App/Models/Program'
 import UserProgram from 'App/Models/UserProgram'
 
-export default class ArchivesController {
+export default class ProgramsController {
   public async index({ request, response }: HttpContextContract) {
     try {
       const { page, limit, search } = request.qs()

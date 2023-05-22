@@ -160,6 +160,8 @@ Route.group(() => {
     .prefix('archive')
     .middleware('auth')
 
+  Route.get('/dashboard', 'DashboardController.index').middleware('auth')
+
   Route.resource('faq', 'FaqController').middleware({
     store: ['auth'],
   })
