@@ -261,8 +261,7 @@ export default class TaskReportController {
         return response.unauthorized({ error: 'You must be an admin to delete reports' })
       }
 
-      const reportId = params.reportId
-      const report = await TaskReport.findOrFail(reportId)
+      const report = await TaskReport.findOrFail(params.reportId)
 
       await report.delete()
 

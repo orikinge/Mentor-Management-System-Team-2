@@ -1,6 +1,7 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Roles from 'App/Enums/Roles'
 import Program from 'App/Models/Program'
+import ProgramReport from 'App/Models/ProgramReport'
 import UserProgram from 'App/Models/UserProgram'
 
 export default class ProgramsController {
@@ -51,24 +52,44 @@ export default class ProgramsController {
     }
   }
 
-  public async show({ auth, params, request, response }: HttpContextContract) {
-    const user = auth.user
-    if (!user || !user.isAdmin) {
-      response.unauthorized({ message: 'You are not authorized to access this resource.' })
-      return
+  public async show({ auth, params, response }: HttpContextContract) {
+    try {
+      const user = auth.user
+      if (!user || !user.isAdmin) {
+        return response.unauthorized({ error: 'You must be an admin to view program reports' })
+      }
+
+      const { id } = params
+
+      const program = await Program.query().where('id', id).firstOrFail()
+      const reports = await ProgramReport.query().where('program_id', id).exec()
+      const mentors = await UserProgram.query()
+        .where('program_id', id)
+        .whereHas('user', (query) => {
+          query.where('role_id', Roles.MENTOR)
+        })
+        .preload('user')
+        .exec()
+      const mentorManagers = await UserProgram.query()
+        .where('program_id', id)
+        .whereHas('user', (query) => {
+          query.where('role_id', Roles.MENTOR_MANAGER)
+        })
+        .preload('user')
+        .exec()
+
+      return response.ok({
+        program,
+        reportCount: reports.length,
+        reports,
+        mentorCount: mentors.length,
+        mentors,
+        mentorManagerCount: mentorManagers.length,
+        mentorManagers,
+      })
+    } catch (error) {
+      return response.badRequest({ message: 'Server issue', status: 'Error' })
     }
-    const program = await Program.query().where('id', params.id).firstOrFail()
-    const { page, limit } = request.qs()
-    const users = await UserProgram.query()
-      .preload('user')
-      .where('program_id', params.id)
-      .paginate(page || 1, limit || 10)
-
-    if (!program) return response.status(404).send({ message: 'Program not found' })
-
-    program.users = users
-
-    return response.ok(program)
   }
 
   public async update({ auth, params, request, response }: HttpContextContract) {
@@ -86,6 +107,8 @@ export default class ProgramsController {
 
       program.merge({ name, description, userId })
       await program.save()
+
+      await UserProgram.query().where('programId', program.id).delete()
 
       const users = [...mentors, ...mentorManagers]
 

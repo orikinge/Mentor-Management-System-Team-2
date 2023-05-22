@@ -23,6 +23,7 @@ import PreviousProgram from './PreviousProgram'
 import PreviousRole from './PreviousRole'
 import Document from './Document'
 import ProgramCertificate from './ProgramsCertificate'
+import ProgramReport from './ProgramReport'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -93,6 +94,12 @@ export default class User extends BaseModel {
     localKey: 'id',
   })
   public taskReport: HasMany<typeof TaskReport>
+
+  @hasMany(() => ProgramReport, {
+    foreignKey: 'userId',
+    localKey: 'id',
+  })
+  public programReport: HasMany<typeof ProgramReport>
 
   @hasMany(() => User, { foreignKey: 'id' })
   public userId: HasMany<typeof User>

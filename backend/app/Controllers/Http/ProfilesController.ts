@@ -40,9 +40,10 @@ export default class ProfilesController {
         profile.website = payload.website ?? profile.website
         profile.city = payload.city ?? profile.city
         profile.country = payload.country ?? profile.country
-        profile.socialMediaLinks = JSON.stringify(payload.socialMediaLinks) ?? profile.socialMediaLinks
+        profile.socialMediaLinks =
+          JSON.stringify(payload.socialMediaLinks) ?? profile.socialMediaLinks
 
-        if(payload.profileImagePath){
+        if (payload.profileImagePath) {
           const profileImage = request.file('profileImagePath')
           await profileImage?.moveToDisk('upload_file')
           profile.profileImagePath = profileImage?.fileName ?? profile.profileImagePath
@@ -52,7 +53,8 @@ export default class ProfilesController {
         profile.website = payload.website ?? profile.website
         profile.city = payload.city ?? profile.city
         profile.country = payload.country ?? profile.country
-        profile.socialMediaLinks = JSON.stringify(payload.socialMediaLinks) ?? profile.socialMediaLinks
+        profile.socialMediaLinks =
+          JSON.stringify(payload.socialMediaLinks) ?? profile.socialMediaLinks
         await profile.save()
 
         return response.ok({ status: 'success', message: 'Profile successfully updated', profile })

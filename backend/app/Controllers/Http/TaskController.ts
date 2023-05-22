@@ -13,25 +13,17 @@ export default class TaskController {
       return response.unauthorized({ message: 'You are not authorized to perform this action' })
     }
 
-    const {
-      title,
-      description,
-      meta,
-      startDate,
-      endDate,
-      typeOfReport,
-      mentors,
-      mentorManagers,
-    } = request.only([
-      'title',
-      'description',
-      'meta',
-      'startDate',
-      'endDate',
-      'typeOfReport',
-      'mentors',
-      'mentorManagers',
-    ])
+    const { title, description, meta, startDate, endDate, typeOfReport, mentors, mentorManagers } =
+      request.only([
+        'title',
+        'description',
+        'meta',
+        'startDate',
+        'endDate',
+        'typeOfReport',
+        'mentors',
+        'mentorManagers',
+      ])
 
     try {
       const task = await Database.transaction(async (trx) => {
@@ -91,25 +83,17 @@ export default class TaskController {
       return response.unauthorized({ message: 'You are not authorized to perform this action' })
     }
 
-    const {
-      title,
-      description,
-      meta,
-      startDate,
-      endDate,
-      typeOfReport,
-      mentors,
-      mentorManagers,
-    } = request.only([
-      'title',
-      'description',
-      'meta',
-      'startDate',
-      'endDate',
-      'typeOfReport',
-      'mentors',
-      'mentorManagers',
-    ])
+    const { title, description, meta, startDate, endDate, typeOfReport, mentors, mentorManagers } =
+      request.only([
+        'title',
+        'description',
+        'meta',
+        'startDate',
+        'endDate',
+        'typeOfReport',
+        'mentors',
+        'mentorManagers',
+      ])
 
     const taskId = params.taskId
 
