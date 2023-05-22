@@ -444,5 +444,22 @@ export const Icons = (props) => {
     );
   }
 
+  if (props.name === "subtract")
+    return (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width={26}
+        height={25}
+        fill="none"
+        {...props}>
+        <path
+          stroke="#000"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M7.583 12.5h10.834M13 22.5c5.983 0 10.833-4.477 10.833-10S18.983 2.5 13 2.5c-5.983 0-10.833 4.477-10.833 10s4.85 10 10.833 10Z"
+        />
+      </svg>
+    );
+
   return null;
 };

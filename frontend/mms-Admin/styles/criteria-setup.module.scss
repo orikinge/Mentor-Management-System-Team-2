@@ -1,0 +1,66 @@
+.wrapper {
+  min-height: 80vh;
+}
+
+.page_title,
+.input_modal_title {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.input_type_title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1.4rem;
+}
+
+.info_text_area {
+  background-color: #f7feff;
+  padding: 2rem;
+  border-radius: 10px;
+
+  p {
+    line-height: 1.8rem;
+    color: #666;
+  }
+}
+
+.action_buttons {
+  margin-top: 2.5rem;
+}
+
+.input_type_options {
+  margin: 2rem 0;
+  background: #fff;
+  box-shadow: 1px 3px 9px rgba(3, 93, 99, 0.2);
+  border-radius: 5px;
+}
+
+.input_type_options > label {
+  color: black;
+  background: transparent;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+}
+
+.input_type_options input[type="radio"] {
+  display: none;
+}
+
+.input_type_options input + div {
+  padding: 1.2rem 1rem;
+}
+
+.input_type_options input:checked + div {
+  background-color: #f7feff;
+  font-weight: bold;
+}
+
+.input_type_options > label:first-child input + div {
+  border-radius: 5px 5px 0 0;
+}
+
+.input_type_options > label:last-child input + div {
+  border-radius: 0 0 5px 5px;
+}
