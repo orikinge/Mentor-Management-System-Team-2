@@ -3,6 +3,7 @@ import Task from 'App/Models/Task'
 import User from 'App/Models/User'
 import TaskMentorManager from 'App/Models/TaskMentorManager'
 import Roles from 'App/Enums/Roles'
+import TaskMentor from 'App/Models/TaskMentor'
 
 export default class MentorManagerController {
   async getAllMentorManagers({ auth, response, request }: HttpContextContract) {
@@ -109,6 +110,34 @@ export default class MentorManagerController {
       return response.ok({ status: 'success', message: 'Mentor manager removed from task' })
     } catch (error) {
       return response.status(500).send({ message: 'Error removing mentor manager from task.' })
+    }
+  }
+
+  async getMentorsByManager({ params, response }: HttpContextContract) {
+    const { mentorManagerId } = params
+
+    try {
+      await User.findOrFail(mentorManagerId)
+
+      const taskMentorManagers = await TaskMentorManager.query()
+        .where('mentorManagerId', mentorManagerId)
+        .select('taskId')
+
+      const taskIds = taskMentorManagers.map((taskMentorManager) => taskMentorManager.taskId)
+
+      const mentors = await User.query()
+        .whereIn('id', (query) => {
+          query.from('task_mentors').select('mentor_id').whereIn('task_id', taskIds)
+        })
+        .select(['id', 'firstName', 'lastName'])
+
+      return response.status(200).json({
+        status: 'success',
+        message: 'Mentors fetched successfully',
+        data: mentors,
+      })
+    } catch (error) {
+      return response.status(500).send({ message: 'Error retrieving mentors.' })
     }
   }
 }
