@@ -342,12 +342,12 @@ export default class ProgramsController {
         mentorManager: any[]
       } = {
         id: program.id,
-        user_id: program.user_id,
+        user_id: program.userId,
         name: program.name,
         description: program.description,
-        is_archive: program.is_archive,
-        created_at: program.created_at,
-        updated_at: program.updated_at,
+        is_archive: program.isArchive,
+        created_at: program.createdAt,
+        updated_at: program.updatedAt,
         programReportsCount: program.programReports.length,
         mentorCount: 0,
         mentorManagerCount: 0,
@@ -424,5 +424,5 @@ export default class ProgramsController {
       return response.status(500).send({ message: 'Error retrieving reports.' })
     }
   }
-  
+
 }
