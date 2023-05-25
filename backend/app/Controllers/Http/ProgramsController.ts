@@ -395,4 +395,34 @@ export default class ProgramsController {
       return { user, programs }
     }
   }
+
+  async getReportsByProgram({ params, response }: HttpContextContract) {
+    const { id } = params
+    try {
+      const program = await Program.query().where('id', id).preload('programReports').first()
+      if (!program) {
+        return response.notFound({ message: 'Program not found' })
+      }
+
+      const reports = program.programReports.map((report) => ({
+        id: report.id,
+        programId: report.programId,
+        mentorManagerId: report.mentorManagerId,
+        achievement: report.achievement,
+        blocker: report.blocker,
+        recommendation: report.recommendation,
+        createdAt: report.createdAt,
+        updatedAt: report.updatedAt,
+      }))
+
+      return response.ok({
+        status: 'success',
+        message: 'Reports fetched successfully',
+        data: reports,
+      })
+    } catch (error) {
+      return response.status(500).send({ message: 'Error retrieving reports.' })
+    }
+  }
+  
 }

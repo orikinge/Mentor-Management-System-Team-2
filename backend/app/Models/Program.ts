@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, HasMany, belongsTo, column, hasMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
 import User from './User'
 import UserProgram from './UserProgram'
 import ProgramReport from './ProgramReport'
@@ -40,4 +40,5 @@ export default class Program extends BaseModel {
 
   @column()
   public users?: any
+
 }

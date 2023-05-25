@@ -4,6 +4,8 @@ import Program from 'App/Models/Program'
 import UserProgram from 'App/Models/UserProgram'
 import User from 'App/Models/User'
 import Roles from 'App/Enums/Roles'
+import Database from '@ioc:Adonis/Lucid/Database'
+import generatePdfFile from 'Helpers/index'
 
 export default class ProgramReportsController {
   public async createProgramReport({ auth, params, request, response }: HttpContextContract) {
@@ -173,6 +175,35 @@ export default class ProgramReportsController {
       return response.ok({ message: 'Program Report deleted successfully' })
     } catch (error) {
       response.badRequest({ message: 'Error deleting report', status: 'Error' })
+    }
+  }
+
+  async downloadReportPDF({ auth, params, response }: HttpContextContract) {
+    const trx = await Database.transaction()
+    const title = { name: Program }
+    try {
+      const user = auth.user
+      if (!user || !user.isAdmin) {
+        await trx.rollback()
+        return response.unauthorized({
+          error: 'You must be an admin to view program report',
+        })
+      }
+
+      const report = await ProgramReport.query(trx).where('id', params.reportId).firstOrFail()
+      const program = await Program.query(trx)
+        .where('id', report.programId)
+        .preload('user', (query) => {
+          query.select(['firstName', 'lastName'])
+        })
+        .firstOrFail()
+      const mentorManager = await User.findOrFail(report.mentorManagerId)
+
+      await trx.commit()
+      return generatePdfFile(response, report, program.name, mentorManager, title)
+    } catch (error) {
+      await trx.rollback()
+      response.badRequest({ message: 'Error getting request', status: 'Error' })
     }
   }
 }

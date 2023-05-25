@@ -5,6 +5,7 @@ import TaskMentor from 'App/Models/TaskMentor'
 import TaskMentorManager from 'App/Models/TaskMentorManager'
 import Database from '@ioc:Adonis/Lucid/Database'
 import TaskReport from 'App/Models/TaskReport'
+import TaskReport from 'App/Models/TaskReport'
 
 export default class TaskController {
   async create({ auth, request, response }: HttpContextContract) {

@@ -147,6 +147,7 @@ Route.group(() => {
     Route.get('/:id', 'ProgramsController.show')
     Route.get('/:id/mentors', 'ProgramsController.programMentor')
     Route.get('/:id/mentor-managers', 'ProgramsController.programMentorManager')
+    Route.get('/:id/reports', 'ProgramsController.getReportsByProgram')
     Route.post('/', 'ProgramsController.store')
     Route.put('/:id', 'ProgramsController.update')
     Route.delete('/:id', 'ProgramsController.destroy')
@@ -161,6 +162,7 @@ Route.group(() => {
     Route.get('/', 'ProgramReportsController.getAllReports')
     Route.post('/:programId/', 'ProgramReportsController.createProgramReport')
     Route.get('/:reportId', 'ProgramReportsController.getReport')
+    Route.get('/:reportId/pdf', 'ProgramReportsController.downloadReportPDF')
     Route.delete('/delete/:reportId', 'ProgramReportsController.deleteReport')
   }).prefix('program-reports')
 
