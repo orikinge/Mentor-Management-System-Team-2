@@ -3,7 +3,6 @@ import Task from 'App/Models/Task'
 import User from 'App/Models/User'
 import TaskMentorManager from 'App/Models/TaskMentorManager'
 import Roles from 'App/Enums/Roles'
-import TaskMentor from 'App/Models/TaskMentor'
 
 export default class MentorManagerController {
   async getAllMentorManagers({ auth, response, request }: HttpContextContract) {

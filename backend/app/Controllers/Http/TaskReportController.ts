@@ -229,9 +229,10 @@ export default class TaskReportController {
         })
         .firstOrFail()
       const mentor = await User.findOrFail(report.mentorId)
+      const mentorNames = {name: {name: `${mentor.firstName} ${mentor.lastName}`}}
       const writable = new stream.Duplex()
 
-      await generatePdfFile(Task, { response: writable }, report, task, mentor)
+      await generatePdfFile(Task, { response: writable }, report, task, mentorNames)
       const readable = new stream.Readable()
       readable.pipe(writable)
 
