@@ -63,7 +63,6 @@ function Support() {
 
       try {
         if (file) {
-          console.log("here");
           formData.append("imageUrl", file);
         }
         if (email) {
@@ -78,8 +77,7 @@ function Support() {
 
         if (response.status === 200 || response.status === 201) {
           setLoading(false);
-
-          setIsSuccess(true);
+           setIsSuccess(true);
         }
 
         if (response.status === 401 || response.status === 400) {

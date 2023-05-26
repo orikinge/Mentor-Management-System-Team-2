@@ -12,11 +12,14 @@ import { Loader } from "components/Loader";
 import { Button } from "components/Button";
 import { useRouter } from "next/router";
 
-let image_url = process.env.NEXT_PUBLIC_BASE_URL + "/uploads/upload_file/";
+let image_url =
+  process.env.NEXT_PUBLIC_BASE_URL.replace("/api/v1", "") +
+  "/uploads/upload_file/";
 function About() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [sMedia, setSmedia] = useState({});
   const { Paragraph } = Typography;
 
   const router = useRouter();
@@ -29,7 +32,9 @@ function About() {
       const response = await fetchUserProfile();
       if (response.status === 200) {
         setData(response.data);
-
+        setSmedia(
+          response?.data?.social_media_links ? JSON.parse(response?.data?.social_media_links) : {},
+        );
         setLoading(false);
       }
 
@@ -143,9 +148,7 @@ function About() {
                 container={styles.social_icon_container}
                 color={styles.social_color}
                 styles={styles.social_icon}
-                text={
-                  data.social_media_links ? data.social_media_links.github : ""
-                }>
+                text={sMedia ? sMedia.github : ""}>
                 <Icon
                   icon={"/assets/images/Gitlogo.svg"}
                   width={"25px"}
@@ -158,11 +161,7 @@ function About() {
                 container={styles.social_icon_container}
                 color={styles.social_color}
                 styles={styles.social_icon}
-                text={
-                  data.social_media_links
-                    ? data.social_media_links.linkedin
-                    : ""
-                }>
+                text={sMedia ? sMedia.linkedin : ""}>
                 <Icon
                   icon={"/assets/images/Linkeinlogo.svg"}
                   width={"25px"}
@@ -177,9 +176,7 @@ function About() {
                 container={styles.social_icon_container}
                 color={styles.social_color}
                 styles={styles.social_icon}
-                text={
-                  data.social_media_links ? data.social_media_links.twitter : ""
-                }>
+                text={sMedia ? sMedia.twitter : ""}>
                 <Icon
                   icon={"/assets/images/Twitterlogo.svg"}
                   width={"25px"}
@@ -192,11 +189,7 @@ function About() {
                 container={styles.social_icon_container}
                 color={styles.social_color}
                 styles={styles.social_icon}
-                text={
-                  data.social_media_links
-                    ? data.social_media_links.instagram
-                    : ""
-                }>
+                text={sMedia ? sMedia.instagram : ""}>
                 <Icon
                   icon={"/assets/images/instagramlogo.svg"}
                   width={"25px"}

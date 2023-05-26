@@ -4,9 +4,7 @@ function IconWithText({ styles, container, text, color, children }) {
   return (
     <div className={container}>
       <div className={color}>{children}</div>
-      <div>
-        <p className={styles}>{text} </p>
-      </div>
+      <div className={styles}>{text} </div>
     </div>
   );
 }

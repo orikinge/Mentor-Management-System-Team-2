@@ -6,6 +6,7 @@ import {
   CustomInput,
   CustomTextArea,
 } from "./formInputs/CustomInput";
+import Button from "./Buttons/PrimaryBtn"
 import styles from "../styles/admin/discussionForum.module.css";
 import { Icon } from "./Icon/Icon";
 import EmojiPicker from "emoji-picker-react";
@@ -109,13 +110,13 @@ export const CustomFormModal = ({
           onOk={handleSubmit}
           width={866}
           footer={
-            <Button
+            <CustomButton
               loading={confirmLoading}
               onClick={handleSubmit}
               variant="normal"
               size="large">
               Post to forum
-            </Button>
+            </CustomButton>
           }
           confirmLoading={confirmLoading}
           closable={false}>

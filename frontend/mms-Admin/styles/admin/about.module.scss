@@ -140,23 +140,24 @@
 }
 
 .social_icon {
-  width: 142px;
+  width: 147px;
   height: 33px;
   font-weight: 600;
   font-size: 20px;
   line-height: 33px;
   color: #4d4d4d;
-  margin-left: 12px;
+  margin-left: 21px;
 }
 
 .social_icon_container {
   display: flex;
   flex-direction: row;
-  padding: 5px 11px;
-  height: 40px;
+  padding: 12px 14px;
+  height: 50px;
   background-color: #e6fdfe;
   border-radius: 5px;
   margin-bottom: 1em;
+  align-items: center;
 }
 
 .spin {
@@ -176,11 +177,9 @@
   margin-top: 20px;
   width: 758px;
   height: 652px;
-  border: 1px solid #E6E6E6;
+  border: 1px solid #e6e6e6;
   border-radius: 10px;
   padding: 10px 32px;
-
-
 }
 
 .title_mt {
@@ -192,7 +191,7 @@
   font-size: 20px;
   line-height: 33px;
   color: #333333;
-  margin-bottom: 15px
+  margin-bottom: 15px;
 }
 
 .text_desc {
@@ -212,8 +211,7 @@
 .bio {
   box-sizing: border-box;
   width: 688px;
-  background: #F7FEFF;
-  border: 1px solid #E6FDFE;
-  padding:10px 20px
-
+  background: #f7feff;
+  border: 1px solid #e6fdfe;
+  padding: 10px 20px;
 }

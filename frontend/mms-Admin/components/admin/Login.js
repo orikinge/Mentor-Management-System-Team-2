@@ -17,9 +17,6 @@ const Login = ({ showPassword, setShowPassword }) => {
     password: "",
   });
   const { setToken, token, setUser } = useLogin();
-   
-
-
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState("");
   const router = useRouter();
@@ -42,7 +39,7 @@ const Login = ({ showPassword, setShowPassword }) => {
       try {
         const response = await postLogin(loginData);
 
-        if (response.status === 200) {
+        if (response?.status === 200) {
           setToken(response.data.token.token);
           setUser(response.data)
           setMessage("Logged In Successfully");
@@ -50,12 +47,17 @@ const Login = ({ showPassword, setShowPassword }) => {
           router.push("/");
         }
 
-        if (response.status === 401 || response.status === 400) {
-          setMessage(response.message);
+        if (response?.status === 401 || response?.status === 400) {
+          setMessage(response?.message);
+          setLoading(false);
+
         }
         setLoading(false);
       } catch (e) {
+        console.log(e)
         setMessage(e.message);
+        setLoading(false);
+
       }
     }
   };
