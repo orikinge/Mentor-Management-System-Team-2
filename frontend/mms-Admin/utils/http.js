@@ -118,32 +118,5 @@ export async function setProfile(userData, sMedia, token) {
   }
 }
 
-// support request
 
-export async function supportRequest(token, supportData) {
-  try {
-    const response = await axios.post(
-      support_request,
-      {
-        ...supportData,
-      },
-      {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      },
-    );
-
-    return response;
-  } catch (er) {
-    if (typeof err.response.data.message !== "undefined") {
-      let errObj = {
-        status: err.response.status,
-        message: err.response.data.message,
-      };
-
-      return errObj;
-    }
-  }
-}
 
