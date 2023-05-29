@@ -29,8 +29,8 @@ function Dashboard() {
     <>
       <div className={styles.header_text}>Dashboard</div>
 
-      <Row >
-        <Col  xs={12} lg={4} className={styles.active_program}>
+      <Row>
+        <Col xs={12} lg={4} className={styles.active_program}>
           <div className={styles.active_program_number}>
             {data?.data?.active_programs}
           </div>
@@ -42,7 +42,12 @@ function Dashboard() {
           </div>
         </Col>
 
-        <Col xs ={24} sm ={24} md={24} lg={19} className={styles.details_card_container}>
+        <Col
+          xs={24}
+          sm={24}
+          md={24}
+          lg={19}
+          className={styles.details_card_container}>
           <DetailsCard
             icon="Person"
             text="Mentors"
@@ -78,7 +83,7 @@ function Dashboard() {
           </div>
         </Col>
 
-        <Col xs ={24}  className={styles.details_column}>
+        <Col xs={24} className={styles.details_column}>
           {data?.data?.program_list?.map((program) => (
             <DetailsCard
               key={program?.id}
@@ -109,10 +114,10 @@ function Dashboard() {
           </div>
         </Col>
 
-        <Col xs = {24} className={styles.details_column}>
+        <Col xs={24} className={styles.details_column}>
           {createArray(3).map((report, index) => (
             <ReportCard
-              key={index} 
+              key={index}
               icon="ReportRight"
               text="GADS Program 2022"
               subText="Jun 13, 2022 -> Feb 10, 2023"
@@ -132,21 +137,22 @@ function Dashboard() {
         </Col>
       </Row>
 
-      <Row span={24} className={styles.details_card_row}>
-        <p className={styles.overview_header}>Tasks Overview</p>
-        <Row>
-          <Col span={3} className={styles.details_in_progress_container}>
+      <div className={styles.details_card_row} >
+        <Col span={24} className={styles.programs_header_justify}>
+          <p className={styles.overview_header}>Tasks Overview</p>
+        </Col>
+        <Row  span={24}>
+        <Col span={3} className={styles.details_in_progress_container}>
             <div className={styles.details_in_progress_header}>In Progress</div>
           </Col>
           <Col span={1}></Col>
-
           <Col span={20} className={styles.details_column}>
-            {data?.data?.inprogress_task_list?.map((task) => (
+            {data?.data?.completed_task_list?.map((task) => (
               <ReportCard
                 key={task?.id}
                 icon="TaskRight"
                 text={task?.title.substring(0, 28) + "..."}
-                subtext={moment(task?.end_date).fromNow()}
+                subtext={moment(task?.end_date).toNow()}
                 marginRight="20px"
                 report
                 width="283px"
@@ -163,6 +169,7 @@ function Dashboard() {
             </Link>
           </Col>
         </Row>
+
 
         <Row className={styles.mt}>
           <Col span={3} className={styles.details_in_progress_container}>
@@ -184,8 +191,15 @@ function Dashboard() {
               />
             ))}
           </Col>
+          <Col span={24} className={styles.button_container}>
+            <Link href="/tasks" passHref>
+              <Button size="small" variant="normal">
+                View All
+              </Button>
+            </Link>
+          </Col>
         </Row>
-      </Row>
+      </div>
     </>
   );
 }
