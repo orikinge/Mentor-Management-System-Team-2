@@ -29,8 +29,8 @@ jobs:
       with:
         deliverables: frontend/mms-Admin/app.yaml backend/server.yaml
         version: v1
-        project_id: team-2-auto
-        credentials: ${{ secrets.TEAM2SECRET }}
+        project_id: mms-team-2
+        credentials: ${{ secrets.TEAM2SECRET2 }}
 
     - name: Test
       run: curl "${{ steps.deploy.outputs.url }}"
