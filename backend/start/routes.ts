@@ -173,6 +173,15 @@ Route.group(() => {
     .prefix('archive')
     .middleware('auth')
 
+  Route.group(() => {
+    Route.get('/', 'CriteriaController.index')
+    Route.post('/', 'CriteriaController.createCriteria')
+    Route.get('/:id', 'CriteriaController.show')
+    Route.put('/:id', 'CriteriaController.updateCriteria')
+  })
+    .prefix('criteria')
+    .middleware('auth')
+
   Route.get('/dashboard', 'DashboardController.index').middleware('auth')
 
   Route.resource('faq', 'FaqController').middleware({

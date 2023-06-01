@@ -4,6 +4,7 @@ import Program from 'App/Models/Program'
 import ProgramReport from 'App/Models/ProgramReport'
 import UserProgram from 'App/Models/UserProgram'
 import { schema } from '@ioc:Adonis/Core/Validator'
+import ProgramCriterion from 'App/Models/ProgramCriterion'
 
 export default class ProgramsController {
   public async index({ request, response }: HttpContextContract) {
@@ -16,6 +17,9 @@ export default class ProgramsController {
         .preload('programReports')
         .preload('userPrograms', (query) => {
           ;(async () => await query.preload('user'))()
+        })
+        .preload('programCriteria', (query) => {
+          ;(async () => await query.preload('formTemplate'))()
         })
         .paginate(page || 1, limit || 10)
 
@@ -43,6 +47,7 @@ export default class ProgramsController {
             description: schema.string.optional(),
             mentors: schema.array().members(schema.number()),
             mentorManagers: schema.array().members(schema.number()),
+            criteria: schema.array.optional().members(schema.number()),
           }),
         })
 
@@ -68,6 +73,17 @@ export default class ProgramsController {
           }))
 
           await UserProgram.createMany(usersData)
+        }
+
+        const { criteria } = payload
+
+        if (criteria && criteria.length > 0) {
+          const criteriaData = criteria.map((criteriaId) => ({
+            programId: program.id,
+            criteriaId,
+          }))
+
+          await ProgramCriterion.createMany(criteriaData)
         }
         response.created({ message: 'Program created', ...program.$attributes })
       }
@@ -102,6 +118,11 @@ export default class ProgramsController {
         .preload('user')
         .exec()
 
+        const programCriteria = await ProgramCriterion.query()
+        .where('program_id', id)
+        .preload('formTemplate')
+        .exec()
+
       return response.ok({
         program,
         reportCount: reports.length,
@@ -110,6 +131,8 @@ export default class ProgramsController {
         mentors,
         mentorManagerCount: mentorManagers.length,
         mentorManagers,
+        programCriteriaCount: programCriteria.length,
+        programCriteria
       })
     } catch (error) {
       return response.badRequest({ message: 'Server issue', status: 'Error' })
@@ -130,20 +153,21 @@ export default class ProgramsController {
           description: schema.string.optional(),
           mentors: schema.array().members(schema.number()),
           mentorManagers: schema.array().members(schema.number()),
+          criteria: schema.array.optional().members(schema.number()),
         }),
       })
 
       if (!program) return response.status(404).send({ message: 'Program not Found' })
 
       program.userId = userId ?? program.userId
-        program.name = payload.name ?? program.name
-        program.description = payload.description ?? program.description
+      program.name = payload.name ?? program.name
+      program.description = payload.description ?? program.description
 
-        if (payload.gravatar) {
-          const gravatar = request.file('gravatar')
-          await gravatar?.moveToDisk('upload_file')
-          program.gravatar = gravatar?.fileName ?? program.gravatar
-        }
+      if (payload.gravatar) {
+        const gravatar = request.file('gravatar')
+        await gravatar?.moveToDisk('upload_file')
+        program.gravatar = gravatar?.fileName ?? program.gravatar
+      }
       await program.save()
 
       await UserProgram.query().where('programId', program.id).delete()
@@ -158,6 +182,19 @@ export default class ProgramsController {
         }))
 
         await UserProgram.createMany(usersData)
+      }
+
+      await ProgramCriterion.query().where('programId', program.id).delete()
+
+      const { criteria } = payload
+
+      if (criteria && criteria.length > 0) {
+        const criteriaData = criteria.map((criteriaId) => ({
+          programId: program.id,
+          formTemplateId: criteriaId,
+        }))
+
+        await ProgramCriterion.createMany(criteriaData)
       }
 
       response.status(200).json({ message: 'Program updated', ...program.$attributes })
@@ -337,9 +374,11 @@ export default class ProgramsController {
         programReportsCount: number
         mentorCount: number
         mentorManagerCount: number
+        criteriaCount: number
         programReports: any[]
         mentor: any[]
         mentorManager: any[]
+        criteria: any[]
       } = {
         id: program.id,
         user_id: program.userId,
@@ -351,11 +390,12 @@ export default class ProgramsController {
         programReportsCount: program.programReports.length,
         mentorCount: 0,
         mentorManagerCount: 0,
+        criteriaCount: 0,
         programReports: program.programReports,
         mentor: [],
         mentorManager: [],
+        criteria: [],
       }
-
       program.userPrograms.forEach((programUser) => {
         const { user } = programUser
         if (user.roleId === Roles.MENTOR) {
@@ -366,12 +406,17 @@ export default class ProgramsController {
         }
       })
 
+      program.programCriteria.forEach((programCriterion) => {
+        const {formTemplate} = programCriterion
+        result.criteria.push(formTemplate)
+      })
+
+      result.criteriaCount = result.criteria.length
       result.mentorCount = result.mentor.length
       result.mentorManagerCount = result.mentorManager.length
 
       return result
     })
-
     return structured
   }
 
@@ -424,5 +469,4 @@ export default class ProgramsController {
       return response.status(500).send({ message: 'Error retrieving reports.' })
     }
   }
-
 }
