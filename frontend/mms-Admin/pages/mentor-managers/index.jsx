@@ -1,9 +1,9 @@
-import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { PaginationWithFilter } from "../../components/molecules/PaginationWithFilter";
 import styles from "../../styles/mentor-managers/mentor-managers.module.scss";
 import { ListItem } from "../../components/atoms/ListItem";
 import { Icons } from "../../components/atoms/Icons";
+import { Loader } from "../../components/atoms/Loader";
 import { Button } from "../../components/atoms/Button";
 import Image from "next/image";
 import Link from "next/link";
@@ -19,7 +19,7 @@ const TaskAssignees = () => {
     isError,
   } = useQuery(["mentor-managers"], fetchMentorManagers);
 
-  if (isLoading) return "loading...";
+  if (isLoading) return <Loader />;
 
   if (isError) return "An error occured";
 

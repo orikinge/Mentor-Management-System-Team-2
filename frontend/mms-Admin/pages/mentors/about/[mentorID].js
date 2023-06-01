@@ -16,7 +16,6 @@ function AboutMentor() {
     isError,
   } = useQuery(["about_user"], () => fetchMentorAbout(router.query.mentorID));
 
- 
   if (isLoading) return "loading tasks...";
 
   if (isError) return "An error occured";

@@ -66,9 +66,9 @@ export const Icons = (props) => {
         <path
           d="M5 5H13M5 9H13M5 13H8M3 21H15C16.1046 21 17 20.1046 17 19V3C17 1.89543 16.1046 1 15 1H3C1.89543 1 1 1.89543 1 3V19C1 20.1046 1.89543 21 3 21Z"
           stroke="#058B94"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     );

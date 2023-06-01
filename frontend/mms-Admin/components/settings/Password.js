@@ -39,17 +39,13 @@ function Password() {
         newPassword: data.newPassword,
         oldPassword: data.oldPassword,
       });
-      console.log(response)
 
       if (response.status === 200) {
-
         setLoading(false);
-        setData({})
+        setData({});
         setIsSuccess(true);
-
       }
       if (response.status === 400 || response.status === 401) {
-          
         setMessage(response.data.message);
       }
     } catch (e) {
@@ -126,8 +122,6 @@ function Password() {
           </Button>
         </Col>
       </Row>
-
-      
 
       {isSuccess && (
         <SuccessMessage

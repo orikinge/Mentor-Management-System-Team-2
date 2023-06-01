@@ -24,7 +24,7 @@ let image_url =
 function General() {
   const [loading, setLoading] = useState(false);
   const [profileData, setProfileData] = useState(initialProfileData);
-  const [error, setError]=useState(false)
+  const [error, setError] = useState(false);
   const [sMedia, setSmedia] = useState({
     instagram: "",
     github: "",
@@ -55,29 +55,27 @@ function General() {
   };
 
   useEffect(() => {
-    try{
-    (async () => {
-      const profile = await fetchUserProfile();
-      setProfileData(profile?.data || {});
+    try {
+      (async () => {
+        const profile = await fetchUserProfile();
+        setProfileData(profile?.data || {});
 
-      setSmedia(
-        profile?.data?.social_media_links
-          ? JSON.parse(profile?.data?.social_media_links)
-          : {},
-      );
-      setCountry(profile?.data?.country);
-      setRegion(profile?.data?.city);
-    })();
-  }
-  catch(e){
-    setError(true)
-  }
+        setSmedia(
+          profile?.data?.social_media_links
+            ? JSON.parse(profile?.data?.social_media_links)
+            : {},
+        );
+        setCountry(profile?.data?.country);
+        setRegion(profile?.data?.city);
+      })();
+    } catch (e) {
+      setError(true);
+    }
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(file);
     setLoading(true);
     const valid = validateInputs(profileData);
     if (valid) {
@@ -99,7 +97,7 @@ function General() {
         //  setLoading(false);
 
         const response = await updateUserProfile(formData);
-        console.log(response);
+
         if (response.status === 200) {
           setSuccess(true);
         }
@@ -107,7 +105,7 @@ function General() {
         if (
           response.status === 401 ||
           response.status === 400 ||
-          response.status === 404 
+          response.status === 404
         ) {
           throw response;
         }
@@ -132,12 +130,10 @@ function General() {
     }));
   };
 
-  if(error){
+  if (error) {
     <div>
-      <h2>
-        Failed to fetch! Try
-      </h2>
-    </div>
+      <h2>Failed to fetch! Try</h2>
+    </div>;
   }
 
   return (
@@ -173,96 +169,89 @@ function General() {
       </Row>
 
       <Row className={styles.container}>
-      <Col span={4}>
+        <Col span={4}>
           <label className={styles.label}>Full Name</label>
         </Col>
-      <Col span={20}>
-      
-        <div className={styles.input_container}>
-          <div className={styles.input_div}>
-            <CustomInput
-              value={profileData.first_name}
-              // onChange={handleChange}
-              placeholder="First Name"
-              name="first_name"
-              disabled
-            />
+        <Col span={20}>
+          <div className={styles.input_container}>
+            <div className={styles.input_div}>
+              <CustomInput
+                value={profileData.first_name}
+                // onChange={handleChange}
+                placeholder="First Name"
+                name="first_name"
+                disabled
+              />
+            </div>
+
+            <div className={styles.input_div}>
+              <CustomInput
+                value={profileData?.last_name}
+                // onChange={handleChange}
+                placeholder="Second Name"
+                name="last_name"
+                disabled
+              />
+            </div>
           </div>
-          
-          <div className={styles.input_div}>
-            <CustomInput
-              value={profileData?.last_name}
-              // onChange={handleChange}
-              placeholder="Second Name"
-              name="last_name"
-              disabled
-            />
-          </div>
-        </div>
         </Col>
       </Row>
 
       <Row className={styles.container}>
-      <Col span={4}>
+        <Col span={4}>
           <label className={styles.label}>About</label>
         </Col>
         <Col span={20}>
-        <CustomTextArea
-          value={profileData.bio}
-          name="bio"
-          onChange={handleChange}
-          placeholder="Your Bio"
-          rows={4}
-        />
+          <CustomTextArea
+            value={profileData.bio}
+            name="bio"
+            onChange={handleChange}
+            placeholder="Your Bio"
+            rows={4}
+          />
         </Col>
-        
       </Row>
       <Row className={styles.container}>
-      <Col span={4}>
+        <Col span={4}>
           <label className={styles.label}>Website</label>
         </Col>
         <Col span={20}>
-        <Input
-          onChange={handleChange}
-          value={profileData?.website}
-          className={styles.single_input}
-          placeholder="www.example.com"
-          name="website"
-        />
+          <Input
+            onChange={handleChange}
+            value={profileData?.website}
+            className={styles.single_input}
+            placeholder="www.example.com"
+            name="website"
+          />
         </Col>
       </Row>
-
-
 
       <Row className={styles.container}>
-      <Col span={4}>
+        <Col span={4}>
           <label className={styles.label}>Country</label>
         </Col>
-      <Col span={20}>
-      
-        <div className={styles.input_container}>
-        <CountryDropdown
-          value={country}
-          onChange={(val) => setCountry(val)}
-          classes={styles.select}
-          showDefaultOption={true}
-          defaultOptionLabel={country}
-        />
-          
-        <label className={styles.select_label}>City</label>
-        <RegionDropdown
-          country={country}
-          value={region}
-          showDefaultOption={true}
-          defaultOptionLabel={region}
-          classes={styles.select}
-          onChange={(val) => setRegion(val)}
-        />
-        </div>
+        <Col span={20}>
+          <div className={styles.input_container}>
+            <CountryDropdown
+              value={country}
+              onChange={(val) => setCountry(val)}
+              classes={styles.select}
+              showDefaultOption={true}
+              defaultOptionLabel={country}
+            />
+
+            <label className={styles.select_label}>City</label>
+            <RegionDropdown
+              country={country}
+              value={region}
+              showDefaultOption={true}
+              defaultOptionLabel={region}
+              classes={styles.select}
+              onChange={(val) => setRegion(val)}
+            />
+          </div>
         </Col>
       </Row>
-
-
 
       <div className={styles.select_container}>
         <Col span={3}>

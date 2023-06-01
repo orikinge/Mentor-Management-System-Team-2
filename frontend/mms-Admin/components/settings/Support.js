@@ -77,8 +77,8 @@ function Support() {
         if (response.status === 200 || response.status === 201) {
           setMessage("");
           setLoading(false);
-          setSupportData({})
-          setFile("")
+          setSupportData({});
+          setFile("");
           setIsSuccess(true);
         }
 

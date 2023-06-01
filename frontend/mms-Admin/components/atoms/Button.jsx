@@ -40,7 +40,7 @@ export const Button = (props) => {
 
   if (props.type === "link")
     return (
-      <Link href={props.url}>
+      <Link href={props.url} target={props.target} legacyBehavior>
         <button
           {...otherProps}
           style={generateButtonStyle(

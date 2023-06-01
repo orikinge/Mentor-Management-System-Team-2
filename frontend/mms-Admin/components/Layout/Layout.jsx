@@ -115,7 +115,7 @@ const AppLayout = ({ children }) => {
 
   const loadTask = async () => {
     const query = { search: searchTask, page: pageNumber, limit };
-    console.log(query);
+
     try {
       setLoading(true);
       const { data } = await fetchTasks(convertToURLQuery(query));
@@ -157,55 +157,6 @@ const AppLayout = ({ children }) => {
                       currentPage={page}
                       onPageChange={handlePageChange}
                     />
-                  </>
-                )}
-                {router?.pathname === "/tasks" && (
-                  <>
-                    {showMentorSearch !== false ? (
-                      <CustomInput
-                        className={[styles.archive_input]}
-                        size="large"
-                        placeholder="Search Task"
-                        type="task"
-                        required
-                        value={searchTask}
-                        onChange={handleOnchangeTask}
-                      />
-                    ) : (
-                      ""
-                    )}
-                    <div className={[styles.task_icon]}>
-                      <div
-                        className={[styles.task_search_icon]}
-                        onClick={handleShow}>
-                        <Icon
-                          icon={"/assets/images/search.svg"}
-                          width={"20px"}
-                          height={"20px"}
-                        />
-                      </div>
-                      <div className={[styles.task_filter_icon]}>
-                        <Icon
-                          icon={"/assets/images/filter.svg"}
-                          width={"25px"}
-                          height={"25px"}
-                        />
-                      </div>
-                    </div>
-                    <div className={[styles.task_filter_icon]}>
-                      <Icon
-                        icon={"/assets/images/filter.svg"}
-                        width={"25px"}
-                        height={"25px"}
-                      />
-                    </div>
-                    <span className={[styles.task_create]}>
-                      <CustomButton
-                        className={styles.taskbutton}
-                        onClick={() => router.push("/broadcast")}>
-                        Send Broadcast Message
-                      </CustomButton>
-                    </span>
                   </>
                 )}
                 {router?.pathname === "/messages" && (
