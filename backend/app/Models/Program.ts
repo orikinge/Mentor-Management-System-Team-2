@@ -36,6 +36,12 @@ export default class Program extends BaseModel {
   @hasMany(() => ProgramReport)
   public programReports: HasMany<typeof ProgramReport>
 
+  @column.dateTime()
+  public startDate: DateTime
+
+  @column.dateTime()
+  public endDate: DateTime
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
