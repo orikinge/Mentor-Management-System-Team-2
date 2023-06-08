@@ -5,6 +5,8 @@ import ProgramReport from 'App/Models/ProgramReport'
 import UserProgram from 'App/Models/UserProgram'
 import { schema } from '@ioc:Adonis/Core/Validator'
 import ProgramCriterion from 'App/Models/ProgramCriterion'
+import NotificationInterface from 'App/Interfaces/NotificationInterface'
+import NotificationController from './NotificationController'
 
 export default class ProgramsController {
   public async index({ request, response }: HttpContextContract) {
@@ -37,6 +39,7 @@ export default class ProgramsController {
     try {
       if (auth.user?.id) {
         const userId = auth.user?.id
+        const userFirstName = `${auth.user.firstName}`
         const payload = await request.validate({
           schema: schema.create({
             gravatar: schema.file.optional({
@@ -50,7 +53,6 @@ export default class ProgramsController {
             criteria: schema.array.optional().members(schema.number()),
           }),
         })
-
         const program = new Program()
         program.userId = userId
         program.name = payload.name
@@ -73,14 +75,22 @@ export default class ProgramsController {
           }))
 
           await UserProgram.createMany(usersData)
+
+          const notification = new NotificationController()
+          notification.save({
+            type: 'create-program',
+            userId,
+            recipients: users,
+            message: `${userFirstName} created program ${program.name}`,
+          })
         }
 
         const { criteria } = payload
 
         if (criteria && criteria.length > 0) {
-          const criteriaData = criteria.map((criteriaId) => ({
+          const criteriaData = criteria.map((formTemplateId) => ({
             programId: program.id,
-            criteriaId,
+            formTemplateId,
           }))
 
           await ProgramCriterion.createMany(criteriaData)
@@ -118,7 +128,7 @@ export default class ProgramsController {
         .preload('user')
         .exec()
 
-        const programCriteria = await ProgramCriterion.query()
+      const programCriteria = await ProgramCriterion.query()
         .where('program_id', id)
         .preload('formTemplate')
         .exec()
@@ -132,7 +142,7 @@ export default class ProgramsController {
         mentorManagerCount: mentorManagers.length,
         mentorManagers,
         programCriteriaCount: programCriteria.length,
-        programCriteria
+        programCriteria,
       })
     } catch (error) {
       return response.badRequest({ message: 'Server issue', status: 'Error' })
@@ -141,7 +151,9 @@ export default class ProgramsController {
 
   public async update({ auth, params, request, response }: HttpContextContract) {
     try {
+      if(auth.user?.id){
       const userId = await auth.user?.id
+      const userFirstName = `${auth.user?.firstName}`
       const program = await Program.findByOrFail('id', params.id)
       const payload = await request.validate({
         schema: schema.create({
@@ -182,6 +194,13 @@ export default class ProgramsController {
         }))
 
         await UserProgram.createMany(usersData)
+        const notification = new NotificationController()
+          notification.save({
+            type: 'update-program',
+            userId,
+            recipients: users,
+            message: `${userFirstName} updated program ${program.name}`,
+          })
       }
 
       await ProgramCriterion.query().where('programId', program.id).delete()
@@ -198,6 +217,7 @@ export default class ProgramsController {
       }
 
       response.status(200).json({ message: 'Program updated', ...program.$attributes })
+    }
     } catch (error) {
       response.badRequest({ message: `server issue`, status: 'Error' })
     }
@@ -407,7 +427,7 @@ export default class ProgramsController {
       })
 
       program.programCriteria.forEach((programCriterion) => {
-        const {formTemplate} = programCriterion
+        const { formTemplate } = programCriterion
         result.criteria.push(formTemplate)
       })
 

@@ -184,6 +184,13 @@ Route.group(() => {
 
   Route.get('/dashboard', 'DashboardController.index').middleware('auth')
 
+  Route.group(() => {
+    Route.get('/', 'NotificationController.index')
+    Route.put('/:id', 'NotificationController.updateOnRead')
+  })
+    .prefix('notifications')
+    .middleware('auth')
+
   Route.resource('faq', 'FaqController').middleware({
     store: ['auth'],
   })
