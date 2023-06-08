@@ -42,6 +42,8 @@ Route.group(() => {
   }).prefix('user')
 
   Route.group(() => {
+    Route.get('/', 'ProgramsCertificateController.getAllApprovedCertificates')
+    Route.post('/', 'ProgramsCertificateController.createCertificate')
     Route.get('/:userId/certificates', 'ProgramsCertificateController.getUserCertificates')
   }).prefix('certificate')
 
@@ -181,6 +183,11 @@ Route.group(() => {
   })
     .prefix('criteria')
     .middleware('auth')
+
+  Route.group(()=>{
+    Route.get('/pending-requests', 'RequestController.getPendingRequest')
+  })
+  .prefix('requests').middleware('auth')
 
   Route.get('/dashboard', 'DashboardController.index').middleware('auth')
 

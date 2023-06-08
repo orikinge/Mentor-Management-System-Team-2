@@ -2,7 +2,7 @@ import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
 import Certificate from 'App/Models/ProgramsCertificate'
 
 export default class extends BaseSeeder {
-  public async run() {
+  public async aaaaaa() {
     // Write your database queries inside the run method
     Certificate.createMany([
       {

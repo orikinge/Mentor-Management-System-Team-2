@@ -2,25 +2,25 @@ import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
 import User from 'App/Models/User'
 
 export default class extends BaseSeeder {
-  public async aaaa() {
+  public async run() {
     // Write your database queries inside the run method
     await User.createMany([
       {
-        email: 'dim2though@gmail.com',
+        email: 'test20@gmail.com',
         password: 'test12345678',
         firstName: 'aliyu',
         lastName: 'Olad',
         bio: "I don't have a bio",
       },
       {
-        email: 'test@gmail.com',
+        email: 'test21@gmail.com',
         password: 'test12345678',
         firstName: 'aliyu',
         lastName: 'Olad',
         bio: "I don't have a bio",
       },
       {
-        email: 'test2@gmail.com',
+        email: 'test22@gmail.com',
         password: 'test12345678',
         firstName: 'Segun',
         lastName: 'Oyinlola',
@@ -28,7 +28,7 @@ export default class extends BaseSeeder {
       },
 
       {
-        email: 'test3@gmail.com',
+        email: 'test23@gmail.com',
         password: 'test12345678',
         firstName: 'Another',
         lastName: 'User',
@@ -36,7 +36,7 @@ export default class extends BaseSeeder {
       },
 
       {
-        email: 'test4@gmail.com',
+        email: 'test24@gmail.com',
         password: 'test12345678',
         firstName: 'Annoying',
         lastName: 'User',
@@ -44,7 +44,7 @@ export default class extends BaseSeeder {
       },
 
       {
-        email: 'test5@gmail.com',
+        email: 'test25@gmail.com',
         password: 'test12345678',
         firstName: 'Just Another',
         lastName: 'User',
@@ -52,7 +52,7 @@ export default class extends BaseSeeder {
       },
 
       {
-        email: 'test6@gmail.com',
+        email: 'test26@gmail.com',
         password: 'test12345678',
         firstName: 'Dan',
         lastName: 'Mike',
@@ -60,7 +60,7 @@ export default class extends BaseSeeder {
       },
 
       {
-        email: 'test7@gmail.com',
+        email: 'test27@gmail.com',
         password: 'test12345678',
         firstName: 'Test',
         lastName: 'Test',
