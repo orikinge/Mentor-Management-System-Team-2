@@ -189,6 +189,8 @@ Route.group(() => {
   })
   .prefix('requests').middleware('auth')
 
+  Route.get('/search', 'SearchController.search').middleware('auth')
+
   Route.get('/dashboard', 'DashboardController.index').middleware('auth')
 
   Route.group(() => {

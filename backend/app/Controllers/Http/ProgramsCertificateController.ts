@@ -72,7 +72,7 @@ export default class ProgramsCertificateController {
       
       const approvedCertificatesCount = approvedCertificates.length
 
-      const pendingApproval = await ProgramCertificate.query().where('is_approved', false)
+      const pendingApproval = await ProgramCertificate.query().where('is_approved', false).where('delete_at')
         
       const pendingApprovalCount = pendingApproval.length
 

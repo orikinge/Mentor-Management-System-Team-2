@@ -45,7 +45,7 @@ export default class RequestController {
       })
     } catch (error) {
       return response.badRequest({
-        message: `Error fetching Mentor Managers Request`,
+        message: `Error fetching Request`,
         status: 'error',
       })
     }
