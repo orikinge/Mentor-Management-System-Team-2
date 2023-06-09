@@ -42,7 +42,11 @@ Route.group(() => {
   }).prefix('user')
 
   Route.group(() => {
+    Route.get('/', 'ProgramsCertificateController.getAllApprovedCertificates')
+    Route.post('/', 'ProgramsCertificateController.createCertificate')
     Route.get('/:userId/certificates', 'ProgramsCertificateController.getUserCertificates')
+    Route.put('/approve/:id', 'ProgramsCertificateController.approveCertificate')
+    Route.put('/decline/:id', 'ProgramsCertificateController.declineCertificate')
   }).prefix('certificate')
 
   Route.group(() => {
@@ -72,6 +76,7 @@ Route.group(() => {
     Route.put('/', 'ProfilesController.update')
     Route.put('/delete/:userId', 'ProfilesController.delete')
     Route.get('/search', 'ProfilesController.search')
+    Route.put('/approve/:userId', 'ProfilesController.approveUser')
   })
     .prefix('profile')
     .middleware('auth')
@@ -173,7 +178,31 @@ Route.group(() => {
     .prefix('archive')
     .middleware('auth')
 
+  Route.group(() => {
+    Route.get('/', 'CriteriaController.index')
+    Route.post('/', 'CriteriaController.createCriteria')
+    Route.get('/:id', 'CriteriaController.show')
+    Route.put('/:id', 'CriteriaController.updateCriteria')
+  })
+    .prefix('criteria')
+    .middleware('auth')
+
+  Route.group(() => {
+    Route.get('/pending-requests', 'RequestController.getPendingRequest')
+  })
+    .prefix('requests')
+    .middleware('auth')
+
+  Route.get('/search', 'SearchController.search').middleware('auth')
+
   Route.get('/dashboard', 'DashboardController.index').middleware('auth')
+
+  Route.group(() => {
+    Route.get('/', 'NotificationController.index')
+    Route.put('/:id', 'NotificationController.updateOnRead')
+  })
+    .prefix('notifications')
+    .middleware('auth')
 
   Route.resource('faq', 'FaqController').middleware({
     store: ['auth'],

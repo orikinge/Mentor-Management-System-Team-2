@@ -12,6 +12,7 @@ export default class MentorController {
       return
     }
     const { page, limit, query } = request.qs()
+    try{
     const mentors = await User.query()
       .where((queryBuilder) => {
         queryBuilder
@@ -22,6 +23,9 @@ export default class MentorController {
       .whereNull('deleted_at')
       .paginate(page || 1, limit || 10)
     return { status: 'success', message: 'Fetched all mentors successful', mentors }
+    }catch (error) {
+      return response.status(500).send({ message: 'Error fetching mentors.' })
+    }
   }
 
   async getMentorTask({ auth, params, request, response }: HttpContextContract) {

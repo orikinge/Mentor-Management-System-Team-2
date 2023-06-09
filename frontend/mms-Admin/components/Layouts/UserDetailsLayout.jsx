@@ -27,7 +27,7 @@ const UserDetailsLayout = ({ data, children }) => {
   return (
     <div className="flex">
       <div className={styles.user_list_container}>
-        <ListHeader />
+        <ListHeader userRole={role} />
 
         <Users users={users.data} />
       </div>
@@ -41,7 +41,9 @@ const UserDetailsLayout = ({ data, children }) => {
 const ListHeader = ({ userRole }) => {
   return (
     <div className={`flex flex-justify-between ${styles.user_list_header}`}>
-      <h1 className={`${styles.title}`}>{userRole ? userRole : "Mentors"}</h1>
+      <h1 className={`${styles.title}`}>
+        {userRole === "mentor-managers" ? "Mentor Managers" : "Mentors"}
+      </h1>
       <Icons name="search" width="24" height="24" fill="#058B94" />
     </div>
   );
@@ -142,7 +144,7 @@ const UserDetails = ({ children, role, users }) => {
       <div
         className={`flex flex-align-center flex-justify-between ${styles.user_details_wrapper}`}>
         <div className="flex gap-10">
-          <Image
+          <Image 
             width={90}
             height={90}
             src={avatar ? avatar : "/assets/images/user_img.svg"}
@@ -153,9 +155,9 @@ const UserDetails = ({ children, role, users }) => {
             <h2
               className={
                 styles.user_name
-              }>{`${userDetails.first_name} ${userDetails.last_name}`}</h2>
+              }>{`${userDetails?.first_name} ${userDetails?.last_name}`}</h2>
             <p className={styles.designation}>
-              {getDesignation(userDetails.isAdmin, userDetails.isMentorManager)}
+              {getDesignation(userDetails?.isAdmin, userDetails?.isMentorManager)}
             </p>
           </div>
         </div>

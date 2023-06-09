@@ -1,0 +1,26 @@
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loader_wrapper {
+  width: 100%;
+  height: 80vh;
+}
+
+.loader {
+  width: 30px;
+  height: 30px;
+  border: 2px solid #058b94;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  animation: rotate 2s ease-in-out infinite;
+}

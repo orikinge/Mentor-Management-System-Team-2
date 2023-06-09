@@ -1,6 +1,6 @@
 import http from "services/axios";
 
 export const fetchTaskReports = async () => {
-  const url = "/task-reports";
-  return await http.get(url);
+  const response = await http.get("/task-reports");
+  return response.data.responseData;
 };

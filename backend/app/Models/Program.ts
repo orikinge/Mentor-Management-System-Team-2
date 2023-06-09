@@ -3,6 +3,7 @@ import { BaseModel, BelongsTo, belongsTo, column, hasMany, HasMany } from '@ioc:
 import User from './User'
 import UserProgram from './UserProgram'
 import ProgramReport from './ProgramReport'
+import ProgramCriterion from './ProgramCriterion'
 
 export default class Program extends BaseModel {
   @column({ isPrimary: true })
@@ -29,8 +30,17 @@ export default class Program extends BaseModel {
   @hasMany(() => UserProgram)
   public userPrograms: HasMany<typeof UserProgram>
 
+  @hasMany(() => ProgramCriterion)
+  public programCriteria: HasMany<typeof ProgramCriterion>
+
   @hasMany(() => ProgramReport)
   public programReports: HasMany<typeof ProgramReport>
+
+  @column.dateTime()
+  public startDate: DateTime
+
+  @column.dateTime()
+  public endDate: DateTime
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
@@ -40,5 +50,8 @@ export default class Program extends BaseModel {
 
   @column()
   public users?: any
+
+  @column()
+  public criteria: any
 
 }

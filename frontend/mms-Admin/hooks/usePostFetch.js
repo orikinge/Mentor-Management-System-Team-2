@@ -2,18 +2,13 @@ import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { fetchPosts } from "../pages/api/forum";
 
-function usePostFetch(page,success) {
-console.log("this is the page")
-console.log(page)
-
+function usePostFetch(page, success) {
   const [data, setData] = useState([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
   const [pageNumber, setPageNumber] = useState(page);
   const [hasMore, setHasMore] = useState(true);
 
-
-  console.log("this is the error");
   useEffect(() => {
     fetchPosts(page)
       .then((res) => {
@@ -31,7 +26,7 @@ console.log(page)
         setError(true);
         setLoading(false);
       });
-  }, [page,success]);
+  }, [page, success]);
 
   return { data, error, loading, hasMore, pageNumber };
 }

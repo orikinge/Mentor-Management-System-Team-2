@@ -1,163 +1,152 @@
-import moment from 'moment';
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
-import styles from "styles/tasks.module.css";
-import TasksSidebar from 'components/TasksSidebar';
-import Icon from 'components/Icon';
-import { Loader } from "components/Loader";
-import { CustomButton } from 'components/formInputs/CustomInput';
-import DeleteTask from 'components/DeleteTask';
+import styles from "../../styles/programs/programs.module.scss";
+import { Icons } from "../../components/atoms/Icons";
+import { Loader } from "../../components/atoms/Loader";
+import { ListItem } from "../../components/atoms/ListItem";
+import { Button } from "../../components/atoms/Button";
+import { Stats } from "../../components/molecules/Stats";
+import NoItemSelected from "../../components/organisms/NoItemSelected";
+import { fetchTasks } from "pages/api/task";
+import { formatDistance } from "date-fns";
+import { useRouter } from "next/router";
 
+const Tasks = () => {
+  const router = useRouter();
+  const [task, setTask] = useState(null);
+  const { data: tasks, isLoading, isError } = useQuery(["tasks"], fetchTasks);
 
-function tasks() {
-  const [data, setData] = useState(null);
+  useEffect(() => {
+    if (router.query.id && tasks) {
+      setTask((prev) => tasks.filter((task) => task.id == router.query.id)[0]);
+    }
+  }, [tasks]);
 
-  const handleDataChange = newData => {
-    setData(newData);
-  };
-  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-  const handleClickDelete = (e) => {
-    e.preventDefault();
-    setIsDeleteOpen(true);
-  };
+  if (isLoading) return <Loader />;
+
+  if (isError) return "An error occured";
+
   return (
-    <div className={styles.main_div}>
-        <div className={styles.side_container}>
-         <TasksSidebar onDataChanged={handleDataChange}/>
-         </div>
-         <div className={styles.main_container}>
-         {data !== null ? (
-          <>
-          <div className={styles.main_container_sub}>
-            <div className={styles.side_container_task}>
-              <div className={styles.side_div_logo_task}>
-                <Icon
-                  icon={"/assets/images/task.svg"}
-                  width={"40px"}
-                  height={"40px"} />
-              </div>
-              <div className={styles.side_div_item_task}>
-                <p>
-                  {data?.title}
-                </p>
-                <div className={styles.side_div_item_div_task}>
-                  <Icon
-                    icon={"/assets/images/ClockLogo.svg"}
-                    width={"16.5px"}
-                    height={"16.5px"}
-                    className={styles.side_div_item_icon_task} />
-                  <div className={styles.side_div_item_date_task}>{moment(data?.endDate).diff(moment(), 'days')} days from now</div>
-                </div>
-              </div>
-            </div>
-
-            <div className={styles.side_div_item_des}>
-              <p>
-                {data?.description}
-              </p>
-              <div className={styles.side_div_item_des1}>
-                <div className={styles.side_div_mentor_managers1}>
-                  <Icon
-                    icon={"/assets/images/Mentor_Managers.svg"}
-                    width={"30px"}
-                    height={"30px"}
-                    className={styles.item_icon_mentor_managers} />
-                </div>
-                <div className={styles.side_div_mentor_managers2}>
-                  <div className={styles.amount_mentor_managers}>
-                    {data?.mentorManagerCount}
-                  </div>
-                  <span className={styles.program_mentor_managers}>
-                    Mentor Managers assigned to this program
-                  </span>
-                  <span className={styles.taskbuttonspan}>
-                    <CustomButton className={styles.taskbutton}>
-                      View
-                    </CustomButton>
-                  </span>
-                </div>
-              </div>
-              <div className={styles.side_div_item_des2}>
-                <div className={styles.side_div_mentor_managers1}>
-                  <Icon
-                    icon={"/assets/images/Mentor.svg"}
-                    width={"30px"}
-                    height={"30px"}
-                    className={styles.item_icon_mentor_managers} />
-                </div>
-                <div className={styles.side_div_mentor_managers2_1}>
-                  <div className={styles.amount_mentor_managers2}>
-                    {data?.mentorCount}
-                  </div>
-                  <span className={styles.program_mentor_managers2}>
-                    Mentors assigned to this program
-                  </span>
-                  <span className={styles.taskbuttonspan}>
-                    <CustomButton className={styles.taskbutton1}>
-                      View
-                    </CustomButton>
-                  </span>
-                </div>
-              </div>
-
-              <div className={styles.side_div_item_des2}>
-                <div className={styles.side_div_mentor_managers1}>
-                  <Icon
-                    icon={"/assets/images/reportstask.svg"}
-                    width={"30px"}
-                    height={"30px"}
-                    className={styles.item_icon_mentor_managers} />
-                </div>
-                <div className={styles.side_div_mentor_managers2_1}>
-                  <div className={styles.amount_mentor_managers2}>
-                    {data?.taskReportCount}
-                  </div>
-                  <span className={styles.program_mentor_managers3}>
-                    Task reports
-                  </span>
-                  <span className={styles.taskbuttonspan}>
-                    <CustomButton className={styles.taskbutton1}>
-                      View
-                    </CustomButton>
-                  </span>
-                </div>
-              </div>
-            </div>
+    <div className={`flex`}>
+      <div className={`${styles.list_area}`}>
+        <div className="flex flex-justify-between flex-align-center mb-1">
+          <h1 className={styles.page_title}>Tasks</h1>
+          <div className={`flex flex-align-center gap-10`}>
+            <Icons name="search" width="24" fill="#058B94" />
+            <Icons name="filter" />
           </div>
-          <div className={styles.button_div}>
-              <button className={styles.button_div_icon} onClick={handleClickDelete}>
-                <Icon
-                  icon={"/assets/images/Delete.svg"}
-                  width={"30px"}
-                  height={"30px"} /> Delete
-              </button>
+        </div>
 
-              <CustomButton>
-                <Link href={`/tasks/${data?.id}`}>
-                  <a className={styles.edit_link_text}>Edit Task</a>
-                </Link>
-              </CustomButton>
+        <div className={`${styles.list_wrapper}`}>
+          {tasks.map((item) => (
+            <ListItem
+              onClick={() => {
+                router.push({
+                  pathname: `/tasks`,
+                  query: { id: encodeURI(item.id) },
+                });
+                setTask(item);
+              }}
+              className="cursor-pointer"
+              key={item.id}>
+              <div className={`flex gap-16 flex-align-center`}>
+                <Icons name="task" fill="#058B94" />
+
+                <div>
+                  <p className={`list_main_text`}>{item.title}</p>
+                  <div className={`flex gap-10`}>
+                    <p className="flex flex-align-center gap-10 list_sub_text">
+                      <Icons name="calendar" />
+                      {formatDistance(new Date(item.endDate), new Date(), {
+                        addSuffix: true,
+                      })}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </ListItem>
+          ))}
+        </div>
+      </div>
+
+      <div className={styles.program_details}>
+        <div className={`flex flex-justify-end ${styles.compose_button_area}`}>
+          <Button variant="normal" size="large" type="link" url="/tasks/create">
+            Create New Task
+          </Button>
+        </div>
+        <div className={styles.program_details_content}>
+          {task ? (
+            <div>
+              <div
+                className={`flex flex-justify-between flex-align-center ${styles.details_header}`}>
+                <div className={`flex gap-16 flex-align-center`}>
+                  <Icons name="task" fill="#058B94" />
+                  <div>
+                    <p className={`list_main_text`}>{task.title}</p>
+                    <div className={`flex gap-10`}>
+                      <p className="flex flex-align-center gap-10 list_sub_text">
+                        <Icons name="calendar" />
+                        {formatDistance(new Date(task.endDate), new Date(), {
+                          addSuffix: true,
+                        })}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <Icons onClick={() => setTask(null)} name="close" />
+              </div>
+
+              <div className={styles.details_body}>
+                <section>
+                  <p>{task.description}</p>
+
+                  <Stats
+                    url={`/tasks/assignees/mentor-manager/${task.id}`}
+                    icon={<Icons name="mentor-manager" />}
+                    number={task.mentorManagerCount}
+                    text="Mentor Managers assigned to this task"
+                  />
+
+                  <Stats
+                    url={`/tasks/assignees/mentor/${task.id}`}
+                    icon={<Icons name="mentor" />}
+                    number={task.mentorCount}
+                    text="Mentors assigned to this task"
+                  />
+
+                  <Stats
+                    url={`/tasks/reports/${task.id}`}
+                    icon={<Icons name="report-sheet" />}
+                    number={task.taskReportCount}
+                    text="Task reports"
+                  />
+                </section>
+
+                <section className="flex flex-align-center flex-justify-end gap-16">
+                  <Link href="#">
+                    <span className={`cursor-pointer ${styles.remove_program}`}>
+                      Delete
+                    </span>
+                  </Link>
+                  <Button
+                    type="link"
+                    url={`/tasks/edit?id=${task.id}`}
+                    variant="normal"
+                    size="large">
+                    Edit Task
+                  </Button>
+                </section>
+              </div>
             </div>
-            {isDeleteOpen && (
-              <DeleteTask
-                image={"/assets/images/deleteTask.svg"}
-                message={"Task Deleted Successfully"}
-                width={"300px"}
-                height={"150px"}
-                isDeleteOpen={isDeleteOpen}
-                setIsDeleteOpen={setIsDeleteOpen}
-                data={data}
-              />
-            )}
-            </>
           ) : (
-          <div className={styles.spin}>
-            <Loader size="large" />
-          </div>
+            <NoItemSelected />
           )}
-       </div>
-     </div>
-  )
-}
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export default tasks
+export default Tasks;

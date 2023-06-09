@@ -7,6 +7,9 @@ export default class ProgramCertificate extends BaseModel {
   public id: number
 
   @column()
+  public creatorId: number
+
+  @column()
   public userId: number
 
   @column()
@@ -26,6 +29,12 @@ export default class ProgramCertificate extends BaseModel {
 
   @column()
   public signature: string
+
+  @column()
+  public isApproved: boolean
+
+  @column()
+  public deletedAt: DateTime
 
   @belongsTo(() => User)
   public user: BelongsTo<typeof User>

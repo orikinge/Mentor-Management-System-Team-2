@@ -7,7 +7,7 @@ import { Button } from "../../../components/atoms/Button";
 import { Accordion } from "../../../components/molecules/Accordion";
 import { useQuery } from "@tanstack/react-query";
 import { fetchMentorTasks } from "pages/api/user";
-import { useRouter } from "next/router"; 
+import { useRouter } from "next/router";
 
 function MentorTasks() {
   const router = useRouter();
@@ -19,7 +19,6 @@ function MentorTasks() {
   if (isLoading) return "loading tasks...";
 
   if (isError) return "An error occured";
-  console.log(isError)
 
   return (
     <div className={styles.wrapper}>

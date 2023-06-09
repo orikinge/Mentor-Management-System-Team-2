@@ -31,7 +31,6 @@ const BroadcastMessageScreen = () => {
 
   const loadUsersCallback = useCallback(loadUsers, []);
   const onSearch = (query) => {
-    console.log("Search:", query);
     ref.current = query;
     setLoading(!!query);
     setUsers([]);
