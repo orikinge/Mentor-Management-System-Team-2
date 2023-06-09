@@ -2,6 +2,7 @@ import { Document, Page, Image, View, Text } from "@react-pdf/renderer";
 import { styles } from "./certificateStyle";
 import moment from "moment";
 const Template = ({ data }) => {
+  console.log(data);
   return (
     <Document>
       <Page size="A4" orientation="landscape" style={styles.page}>
@@ -45,8 +46,7 @@ const Template = ({ data }) => {
               <View style={styles.flexR}>
                 <View style={styles.w30}>
                   <Image
-                    src={
-                      data?.signature ? data.signature : ""}
+                    src={data?.signature ? data.signature : ""}
                     style={{ height: "40px", width: "200px" }}
                   />
                   <View style={styles.hr50} />
@@ -72,7 +72,8 @@ const Template = ({ data }) => {
                     : "Date of Issue: "}
                 </Text>
                 <Text>
-                  Certificate ID:{data?.certicate_id ? data.certicate_id : ""}{" "}
+                  Certificate ID:
+                  {data?.certificate_id ? " " + data.certificate_id : ""}
                 </Text>
               </View>
               <View
@@ -85,7 +86,7 @@ const Template = ({ data }) => {
                 <Image
                   alt="signature"
                   src="/assets/images/andela_logo.png"
-                  style={{ height: "50px", width: "100px" }}
+                  style={{ height: "25px", width: "60px" }}
                 />
               </View>
             </View>
