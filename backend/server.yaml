@@ -1,10 +1,10 @@
 runtime: nodejs18
 service: server
 
-automatic_scaling:
-  target_cpu_utilization: 0.9
-  min_instances: 1
-  max_instances: 2
+#automatic_scaling:
+#  target_cpu_utilization: 0.9
+#  min_instances: 1
+#  max_instances: 2
 
 env_variables:
   SMTP_HOST: "smtp-relay.sendinblue.com"
