@@ -125,6 +125,9 @@ export default class User extends BaseModel {
   @column()
   public inviteCode: string | null
 
+  @column()
+  public isApproved: boolean
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

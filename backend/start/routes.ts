@@ -45,6 +45,8 @@ Route.group(() => {
     Route.get('/', 'ProgramsCertificateController.getAllApprovedCertificates')
     Route.post('/', 'ProgramsCertificateController.createCertificate')
     Route.get('/:userId/certificates', 'ProgramsCertificateController.getUserCertificates')
+    Route.put('/approve/:id', 'ProgramsCertificateController.approveCertificate')
+    Route.put('/decline/:id', 'ProgramsCertificateController.declineCertificate')
   }).prefix('certificate')
 
   Route.group(() => {
@@ -74,6 +76,7 @@ Route.group(() => {
     Route.put('/', 'ProfilesController.update')
     Route.put('/delete/:userId', 'ProfilesController.delete')
     Route.get('/search', 'ProfilesController.search')
+    Route.put('/approve/:userId', 'ProfilesController.approveUser')
   })
     .prefix('profile')
     .middleware('auth')
@@ -184,10 +187,11 @@ Route.group(() => {
     .prefix('criteria')
     .middleware('auth')
 
-  Route.group(()=>{
+  Route.group(() => {
     Route.get('/pending-requests', 'RequestController.getPendingRequest')
   })
-  .prefix('requests').middleware('auth')
+    .prefix('requests')
+    .middleware('auth')
 
   Route.get('/search', 'SearchController.search').middleware('auth')
 

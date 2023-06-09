@@ -1,6 +1,7 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import ProgramCertificate from 'App/Models/ProgramsCertificate'
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
+import { DateTime } from 'luxon'
 
 export default class ProgramsCertificateController {
   async getUserCertificates({ auth, params, request, response }: HttpContextContract) {
@@ -68,17 +69,22 @@ export default class ProgramsCertificateController {
     try {
       const approvedCertificates = await ProgramCertificate.query()
         .where('is_approved', true)
+        .whereNull('deleted_at')
         .exec()
-      
+
       const approvedCertificatesCount = approvedCertificates.length
 
-      const pendingApproval = await ProgramCertificate.query().where('is_approved', false).where('delete_at')
-        
+      const pendingApproval = await ProgramCertificate.query()
+        .where('is_approved', false)
+        .whereNull('deleted_at')
+
       const pendingApprovalCount = pendingApproval.length
 
-      const userGeneratedCertificates = 
-        await ProgramCertificate.query().where('creator_id', user.id)
-      
+      const userGeneratedCertificates = await ProgramCertificate.query().where(
+        'creator_id',
+        user.id
+      )
+
       const userGeneratedCertificatesCount = userGeneratedCertificates.length
 
       const recentCertificates = await ProgramCertificate.query()
@@ -97,6 +103,46 @@ export default class ProgramsCertificateController {
       })
     } catch (error) {
       return response.badRequest({ message: `Error fetching certificates`, status: 'error' })
+    }
+  }
+
+  public async approveCertificate({ auth, params, response }: HttpContextContract) {
+    const user = auth.user
+    if (!user || !user.isAdmin) {
+      response.unauthorized({ message: 'You are not authorized to access this resource.' })
+    }
+
+    try {
+      const programCertificate = await ProgramCertificate.findByOrFail('id', params.id)
+      if (!programCertificate)
+        return response.status(404).send({ message: 'Program Certificate does not exist' })
+
+      programCertificate.isApproved = true
+      await programCertificate.save()
+
+      response.ok({ message: 'Program Certificate approved successfully' })
+    } catch (error) {
+      response.badRequest({ message: 'server Issue' })
+    }
+  }
+
+  public async declineCertificate({ auth, params, response }: HttpContextContract) {
+    const user = auth.user
+    if (!user || !user.isAdmin) {
+      response.unauthorized({ message: 'You are not authorized to access this resource.' })
+      return
+    }
+    try {
+      const programCertificate = await ProgramCertificate.findByOrFail('id', params.id)
+      if (!programCertificate)
+        return response.status(404).send({ message: 'Program Certificate does not exist' })
+
+      programCertificate.deletedAt = DateTime.local()
+
+      programCertificate.save()
+      response.status(202).send({ message: 'Program Certificate declined' })
+    } catch (error) {
+      response.status(204).send({ message: `invalid userId: ${params.userId}`, status: 'Error' })
     }
   }
 }

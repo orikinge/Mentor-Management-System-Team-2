@@ -5,7 +5,6 @@ import ProgramReport from 'App/Models/ProgramReport'
 import UserProgram from 'App/Models/UserProgram'
 import { schema } from '@ioc:Adonis/Core/Validator'
 import ProgramCriterion from 'App/Models/ProgramCriterion'
-import NotificationInterface from 'App/Interfaces/NotificationInterface'
 import NotificationController from './NotificationController'
 
 export default class ProgramsController {
@@ -26,6 +25,7 @@ export default class ProgramsController {
         .paginate(page || 1, limit || 10)
 
       const { data } = programs.toJSON()
+      if (!data.length) return response.status(404).send({ message: 'Programs not found' })
 
       const structuredPrograms = this.structurePrograms(data)
 
@@ -112,6 +112,7 @@ export default class ProgramsController {
       const { id } = params
 
       const program = await Program.query().where('id', id).firstOrFail()
+      if (!program) return response.status(404).send({ message: 'Program not found' })
       const reports = await ProgramReport.query().where('program_id', id).exec()
       const mentors = await UserProgram.query()
         .where('program_id', id)
@@ -151,73 +152,73 @@ export default class ProgramsController {
 
   public async update({ auth, params, request, response }: HttpContextContract) {
     try {
-      if(auth.user?.id){
-      const userId = await auth.user?.id
-      const userFirstName = `${auth.user?.firstName}`
-      const program = await Program.findByOrFail('id', params.id)
-      const payload = await request.validate({
-        schema: schema.create({
-          gravatar: schema.file.optional({
-            size: '2mb',
-            extnames: ['jpg', 'png'],
+      if (auth.user?.id) {
+        const userId = await auth.user?.id
+        const userFirstName = `${auth.user?.firstName}`
+        const program = await Program.findByOrFail('id', params.id)
+        const payload = await request.validate({
+          schema: schema.create({
+            gravatar: schema.file.optional({
+              size: '2mb',
+              extnames: ['jpg', 'png'],
+            }),
+            name: schema.string(),
+            description: schema.string.optional(),
+            mentors: schema.array().members(schema.number()),
+            mentorManagers: schema.array().members(schema.number()),
+            criteria: schema.array.optional().members(schema.number()),
           }),
-          name: schema.string(),
-          description: schema.string.optional(),
-          mentors: schema.array().members(schema.number()),
-          mentorManagers: schema.array().members(schema.number()),
-          criteria: schema.array.optional().members(schema.number()),
-        }),
-      })
+        })
 
-      if (!program) return response.status(404).send({ message: 'Program not Found' })
+        if (!program) return response.status(404).send({ message: 'Program not Found' })
 
-      program.userId = userId ?? program.userId
-      program.name = payload.name ?? program.name
-      program.description = payload.description ?? program.description
+        program.userId = userId ?? program.userId
+        program.name = payload.name ?? program.name
+        program.description = payload.description ?? program.description
 
-      if (payload.gravatar) {
-        const gravatar = request.file('gravatar')
-        await gravatar?.moveToDisk('upload_file')
-        program.gravatar = gravatar?.fileName ?? program.gravatar
-      }
-      await program.save()
+        if (payload.gravatar) {
+          const gravatar = request.file('gravatar')
+          await gravatar?.moveToDisk('upload_file')
+          program.gravatar = gravatar?.fileName ?? program.gravatar
+        }
+        await program.save()
 
-      await UserProgram.query().where('programId', program.id).delete()
+        await UserProgram.query().where('programId', program.id).delete()
 
-      const { mentors, mentorManagers } = payload
-      const users = [...mentors, ...mentorManagers]
+        const { mentors, mentorManagers } = payload
+        const users = [...mentors, ...mentorManagers]
 
-      if (users && users.length > 0) {
-        const usersData = users.map((userId) => ({
-          programId: program.id,
-          userId,
-        }))
+        if (users && users.length > 0) {
+          const usersData = users.map((userId) => ({
+            programId: program.id,
+            userId,
+          }))
 
-        await UserProgram.createMany(usersData)
-        const notification = new NotificationController()
+          await UserProgram.createMany(usersData)
+          const notification = new NotificationController()
           notification.save({
             type: 'update-program',
             userId,
             recipients: users,
             message: `${userFirstName} updated program ${program.name}`,
           })
+        }
+
+        await ProgramCriterion.query().where('programId', program.id).delete()
+
+        const { criteria } = payload
+
+        if (criteria && criteria.length > 0) {
+          const criteriaData = criteria.map((criteriaId) => ({
+            programId: program.id,
+            formTemplateId: criteriaId,
+          }))
+
+          await ProgramCriterion.createMany(criteriaData)
+        }
+
+        response.status(200).json({ message: 'Program updated', ...program.$attributes })
       }
-
-      await ProgramCriterion.query().where('programId', program.id).delete()
-
-      const { criteria } = payload
-
-      if (criteria && criteria.length > 0) {
-        const criteriaData = criteria.map((criteriaId) => ({
-          programId: program.id,
-          formTemplateId: criteriaId,
-        }))
-
-        await ProgramCriterion.createMany(criteriaData)
-      }
-
-      response.status(200).json({ message: 'Program updated', ...program.$attributes })
-    }
     } catch (error) {
       response.badRequest({ message: `server issue`, status: 'Error' })
     }
@@ -252,6 +253,7 @@ export default class ProgramsController {
         .orderBy('id', 'desc')
         .paginate(page || 1, limit || 10)
 
+      if (!programs.length) return response.status(404).send({ message: 'Program not found' })
       response.ok(programs)
     } catch (error) {
       response.badRequest({ message: `server issue`, status: 'Error' })
@@ -327,6 +329,8 @@ export default class ProgramsController {
         .paginate(page || 1, limit || 10)
 
       const { data } = userPrograms.toJSON()
+
+      if (!data.length) return response.notFound({ message: 'user does not exist' })
       const structuredUserPrograms = this.structureUserPrograms(data)
 
       response.ok(structuredUserPrograms)
