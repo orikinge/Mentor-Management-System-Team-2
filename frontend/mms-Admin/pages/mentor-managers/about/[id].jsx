@@ -15,6 +15,8 @@ function AboutMentorManager() {
 
   if (isError) return "An error occured";
 
+  
+
   return (
     <div className={styles.tab_content_wrapper}>
       <h3>Bio</h3>

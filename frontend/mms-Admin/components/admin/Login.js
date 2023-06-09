@@ -35,6 +35,11 @@ const Login = ({ showPassword, setShowPassword }) => {
     setLoading(true);
 
     const valid = validateInputs(loginData);
+    if(!valid){
+      setLoading(false);
+
+      setMessage("invalid email/password")
+    }
     if (valid) {
       try {
         const response = await postLogin(loginData);
@@ -55,7 +60,8 @@ const Login = ({ showPassword, setShowPassword }) => {
         setLoading(false);
       } catch (e) {
         console.log(e)
-        setMessage(e.message);
+        // setMessage(e.message);
+        setMessage("Network Error")
         setLoading(false);
 
       }
@@ -127,4 +133,4 @@ const Login = ({ showPassword, setShowPassword }) => {
     </div>
   );
 };
-export default Login;
+export default Login;

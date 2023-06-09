@@ -142,7 +142,7 @@ const UserDetails = ({ children, role, users }) => {
       <div
         className={`flex flex-align-center flex-justify-between ${styles.user_details_wrapper}`}>
         <div className="flex gap-10">
-          <Image
+          <Image 
             width={90}
             height={90}
             src={avatar ? avatar : "/assets/images/user_img.svg"}
@@ -153,9 +153,9 @@ const UserDetails = ({ children, role, users }) => {
             <h2
               className={
                 styles.user_name
-              }>{`${userDetails.first_name} ${userDetails.last_name}`}</h2>
+              }>{`${userDetails?.first_name} ${userDetails?.last_name}`}</h2>
             <p className={styles.designation}>
-              {getDesignation(userDetails.isAdmin, userDetails.isMentorManager)}
+              {getDesignation(userDetails?.isAdmin, userDetails?.isMentorManager)}
             </p>
           </div>
         </div>
