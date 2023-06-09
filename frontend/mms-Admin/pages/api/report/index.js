@@ -19,3 +19,13 @@ export const fetchReportAssociatedWithprogram = async (id) => {
   const response = await apiService(`/programs/${id}/reports`, "GET");
   return response.data.data;
 };
+
+export const downloadTaskReport = async (id) => {
+  const response = await apiService(`/task-reports/${id}/pdf`, "GET");
+  return response.data;
+};
+
+export const downloadProgramReport = async (id) => {
+  const response = await apiService(`/program-reports/${id}/pdf`, "GET");
+  return response.data;
+};
