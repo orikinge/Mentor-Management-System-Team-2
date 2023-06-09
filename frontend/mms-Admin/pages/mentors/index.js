@@ -1,81 +1,97 @@
-import React from 'react';
-import ListMentor from '../../components/ListMentor';
-import GridMentor from '../../components/GridMentor';
-import { useStateValue } from "store/context";
-import { useRouter } from 'next/router';
-import Icon from "../../components/Icon";
-import { GlobalContextProvider } from "../../Context/store";
-import styles from "styles/navheader.module.css";
+import React, { useState } from "react";
+import { PaginationWithFilter } from "../../components/molecules/PaginationWithFilter";
+import styles from "../../styles/mentor-managers/mentor-managers.module.scss";
+import { ListItem } from "../../components/atoms/ListItem";
+import { Icons } from "../../components/atoms/Icons";
+import { Loader } from "../../components/atoms/Loader";
+import { Button } from "../../components/atoms/Button";
+import Image from "next/image";
+import Link from "next/link";
+import { useQuery } from "@tanstack/react-query";
+import { fetchMentors } from "../api/user";
 
-function mentors() {
-  const [showGrid, setShowGrid] = React.useState(true)
-  const [showList, setShowList] = React.useState(false)
-  const { dispatch } = useStateValue();
-  const router = useRouter();
+const Mentors = () => {
+  const [isGrid, setIsGrid] = useState(true);
 
-  const [ {gridState} ] = Object.values(useStateValue())
-  const handleGrid = (event) => {
-    // event.preventDefault();
-    if (showList) {
-      setShowList(false);
-      setShowGrid(true);
-      dispatch({
-        type: 'MENTOR_GRID_STATE',
-        payload: {showList, showGrid}
-      })
-    } else {
-      setShowList(true);
-      setShowGrid(false);
-      dispatch({
-        type: 'MENTOR_GRID_STATE',
-        payload: {showList, showGrid}
-      })
-    }
-  };
-  React.useEffect(() => {
-    handleGrid()
-  }, [])
+  const {
+    data: mentors,
+    isLoading,
+    isError,
+  } = useQuery(["mentors"], fetchMentors);
+
+  if (isLoading) return <Loader />;
+
+  if (isError) return "An error occured";
+
   return (
-    <GlobalContextProvider>
-    <span className={styles.module_header_span} onClick={handleGrid}>
-    {showGrid === true ? (
-      <Icon
-      icon={"/assets/images/grid-on.svg"}
-      width={"20px"}
-      height={"20px"}
-    />
-    ): (
-      <Icon
-      icon={"/assets/images/grid-active.svg"}
-      width={"20px"}
-      height={"20px"}
-    />
-    )}
- </span>
- <span style={{marginLeft: "1rem"}} onClick={handleGrid}>
-   {showList === true ? (
-    <Icon
-    icon={"/assets/images/list-on.svg"}
-    width={"22px"}
-    height={"22px"}
-  />
-   ): (
-    <Icon
-     icon={"/assets/images/list-active.svg"}
-     width={"22px"}
-     height={"22px"}
-   />
-   )}
-   </span>
     <div>
-     {gridState.showGrid !== false ? (
-      <GridMentor />
-     ) : (
-      <ListMentor />
-     )}
-    </div>
-    </GlobalContextProvider>
-  )
-}
+      <div className="flex flex-justify-between flex-align-center">
+        <div className="flex flex-align-center gap-16">
+          <h1 className={styles.page_title}>Mentors</h1>
+          <span className="cursor-pointer">
+            <Icons name="grid" onClick={() => setIsGrid(true)} />
+          </span>
+          <span className="cursor-pointer">
+            <Icons name="list" onClick={() => setIsGrid(false)} />
+          </span>
+        </div>
+        <div className="flex flex-align-center gap-16">
+          <Button variant="white" size="small" bordered>
+            Send Broadcast Message
+          </Button>
+          <Button variant="normal" size="small" bordered>
+            Add New Mentor
+          </Button>
+          <PaginationWithFilter />
+        </div>
+      </div>
+      <div
+        className={`${isGrid && "grid column-gap-10 grid-template-column-2"} ${
+          styles.mentor_managers
+        }`}>
+        {mentors.data.map((item) => (
+          <Link
+            key={item.id}
+            href={`/mentors/about/${item.id}?fullName=${item.first_name} ${item.last_name}&designation=mentor`}>
+            <ListItem>
+              <div className="flex flex-align-center gap-16">
+                <Image
+                  width={50}
+                  height={50}
+                  src={"/assets/images/user_img.svg"}
+                  alt="User profile image"
+                  className={`circle-img`}
+                />
+                <div className={styles.user_summary}>
+                  <h1
+                    className={`list_main_text`}>{`${item.first_name} ${item.last_name}`}</h1>
+                  <div
+                    className={`flex flex-column gap-10 flex-justify-center`}>
+                    <p className={`list_sub_text`}>
+                      {item.bio && `${item.bio.substring(0, 16)}...`}
+                    </p>
 
-export default mentors
+                    <div className="flex gap-10">
+                      <p className={`tag`}>PROGRAM ASST.</p>
+                      <p className={`tag`}>MENTOR-GADS</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-column gap-16">
+                <span className={`cursor-pointer`}>
+                  <Icons name="comment" />
+                </span>
+                <span className={`cursor-pointer`}>
+                  <Icons name="delete" />
+                </span>
+              </div>
+            </ListItem>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default Mentors;

@@ -3,7 +3,7 @@ import { apiService } from "../../api/axios";
 
 export const fetchMentors = async () => {
   const response = await http.get("/mentors");
-  return response.data.mentors.data;
+  return response.data.mentors;
 };
 
 export const fetchMentorTasks = async (id) => {

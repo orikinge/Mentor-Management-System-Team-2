@@ -363,6 +363,25 @@ export const Icons = (props) => {
     );
   }
 
+  if (props.name === "mentor-lg") {
+    return (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width={40}
+        height={41}
+        fill="none"
+        {...props}>
+        <path
+          stroke="#058B94"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={4}
+          d="M20 18.833A6.667 6.667 0 1 0 20 5.5a6.667 6.667 0 0 0 0 13.333ZM6.666 35.5v-6.667A3.333 3.333 0 0 1 9.999 25.5h20a3.333 3.333 0 0 1 3.334 3.333V35.5"
+        />
+      </svg>
+    );
+  }
+
   if (props.name === "mentor-manager") {
     return (
       <svg
@@ -377,6 +396,25 @@ export const Icons = (props) => {
           strokeLinejoin="round"
           strokeWidth={2}
           d="M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM2 21v-4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4M16 3a4 4 0 0 1 0 7.75M19 15h1a2 2 0 0 1 2 2v4"
+        />
+      </svg>
+    );
+  }
+
+  if (props.name === "mentor-manager-lg") {
+    return (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width={40}
+        height={41}
+        fill="none"
+        {...props}>
+        <path
+          stroke="#058B94"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={4}
+          d="M15 18.833A6.667 6.667 0 1 0 15 5.5a6.667 6.667 0 0 0 0 13.333ZM3.334 35.5v-6.667A3.333 3.333 0 0 1 6.667 25.5h16.667a3.333 3.333 0 0 1 3.333 3.333V35.5M26.666 5.5a6.667 6.667 0 0 1 0 12.917M31.666 25.5h1.667a3.333 3.333 0 0 1 3.333 3.333V35.5"
         />
       </svg>
     );

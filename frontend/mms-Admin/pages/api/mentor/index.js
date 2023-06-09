@@ -31,3 +31,18 @@ export const deleteMentor = async (mentorId) => {
   const url = "/profile/delete/" + mentorId;
   return await http.put(url);
 };
+
+export const getMentorManagersTasks = async (id) => {
+  const response = await apiService(`/mentor-managers/${id}/tasks`, "GET");
+  return response.data.data;
+};
+
+export const getMentorManagersPrograms = async (id) => {
+  const response = await apiService(`/programs/user-programs/${id}`, "GET");
+  return response.data;
+};
+
+export const getMentorsOfManagers = async (id) => {
+  const response = await apiService(`/mentor-managers/${id}/mentors`, "GET");
+  return response.data.data;
+};

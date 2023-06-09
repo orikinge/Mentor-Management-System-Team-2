@@ -7,6 +7,11 @@ import Modal from "components/molecules/Modal";
 const CriteriaSetup = () => {
   const [showInfoText, setShowInfoText] = useState(true);
   const [showAddCriteriaModal, setShowAddCriteriaModal] = useState(false);
+  const [criteriaConfig, setCriteriaConfig] = useState({
+    title: "",
+    description: "",
+    formFields: [],
+  });
 
   return (
     <div className={`${styles.wrapper} flex flex-column flex-justify-between`}>
@@ -35,6 +40,9 @@ const CriteriaSetup = () => {
             </div>
           </div>
         )}
+
+        <div>{JSON.stringify(criteriaConfig)}</div>
+
         <div>
           <Button
             onClick={() => setShowAddCriteriaModal(true)}
@@ -45,14 +53,20 @@ const CriteriaSetup = () => {
         </div>
       </div>
 
-      <div className={`flex flex-justify-end`}>
-        <Button variant="normal" size="large">
-          Create Criteria
-        </Button>
-      </div>
+      {criteriaConfig.title && criteriaConfig.formFields.length > 0 && (
+        <div className={`flex flex-justify-end`}>
+          <Button variant="normal" size="large">
+            Create Criteria
+          </Button>
+        </div>
+      )}
 
       <Modal show={showAddCriteriaModal}>
-        <CriteriaInputModal onClose={() => setShowAddCriteriaModal(false)} />
+        <CriteriaInputModal
+          onClose={() => setShowAddCriteriaModal(false)}
+          setCriteriaConfig={setCriteriaConfig}
+          criteriaConfig={criteriaConfig}
+        />
       </Modal>
     </div>
   );

@@ -27,7 +27,7 @@ const UserDetailsLayout = ({ data, children }) => {
   return (
     <div className="flex">
       <div className={styles.user_list_container}>
-        <ListHeader />
+        <ListHeader userRole={role} />
 
         <Users users={users.data} />
       </div>
@@ -41,7 +41,9 @@ const UserDetailsLayout = ({ data, children }) => {
 const ListHeader = ({ userRole }) => {
   return (
     <div className={`flex flex-justify-between ${styles.user_list_header}`}>
-      <h1 className={`${styles.title}`}>{userRole ? userRole : "Mentors"}</h1>
+      <h1 className={`${styles.title}`}>
+        {userRole === "mentor-managers" ? "Mentor Managers" : "Mentors"}
+      </h1>
       <Icons name="search" width="24" height="24" fill="#058B94" />
     </div>
   );

@@ -10,7 +10,7 @@ import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { fetchMentorManagers } from "../api/user";
 
-const TaskAssignees = () => {
+const MentorManagers = () => {
   const [isGrid, setIsGrid] = useState(true);
 
   const {
@@ -92,4 +92,4 @@ const TaskAssignees = () => {
   );
 };
 
-export default TaskAssignees;
+export default MentorManagers;

@@ -17,7 +17,7 @@ const pickBtnTheme = (variant) => {
     case "normal":
       return { backgroundColor: "#058B94", color: "#ffffff" };
     case "white":
-      return { backgroundColor: "#ffffff" };
+      return { backgroundColor: "#ffffff", color: "#000" };
     default:
       return { backgroundColor: "transparent" };
   }
@@ -26,7 +26,7 @@ const pickBtnTheme = (variant) => {
 const generateBtnPadding = (size) => {
   switch (size) {
     case "small":
-      return { padding: "8px 18px", borderRadius: "5px", fontSize: "11px" };
+      return { padding: "4px 18px", borderRadius: "5px", fontSize: "11px" };
     case "large":
       return { padding: "14px 28px", borderRadius: "10px" };
     default:

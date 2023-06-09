@@ -39,7 +39,7 @@ export function ReportCard({
           )}
 
           {!task && (
-            <div className={styles.subtext_no_margin}>
+            <div className={`${styles.subtext_no_margin}`}>
               By Ibrahim Kabir - 19th - 25th Oct 22
             </div>
           )}

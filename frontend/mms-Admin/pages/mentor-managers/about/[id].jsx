@@ -4,6 +4,7 @@ import UserDetailsLayout from "../../../components/Layouts/UserDetailsLayout";
 import { useQuery } from "@tanstack/react-query";
 import { fetchMentorManagerData } from "pages/api/user";
 import styles from "../../../styles/mentor-managers/mentor-managers.module.scss";
+import { Loader } from "../../../components/atoms/Loader";
 
 function AboutMentorManager() {
   const router = useRouter();
@@ -11,54 +12,62 @@ function AboutMentorManager() {
     fetchMentorManagerData(router.query.id),
   );
 
-  if (isLoading) return "loading...";
+  if (isLoading) return <Loader />;
 
   if (isError) return "An error occured";
 
-  
+  const {
+    beenAMentor,
+    bio,
+    previousPrograms,
+    previousRoles,
+    profileImagePath,
+    programOfInterest,
+    website,
+    technicalProficiencies,
+  } = data?.result[0];
 
   return (
     <div className={styles.tab_content_wrapper}>
-      <h3>Bio</h3>
+      <h3 className="bold text-lg">Bio</h3>
       <div className={styles.bio_text}>
+        <p>{bio}</p>
+      </div>
+      <div className={`flex gap-16 mb-4 flex-align-center`}>
+        <p className={`bold text-lg`}>Technical Proficiency:</p>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-          dignissim ut cursus purus efficitur et. Duis ac enim tellus. Phasellus
-          pharetra metus, ut cursus purus efficitur et. Duis ac enim tellus.
-          Phasellus eget tortor dapibus, laoreet mauris sed, dignissim lectus.{" "}
+          {technicalProficiencies
+            .map((proficiency) => proficiency.stack)
+            .join(", ")}
         </p>
       </div>
-      <div className={`flex gap-16 flex-align-center`}>
-        <p className={`bold`}>Technical Proficiency:</p>
-        <p>Java Script, Django, Mysql, Android </p>
+      <div className={`flex gap-16 mb-4 flex-align-center`}>
+        <p className={`bold text-lg`}>Previous Programs:</p>
+        <p>{previousPrograms.map((item) => item.program).join(", ")}</p>
       </div>
-      <div className={`flex gap-16 flex-align-center`}>
-        <p className={`bold`}>Previous Programs:</p>
-        <p>GADS 2022, Google I/O Extended 2021</p>
+      <div className={`flex gap-16 mb-4 flex-align-center`}>
+        <p className={`bold text-lg`}>Previous Roles Held: </p>
+        <p>{previousRoles.map((item) => item.role).join(", ")}</p>
       </div>
-      <div className={`flex gap-16 flex-align-center`}>
-        <p className={`bold`}>Previous Roles Held: </p>
-        <p>Learner, Mentor, Program Assistant, Program Assistant Lead</p>
-      </div>
-      <div className={`flex gap-16 flex-align-center`}>
-        <p className={`bold`}>Availability to join a new program:</p>
+      <div className={`flex gap-16 mb-4 flex-align-center`}>
+        <p className={`bold text-lg`}>Availability to join a new program:</p>
         <p>Unavailable</p>
       </div>
-      <div className={`flex gap-16 flex-align-center`}>
-        <p className={`bold`}>Program of interest:</p>
-        <p>Google Africa Scholarship Program</p>
+      <div className={`flex gap-16 mb-4 flex-align-center`}>
+        <p className={`bold text-lg`}>Program of interest:</p>
+        <p>{!programOfInterest ? "None" : programOfInterest}</p>
       </div>
-      <div className={`flex gap-16 flex-align-center`}>
-        <p className={`bold`}>Been a Mentor Before?</p>
-        <p>Yes</p>
+      <div className={`flex gap-16 mb-4 flex-align-center`}>
+        <p className={`bold text-lg`}>Been a Mentor Before?</p>
+        <p>{beenAMentor ? "Yes" : "No"}</p>
       </div>
-      <div className={`flex gap-16 flex-align-center`}>
-        <p className={`bold`}>Years of Technical Experience:</p>
-        <p>3years</p>
+      <div className={`flex gap-16 mb-4 flex-align-center`}>
+        <p className={`bold text-lg`}>Years of Technical Experience:</p>
+        <p>0</p>
       </div>
-      <div className={`flex gap-16 flex-align-center`}>
-        <p className={`bold`}>Website:</p>
-        <p>www.kabir.i@andela.com</p>
+      <div className={`flex gap-16 mb-4 flex-align-center`}>
+        <p className={`bold text-lg`}>Website:</p>
+        <p>{website ? website : "None"}</p>
       </div>
     </div>
   );

@@ -5,6 +5,8 @@
 .app_layout_content {
   margin: 32px 24px;
   background-color: white;
+  max-height: calc(90vh - 90px);
+  overflow-y: hidden;
 }
 
 .archive_input {

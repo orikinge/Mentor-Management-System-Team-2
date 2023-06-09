@@ -5,7 +5,7 @@ import {
   fetchNotificationSettings,
   updateNotificationSettings,
 } from "pages/api/setting";
-import { Loader } from "components/Loader";
+import { Loader } from "components/atoms/Loader";
 import debounce from "lodash.debounce";
 import { useStateValue } from "store/context";
 import SuccessMessage from "components/SuccessMessage";
@@ -168,47 +168,53 @@ function Notifications() {
     setModalOpen(!modalOpen);
   };
 
-  if (loading) {
-    return (
-      <div className={styles.spin}>
-        <Loader size="large" />
-      </div>
-    );
-  }
+  if (loading) return <Loader />;
 
   return (
     <div className={styles.main_div}>
       <div className={styles.general_div}>
         <p>General Notifications</p>
-        <div className={styles.noti_span}>
-          <span className={styles.email_span}>Email</span>
-          <span className={styles.inapp_span}>In-app</span>
-        </div>
+
         <div className={styles.main}>
-          {generalInputFields.map((field) => (
-            <div className={styles.item} key={field.name}>
-              <span className={styles.head}>{field.label}</span>
-              <div className={styles.toggle_div}>
-                <span className={styles.item_span1}>
-                  <ToggleInput
-                    key={field.name}
-                    checked={settings[field.name]?.email}
-                    handleChange={(action) =>
-                      handleChange({ ...field, action, type: field.email })
-                    }
-                  />
-                </span>
-                <span className={styles.item_span2}>
-                  <ToggleInput
-                    key={field.name}
-                    checked={settings[field.name]?.push}
-                    handleChange={(action) =>
-                      handleChange({ ...field, action, type: field.push })
-                    }
-                  />
-                </span>
+          {generalInputFields.map((field, index) => (
+            <>
+              {index === 0 && (
+                <div className={styles.item} key={field.name}>
+                  <div className="min-w-[250px]"></div>
+
+                  <div className={`flex gap-x-8 ${styles.toggle_div}`}>
+                    <span className="pb-4 font-bold font-lg">Email</span>
+                    <span className="pb-4 font-bold font-lg">In-app</span>
+                  </div>
+                </div>
+              )}
+
+              <div className={styles.item} key={field.name}>
+                <div className="min-w-[250px]">
+                  <span className={styles.head}>{field.label}</span>
+                </div>
+                <div className={`flex gap-x-8 ${styles.toggle_div}`}>
+                  <span className={styles.item_span1}>
+                    <ToggleInput
+                      key={field.name}
+                      checked={settings[field.name]?.email}
+                      handleChange={(action) =>
+                        handleChange({ ...field, action, type: field.email })
+                      }
+                    />
+                  </span>
+                  <span className={styles.item_span2}>
+                    <ToggleInput
+                      key={field.name}
+                      checked={settings[field.name]?.push}
+                      handleChange={(action) =>
+                        handleChange({ ...field, action, type: field.push })
+                      }
+                    />
+                  </span>
+                </div>
               </div>
-            </div>
+            </>
           ))}
         </div>
         <SuccessMessage
@@ -220,35 +226,47 @@ function Notifications() {
       </div>
       <div className={styles.discussion_div}>
         <p>Discussion Notifications</p>
-        <div className={styles.noti_span}>
-          <span className={styles.email_span}>Email</span>
-          <span className={styles.inapp_span}>In-app</span>
-        </div>
+
         <div className={styles.main}>
-          {discussionInputFields.map((field) => (
-            <div className={styles.item} key={field.name}>
-              <span className={styles.head}>{field.label}</span>
-              <div className={styles.toggle_div}>
-                <span className={styles.item_span1}>
-                  <ToggleInput
-                    key={field.name}
-                    checked={disSettings[field.name]?.email}
-                    handleChange={(action) =>
-                      handleChangeDis({ ...field, action, type: field.email })
-                    }
-                  />
-                </span>
-                <span className={styles.item_span2}>
-                  <ToggleInput
-                    key={field.name}
-                    checked={disSettings[field.name]?.push}
-                    handleChange={(action) =>
-                      handleChangeDis({ ...field, action, type: field.push })
-                    }
-                  />
-                </span>
+          {discussionInputFields.map((field, index) => (
+            <>
+              {index === 0 && (
+                <div className={styles.item} key={field.name}>
+                  <div className="min-w-[250px]"></div>
+
+                  <div className={`flex gap-x-8 ${styles.toggle_div}`}>
+                    <span className="pb-4 font-bold font-lg">Email</span>
+                    <span className="pb-4 font-bold font-lg">In-app</span>
+                  </div>
+                </div>
+              )}
+              <div className={styles.item} key={field.name}>
+                <div className="min-w-[250px]">
+                  <span className={styles.head}>{field.label}</span>
+                </div>
+
+                <div className={`flex gap-x-8 ${styles.toggle_div}`}>
+                  <span className={styles.item_span1}>
+                    <ToggleInput
+                      key={field.name}
+                      checked={disSettings[field.name]?.email}
+                      handleChange={(action) =>
+                        handleChangeDis({ ...field, action, type: field.email })
+                      }
+                    />
+                  </span>
+                  <span className={styles.item_span2}>
+                    <ToggleInput
+                      key={field.name}
+                      checked={disSettings[field.name]?.push}
+                      handleChange={(action) =>
+                        handleChangeDis({ ...field, action, type: field.push })
+                      }
+                    />
+                  </span>
+                </div>
               </div>
-            </div>
+            </>
           ))}
         </div>
         <SuccessMessage
