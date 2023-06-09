@@ -3,7 +3,7 @@ import http from "services/axios";
 import { apiService } from "../../api/axios";
 
 export const getAllmentor = async (query) => {
-  const url = "/mentor" + query;
+  const url = "/mentors" + query;
   return await http.get(url);
 };
 

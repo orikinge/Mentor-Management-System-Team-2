@@ -62,6 +62,18 @@ body {
   gap: 10px;
 }
 
+.padding-left-40 {
+  padding-left: 40rem;
+}
+
+.padding-left-45 {
+  padding-left: 44.5rem;
+}
+
+.padding-left-52 {
+  padding-left: 52.5rem;
+}
+
 .gap-5 {
   gap: 5px;
 }

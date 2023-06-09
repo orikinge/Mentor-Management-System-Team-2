@@ -98,7 +98,7 @@ const AppLayout = ({ children }) => {
     const query = { query: searchMentor, page: mentorPage, limit };
     try {
       setLoading(true);
-      const { data } = await getAllmentor(convertToURLQuery(query));
+      const { data } = await (convertToURLQuery(query));
       const newData = data;
       setMentorTotal(data?.mentors?.meta);
       dispatch({
