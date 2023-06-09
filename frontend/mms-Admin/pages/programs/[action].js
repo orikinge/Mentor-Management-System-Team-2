@@ -32,7 +32,7 @@ const Create = () => {
   useEffect(async () => {
     if (listType === "mentor") {
       const mentors = await fetchMentors();
-      setUsers((prev) => mentors);
+      setUsers((prev) => mentors.data);
     }
 
     if (listType === "mentor-manager") {

@@ -8,7 +8,12 @@ import Modal from "../components/molecules/Modal";
 import { ShareReportConfirmationDialogue } from "../components/molecules/ShareReportConfirmationDialogue";
 import { SuccessModal } from "../components/molecules/SuccessModal";
 import NoItemSelected from "../components/organisms/NoItemSelected";
-import { fetchTaskReports, fetchProgramReports } from "./api/report/index";
+import {
+  fetchTaskReports,
+  fetchProgramReports,
+  downloadTaskReport,
+  downloadProgramReport,
+} from "./api/report/index";
 import { format } from "date-fns";
 
 const Reports = () => {
@@ -43,6 +48,14 @@ const Reports = () => {
     setIsLoading(true);
     setReport(null);
     setReportFilterType(type);
+  }
+
+  async function downloadATaskReport() {
+    const response = await downloadTaskReport();
+  }
+
+  async function downloadAProgramReport() {
+    const response = await downloadProgramReport();
   }
 
   return (
