@@ -1,0 +1,34 @@
+runtime: nodejs18
+service: server
+
+#automatic_scaling:
+#  target_cpu_utilization: 0.9
+#  min_instances: 1
+#  max_instances: 2
+
+env_variables:
+  SMTP_HOST: "smtp-relay.sendinblue.com"
+  SMTP_PORT: 587
+  SMTP_USERNAME: "dim2though@gmail.com"
+  SMTP_PASSWORD: "BDXEWVZ3U6RvSbJ1"
+  FRONTEND_URL: "https://mms-team-2.ue.r.appspot.com/reset-password"
+  FRONTEND_URL_RESET_PASSWORD: "https://mms-team-2.ue.r.appspot.com/reset-password"
+  FRONTEND_URL_INVITATION: "https://mms-team-2.ue.r.appspot.com/user/invitation"
+  GOOGLE_CLIENT_ID: "clientId"
+  GOOGLE_CLIENT_SECRET: "clientSecret"
+  PUSHER_APP_KEY: "clientSecret"
+  PUSHER_APP_SECRET: "clientSecret"
+  PUSHER_APP_ID: "PUSHER_APP_ID"
+  PUSHER_APP_CLUSTER: "PUSHER_APP_CLUSTER"
+#  PORT: 3333
+  HOST: "127.0.0.1"
+  #NODE_ENV=development
+  APP_KEY: "N2rVa1v530XepMv1sMykalIQmHZtTK9R"
+  DRIVE_DISK: "local"
+  DB_CONNECTION: "pg"
+  PG_HOST: "horton.db.elephantsql.com"
+  PG_PORT: 5432
+  PG_USER: "zopovlpz"
+  PG_PASSWORD: "E6ayNYIYpgMIilPxDMGzfnJEWIhbAy_g"
+  PG_DB_NAME: "zopovlpz"
+
