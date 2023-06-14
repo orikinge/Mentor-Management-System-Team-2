@@ -15,12 +15,9 @@ export default class ProgramsController {
         .where('is_archive', false)
         .andWhereRaw('LOWER(name) LIKE ?', [`%${search?.toLowerCase() || ''}%`])
         .orderBy('id', 'desc')
-        .preload('programReports')
-        .preload('userPrograms', (query) => {
-          ;(async () => await query.preload('user'))()
-        })
-        .preload('programCriteria', (query) => {
-          ;(async () => await query.preload('formTemplate'))()
+        .withCount('programReports')
+        .with('userPrograms', (query) => {
+          query.withCount('user')
         })
         .paginate(page || 1, limit || 10)
 
