@@ -70,6 +70,7 @@ export default class ProgramsCertificateController {
       const approvedCertificates = await ProgramCertificate.query()
         .where('is_approved', true)
         .whereNull('deleted_at')
+        .preload('user')
         .exec()
 
       const approvedCertificatesCount = approvedCertificates.length
@@ -77,6 +78,7 @@ export default class ProgramsCertificateController {
       const pendingApproval = await ProgramCertificate.query()
         .where('is_approved', false)
         .whereNull('deleted_at')
+        .preload('user')
 
       const pendingApprovalCount = pendingApproval.length
 
@@ -89,6 +91,7 @@ export default class ProgramsCertificateController {
 
       const recentCertificates = await ProgramCertificate.query()
         .orderBy('updated_at', 'desc')
+        .preload('user')
         .limit(6)
         .exec()
 
