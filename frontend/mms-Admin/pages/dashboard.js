@@ -7,6 +7,7 @@ import { FlexContainer, Section } from "../components/atoms/HTMLElements";
 import { Icons } from "../components/atoms/Icons";
 import { useQuery } from "@tanstack/react-query";
 import { Loader } from "components/atoms/Loader";
+import { Error } from "components/organisms/Error";
 
 function Dashboard() {
   const { data, isLoading, isError } = useQuery(["dashboard"], () =>
@@ -15,7 +16,7 @@ function Dashboard() {
 
   if (isLoading) return <Loader />;
 
-  if (isError) return "An error occured";
+  if (isError) return <Error />;
 
   return (
     <div className={`flex flex-column gap-y-6 ${styles.wrapper}`}>

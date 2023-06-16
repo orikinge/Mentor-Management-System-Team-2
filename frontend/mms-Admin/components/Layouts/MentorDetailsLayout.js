@@ -4,6 +4,7 @@ import { MentorsList } from "../organisms/MentorList";
 import { MentorDetails } from "../organisms/MentorDetails";
 import styles from "../../styles/mentors/mentors.module.scss";
 import { fetchMentors } from "pages/api/user";
+import { Error } from "../organisms/Error";
 
 const MentorDetailsLayout = ({ children }) => {
   const {
@@ -14,7 +15,7 @@ const MentorDetailsLayout = ({ children }) => {
 
   if (isLoading) return "loading...";
 
-  if (isError) return "An error occured";
+  if (isError) return <Error />;
 
   return (
     <div className="flex overflow-y-scroll h-full ">

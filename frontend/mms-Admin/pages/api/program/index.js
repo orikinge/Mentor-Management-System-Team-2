@@ -12,8 +12,8 @@ export const fetchProgram = async (id) => {
   return response.data;
 };
 
-export const getUserProgram = async (id, query) => {
-  const response = await http.get(`/programs/user-programs/${id}` + query);
+export const getUserProgram = async (id) => {
+  const response = await http.get(`/programs/user-programs/${id}`);
   return response.data;
 };
 

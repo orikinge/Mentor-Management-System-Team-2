@@ -7,7 +7,7 @@ export const fetchMentors = async () => {
 };
 
 export const fetchMentorTasks = async (id) => {
-  const response = await http.get(`/mentor/${id}/tasks`);
+  const response = await http.get(`/mentors/${id}/tasks`);
   return response.data.data;
 };
 

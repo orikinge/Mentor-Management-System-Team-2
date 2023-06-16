@@ -7,6 +7,7 @@ import { validateInputs } from "../../utils/validateInputs";
 import SuccessMessage from "../SuccessMessage";
 import { fetchUserProfile, updateUserProfile } from "pages/api/user";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
+import { Error } from "components/organisms/Error";
 
 const initialProfileData = {
   first_name: "",
@@ -131,9 +132,7 @@ function General() {
   };
 
   if (error) {
-    <div>
-      <h2>Failed to fetch! Try</h2>
-    </div>;
+    <Error />;
   }
 
   return (

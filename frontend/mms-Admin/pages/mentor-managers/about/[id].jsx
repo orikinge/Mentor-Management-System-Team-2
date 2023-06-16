@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchMentorManagerData } from "pages/api/user";
 import styles from "../../../styles/mentor-managers/mentor-managers.module.scss";
 import { Loader } from "../../../components/atoms/Loader";
+import { Error } from "../../../components/organisms/Error";
 
 function AboutMentorManager() {
   const router = useRouter();
@@ -14,7 +15,7 @@ function AboutMentorManager() {
 
   if (isLoading) return <Loader />;
 
-  if (isError) return "An error occured";
+  if (isError) return <Error />;
 
   const {
     beenAMentor,
