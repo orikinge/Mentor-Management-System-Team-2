@@ -140,11 +140,12 @@ const AppLayout = ({ children }) => {
           <Layout className={styles.app_layout}>
             <SideBar />
             <Content className={styles.app_layout_content}>
-              <div className={[styles.div_input]}>
+              <div>
                 {router?.pathname === "/settings/archive" && (
-                  <>
-                    <Input
-                      className={[styles.archive_input]}
+                  <div className="flex  justify-end  align-center mb-5">
+                   
+                   <div className="w-3/5 ml-24"> <Input
+                      className="w-5/6 ml-10"
                       size="large"
                       placeholder="Search Archive"
                       type="archive"
@@ -152,12 +153,15 @@ const AppLayout = ({ children }) => {
                       value={search}
                       onChange={handleOnchange}
                     />
+                    </div>
+                    <div>
                     <Pagination
                       total={total?.total}
                       currentPage={page}
                       onPageChange={handlePageChange}
                     />
-                  </>
+                    </div>
+                  </div>
                 )}
                 {router?.pathname === "/messages" && (
                   <>

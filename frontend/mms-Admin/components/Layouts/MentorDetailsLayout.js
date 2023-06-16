@@ -17,7 +17,7 @@ const MentorDetailsLayout = ({ children }) => {
   if (isError) return "An error occured";
 
   return (
-    <div className="flex">
+    <div className="flex overflow-y-scroll h-full ">
       <div className={styles.mentor_list_container}>
         <MentorsList mentors={mentors.data} />
       </div>

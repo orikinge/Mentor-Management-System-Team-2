@@ -171,9 +171,10 @@ const UserDetails = ({ children, role, users }) => {
           </Button>
         </div>
       </div>
-      <CustomTab tabs={subPages}>{children}</CustomTab>
+      <CustomTab tabs={subPages} >{children}</CustomTab>
     </>
   );
 };
 
 export default UserDetailsLayout;
+ 

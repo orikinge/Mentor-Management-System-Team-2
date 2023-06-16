@@ -10,7 +10,7 @@ import { PostCard } from "components/Cards";
 import styles from "styles/admin/discussionForum.module.css";
 import usePostFetch from "../../hooks/usePostFetch";
 import { useStateValue } from "store/context";
-import { Loader } from "components/Loader";
+import { Loader } from "components/atoms/Loader";
 import { fetchPosts } from "../api/forum";
 import { useRouter } from "next/router";
 
@@ -70,16 +70,20 @@ const router = useRouter()
     setNewTopic(true);
   };
 
-  if (!data) {
+  if (loading) {
     return <Loader />;
   }
 
   if (error) {
     return <div>Failed to fetch</div>;
   }
+if(!data){
+  return <div>No data</div>;
 
+}
   return (
     <NoSSRWrapper>
+      <div className="overflow-y-scroll h-full">
 
       <Row span={24} className={styles.container}>
         <Label title="Discussion Forum" weight="bold" />
@@ -134,7 +138,7 @@ const router = useRouter()
           success
         />
       )}
-      
+      </div>
     </NoSSRWrapper>
     
   );

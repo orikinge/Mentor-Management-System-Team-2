@@ -9,6 +9,15 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { getMentorsOfManagers } from "pages/api/mentor";
 import { useQuery } from "@tanstack/react-query";
+import { Inputs } from "../../../components/atoms/Inputs";
+import { Icons } from "../../../components/atoms/Icons";
+import { Loader } from "../../../components/atoms/Loader";
+import { ListItem } from "../../../components/atoms/ListItem";
+import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import { getMentorsOfManagers } from "pages/api/mentor";
+import { useQuery } from "@tanstack/react-query";
 
 function MentorManagerMentors() {
   const router = useRouter();
@@ -21,7 +30,7 @@ function MentorManagerMentors() {
 
   if (isError) return "An error occured";
 
-  console.log(data);
+  
   return (
     <>
       <div className="flex pt-4 pb-4 justify-between items-center">
