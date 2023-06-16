@@ -7,6 +7,7 @@
     "build": "node ace build --production",
     "start": "node build/server.js",
     "start:pm2": "pm2 start server.js",
+    "docs": "node ace swagger:generate",
     "test": "node ace test",
     "lint": "eslint . --ext=.ts",
     "format": "prettier --write .",
