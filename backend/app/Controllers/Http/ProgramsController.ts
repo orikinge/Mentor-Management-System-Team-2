@@ -15,10 +15,9 @@ export default class ProgramsController {
         .where('is_archive', false)
         .andWhereRaw('LOWER(name) LIKE ?', [`%${search?.toLowerCase() || ''}%`])
         .orderBy('id', 'desc')
-        .withCount('programReports')
-        .with('userPrograms', (query) => {
-          query.withCount('user')
-        })
+        .preload('programReports')
+        .preload('programUsers')
+        .preload('criteria')
         .paginate(page || 1, limit || 10)
 
       const { data } = programs.toJSON()
@@ -417,19 +416,17 @@ export default class ProgramsController {
         mentorManager: [],
         criteria: [],
       }
-      program.userPrograms.forEach((programUser) => {
-        const { user } = programUser
-        if (user.roleId === Roles.MENTOR) {
-          result.mentor.push(user)
+      program.programUsers?.forEach((programUser) => {
+        if (programUser.roleId === Roles.MENTOR) {
+          result.mentor.push(programUser)
         }
-        if (user.roleId === Roles.MENTOR_MANAGER) {
-          result.mentorManager.push(user)
+        if (programUser.roleId === Roles.MENTOR_MANAGER) {
+          result.mentorManager.push(programUser)
         }
       })
 
-      program.programCriteria.forEach((programCriterion) => {
-        const { formTemplate } = programCriterion
-        result.criteria.push(formTemplate)
+      program.criteria?.forEach((programCriterion) => {
+        result.criteria.push(programCriterion)
       })
 
       result.criteriaCount = result.criteria.length

@@ -1,9 +1,19 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
+import {
+  BaseModel,
+  BelongsTo,
+  belongsTo,
+  column,
+  hasMany,
+  HasMany,
+  ManyToMany,
+  manyToMany,
+} from '@ioc:Adonis/Lucid/Orm'
 import User from './User'
 import UserProgram from './UserProgram'
 import ProgramReport from './ProgramReport'
 import ProgramCriterion from './ProgramCriterion'
+import FormTemplate from './FormTemplate'
 
 export default class Program extends BaseModel {
   @column({ isPrimary: true })
@@ -36,6 +46,24 @@ export default class Program extends BaseModel {
   @hasMany(() => ProgramReport)
   public programReports: HasMany<typeof ProgramReport>
 
+  @manyToMany(() => User, {
+    localKey: 'id',
+    pivotForeignKey: 'program_id',
+    relatedKey: 'id',
+    pivotRelatedForeignKey: 'user_id',
+    pivotTable: 'user_programs',
+  })
+  public programUsers: ManyToMany<typeof User>
+
+  @manyToMany(() => FormTemplate, {
+    localKey: 'id',
+    pivotForeignKey: 'program_id',
+    relatedKey: 'id',
+    pivotRelatedForeignKey: 'form_template_id',
+    pivotTable: 'program_criteria',
+  })
+  public criteria: ManyToMany<typeof FormTemplate>
+
   @column.dateTime()
   public startDate: DateTime
 
@@ -50,8 +78,4 @@ export default class Program extends BaseModel {
 
   @column()
   public users?: any
-
-  @column()
-  public criteria: any
-
 }
