@@ -5,6 +5,8 @@
  * file.
  */
 
+import NotificationInterface from 'App/Interfaces/NotificationInterface'
+
 declare module '@ioc:Adonis/Core/Event' {
   /*
   |--------------------------------------------------------------------------
@@ -26,6 +28,6 @@ declare module '@ioc:Adonis/Core/Event' {
   |
   */
   interface EventsList {
-    //
+    'send:notification': NotificationInterface
   }
 }

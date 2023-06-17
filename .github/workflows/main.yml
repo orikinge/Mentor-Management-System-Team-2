@@ -7,9 +7,15 @@ on:
   # Triggers the workflow on push or pull request events but only for the Devops branch
   push:
   pull_request:
+<<<<<<< HEAD
     branches: [ Devops ]
     paths:
     - 'frontend/mms-Admin/**'
+=======
+    branches: [ develop ]
+    paths:
+      - './frontend/mms-Admin/**'
+>>>>>>> 401cfec04e5c4f8275d38aba8bd8afc7570188f4
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:

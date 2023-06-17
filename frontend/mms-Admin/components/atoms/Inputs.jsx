@@ -12,6 +12,15 @@ export const Inputs = (props) => {
       </div>
     );
 
+  if (props.type === "search")
+    return (
+      <div
+        className={`flex flex-align-center gap-16 ${styles.input_container}`}>
+        {props.icon ? <div>{props.icon}</div> : null}
+        <input {...props} className={`${styles.input} ${props.className}`} />
+      </div>
+    );
+
   if (props.type === "select")
     return (
       <div className={styles.input_container}>

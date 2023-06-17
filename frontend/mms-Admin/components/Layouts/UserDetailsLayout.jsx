@@ -5,6 +5,7 @@ import { ListItem } from "../atoms/ListItem";
 import { Icons } from "../atoms/Icons";
 import Image from "next/image";
 import { Button } from "../atoms/Button";
+import { Error } from "../organisms/Error";
 import { CustomTab } from "../organisms/CustomTab";
 import { useRouter } from "next/router";
 import { fetchMentorManagers, fetchMentors } from "../../pages/api/user";
@@ -22,12 +23,12 @@ const UserDetailsLayout = ({ data, children }) => {
 
   if (isLoading) return "loading...";
 
-  if (isError) return "An error occured";
+  if (isError) return <Error />;
 
   return (
     <div className="flex">
       <div className={styles.user_list_container}>
-        <ListHeader />
+        <ListHeader userRole={role} />
 
         <Users users={users.data} />
       </div>
@@ -41,7 +42,9 @@ const UserDetailsLayout = ({ data, children }) => {
 const ListHeader = ({ userRole }) => {
   return (
     <div className={`flex flex-justify-between ${styles.user_list_header}`}>
-      <h1 className={`${styles.title}`}>{userRole ? userRole : "Mentors"}</h1>
+      <h1 className={`${styles.title}`}>
+        {userRole === "mentor-managers" ? "Mentor Managers" : "Mentors"}
+      </h1>
       <Icons name="search" width="24" height="24" fill="#058B94" />
     </div>
   );
@@ -153,9 +156,12 @@ const UserDetails = ({ children, role, users }) => {
             <h2
               className={
                 styles.user_name
-              }>{`${userDetails.first_name} ${userDetails.last_name}`}</h2>
+              }>{`${userDetails?.first_name} ${userDetails?.last_name}`}</h2>
             <p className={styles.designation}>
-              {getDesignation(userDetails.isAdmin, userDetails.isMentorManager)}
+              {getDesignation(
+                userDetails?.isAdmin,
+                userDetails?.isMentorManager,
+              )}
             </p>
           </div>
         </div>

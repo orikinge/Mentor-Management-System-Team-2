@@ -34,8 +34,8 @@
 
 .item_dis,
 .item {
-  margin-top: 4rem;
-  margin-bottom: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   display: flex;
   justify-content: space-between;
 }

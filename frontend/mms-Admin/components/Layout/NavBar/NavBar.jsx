@@ -1,4 +1,4 @@
-import { useContext, useState, useRef } from 'react'
+import { useContext, useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -6,14 +6,19 @@ import { Icon } from "components/Icon/Icon";
 import { Avatar, Badge, Input } from "antd";
 
 import styles from "styles/navbar.module.scss";
-import { BarsOutlined } from '@ant-design/icons'
-import { GlobalContext } from '../../../Context/store'
+import { BarsOutlined } from "@ant-design/icons";
+import { GlobalContext } from "../../../Context/store";
+import NotificationIcon from "components/NotificationIcon";
+import { useStateValue } from "store/context";
 
 const NavBar = () => {
   const ref = useRef(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [recentNotifications, setRecentNotifications] = useState([]);
-  const { isMobileSideBarOpen, setMobileSideBarState, logout } = useContext(GlobalContext);
+  const { isMobileSideBarOpen, setMobileSideBarState, logout } =
+    useContext(GlobalContext);
+  const [search, setSearch] = useState("");
+  const [{ notification }] = Object.values(useStateValue());
 
   const router = useRouter();
 
@@ -33,11 +38,35 @@ const NavBar = () => {
     router.push("/dashboard");
   };
 
+  const handleRedirectNotifications = (e) => {
+    e.preventDefault();
+    router.push("/notifications");
+  };
+
+  const handleRedirectsearch = (event) => {
+    router.push("/search");
+  };
+
+  const handleOnchange = (e) => {
+    e.preventDefault();
+    setSearch(e.target.value);
+  };
+
+  useEffect(() => {
+    if (search.length > 3) {
+      handleRedirectsearch();
+    }
+  }, [search]);
+
   const handleLogout = (e) => {
     e.preventDefault();
     logout();
     router.push("/login");
   };
+
+  const countIsRead = notification?.data?.filter(
+    (item) => item.is_read === true,
+  ).length;
 
   return (
     <header className={styles.header}>
@@ -62,12 +91,16 @@ const NavBar = () => {
               prefix={<Icon name="Search" />}
               size="large"
               type="search"
+              value={search}
+              onChange={handleOnchange}
             />
           </div>
           <div className={styles.navbar_icons_size}>
-                <Badge>
-                  <BarsOutlined onClick={()=> setMobileSideBarState(!isMobileSideBarOpen)}  />
-                </Badge>
+            <Badge>
+              <BarsOutlined
+                onClick={() => setMobileSideBarState(!isMobileSideBarOpen)}
+              />
+            </Badge>
           </div>
           <div className={styles.navbar_icons}>
             <div>
@@ -79,14 +112,13 @@ const NavBar = () => {
                 </a>
               </Link>
             </div>
-            <div>
-              <Link href="/home">
-                <a>
-                  <Badge count={notificationCount(recentNotifications?.length)}>
-                    <Icon name="Notification" />
-                  </Badge>
-                </a>
-              </Link>
+            <div onClick={handleRedirectNotifications}>
+              <a>
+                <Badge count={notificationCount(recentNotifications?.length)}>
+                  <NotificationIcon count={countIsRead || 0} />
+                  <Icon name="Notification" />
+                </Badge>
+              </a>
             </div>
             <div>
               <a onClick={handleDropdown}>

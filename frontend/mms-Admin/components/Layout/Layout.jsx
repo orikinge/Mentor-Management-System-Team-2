@@ -98,7 +98,7 @@ const AppLayout = ({ children }) => {
     const query = { query: searchMentor, page: mentorPage, limit };
     try {
       setLoading(true);
-      const { data } = await getAllmentor(convertToURLQuery(query));
+      const { data } = await (convertToURLQuery(query));
       const newData = data;
       setMentorTotal(data?.mentors?.meta);
       dispatch({
@@ -115,7 +115,7 @@ const AppLayout = ({ children }) => {
 
   const loadTask = async () => {
     const query = { search: searchTask, page: pageNumber, limit };
-    console.log(query);
+
     try {
       setLoading(true);
       const { data } = await fetchTasks(convertToURLQuery(query));
@@ -140,11 +140,12 @@ const AppLayout = ({ children }) => {
           <Layout className={styles.app_layout}>
             <SideBar />
             <Content className={styles.app_layout_content}>
-              <div className={[styles.div_input]}>
+              <div>
                 {router?.pathname === "/settings/archive" && (
-                  <>
-                    <Input
-                      className={[styles.archive_input]}
+                  <div className="flex  justify-end  align-center mb-5">
+                   
+                   <div className="w-3/5 ml-24"> <Input
+                      className="w-5/6 ml-10"
                       size="large"
                       placeholder="Search Archive"
                       type="archive"
@@ -152,61 +153,15 @@ const AppLayout = ({ children }) => {
                       value={search}
                       onChange={handleOnchange}
                     />
+                    </div>
+                    <div>
                     <Pagination
                       total={total?.total}
                       currentPage={page}
                       onPageChange={handlePageChange}
                     />
-                  </>
-                )}
-                {router?.pathname === "/tasks" && (
-                  <>
-                    {showMentorSearch !== false ? (
-                      <CustomInput
-                        className={[styles.archive_input]}
-                        size="large"
-                        placeholder="Search Task"
-                        type="task"
-                        required
-                        value={searchTask}
-                        onChange={handleOnchangeTask}
-                      />
-                    ) : (
-                      ""
-                    )}
-                    <div className={[styles.task_icon]}>
-                      <div
-                        className={[styles.task_search_icon]}
-                        onClick={handleShow}>
-                        <Icon
-                          icon={"/assets/images/search.svg"}
-                          width={"20px"}
-                          height={"20px"}
-                        />
-                      </div>
-                      <div className={[styles.task_filter_icon]}>
-                        <Icon
-                          icon={"/assets/images/filter.svg"}
-                          width={"25px"}
-                          height={"25px"}
-                        />
-                      </div>
                     </div>
-                    <div className={[styles.task_filter_icon]}>
-                      <Icon
-                        icon={"/assets/images/filter.svg"}
-                        width={"25px"}
-                        height={"25px"}
-                      />
-                    </div>
-                    <span className={[styles.task_create]}>
-                      <CustomButton
-                        className={styles.taskbutton}
-                        onClick={() => router.push("/broadcast")}>
-                        Send Broadcast Message
-                      </CustomButton>
-                    </span>
-                  </>
+                  </div>
                 )}
                 {router?.pathname === "/messages" && (
                   <>
@@ -226,88 +181,6 @@ const AppLayout = ({ children }) => {
                         Send Broadcast Message
                       </CustomButton>
                     </span>
-                  </>
-                )}
-                {router?.pathname === "/mentors" && (
-                  <>
-                    <span className={[styles.task_memtor]}>
-                      <CustomButton
-                        className={styles.mentorbutton1}
-                        onClick={() => router.push("/broadcast")}>
-                        Send Broadcast Message
-                      </CustomButton>
-                      <CustomButton
-                        className={styles.mentorbutton}
-                        onClick={() => handleClickInvite()}>
-                        Add New Mentor
-                      </CustomButton>
-                    </span>
-                    <Pagination
-                      total={mentorTotal?.total || 0}
-                      currentPage={mentorPage}
-                      onPageChange={handleMentorPageChange}
-                    />
-                    {showMentorSearch !== false ? (
-                      <CustomInput
-                        className={[styles.archive_input]}
-                        size="large"
-                        placeholder="Search Mentor"
-                        type="mentor"
-                        required
-                        value={searchMentor}
-                        onChange={handleOnchangeMentor}
-                      />
-                    ) : (
-                      ""
-                    )}
-                    {showMentorSearch !== false ? (
-                      <div className={[styles.mentor_icon1]}>
-                        <div
-                          className={[styles.task_search_icon]}
-                          onClick={handleShow}>
-                          <Icon
-                            icon={"/assets/images/search.svg"}
-                            width={"20px"}
-                            height={"20px"}
-                          />
-                        </div>
-                        <div className={[styles.task_filter_icon]}>
-                          <Icon
-                            icon={"/assets/images/filter.svg"}
-                            width={"25px"}
-                            height={"25px"}
-                          />
-                        </div>
-                      </div>
-                    ) : (
-                      <div className={[styles.mentor_icon]}>
-                        <div
-                          className={[styles.task_search_icon]}
-                          onClick={handleShow}>
-                          <Icon
-                            icon={"/assets/images/search.svg"}
-                            width={"20px"}
-                            height={"20px"}
-                          />
-                        </div>
-                        <div className={[styles.task_filter_icon]}>
-                          <Icon
-                            icon={"/assets/images/filter.svg"}
-                            width={"25px"}
-                            height={"25px"}
-                          />
-                        </div>
-                      </div>
-                    )}
-                    {isOpen && (
-                      <AddMentor
-                        message={"Add Mentor"}
-                        width={"400px"}
-                        height={"200px"}
-                        isOpen={isOpen}
-                        setIsOpen={setIsOpen}
-                      />
-                    )}
                   </>
                 )}
               </div>

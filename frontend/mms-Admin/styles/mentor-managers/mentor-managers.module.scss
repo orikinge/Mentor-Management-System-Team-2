@@ -13,3 +13,23 @@
 .user_summary {
   margin-right: 24px;
 }
+
+.tab_content_wrapper {
+  padding: 1rem;
+  overflow-y: scroll;
+  max-height: 62vh;
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+  margin-top: 1rem;
+}
+
+.bio_text {
+  background-color: #f7feff;
+  padding: 0.8rem;
+  margin-bottom: 2rem;
+
+  > p {
+    line-height: 1.5rem;
+    color: #4d4d4d;
+  }
+}

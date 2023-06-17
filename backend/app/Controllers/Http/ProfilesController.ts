@@ -80,6 +80,26 @@ export default class ProfilesController {
     }
   }
 
+
+  public async approveUser({ auth, params, response }: HttpContextContract) {
+    const user = auth.user
+    if (!user || !user.isAdmin) {
+      response.unauthorized({ message: 'You are not authorized to access this resource.' })
+    }
+
+    try {
+      const user = await User.findOrFail(params.userId)
+      if (!user) return response.status(404).send({ message: 'User does not exist' })
+
+      user.isApproved = true
+      await user.save()
+
+      response.ok({ message: 'Program Certificate approved successfully' })
+    } catch (error) {
+      response.badRequest({ message: 'server Issue' })
+    }
+  }
+
   async search({ request, response }: HttpContextContract) {
     const query = request.input('query')
 

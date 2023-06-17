@@ -30,9 +30,7 @@ const Certificate = ({
     });
   }, [ref]);
 
-  const handleChange = (value) => {
-    console.log(`selected ${value}`);
-  };
+  const handleChange = (value) => {};
 
   return (
     <>

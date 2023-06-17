@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./styles/stats.module.scss";
 import { Button } from "../../components/atoms/Button";
 
-export const Stats = ({ icon, number, text }) => {
+export const Stats = ({ icon, number, text, url }) => {
   return (
     <div
       className={`flex flex-justify-between flex-align-center ${styles.stats}`}>
@@ -16,7 +16,7 @@ export const Stats = ({ icon, number, text }) => {
       </div>
 
       <div>
-        <Button variant="normal" size="small">
+        <Button type="link" url={url} variant="normal" size="small">
           View
         </Button>
       </div>

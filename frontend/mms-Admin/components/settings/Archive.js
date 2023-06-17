@@ -15,7 +15,11 @@ function Archive() {
     <div className={styles.main_div}>
      {search?.data?.length > 0 ? (
       search?.data?.map(data => (
-      <nav>
+      <nav> 
+
+
+
+         
       <Accordion
        key={data?.id}
        header={
@@ -28,7 +32,7 @@ function Archive() {
           />
         </div>
         <div className={styles.main_sub_content}>
-          <h1>{data?.name.slice(0, 50)}</h1>
+          <h1 className="mb-4">{data?.name.slice(0, 50)}</h1>
           <div className={styles.main_sub_con_main}>
             <div className={styles.main_sub_con}>
               <span className={styles.main_sub_content_timeicon}>

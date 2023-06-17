@@ -8,7 +8,7 @@ export default class extends BaseSchema {
       table.increments('id').primary()
       table.string('title').notNullable()
       table.text('description').notNullable()
-      table.string('meta').notNullable()
+      table.string('meta').nullable()
       table
         .integer('user_id')
         .unsigned()
@@ -18,7 +18,7 @@ export default class extends BaseSchema {
         .notNullable()
       table.timestamp('start_date').notNullable()
       table.timestamp('end_date').notNullable()
-      table.string('type_of_report').notNullable()
+      table.string('type_of_report').nullable()
       table.timestamp('deleted_at').nullable()
 
       /**

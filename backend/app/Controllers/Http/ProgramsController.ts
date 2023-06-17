@@ -4,6 +4,8 @@ import Program from 'App/Models/Program'
 import ProgramReport from 'App/Models/ProgramReport'
 import UserProgram from 'App/Models/UserProgram'
 import { schema } from '@ioc:Adonis/Core/Validator'
+import ProgramCriterion from 'App/Models/ProgramCriterion'
+import NotificationController from './NotificationController'
 
 export default class ProgramsController {
   public async index({ request, response }: HttpContextContract) {
@@ -14,12 +16,12 @@ export default class ProgramsController {
         .andWhereRaw('LOWER(name) LIKE ?', [`%${search?.toLowerCase() || ''}%`])
         .orderBy('id', 'desc')
         .preload('programReports')
-        .preload('userPrograms', (query) => {
-          ;(async () => await query.preload('user'))()
-        })
+        .preload('programUsers')
+        .preload('criteria')
         .paginate(page || 1, limit || 10)
 
       const { data } = programs.toJSON()
+      if (!data.length) return response.status(404).send({ message: 'Programs not found' })
 
       const structuredPrograms = this.structurePrograms(data)
 
@@ -33,6 +35,7 @@ export default class ProgramsController {
     try {
       if (auth.user?.id) {
         const userId = auth.user?.id
+        const userFirstName = `${auth.user.firstName}`
         const payload = await request.validate({
           schema: schema.create({
             gravatar: schema.file.optional({
@@ -43,9 +46,9 @@ export default class ProgramsController {
             description: schema.string.optional(),
             mentors: schema.array().members(schema.number()),
             mentorManagers: schema.array().members(schema.number()),
+            criteria: schema.array.optional().members(schema.number()),
           }),
         })
-
         const program = new Program()
         program.userId = userId
         program.name = payload.name
@@ -68,6 +71,25 @@ export default class ProgramsController {
           }))
 
           await UserProgram.createMany(usersData)
+
+          const notification = new NotificationController()
+          notification.save({
+            type: 'create-program',
+            userId,
+            recipients: users,
+            message: `${userFirstName} created program ${program.name}`,
+          })
+        }
+
+        const { criteria } = payload
+
+        if (criteria && criteria.length > 0) {
+          const criteriaData = criteria.map((formTemplateId) => ({
+            programId: program.id,
+            formTemplateId,
+          }))
+
+          await ProgramCriterion.createMany(criteriaData)
         }
         response.created({ message: 'Program created', ...program.$attributes })
       }
@@ -86,6 +108,7 @@ export default class ProgramsController {
       const { id } = params
 
       const program = await Program.query().where('id', id).firstOrFail()
+      if (!program) return response.status(404).send({ message: 'Program not found' })
       const reports = await ProgramReport.query().where('program_id', id).exec()
       const mentors = await UserProgram.query()
         .where('program_id', id)
@@ -102,6 +125,11 @@ export default class ProgramsController {
         .preload('user')
         .exec()
 
+      const programCriteria = await ProgramCriterion.query()
+        .where('program_id', id)
+        .preload('formTemplate')
+        .exec()
+
       return response.ok({
         program,
         reportCount: reports.length,
@@ -110,6 +138,8 @@ export default class ProgramsController {
         mentors,
         mentorManagerCount: mentorManagers.length,
         mentorManagers,
+        programCriteriaCount: programCriteria.length,
+        programCriteria,
       })
     } catch (error) {
       return response.badRequest({ message: 'Server issue', status: 'Error' })
@@ -118,24 +148,27 @@ export default class ProgramsController {
 
   public async update({ auth, params, request, response }: HttpContextContract) {
     try {
-      const userId = await auth.user?.id
-      const program = await Program.findByOrFail('id', params.id)
-      const payload = await request.validate({
-        schema: schema.create({
-          gravatar: schema.file.optional({
-            size: '2mb',
-            extnames: ['jpg', 'png'],
+      if (auth.user?.id) {
+        const userId = await auth.user?.id
+        const userFirstName = `${auth.user?.firstName}`
+        const program = await Program.findByOrFail('id', params.id)
+        const payload = await request.validate({
+          schema: schema.create({
+            gravatar: schema.file.optional({
+              size: '2mb',
+              extnames: ['jpg', 'png'],
+            }),
+            name: schema.string(),
+            description: schema.string.optional(),
+            mentors: schema.array().members(schema.number()),
+            mentorManagers: schema.array().members(schema.number()),
+            criteria: schema.array.optional().members(schema.number()),
           }),
-          name: schema.string(),
-          description: schema.string.optional(),
-          mentors: schema.array().members(schema.number()),
-          mentorManagers: schema.array().members(schema.number()),
-        }),
-      })
+        })
 
-      if (!program) return response.status(404).send({ message: 'Program not Found' })
+        if (!program) return response.status(404).send({ message: 'Program not Found' })
 
-      program.userId = userId ?? program.userId
+        program.userId = userId ?? program.userId
         program.name = payload.name ?? program.name
         program.description = payload.description ?? program.description
 
@@ -144,23 +177,44 @@ export default class ProgramsController {
           await gravatar?.moveToDisk('upload_file')
           program.gravatar = gravatar?.fileName ?? program.gravatar
         }
-      await program.save()
+        await program.save()
 
-      await UserProgram.query().where('programId', program.id).delete()
+        await UserProgram.query().where('programId', program.id).delete()
 
-      const { mentors, mentorManagers } = payload
-      const users = [...mentors, ...mentorManagers]
+        const { mentors, mentorManagers } = payload
+        const users = [...mentors, ...mentorManagers]
 
-      if (users && users.length > 0) {
-        const usersData = users.map((userId) => ({
-          programId: program.id,
-          userId,
-        }))
+        if (users && users.length > 0) {
+          const usersData = users.map((userId) => ({
+            programId: program.id,
+            userId,
+          }))
 
-        await UserProgram.createMany(usersData)
+          await UserProgram.createMany(usersData)
+          const notification = new NotificationController()
+          notification.save({
+            type: 'update-program',
+            userId,
+            recipients: users,
+            message: `${userFirstName} updated program ${program.name}`,
+          })
+        }
+
+        await ProgramCriterion.query().where('programId', program.id).delete()
+
+        const { criteria } = payload
+
+        if (criteria && criteria.length > 0) {
+          const criteriaData = criteria.map((criteriaId) => ({
+            programId: program.id,
+            formTemplateId: criteriaId,
+          }))
+
+          await ProgramCriterion.createMany(criteriaData)
+        }
+
+        response.status(200).json({ message: 'Program updated', ...program.$attributes })
       }
-
-      response.status(200).json({ message: 'Program updated', ...program.$attributes })
     } catch (error) {
       response.badRequest({ message: `server issue`, status: 'Error' })
     }
@@ -195,6 +249,7 @@ export default class ProgramsController {
         .orderBy('id', 'desc')
         .paginate(page || 1, limit || 10)
 
+      if (!programs.length) return response.status(404).send({ message: 'Program not found' })
       response.ok(programs)
     } catch (error) {
       response.badRequest({ message: `server issue`, status: 'Error' })
@@ -270,6 +325,8 @@ export default class ProgramsController {
         .paginate(page || 1, limit || 10)
 
       const { data } = userPrograms.toJSON()
+
+      if (!data.length) return response.notFound({ message: 'user does not exist' })
       const structuredUserPrograms = this.structureUserPrograms(data)
 
       response.ok(structuredUserPrograms)
@@ -337,9 +394,11 @@ export default class ProgramsController {
         programReportsCount: number
         mentorCount: number
         mentorManagerCount: number
+        criteriaCount: number
         programReports: any[]
         mentor: any[]
         mentorManager: any[]
+        criteria: any[]
       } = {
         id: program.id,
         user_id: program.userId,
@@ -351,27 +410,31 @@ export default class ProgramsController {
         programReportsCount: program.programReports.length,
         mentorCount: 0,
         mentorManagerCount: 0,
+        criteriaCount: 0,
         programReports: program.programReports,
         mentor: [],
         mentorManager: [],
+        criteria: [],
       }
-
-      program.userPrograms.forEach((programUser) => {
-        const { user } = programUser
-        if (user.roleId === Roles.MENTOR) {
-          result.mentor.push(user)
+      program.programUsers?.forEach((programUser) => {
+        if (programUser.roleId === Roles.MENTOR) {
+          result.mentor.push(programUser)
         }
-        if (user.roleId === Roles.MENTOR_MANAGER) {
-          result.mentorManager.push(user)
+        if (programUser.roleId === Roles.MENTOR_MANAGER) {
+          result.mentorManager.push(programUser)
         }
       })
 
+      program.criteria?.forEach((programCriterion) => {
+        result.criteria.push(programCriterion)
+      })
+
+      result.criteriaCount = result.criteria.length
       result.mentorCount = result.mentor.length
       result.mentorManagerCount = result.mentorManager.length
 
       return result
     })
-
     return structured
   }
 
@@ -424,5 +487,4 @@ export default class ProgramsController {
       return response.status(500).send({ message: 'Error retrieving reports.' })
     }
   }
-
 }

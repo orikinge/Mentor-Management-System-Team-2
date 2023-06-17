@@ -8,6 +8,7 @@ import EmojiPicker from "emoji-picker-react";
 import { Icon } from "components/Icon/Icon";
 import { createComment } from "../api/forum/index";
 import { Loader } from "components/Loader";
+import { Error } from "components/organisms/Error";
 
 import styles from "styles/admin/discussionForum.module.css";
 
@@ -98,8 +99,7 @@ function Post() {
   }
 
   if (error) {
-    console.log(error)
-    return <div>something went wrong!</div>;
+    return <Error />;
   }
 
   return (
@@ -167,8 +167,6 @@ function Post() {
             })}
         </Row>
       )}
-
-      
     </>
   );
 }

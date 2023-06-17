@@ -24,8 +24,7 @@ function searchProfile(query, token) {
   return fetchWrapper
     .get(`${baseUrl}/profile/search?query=${query}`, token)
     .then((profile) => {
-        console.log(profile)
-        return profile
+      return profile;
     });
 }
 
