@@ -2,9 +2,9 @@ runtime: nodejs18
 service: default
 
 automatic_scaling:
-  target_cpu_utilization: 0.9
-#  min_instances: 1
-  max_instances: 2
+  target_cpu_utilization: 0.6
+  min_instances: 1
+  max_instances: 3
 
 env_variables:
   NEXT_PUBLIC_BASE_URL: "https://server-dot-mms-team-2.ue.r.appspot.com/api/v1"
