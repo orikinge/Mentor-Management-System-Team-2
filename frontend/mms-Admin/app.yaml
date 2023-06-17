@@ -1,12 +1,6 @@
 runtime: nodejs18
 service: default
 
-instance_class: B1
-
-basic_scaling:
-  max_instances: 2
-  idle_timeout: 10m
-
 env_variables:
   NEXT_PUBLIC_BASE_URL: "https://server-dot-mms-team-2.ue.r.appspot.com/api/v1"
   NEXT_PUBLIC_PUSHER_APP_KEY: "f6e2b78d4c39d6321a45"
