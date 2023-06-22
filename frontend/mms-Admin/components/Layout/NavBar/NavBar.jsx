@@ -104,7 +104,7 @@ const NavBar = () => {
           </div>
           <div className={styles.navbar_icons}>
             <div>
-              <Link href="/home">
+              <Link href="/messages">
                 <a>
                   <Badge>
                     <Icon name="Chat" />
@@ -112,7 +112,7 @@ const NavBar = () => {
                 </a>
               </Link>
             </div>
-            <div onClick={handleRedirectNotifications}>
+            <div onClick={handleRedirectNotifications} className="-mt-4">
               <a>
                 <Badge count={notificationCount(recentNotifications?.length)}>
                   <NotificationIcon count={countIsRead || 0} />

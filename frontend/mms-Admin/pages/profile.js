@@ -54,7 +54,7 @@ function About() {
   if (loading) return <Loader />;
 
   return (
-    <>
+    <div className="h-full overflow-y-scroll">
       <div className={`flex items-center justify-between`}>
         <div className={styles.about_header}>
           <Avatar
@@ -159,7 +159,7 @@ function About() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

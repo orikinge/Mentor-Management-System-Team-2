@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Button, Input } from "antd";
+import { Input } from "antd";
 import styles from "./componentStyles/passwordreset.module.css";
 import SuccessMessage from "./SuccessMessage";
 import { validateInputs } from "utils/validateInputs";
 import { passwordForgot } from "utils/http";
 import { useRouter } from "next/router";
+import { Button } from "./atoms/Button";
 
 function ForgetPassword({ setForgetPassword, forgetPassword }) {
   const [email, setEmail] = useState("");
@@ -59,6 +60,8 @@ function ForgetPassword({ setForgetPassword, forgetPassword }) {
         onChange={handleChange}
       />
       <Button
+        variant="normal"
+        size="large"
         loading={loading}
         onClick={handleSubmit}
         className={styles.button}>

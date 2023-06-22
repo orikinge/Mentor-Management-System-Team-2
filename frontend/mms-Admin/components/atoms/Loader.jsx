@@ -14,3 +14,19 @@ export const Loader = () => {
     </>
   );
 };
+
+
+export const CustomLoader = ({text}) => {
+  return (
+    <>
+      <div
+        className={`flex flex-align-center flex-justify-center ${styles.loader_wrapper}`}>
+        <div className={`flex flex-column flex-align-center`}>
+          <div className={`mb-1 ${styles.loader}`} />
+          <p>{text}</p>
+        </div>
+      </div>
+    </>
+  );
+};
+
