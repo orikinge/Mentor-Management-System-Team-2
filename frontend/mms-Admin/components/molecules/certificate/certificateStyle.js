@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
     boxShadow: "rgba(255, 255, 255, 1) 8px 8px 0px",
     display: "flex",
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "center", 
     alignItems: "center",
   },
   headerText: {
@@ -27,6 +27,7 @@ export const styles = StyleSheet.create({
     width: "250px",
     color: "black",
     fontStyle: "bold",
+    marginLeft:"8px"
   },
   h1: {
     color: "#023c40",
@@ -45,7 +46,6 @@ export const styles = StyleSheet.create({
   hr: {
     width: "70%",
     borderBottom: "1px solid green",
-
     margin: "40px  auto",
     marginBottom: "25px",
   },

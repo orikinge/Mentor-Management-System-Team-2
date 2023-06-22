@@ -5,6 +5,8 @@ import { fetchMentorAbout } from "pages/api/user";
 import { useRouter } from "next/router";
 import { Col, Row, Typography } from "antd";
 import styles from "../../../styles/admin/about.module.scss";
+import { Loader } from "../../../components/atoms/Loader";
+
 
 function AboutMentor() {
   const { Paragraph } = Typography;
@@ -16,7 +18,7 @@ function AboutMentor() {
     isError,
   } = useQuery(["about_user"], () => fetchMentorAbout(router.query.mentorID));
 
-  if (isLoading) return "loading tasks...";
+  if (isLoading) return <Loader/>;
 
   if (isError) return "An error occured";
 

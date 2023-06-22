@@ -5,6 +5,7 @@ import { ListItem } from "../../components/atoms/ListItem";
 import { Icons } from "../../components/atoms/Icons";
 import { Loader } from "../../components/atoms/Loader";
 import { Button } from "../../components/atoms/Button";
+import { Error } from "../../components/organisms/Error";
 import Image from "next/image";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
@@ -21,7 +22,7 @@ const MentorManagers = () => {
 
   if (isLoading) return <Loader />;
 
-  if (isError) return "An error occured";
+  if (isError) return <Error />;
 
   return (
     <div>

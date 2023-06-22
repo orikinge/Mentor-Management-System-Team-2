@@ -6,9 +6,11 @@ import { Button } from "../../components/atoms/Button";
 import { Icons } from "../../components/atoms/Icons";
 import { Loader } from "../../components/atoms/Loader";
 import { Accordion } from "../../components/molecules/Accordion";
+import { Error } from "../../components/organisms/Error";
 import Certificate from "../../components/organisms/Certificate";
 import { useQuery } from "@tanstack/react-query";
 import { getCertificates } from "../api/certificates";
+import CertificatePreview from "../../components/molecules/certificate/previewCert";
 
 const Certificates = () => {
   const { data, isLoading, isError } = useQuery(
@@ -19,7 +21,7 @@ const Certificates = () => {
 
   if (isLoading) return <Loader />;
 
-  if (isError) return "An error occured";
+  if (isError) return <Error />;
 
   function handleInputChange(e) {
     setStatus(e.target.value);
@@ -169,7 +171,11 @@ const Certificates = () => {
                         alt={item.certification}
                       />
                       <div>
-                        <p>Allison Davids</p>
+                        <p>
+                          {item?.user
+                            ? `${item?.user?.first_name} ${item?.user?.first_name}`
+                            : "Allison Davids"}
+                        </p>
                         <h1 className="pt-0 pb-0 mt-0 mb-0">
                           {item.certification}
                         </h1>
@@ -179,15 +185,16 @@ const Certificates = () => {
                   </div>
                 }
                 body={
-                  <div className={`flex flex-justify-center `}>
+                  <div>
                     <div className={""}>
-                      <Certificate
+                      {/* <Certificate
                         logoURL={item.program_name_url}
                         badgeURL={item.logo_url}
                         signatureURL={item.signature}
                         certification={item.certification}
                         fullName={`Simon MMS`}
-                      />
+                      /> */}
+                      <CertificatePreview data={item} />
                     </div>
                   </div>
                 }

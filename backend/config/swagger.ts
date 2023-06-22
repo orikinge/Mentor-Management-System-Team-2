@@ -1,6 +1,6 @@
 import { SwaggerConfig } from '@ioc:Adonis/Addons/Swagger'
 
-export default {
+const swaggerConfig = {
   uiEnabled: true, //disable or enable swaggerUi route
   uiUrl: 'docs', // url path to swaggerUI
   specEnabled: true, //disable or enable swagger.json route
@@ -18,9 +18,9 @@ export default {
       },
     },
 
-    apis: ['app/**/*.ts', 'docs/swagger/**/*.yml', 'start/routes.ts'],
-    basePath: '/',
+    apis: [`${__dirname}/app/documentation.js`, `${__dirname}/app/**/*.js`, 'docs/swagger/**/*.yml', `${__dirname}/start/routes.js`],
   },
-  mode: process.env.NODE_ENV === 'production' ? 'PRODUCTION' : 'RUNTIME',
-  specFilePath: 'docs/swagger.json',
+  mode: 'RUNTIME',
+  specFilePath: '/swagger.json',
 } as SwaggerConfig
+export default swaggerConfig

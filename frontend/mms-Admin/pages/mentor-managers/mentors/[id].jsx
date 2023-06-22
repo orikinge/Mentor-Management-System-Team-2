@@ -21,7 +21,6 @@ function MentorManagerMentors() {
 
   if (isError) return "An error occured";
 
-  console.log(data);
   return (
     <>
       <div className="flex pt-4 pb-4 justify-between items-center">

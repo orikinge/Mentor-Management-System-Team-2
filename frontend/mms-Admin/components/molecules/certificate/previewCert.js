@@ -29,7 +29,7 @@ const CertificatePreview = ({ data }) => {
             loading ? (
               "Loading document..."
             ) : (
-              <Button variant="normal" size="small">
+              <Button variant="normal" size="large" className="mt-4">
                 Download as pdf
               </Button>
             )

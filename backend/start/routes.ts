@@ -19,6 +19,8 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
+import * as fs from 'fs'
+import * as path from 'path'
 
 Route.get('/', async () => {
   return { hello: 'world' }
@@ -208,3 +210,11 @@ Route.group(() => {
     store: ['auth'],
   })
 }).prefix('api/v1')
+Route.get('/doc/swagger.json', async ({ view }) => {
+  const specUrl = '/swagger.json'
+  return view.renderRaw(fs.readFileSync(path.join(__dirname, '../docs/swagger.json')).toString())
+})
+Route.get('/documentation', async ({ view }) => {
+  const specUrl = '/doc/swagger.json'
+  return view.render('swagger', {specUrl})
+})

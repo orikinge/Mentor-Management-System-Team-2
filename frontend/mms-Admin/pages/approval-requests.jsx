@@ -9,6 +9,7 @@ import { Icons } from "../components/atoms/Icons";
 import { Loader } from "../components/atoms/Loader";
 import { getApprovalRequestSummary } from "../pages/api/approvals";
 import { Accordion } from "../components/molecules/Accordion";
+import { Error } from "../components/organisms/Error";
 
 const ApprovalRequests = () => {
   const { data, isLoading, isError } = useQuery(
@@ -19,7 +20,7 @@ const ApprovalRequests = () => {
 
   if (isLoading) return <Loader />;
 
-  if (isError) return "An error occured";
+  if (isError) return <Error />;
 
   function handleInputChange(e) {
     setRequestType(e.target.value);

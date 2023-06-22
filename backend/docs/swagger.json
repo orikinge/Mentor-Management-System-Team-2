@@ -1,11 +1,3021 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Application with swagger docs",
-    "version": "1.0.0",
-    "description": "My application with swagger docs"
+    "title": "MMS-2",
+    "version": "1.0.0"
   },
-  "paths": {},
-  "components": {},
-  "tags": []
+  "servers": [
+    {
+      "url": "http://127.0.0.1:3333"
+    },
+    {
+      "url": "http://{{url}}"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Authentication"
+    },
+    {
+      "name": "Users"
+    },
+    {
+      "name": "Task"
+    },
+    {
+      "name": "Program"
+    },
+    {
+      "name": "Mentors"
+    },
+    {
+      "name": "Program Certificates"
+    },
+    {
+      "name": "Requests"
+    },
+    {
+      "name": "Mentor Managers"
+    },
+    {
+      "name": "Task Reports"
+    },
+    {
+      "name": "Program Reports"
+    },
+    {
+      "name": "Post"
+    }
+  ],
+  "paths": {
+    "/api/v1/auth/login": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "email": "test4@gmail.com",
+                  "password": "test12345678"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Login",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer MQ.QVByp4l9XpUni1-tjL-Rz2AGInLsRcolD9KGad85wgQHTBwyqG-AyZmyz-in"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Login User",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "email": "test3@gmail.com",
+                  "password": "test12345678"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer MQ.QVByp4l9XpUni1-tjL-Rz2AGInLsRcolD9KGad85wgQHTBwyqG-AyZmyz-in"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/3/about": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "About User",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer MQ.QVByp4l9XpUni1-tjL-Rz2AGInLsRcolD9KGad85wgQHTBwyqG-AyZmyz-in"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"About user fetched successfully\",\r\n    \"result\": {\r\n        \"User\": [\r\n            {\r\n                \"id\": 3,\r\n                \"firstName\": \"Segun\",\r\n                \"lastName\": \"Oyinlola\",\r\n                \"email\": \"test2@gmail.com\",\r\n                \"meta\": null,\r\n                \"bio\": \"I don't have a bio\",\r\n                \"profileImagePath\": null,\r\n                \"socialMediaLink\": null,\r\n                \"roleId\": 3,\r\n                \"website\": null,\r\n                \"country\": null,\r\n                \"programOfInterest\": null,\r\n                \"beenAMentor\": null,\r\n                \"technicalProficiencies\": [\r\n                    {\r\n                        \"id\": 5,\r\n                        \"stack\": \"Mysql\"\r\n                    }\r\n                ],\r\n                \"previousPrograms\": [\r\n                    {\r\n                        \"id\": 5,\r\n                        \"program\": \"GADS 2022\"\r\n                    }\r\n                ],\r\n                \"previousRoles\": [\r\n                    {\r\n                        \"id\": 5,\r\n                        \"role\": \"Program Assistant\"\r\n                    },\r\n                    {\r\n                        \"id\": 6,\r\n                        \"role\": \"Program Assistant Lead\"\r\n                    }\r\n                ],\r\n                \"documents\": []\r\n            }\r\n        ]\r\n    }\r\n}"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/user/document": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Upload Document",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "imageUrl": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer MQ.QVByp4l9XpUni1-tjL-Rz2AGInLsRcolD9KGad85wgQHTBwyqG-AyZmyz-in"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "{\r\n    \"status\": \"success\",\r\n    \"message\": \"About user fetched successfully\",\r\n    \"result\": {\r\n        \"User\": [\r\n            {\r\n                \"id\": 3,\r\n                \"firstName\": \"Segun\",\r\n                \"lastName\": \"Oyinlola\",\r\n                \"email\": \"test2@gmail.com\",\r\n                \"meta\": null,\r\n                \"bio\": \"I don't have a bio\",\r\n                \"profileImagePath\": null,\r\n                \"socialMediaLink\": null,\r\n                \"roleId\": 3,\r\n                \"website\": null,\r\n                \"country\": null,\r\n                \"programOfInterest\": null,\r\n                \"beenAMentor\": null,\r\n                \"technicalProficiencies\": [\r\n                    {\r\n                        \"id\": 5,\r\n                        \"stack\": \"Mysql\"\r\n                    }\r\n                ],\r\n                \"previousPrograms\": [\r\n                    {\r\n                        \"id\": 5,\r\n                        \"program\": \"GADS 2022\"\r\n                    }\r\n                ],\r\n                \"previousRoles\": [\r\n                    {\r\n                        \"id\": 5,\r\n                        \"role\": \"Program Assistant\"\r\n                    },\r\n                    {\r\n                        \"id\": 6,\r\n                        \"role\": \"Program Assistant Lead\"\r\n                    }\r\n                ],\r\n                \"documents\": []\r\n            }\r\n        ]\r\n    }\r\n}"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tasks/": {
+      "post": {
+        "tags": [
+          "Task"
+        ],
+        "summary": "Create Task",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "title": "New task for a new day",
+                  "description": "make today count",
+                  "mentors": [
+                    9
+                  ],
+                  "mentorManagers": [
+                    3
+                  ],
+                  "meta": "",
+                  "startDate": "2023-05-26T11:09:57.369Z",
+                  "endDate": "2023-05-26T11:09:57.369Z"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer MQ.QVByp4l9XpUni1-tjL-Rz2AGInLsRcolD9KGad85wgQHTBwyqG-AyZmyz-in"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "success",
+                  "message": "Task Created",
+                  "task": {
+                    "title": "Room library article written in Java",
+                    "description": "This is another task",
+                    "meta": "Some metadata about the task",
+                    "user_id": 1,
+                    "start_date": "2023-05-06T19:59:50.376+01:00",
+                    "end_date": "2023-05-20T21:59:50.376+01:00",
+                    "type_of_report": "Task Report",
+                    "created_at": "2023-05-06T20:30:09.804+01:00",
+                    "updated_at": "2023-05-06T20:30:09.804+01:00",
+                    "id": 3
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Task"
+        ],
+        "summary": "Search Task",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer MQ.QVByp4l9XpUni1-tjL-Rz2AGInLsRcolD9KGad85wgQHTBwyqG-AyZmyz-in"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "room"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "success",
+                  "message": "Task fetched Successfully",
+                  "result": {
+                    "id": 3,
+                    "title": "Room library article written in Java",
+                    "description": "This is another task edited",
+                    "meta": "Some metadata about the task",
+                    "creatorUserId": 1,
+                    "createdBy": "aliyu Olad",
+                    "startDate": "2023-05-06T19:59:50.376+01:00",
+                    "endDate": "2023-05-20T21:59:50.376+01:00",
+                    "typeOfReport": "Task Report",
+                    "createdAt": "2023-05-06T20:30:09.804+01:00",
+                    "updatedAt": "2023-05-06T20:38:04.212+01:00",
+                    "mentors": [
+                      {
+                        "id": 6,
+                        "firstName": "Just Another",
+                        "lastName": "User"
+                      },
+                      {
+                        "id": 7,
+                        "firstName": "Dan",
+                        "lastName": "Mike"
+                      },
+                      {
+                        "id": 8,
+                        "firstName": "Test",
+                        "lastName": "Test"
+                      }
+                    ],
+                    "mentorManagers": [
+                      {
+                        "id": 5,
+                        "firstName": "Annoying",
+                        "lastName": "User"
+                      }
+                    ],
+                    "reports": [],
+                    "mentorCount": 3,
+                    "mentorManagerCount": 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tasks/3": {
+      "put": {
+        "tags": [
+          "Task"
+        ],
+        "summary": "Edit Task",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "title": "Room library article written in Java",
+                  "description": "This is another task edited",
+                  "meta": "Some metadata about the task",
+                  "startDate": "2023-05-06T19:59:50.376+01:00",
+                  "endDate": "2023-05-20T21:59:50.376+01:00",
+                  "typeOfReport": "Task Report",
+                  "mentors": [
+                    6,
+                    7,
+                    8
+                  ],
+                  "mentorManagers": [
+                    5
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer NA.1a0O5Zkb-VtDVECeWE8rfxYR_JEiJByKWBh1WxvSOQuns6iJPQbW-jrIMLq9"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "success",
+                  "message": "Task Updated Successfully",
+                  "task": {
+                    "id": 3,
+                    "title": "Room library article written in Java",
+                    "description": "This is another task edited",
+                    "meta": "Some metadata about the task",
+                    "user_id": 1,
+                    "start_date": "2023-05-06T19:59:50.376+01:00",
+                    "end_date": "2023-05-20T21:59:50.376+01:00",
+                    "type_of_report": "Task Report",
+                    "deleted_at": null,
+                    "created_at": "2023-05-06T20:30:09.804+01:00",
+                    "updated_at": "2023-05-06T20:33:07.022+01:00"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Task"
+        ],
+        "summary": "Get a Task",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer MQ.QVByp4l9XpUni1-tjL-Rz2AGInLsRcolD9KGad85wgQHTBwyqG-AyZmyz-in"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "success",
+                  "message": "Task fetched Successfully",
+                  "result": {
+                    "id": 3,
+                    "title": "Room library article written in Java",
+                    "description": "This is another task edited",
+                    "meta": "Some metadata about the task",
+                    "creatorUserId": 1,
+                    "createdBy": "aliyu Olad",
+                    "startDate": "2023-05-06T19:59:50.376+01:00",
+                    "endDate": "2023-05-20T21:59:50.376+01:00",
+                    "typeOfReport": "Task Report",
+                    "createdAt": "2023-05-06T20:30:09.804+01:00",
+                    "updatedAt": "2023-05-06T20:38:04.212+01:00",
+                    "mentors": [
+                      {
+                        "id": 6,
+                        "firstName": "Just Another",
+                        "lastName": "User"
+                      },
+                      {
+                        "id": 7,
+                        "firstName": "Dan",
+                        "lastName": "Mike"
+                      },
+                      {
+                        "id": 8,
+                        "firstName": "Test",
+                        "lastName": "Test"
+                      }
+                    ],
+                    "mentorManagers": [
+                      {
+                        "id": 5,
+                        "firstName": "Annoying",
+                        "lastName": "User"
+                      }
+                    ],
+                    "reports": [],
+                    "mentorCount": 3,
+                    "mentorManagerCount": 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tasks/9/mentors": {
+      "get": {
+        "tags": [
+          "Program"
+        ],
+        "summary": "Get mentors by a Program",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer MQ.QVByp4l9XpUni1-tjL-Rz2AGInLsRcolD9KGad85wgQHTBwyqG-AyZmyz-in"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "id": 26,
+                  "user_id": 1,
+                  "name": "Test-GADS - Google Africa Developer Scholarship Search Trial 2_test",
+                  "description": "Assign user on create",
+                  "is_archive": false,
+                  "created_at": "2023-05-22T16:44:46.976+01:00",
+                  "updated_at": "2023-05-22T16:44:46.976+01:00",
+                  "users": {
+                    "meta": {
+                      "total": 1,
+                      "per_page": 10,
+                      "current_page": 1,
+                      "last_page": 1,
+                      "first_page": 1,
+                      "first_page_url": "/?page=1",
+                      "last_page_url": "/?page=1",
+                      "next_page_url": null,
+                      "previous_page_url": null
+                    },
+                    "data": [
+                      {
+                        "id": 27,
+                        "user_id": 7,
+                        "program_id": 26,
+                        "created_at": "2023-05-22T17:09:37.878+01:00",
+                        "updated_at": "2023-05-22T17:09:37.878+01:00",
+                        "user": {
+                          "id": 7,
+                          "email": "test6@gmail.com",
+                          "remember_me_token": null,
+                          "created_at": "2023-05-06T19:36:19.950+01:00",
+                          "updated_at": "2023-05-06T19:36:19.950+01:00",
+                          "first_name": "Dan",
+                          "last_name": "Mike",
+                          "meta": null,
+                          "bio": "I don't have a bio",
+                          "profile_image_path": null,
+                          "social_media_links": null,
+                          "deleted_at": null,
+                          "role_id": 2,
+                          "website": null,
+                          "city": null,
+                          "country": null,
+                          "program_of_interest": null,
+                          "been_a_mentor": null,
+                          "invite_code": null,
+                          "isAdmin": false,
+                          "isMentor": true,
+                          "isMentorManager": false
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tasks/3/reports": {
+      "get": {
+        "tags": [
+          "Task"
+        ],
+        "summary": "Get reports by a Task",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer MQ.QVByp4l9XpUni1-tjL-Rz2AGInLsRcolD9KGad85wgQHTBwyqG-AyZmyz-in"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "success",
+                  "message": "Reports fetched successfully",
+                  "data": [
+                    {
+                      "id": 12,
+                      "taskId": 3,
+                      "mentorId": 5,
+                      "achievement": "Another achievement recorded",
+                      "blocker": "Baddass, no blockers for now shaaa",
+                      "recommendation": "No recommendation for now shaaa",
+                      "createdAt": "2023-05-24T14:27:48.014+01:00",
+                      "updatedAt": "2023-05-24T14:27:48.014+01:00"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tasks/9/mentor-managers": {
+      "get": {
+        "tags": [
+          "Task"
+        ],
+        "summary": "Get mentor managers by a Task",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer MQ.QVByp4l9XpUni1-tjL-Rz2AGInLsRcolD9KGad85wgQHTBwyqG-AyZmyz-in"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "success",
+                  "message": "Mentor Managers fetched successfully",
+                  "data": [
+                    {
+                      "mentorManager": {
+                        "id": 4,
+                        "email": "test3@gmail.com",
+                        "remember_me_token": null,
+                        "created_at": "2023-05-06T19:36:19.683+01:00",
+                        "updated_at": "2023-05-12T18:24:49.304+01:00",
+                        "first_name": "t",
+                        "last_name": "User",
+                        "meta": null,
+                        "bio": "I don't have a bio.",
+                        "profile_image_path": "clhktwe1g00048vkl0wy27whh.png",
+                        "social_media_links": "{\"facebook\":\"https://www.facebook.com/example\",\"twitter\":\"https://twitter.com/example\",\"github\":\"test\",\"instagram\":\"trse\",\"linkedin\":\"bing\"}",
+                        "deleted_at": null,
+                        "role_id": 1,
+                        "website": "www.example.co",
+                        "city": "Badghis",
+                        "country": "Afghanistan",
+                        "program_of_interest": null,
+                        "been_a_mentor": null,
+                        "invite_code": null,
+                        "isAdmin": true,
+                        "isMentor": false,
+                        "isMentorManager": false
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tasks": {
+      "get": {
+        "tags": [
+          "Task"
+        ],
+        "summary": "Get all Task",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer NA.1a0O5Zkb-VtDVECeWE8rfxYR_JEiJByKWBh1WxvSOQuns6iJPQbW-jrIMLq9"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "success",
+                  "message": "Task fetched Successfully",
+                  "result": {
+                    "id": 3,
+                    "title": "Room library article written in Java",
+                    "description": "This is another task edited",
+                    "meta": "Some metadata about the task",
+                    "creatorUserId": 1,
+                    "createdBy": "aliyu Olad",
+                    "startDate": "2023-05-06T19:59:50.376+01:00",
+                    "endDate": "2023-05-20T21:59:50.376+01:00",
+                    "typeOfReport": "Task Report",
+                    "createdAt": "2023-05-06T20:30:09.804+01:00",
+                    "updatedAt": "2023-05-06T20:38:04.212+01:00",
+                    "mentors": [
+                      {
+                        "id": 6,
+                        "firstName": "Just Another",
+                        "lastName": "User"
+                      },
+                      {
+                        "id": 7,
+                        "firstName": "Dan",
+                        "lastName": "Mike"
+                      },
+                      {
+                        "id": 8,
+                        "firstName": "Test",
+                        "lastName": "Test"
+                      }
+                    ],
+                    "mentorManagers": [
+                      {
+                        "id": 5,
+                        "firstName": "Annoying",
+                        "lastName": "User"
+                      }
+                    ],
+                    "reports": [],
+                    "mentorCount": 3,
+                    "mentorManagerCount": 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/programs/": {
+      "post": {
+        "tags": [
+          "Program"
+        ],
+        "summary": "Create Program",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "name": "Test-GADS - Google Africa Developer Scholarship Search Trial 2_test",
+                  "description": "Assign user on create",
+                  "mentors": [
+                    7
+                  ],
+                  "mentorManagers": [
+                    3
+                  ],
+                  "criteria": [],
+                  "programAvatar": ""
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer MQ.QVByp4l9XpUni1-tjL-Rz2AGInLsRcolD9KGad85wgQHTBwyqG-AyZmyz-in"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "message": "Program created",
+                  "userId": 1,
+                  "name": "Test-GADS - Google Africa Developer Scholarship Search Trial 2_test",
+                  "description": "Assign user on create",
+                  "createdAt": "2023-05-22T16:44:46.976+01:00",
+                  "updatedAt": "2023-05-22T16:44:46.976+01:00",
+                  "id": 26
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/programs/26/mentor-managers": {
+      "get": {
+        "tags": [
+          "Program"
+        ],
+        "summary": "Get mentor managers by a Program",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer MQ.QVByp4l9XpUni1-tjL-Rz2AGInLsRcolD9KGad85wgQHTBwyqG-AyZmyz-in"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "id": 26,
+                  "user_id": 1,
+                  "name": "Test-GADS - Google Africa Developer Scholarship Search Trial 2_test",
+                  "description": "Assign user on create",
+                  "is_archive": false,
+                  "created_at": "2023-05-22T16:44:46.976+01:00",
+                  "updated_at": "2023-05-22T16:44:46.976+01:00",
+                  "users": {
+                    "meta": {
+                      "total": 1,
+                      "per_page": 10,
+                      "current_page": 1,
+                      "last_page": 1,
+                      "first_page": 1,
+                      "first_page_url": "/?page=1",
+                      "last_page_url": "/?page=1",
+                      "next_page_url": null,
+                      "previous_page_url": null
+                    },
+                    "data": [
+                      {
+                        "id": 28,
+                        "user_id": 3,
+                        "program_id": 26,
+                        "created_at": "2023-05-22T17:09:37.933+01:00",
+                        "updated_at": "2023-05-22T17:09:37.933+01:00",
+                        "user": {
+                          "id": 3,
+                          "email": "test2@gmail.com",
+                          "remember_me_token": null,
+                          "created_at": "2023-05-06T19:36:19.591+01:00",
+                          "updated_at": "2023-05-12T09:03:19.023+01:00",
+                          "first_name": "Segun",
+                          "last_name": "Oyinlola",
+                          "meta": null,
+                          "bio": "not a titlee",
+                          "profile_image_path": "clhk9uag400094oss00zohup7.png",
+                          "social_media_links": {
+                            "github": "@git",
+                            "instagram": "@ig",
+                            "twitter": "@tw",
+                            "linkedin": "@linkedIn"
+                          },
+                          "deleted_at": null,
+                          "role_id": 3,
+                          "website": "hello.comm",
+                          "city": "Lusaka",
+                          "country": "Zambia",
+                          "program_of_interest": null,
+                          "been_a_mentor": null,
+                          "invite_code": null,
+                          "isAdmin": false,
+                          "isMentor": false,
+                          "isMentorManager": true
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/programs/26/reports": {
+      "get": {
+        "tags": [
+          "Program"
+        ],
+        "summary": "Get reports by a Program",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer MQ.QVByp4l9XpUni1-tjL-Rz2AGInLsRcolD9KGad85wgQHTBwyqG-AyZmyz-in"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "success",
+                  "message": "Reports fetched successfully",
+                  "data": [
+                    {
+                      "id": 1,
+                      "programId": 26,
+                      "mentorManagerId": 5,
+                      "achievement": "Another achievement recorded",
+                      "blocker": "Baddass, no blockers for now shaaa",
+                      "recommendation": "No recommendation for now shaaa",
+                      "createdAt": "2023-05-22T18:13:47.491+01:00",
+                      "updatedAt": "2023-05-22T18:13:47.491+01:00"
+                    },
+                    {
+                      "id": 2,
+                      "programId": 26,
+                      "mentorManagerId": 3,
+                      "achievement": "Another achievement recorded",
+                      "blocker": "Baddass, no blockers for now shaaa",
+                      "recommendation": "No recommendation for now shaaa",
+                      "createdAt": "2023-05-22T18:39:08.548+01:00",
+                      "updatedAt": "2023-05-22T18:39:08.548+01:00"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/programs/26": {
+      "put": {
+        "tags": [
+          "Program"
+        ],
+        "summary": "Edit a Program",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "name": "Test-GADS - Google Africa Developer Scholarship Search Trial 2_test",
+                  "description": "Assign user on create",
+                  "mentors": [
+                    7
+                  ],
+                  "mentorManagers": [
+                    3
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer NA.1a0O5Zkb-VtDVECeWE8rfxYR_JEiJByKWBh1WxvSOQuns6iJPQbW-jrIMLq9"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "message": "Program updated",
+                  "id": 26,
+                  "userId": 1,
+                  "name": "Test-GADS - Google Africa Developer Scholarship Search Trial 2_test",
+                  "description": "Assign user on create",
+                  "isArchive": false,
+                  "createdAt": "2023-05-22T16:44:46.976+01:00",
+                  "updatedAt": "2023-05-22T16:44:46.976+01:00"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Program"
+        ],
+        "summary": "Get a Program",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer MQ.QVByp4l9XpUni1-tjL-Rz2AGInLsRcolD9KGad85wgQHTBwyqG-AyZmyz-in"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "success",
+                  "message": "Task fetched Successfully",
+                  "result": {
+                    "id": 3,
+                    "title": "Room library article written in Java",
+                    "description": "This is another task edited",
+                    "meta": "Some metadata about the task",
+                    "creatorUserId": 1,
+                    "createdBy": "aliyu Olad",
+                    "startDate": "2023-05-06T19:59:50.376+01:00",
+                    "endDate": "2023-05-20T21:59:50.376+01:00",
+                    "typeOfReport": "Task Report",
+                    "createdAt": "2023-05-06T20:30:09.804+01:00",
+                    "updatedAt": "2023-05-06T20:38:04.212+01:00",
+                    "mentors": [
+                      {
+                        "id": 6,
+                        "firstName": "Just Another",
+                        "lastName": "User"
+                      },
+                      {
+                        "id": 7,
+                        "firstName": "Dan",
+                        "lastName": "Mike"
+                      },
+                      {
+                        "id": 8,
+                        "firstName": "Test",
+                        "lastName": "Test"
+                      }
+                    ],
+                    "mentorManagers": [
+                      {
+                        "id": 5,
+                        "firstName": "Annoying",
+                        "lastName": "User"
+                      }
+                    ],
+                    "reports": [],
+                    "mentorCount": 3,
+                    "mentorManagerCount": 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/programs": {
+      "get": {
+        "tags": [
+          "Program"
+        ],
+        "summary": "Get all Program",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer NA.1a0O5Zkb-VtDVECeWE8rfxYR_JEiJByKWBh1WxvSOQuns6iJPQbW-jrIMLq9"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/programs/user-programs/3": {
+      "get": {
+        "tags": [
+          "Program"
+        ],
+        "summary": "Programs of a user",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/mentor/7/tasks": {
+      "get": {
+        "tags": [
+          "Mentors"
+        ],
+        "summary": "Get a Mentor Task",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer NA.1a0O5Zkb-VtDVECeWE8rfxYR_JEiJByKWBh1WxvSOQuns6iJPQbW-jrIMLq9"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "success",
+                  "message": "Tasks fetched successfully",
+                  "data": [
+                    {
+                      "id": 1,
+                      "title": "Room library article written in Kotlin",
+                      "description": "This is another task",
+                      "meta": "Some metadata about the task",
+                      "creatorUserId": 1,
+                      "createdBy": "aliyu Olad",
+                      "startDate": "2023-05-06T19:59:50.376+01:00",
+                      "endDate": "2023-05-20T21:59:50.376+01:00",
+                      "typeOfReport": "Task Report",
+                      "createdAt": "2023-05-06T20:26:26.516+01:00",
+                      "updatedAt": "2023-05-06T20:26:26.517+01:00",
+                      "reports": [],
+                      "taskReportCount": 0
+                    },
+                    {
+                      "id": 3,
+                      "title": "Room library article written in Java",
+                      "description": "This is another task edited",
+                      "meta": "Some metadata about the task",
+                      "creatorUserId": 1,
+                      "createdBy": "aliyu Olad",
+                      "startDate": "2023-05-06T19:59:50.376+01:00",
+                      "endDate": "2023-05-20T21:59:50.376+01:00",
+                      "typeOfReport": "Task Report",
+                      "createdAt": "2023-05-06T20:30:09.804+01:00",
+                      "updatedAt": "2023-05-06T20:38:04.212+01:00",
+                      "reports": [
+                        {
+                          "id": 1,
+                          "achievement": "Another achievement",
+                          "blocker": "Baddass, no blockers for now",
+                          "recommendation": "No recommendation for now",
+                          "createdAt": "2023-05-06T21:00:22.789+01:00",
+                          "updatedAt": "2023-05-06T21:00:22.789+01:00"
+                        },
+                        {
+                          "id": 2,
+                          "achievement": "Another achievement recorded",
+                          "blocker": "Baddass, no blockers for now",
+                          "recommendation": "No recommendation for now shaaa",
+                          "createdAt": "2023-05-06T21:00:58.698+01:00",
+                          "updatedAt": "2023-05-06T21:00:58.698+01:00"
+                        },
+                        {
+                          "id": 3,
+                          "achievement": "Another achievement recorded",
+                          "blocker": "Baddass, no blockers for now shaaa",
+                          "recommendation": "No recommendation for now shaaa",
+                          "createdAt": "2023-05-06T21:01:13.269+01:00",
+                          "updatedAt": "2023-05-06T21:01:13.269+01:00"
+                        }
+                      ],
+                      "taskReportCount": 3
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mentor/7/tasks/search": {
+      "get": {
+        "tags": [
+          "Mentors"
+        ],
+        "summary": "Search a Mentor Task",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer MQ.QVByp4l9XpUni1-tjL-Rz2AGInLsRcolD9KGad85wgQHTBwyqG-AyZmyz-in"
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "This"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "success",
+                  "message": "Tasks fetched successfully",
+                  "data": [
+                    {
+                      "id": 1,
+                      "title": "Room library article written in Kotlin",
+                      "description": "This is another task",
+                      "meta": "Some metadata about the task",
+                      "creatorUserId": 1,
+                      "createdBy": "aliyu Olad",
+                      "startDate": "2023-05-06T19:59:50.376+01:00",
+                      "endDate": "2023-05-20T21:59:50.376+01:00",
+                      "typeOfReport": "Task Report",
+                      "createdAt": "2023-05-06T20:26:26.516+01:00",
+                      "updatedAt": "2023-05-06T20:26:26.517+01:00",
+                      "reports": [],
+                      "taskReportCount": 0
+                    },
+                    {
+                      "id": 2,
+                      "title": "Room library article written in Java",
+                      "description": "This is another task",
+                      "meta": "Some metadata about the task",
+                      "creatorUserId": 1,
+                      "createdBy": "aliyu Olad",
+                      "startDate": "2023-05-06T19:59:50.376+01:00",
+                      "endDate": "2023-05-20T21:59:50.376+01:00",
+                      "typeOfReport": "Task Report",
+                      "createdAt": "2023-05-06T20:29:54.984+01:00",
+                      "updatedAt": "2023-05-06T20:29:54.984+01:00",
+                      "reports": [],
+                      "taskReportCount": 0
+                    },
+                    {
+                      "id": 3,
+                      "title": "Room library article written in Java",
+                      "description": "This is another task edited",
+                      "meta": "Some metadata about the task",
+                      "creatorUserId": 1,
+                      "createdBy": "aliyu Olad",
+                      "startDate": "2023-05-06T19:59:50.376+01:00",
+                      "endDate": "2023-05-20T21:59:50.376+01:00",
+                      "typeOfReport": "Task Report",
+                      "createdAt": "2023-05-06T20:30:09.804+01:00",
+                      "updatedAt": "2023-05-06T20:38:04.212+01:00",
+                      "reports": [
+                        {
+                          "id": 1,
+                          "achievement": "Another achievement",
+                          "blocker": "Baddass, no blockers for now",
+                          "recommendation": "No recommendation for now",
+                          "createdAt": "2023-05-06T21:00:22.789+01:00",
+                          "updatedAt": "2023-05-06T21:00:22.789+01:00"
+                        },
+                        {
+                          "id": 2,
+                          "achievement": "Another achievement recorded",
+                          "blocker": "Baddass, no blockers for now",
+                          "recommendation": "No recommendation for now shaaa",
+                          "createdAt": "2023-05-06T21:00:58.698+01:00",
+                          "updatedAt": "2023-05-06T21:00:58.698+01:00"
+                        },
+                        {
+                          "id": 3,
+                          "achievement": "Another achievement recorded",
+                          "blocker": "Baddass, no blockers for now shaaa",
+                          "recommendation": "No recommendation for now shaaa",
+                          "createdAt": "2023-05-06T21:01:13.269+01:00",
+                          "updatedAt": "2023-05-06T21:01:13.269+01:00"
+                        }
+                      ],
+                      "taskReportCount": 3
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mentor/": {
+      "get": {
+        "tags": [
+          "Mentors"
+        ],
+        "summary": "Get All Mentors",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer MQ.QVByp4l9XpUni1-tjL-Rz2AGInLsRcolD9KGad85wgQHTBwyqG-AyZmyz-in"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "success",
+                  "message": "Fetched all mentors successful",
+                  "mentors": {
+                    "meta": {
+                      "total": 3,
+                      "per_page": 10,
+                      "current_page": 1,
+                      "last_page": 1,
+                      "first_page": 1,
+                      "first_page_url": "/?page=1",
+                      "last_page_url": "/?page=1",
+                      "next_page_url": null,
+                      "previous_page_url": null
+                    },
+                    "data": [
+                      {
+                        "id": 6,
+                        "first_name": "Just Another",
+                        "last_name": "User",
+                        "isAdmin": false,
+                        "isMentor": false,
+                        "isMentorManager": false
+                      },
+                      {
+                        "id": 7,
+                        "first_name": "Dan",
+                        "last_name": "Mike",
+                        "isAdmin": false,
+                        "isMentor": false,
+                        "isMentorManager": false
+                      },
+                      {
+                        "id": 8,
+                        "first_name": "Test",
+                        "last_name": "Test",
+                        "isAdmin": false,
+                        "isMentor": false,
+                        "isMentorManager": false
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mentor/3/8": {
+      "delete": {
+        "tags": [
+          "Mentors"
+        ],
+        "summary": "Remove a mentor from a Task",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer MQ.QVByp4l9XpUni1-tjL-Rz2AGInLsRcolD9KGad85wgQHTBwyqG-AyZmyz-in"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "success",
+                  "message": "Mentor removed from task"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/certificate/7/certificates": {
+      "get": {
+        "tags": [
+          "Program Certificates"
+        ],
+        "summary": "Get a User Certificates",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer MTU.iSYUAhpQ_yIUaFhYdZCeQSa5V-hMFKvB9CGN18BosdwF4IICOGecFRMR8Zkk"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "success",
+                  "message": "User certificates fetched successfully",
+                  "result": [
+                    {
+                      "id": 1,
+                      "firstName": "aliyu",
+                      "lastName": "Olad",
+                      "email": "dim2though@gmail.com",
+                      "certificates": [
+                        {
+                          "id": 1,
+                          "programName": "Google Cloud",
+                          "certification": "Associate Cloud Engineer",
+                          "programLogo": "https://tinyurl.com/programnlogo"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/certificate/7/certificate/approve/22": {
+      "put": {
+        "tags": [
+          "Program Certificates"
+        ],
+        "summary": "Approve Program Certificate",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": ""
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer MTU.iSYUAhpQ_yIUaFhYdZCeQSa5V-hMFKvB9CGN18BosdwF4IICOGecFRMR8Zkk"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "success",
+                  "message": "User certificates fetched successfully",
+                  "result": [
+                    {
+                      "id": 1,
+                      "firstName": "aliyu",
+                      "lastName": "Olad",
+                      "email": "dim2though@gmail.com",
+                      "certificates": [
+                        {
+                          "id": 1,
+                          "programName": "Google Cloud",
+                          "certification": "Associate Cloud Engineer",
+                          "programLogo": "https://tinyurl.com/programnlogo"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/certificate/7/certificate/decline/23": {
+      "put": {
+        "tags": [
+          "Program Certificates"
+        ],
+        "summary": "Decline Program Certificate",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": ""
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer MTU.iSYUAhpQ_yIUaFhYdZCeQSa5V-hMFKvB9CGN18BosdwF4IICOGecFRMR8Zkk"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "success",
+                  "message": "User certificates fetched successfully",
+                  "result": [
+                    {
+                      "id": 1,
+                      "firstName": "aliyu",
+                      "lastName": "Olad",
+                      "email": "dim2though@gmail.com",
+                      "certificates": [
+                        {
+                          "id": 1,
+                          "programName": "Google Cloud",
+                          "certification": "Associate Cloud Engineer",
+                          "programLogo": "https://tinyurl.com/programnlogo"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/certificate/": {
+      "get": {
+        "tags": [
+          "Program Certificates"
+        ],
+        "summary": "Get All Approved Certificates",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer MTU.iSYUAhpQ_yIUaFhYdZCeQSa5V-hMFKvB9CGN18BosdwF4IICOGecFRMR8Zkk"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "success",
+                  "message": "User certificates fetched successfully",
+                  "result": [
+                    {
+                      "id": 1,
+                      "firstName": "aliyu",
+                      "lastName": "Olad",
+                      "email": "dim2though@gmail.com",
+                      "certificates": [
+                        {
+                          "id": 1,
+                          "programName": "Google Cloud",
+                          "certification": "Associate Cloud Engineer",
+                          "programLogo": "https://tinyurl.com/programnlogo"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/certificate": {
+      "post": {
+        "tags": [
+          "Program Certificates"
+        ],
+        "summary": "Create a Certificate",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": ""
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer MTU.iSYUAhpQ_yIUaFhYdZCeQSa5V-hMFKvB9CGN18BosdwF4IICOGecFRMR8Zkk"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "user_id": 7,
+                  "program_name_url": "https://tinyurl.com/gprogramlogo",
+                  "certification": "Associate Frontend Engineer",
+                  "logo_url": "https://tinyurl.com/gcertificatelogo",
+                  "date_of_issue": "2021-07-17T15:39:16.515+01:00",
+                  "certificate_id": "b292733",
+                  "signature": "https://tinyurl.com/programsign",
+                  "creator_id": 1,
+                  "created_at": "2023-06-05T18:57:24.153+01:00",
+                  "updated_at": "2023-06-05T18:57:24.153+01:00",
+                  "id": 23
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/requests/pending-requests": {
+      "get": {
+        "tags": [
+          "Requests"
+        ],
+        "summary": "Get All Pending Requests",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer MTU.iSYUAhpQ_yIUaFhYdZCeQSa5V-hMFKvB9CGN18BosdwF4IICOGecFRMR8Zkk"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "mentorManagers": [
+                    {
+                      "id": 12,
+                      "email": "test22@gmail.com",
+                      "remember_me_token": null,
+                      "created_at": "2023-06-05T19:24:22.703+01:00",
+                      "updated_at": "2023-06-05T19:24:22.703+01:00",
+                      "first_name": "Segun",
+                      "last_name": "Oyinlola",
+                      "meta": null,
+                      "bio": "I don't have a bio",
+                      "profile_image_path": null,
+                      "social_media_links": null,
+                      "deleted_at": null,
+                      "role_id": 3,
+                      "website": null,
+                      "city": null,
+                      "country": null,
+                      "program_of_interest": null,
+                      "been_a_mentor": null,
+                      "invite_code": null,
+                      "isAdmin": false,
+                      "isMentor": false,
+                      "isMentorManager": true
+                    },
+                    {
+                      "id": 13,
+                      "email": "test23@gmail.com",
+                      "remember_me_token": null,
+                      "created_at": "2023-06-05T19:24:22.797+01:00",
+                      "updated_at": "2023-06-05T19:24:22.798+01:00",
+                      "first_name": "Another",
+                      "last_name": "User",
+                      "meta": null,
+                      "bio": "I don't have a bio",
+                      "profile_image_path": null,
+                      "social_media_links": null,
+                      "deleted_at": null,
+                      "role_id": 3,
+                      "website": null,
+                      "city": null,
+                      "country": null,
+                      "program_of_interest": null,
+                      "been_a_mentor": null,
+                      "invite_code": null,
+                      "isAdmin": false,
+                      "isMentor": false,
+                      "isMentorManager": true
+                    },
+                    {
+                      "id": 14,
+                      "email": "test24@gmail.com",
+                      "remember_me_token": null,
+                      "created_at": "2023-06-05T19:24:22.902+01:00",
+                      "updated_at": "2023-06-05T19:24:22.902+01:00",
+                      "first_name": "Annoying",
+                      "last_name": "User",
+                      "meta": null,
+                      "bio": "I don't have a bio",
+                      "profile_image_path": null,
+                      "social_media_links": null,
+                      "deleted_at": null,
+                      "role_id": 3,
+                      "website": null,
+                      "city": null,
+                      "country": null,
+                      "program_of_interest": null,
+                      "been_a_mentor": null,
+                      "invite_code": null,
+                      "isAdmin": false,
+                      "isMentor": false,
+                      "isMentorManager": true
+                    }
+                  ],
+                  "mentorManagersCount": 3,
+                  "mentors": [
+                    {
+                      "id": 15,
+                      "email": "test25@gmail.com",
+                      "remember_me_token": null,
+                      "created_at": "2023-06-05T19:24:22.989+01:00",
+                      "updated_at": "2023-06-05T19:24:22.989+01:00",
+                      "first_name": "Just Another",
+                      "last_name": "User",
+                      "meta": null,
+                      "bio": "I don't have a bio",
+                      "profile_image_path": null,
+                      "social_media_links": null,
+                      "deleted_at": null,
+                      "role_id": 2,
+                      "website": null,
+                      "city": null,
+                      "country": null,
+                      "program_of_interest": null,
+                      "been_a_mentor": null,
+                      "invite_code": null,
+                      "isAdmin": false,
+                      "isMentor": true,
+                      "isMentorManager": false
+                    },
+                    {
+                      "id": 16,
+                      "email": "test26@gmail.com",
+                      "remember_me_token": null,
+                      "created_at": "2023-06-05T19:24:23.092+01:00",
+                      "updated_at": "2023-06-05T19:24:23.092+01:00",
+                      "first_name": "Dan",
+                      "last_name": "Mike",
+                      "meta": null,
+                      "bio": "I don't have a bio",
+                      "profile_image_path": null,
+                      "social_media_links": null,
+                      "deleted_at": null,
+                      "role_id": 2,
+                      "website": null,
+                      "city": null,
+                      "country": null,
+                      "program_of_interest": null,
+                      "been_a_mentor": null,
+                      "invite_code": null,
+                      "isAdmin": false,
+                      "isMentor": true,
+                      "isMentorManager": false
+                    },
+                    {
+                      "id": 17,
+                      "email": "test27@gmail.com",
+                      "remember_me_token": null,
+                      "created_at": "2023-06-05T19:24:23.197+01:00",
+                      "updated_at": "2023-06-05T19:24:23.198+01:00",
+                      "first_name": "Test",
+                      "last_name": "Test",
+                      "meta": null,
+                      "bio": "I don't have a bio",
+                      "profile_image_path": null,
+                      "social_media_links": null,
+                      "deleted_at": null,
+                      "role_id": 2,
+                      "website": null,
+                      "city": null,
+                      "country": null,
+                      "program_of_interest": null,
+                      "been_a_mentor": null,
+                      "invite_code": null,
+                      "isAdmin": false,
+                      "isMentor": true,
+                      "isMentorManager": false
+                    }
+                  ],
+                  "mentorsCount": 3,
+                  "programs": [
+                    {
+                      "id": 5,
+                      "user_id": 5,
+                      "name": "GADS - Google Africa Developer Scholarship Search Trial 5",
+                      "description": "GADS Desc 1",
+                      "is_archive": false,
+                      "created_at": "2023-05-11T09:04:37.408+01:00",
+                      "updated_at": "2023-05-11T09:04:37.408+01:00",
+                      "gravatar": null
+                    },
+                    {
+                      "id": 6,
+                      "user_id": 1,
+                      "name": "GADS - Google Africa Developer Scholarship Search Trial 7",
+                      "description": "GADS Desc 1",
+                      "is_archive": false,
+                      "created_at": "2023-05-11T09:04:37.572+01:00",
+                      "updated_at": "2023-05-11T09:04:37.572+01:00",
+                      "gravatar": null
+                    },
+                    {
+                      "id": 7,
+                      "user_id": 2,
+                      "name": "GADS - Google Africa Developer Scholarship Search Trial 8",
+                      "description": "GADS Desc 1",
+                      "is_archive": true,
+                      "created_at": "2023-05-11T09:04:37.736+01:00",
+                      "updated_at": "2023-05-22T14:20:15.234+01:00",
+                      "gravatar": null
+                    },
+                    {
+                      "id": 8,
+                      "user_id": 3,
+                      "name": "GADS - Google Africa Developer Scholarship Search Trial 9",
+                      "description": "GADS Desc 1",
+                      "is_archive": false,
+                      "created_at": "2023-05-11T09:04:37.900+01:00",
+                      "updated_at": "2023-05-11T09:04:37.900+01:00",
+                      "gravatar": null
+                    }
+                  ],
+                  "programsCount": 4,
+                  "recentRequests": [
+                    {
+                      "id": 17,
+                      "email": "test27@gmail.com",
+                      "remember_me_token": null,
+                      "created_at": "2023-06-05T19:24:23.197+01:00",
+                      "updated_at": "2023-06-05T19:24:23.198+01:00",
+                      "first_name": "Test",
+                      "last_name": "Test",
+                      "meta": null,
+                      "bio": "I don't have a bio",
+                      "profile_image_path": null,
+                      "social_media_links": null,
+                      "deleted_at": null,
+                      "role_id": 2,
+                      "website": null,
+                      "city": null,
+                      "country": null,
+                      "program_of_interest": null,
+                      "been_a_mentor": null,
+                      "invite_code": null,
+                      "isAdmin": false,
+                      "isMentor": true,
+                      "isMentorManager": false
+                    },
+                    {
+                      "id": 16,
+                      "email": "test26@gmail.com",
+                      "remember_me_token": null,
+                      "created_at": "2023-06-05T19:24:23.092+01:00",
+                      "updated_at": "2023-06-05T19:24:23.092+01:00",
+                      "first_name": "Dan",
+                      "last_name": "Mike",
+                      "meta": null,
+                      "bio": "I don't have a bio",
+                      "profile_image_path": null,
+                      "social_media_links": null,
+                      "deleted_at": null,
+                      "role_id": 2,
+                      "website": null,
+                      "city": null,
+                      "country": null,
+                      "program_of_interest": null,
+                      "been_a_mentor": null,
+                      "invite_code": null,
+                      "isAdmin": false,
+                      "isMentor": true,
+                      "isMentorManager": false
+                    },
+                    {
+                      "id": 15,
+                      "email": "test25@gmail.com",
+                      "remember_me_token": null,
+                      "created_at": "2023-06-05T19:24:22.989+01:00",
+                      "updated_at": "2023-06-05T19:24:22.989+01:00",
+                      "first_name": "Just Another",
+                      "last_name": "User",
+                      "meta": null,
+                      "bio": "I don't have a bio",
+                      "profile_image_path": null,
+                      "social_media_links": null,
+                      "deleted_at": null,
+                      "role_id": 2,
+                      "website": null,
+                      "city": null,
+                      "country": null,
+                      "program_of_interest": null,
+                      "been_a_mentor": null,
+                      "invite_code": null,
+                      "isAdmin": false,
+                      "isMentor": true,
+                      "isMentorManager": false
+                    },
+                    {
+                      "id": 14,
+                      "email": "test24@gmail.com",
+                      "remember_me_token": null,
+                      "created_at": "2023-06-05T19:24:22.902+01:00",
+                      "updated_at": "2023-06-05T19:24:22.902+01:00",
+                      "first_name": "Annoying",
+                      "last_name": "User",
+                      "meta": null,
+                      "bio": "I don't have a bio",
+                      "profile_image_path": null,
+                      "social_media_links": null,
+                      "deleted_at": null,
+                      "role_id": 3,
+                      "website": null,
+                      "city": null,
+                      "country": null,
+                      "program_of_interest": null,
+                      "been_a_mentor": null,
+                      "invite_code": null,
+                      "isAdmin": false,
+                      "isMentor": false,
+                      "isMentorManager": true
+                    },
+                    {
+                      "id": 13,
+                      "email": "test23@gmail.com",
+                      "remember_me_token": null,
+                      "created_at": "2023-06-05T19:24:22.797+01:00",
+                      "updated_at": "2023-06-05T19:24:22.798+01:00",
+                      "first_name": "Another",
+                      "last_name": "User",
+                      "meta": null,
+                      "bio": "I don't have a bio",
+                      "profile_image_path": null,
+                      "social_media_links": null,
+                      "deleted_at": null,
+                      "role_id": 3,
+                      "website": null,
+                      "city": null,
+                      "country": null,
+                      "program_of_interest": null,
+                      "been_a_mentor": null,
+                      "invite_code": null,
+                      "isAdmin": false,
+                      "isMentor": false,
+                      "isMentorManager": true
+                    },
+                    {
+                      "id": 12,
+                      "email": "test22@gmail.com",
+                      "remember_me_token": null,
+                      "created_at": "2023-06-05T19:24:22.703+01:00",
+                      "updated_at": "2023-06-05T19:24:22.703+01:00",
+                      "first_name": "Segun",
+                      "last_name": "Oyinlola",
+                      "meta": null,
+                      "bio": "I don't have a bio",
+                      "profile_image_path": null,
+                      "social_media_links": null,
+                      "deleted_at": null,
+                      "role_id": 3,
+                      "website": null,
+                      "city": null,
+                      "country": null,
+                      "program_of_interest": null,
+                      "been_a_mentor": null,
+                      "invite_code": null,
+                      "isAdmin": false,
+                      "isMentor": false,
+                      "isMentorManager": true
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mentor-managers/3/tasks": {
+      "get": {
+        "tags": [
+          "Mentor Managers"
+        ],
+        "summary": "Get a Mentor Manager Task",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer NA.1a0O5Zkb-VtDVECeWE8rfxYR_JEiJByKWBh1WxvSOQuns6iJPQbW-jrIMLq9"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "success",
+                  "message": "Mentor Manager Tasks fetched successfully",
+                  "data": [
+                    {
+                      "id": 4,
+                      "title": "Test library article written in Java",
+                      "description": "This is another task",
+                      "meta": "Some metadata about the task",
+                      "creatorUserId": 1,
+                      "createdBy": "aliyu Olad",
+                      "startDate": "2023-05-06T19:59:50.376+01:00",
+                      "endDate": "2023-05-20T21:59:50.376+01:00",
+                      "typeOfReport": "Task Report",
+                      "createdAt": "2023-05-07T19:10:55.893+01:00",
+                      "updatedAt": "2023-05-07T19:10:55.894+01:00",
+                      "reports": [],
+                      "taskReportCount": 0
+                    },
+                    {
+                      "id": 5,
+                      "title": "Another Test library article written in Java",
+                      "description": "This is another task",
+                      "meta": "Some metadata about the task",
+                      "creatorUserId": 1,
+                      "createdBy": "aliyu Olad",
+                      "startDate": "2023-05-06T19:59:50.376+01:00",
+                      "endDate": "2023-05-20T21:59:50.376+01:00",
+                      "typeOfReport": "Task Report",
+                      "createdAt": "2023-05-07T19:11:14.179+01:00",
+                      "updatedAt": "2023-05-07T19:11:14.179+01:00",
+                      "reports": [],
+                      "taskReportCount": 0
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mentor-manager/3/tasks": {
+      "get": {
+        "tags": [
+          "Mentor Managers"
+        ],
+        "summary": "Search a Mentor Manager Task",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer MQ.QVByp4l9XpUni1-tjL-Rz2AGInLsRcolD9KGad85wgQHTBwyqG-AyZmyz-in"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "test"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "success",
+                  "message": "Mentor Manager Tasks fetched successfully",
+                  "data": [
+                    {
+                      "id": 4,
+                      "title": "Test library article written in Java",
+                      "description": "This is another task",
+                      "meta": "Some metadata about the task",
+                      "creatorUserId": 1,
+                      "createdBy": "aliyu Olad",
+                      "startDate": "2023-05-06T19:59:50.376+01:00",
+                      "endDate": "2023-05-20T21:59:50.376+01:00",
+                      "typeOfReport": "Task Report",
+                      "createdAt": "2023-05-07T19:10:55.893+01:00",
+                      "updatedAt": "2023-05-07T19:10:55.894+01:00",
+                      "reports": [],
+                      "taskReportCount": 0
+                    },
+                    {
+                      "id": 5,
+                      "title": "Another Test library article written in Java",
+                      "description": "This is another task",
+                      "meta": "Some metadata about the task",
+                      "creatorUserId": 1,
+                      "createdBy": "aliyu Olad",
+                      "startDate": "2023-05-06T19:59:50.376+01:00",
+                      "endDate": "2023-05-20T21:59:50.376+01:00",
+                      "typeOfReport": "Task Report",
+                      "createdAt": "2023-05-07T19:11:14.179+01:00",
+                      "updatedAt": "2023-05-07T19:11:14.179+01:00",
+                      "reports": [],
+                      "taskReportCount": 0
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mentor-manager/": {
+      "get": {
+        "tags": [
+          "Mentor Managers"
+        ],
+        "summary": "Get All Mentor Managers",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer MQ.QVByp4l9XpUni1-tjL-Rz2AGInLsRcolD9KGad85wgQHTBwyqG-AyZmyz-in"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "success",
+                  "message": "Fetched all mentor mangers successful",
+                  "mentorManagers": [
+                    {
+                      "id": 3,
+                      "first_name": "Segun",
+                      "last_name": "Oyinlola",
+                      "isAdmin": false,
+                      "isMentor": false,
+                      "isMentorManager": false
+                    },
+                    {
+                      "id": 4,
+                      "first_name": "Another",
+                      "last_name": "User",
+                      "isAdmin": false,
+                      "isMentor": false,
+                      "isMentorManager": false
+                    },
+                    {
+                      "id": 5,
+                      "first_name": "Annoying",
+                      "last_name": "User",
+                      "isAdmin": false,
+                      "isMentor": false,
+                      "isMentorManager": false
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mentor-managers/3/mentors": {
+      "get": {
+        "tags": [
+          "Mentor Managers"
+        ],
+        "summary": "Get All Mentors of A MentorManager",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer MQ.QVByp4l9XpUni1-tjL-Rz2AGInLsRcolD9KGad85wgQHTBwyqG-AyZmyz-in"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "success",
+                  "message": "Fetched all mentor mangers successful",
+                  "mentorManagers": [
+                    {
+                      "id": 3,
+                      "first_name": "Segun",
+                      "last_name": "Oyinlola",
+                      "isAdmin": false,
+                      "isMentor": false,
+                      "isMentorManager": false
+                    },
+                    {
+                      "id": 4,
+                      "first_name": "Another",
+                      "last_name": "User",
+                      "isAdmin": false,
+                      "isMentor": false,
+                      "isMentorManager": false
+                    },
+                    {
+                      "id": 5,
+                      "first_name": "Annoying",
+                      "last_name": "User",
+                      "isAdmin": false,
+                      "isMentor": false,
+                      "isMentorManager": false
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mentor-manager/4/3": {
+      "delete": {
+        "tags": [
+          "Mentor Managers"
+        ],
+        "summary": "Remove a Mentor Manager from a Task",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer MQ.QVByp4l9XpUni1-tjL-Rz2AGInLsRcolD9KGad85wgQHTBwyqG-AyZmyz-in"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "success",
+                  "message": "Mentor manager removed from task"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/task-reports/3": {
+      "post": {
+        "tags": [
+          "Task Reports"
+        ],
+        "summary": "Create A Task Report",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "achievement": "Another achievement recorded",
+                  "blocker": "Baddass, no blockers for now shaaa",
+                  "recommendation": "No recommendation for now shaaa"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer Mw.RRV6oSYpb7-90njmmfpl_Fvm-4Lh9d4Sw1iHOilWu__wYCYo-vE_mjBzTyQT"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "success",
+                  "message": "Tasks report successfully created",
+                  "responseData": {
+                    "report": {
+                      "task_id": "3",
+                      "mentor_id": 5,
+                      "achievement": "Another achievement recorded",
+                      "blocker": "Baddass, no blockers for now shaaa",
+                      "recommendation": "No recommendation for now shaaa",
+                      "created_at": "2023-05-06T21:01:13.269+01:00",
+                      "updated_at": "2023-05-06T21:01:13.269+01:00",
+                      "id": 3
+                    },
+                    "task": {
+                      "id": 3,
+                      "title": "Room library article written in Java",
+                      "creatorUserId": 1,
+                      "createdBy": "aliyu Olad",
+                      "startDate": "2023-05-06T19:59:50.376+01:00",
+                      "endDate": "2023-05-20T21:59:50.376+01:00"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Task Reports"
+        ],
+        "summary": "Edit A Task Report",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "title": "Room library article written in Java",
+                  "description": "This is another task edited",
+                  "meta": "Some metadata about the task",
+                  "startDate": "2023-05-06T19:59:50.376+01:00",
+                  "endDate": "2023-05-20T21:59:50.376+01:00",
+                  "typeOfReport": "Task Report",
+                  "mentors": [
+                    6,
+                    7,
+                    8
+                  ],
+                  "mentorManagers": [
+                    5
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer Mw.RRV6oSYpb7-90njmmfpl_Fvm-4Lh9d4Sw1iHOilWu__wYCYo-vE_mjBzTyQT"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "success",
+                  "message": "Task Updated Successfully",
+                  "task": {
+                    "id": 3,
+                    "title": "Room library article written in Java",
+                    "description": "This is another task edited",
+                    "meta": "Some metadata about the task",
+                    "user_id": 1,
+                    "start_date": "2023-05-06T19:59:50.376+01:00",
+                    "end_date": "2023-05-20T21:59:50.376+01:00",
+                    "type_of_report": "Task Report",
+                    "deleted_at": null,
+                    "created_at": "2023-05-06T20:30:09.804+01:00",
+                    "updated_at": "2023-05-06T20:33:07.022+01:00"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Program Reports"
+        ],
+        "summary": "Get a Program Report",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer MQ.QVByp4l9XpUni1-tjL-Rz2AGInLsRcolD9KGad85wgQHTBwyqG-AyZmyz-in"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "success",
+                  "message": "Report fetched successfully",
+                  "result": {
+                    "id": 2,
+                    "achievement": "Another achievement recorded",
+                    "blocker": "Baddass, no blockers for now shaaa",
+                    "recommendation": "No recommendation for now shaaa",
+                    "program": {
+                      "id": 26,
+                      "title": "Test-GADS - Google Africa Developer Scholarship Search Trial 2_test",
+                      "creatorUserId": 1,
+                      "createdBy": "Aliyu Olateju"
+                    },
+                    "mentorManager": {
+                      "id": 3,
+                      "firstName": "Segun",
+                      "lastName": "Oyinlola"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/task-reports": {
+      "get": {
+        "tags": [
+          "Task Reports"
+        ],
+        "summary": "Get all Task Reports",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer NA.1a0O5Zkb-VtDVECeWE8rfxYR_JEiJByKWBh1WxvSOQuns6iJPQbW-jrIMLq9"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "success",
+                  "message": "All Task reports fetched successfully",
+                  "responseData": [
+                    {
+                      "id": 3,
+                      "achievement": "Another achievement recorded",
+                      "blocker": "Baddass, no blockers for now shaaa",
+                      "recommendation": "No recommendation for now shaaa",
+                      "task": {
+                        "id": 3,
+                        "title": "Room library article written in Java",
+                        "creatorUserId": 1,
+                        "createdBy": "aliyu Olad",
+                        "startDate": "2023-05-06T19:59:50.376+01:00",
+                        "endDate": "2023-05-20T21:59:50.376+01:00"
+                      },
+                      "mentorManager": {
+                        "id": 5,
+                        "firstName": "Annoying",
+                        "lastName": "User"
+                      }
+                    },
+                    {
+                      "id": 2,
+                      "achievement": "Another achievement recorded",
+                      "blocker": "Baddass, no blockers for now",
+                      "recommendation": "No recommendation for now shaaa",
+                      "task": {
+                        "id": 3,
+                        "title": "Room library article written in Java",
+                        "creatorUserId": 1,
+                        "createdBy": "aliyu Olad",
+                        "startDate": "2023-05-06T19:59:50.376+01:00",
+                        "endDate": "2023-05-20T21:59:50.376+01:00"
+                      },
+                      "mentorManager": {
+                        "id": 5,
+                        "firstName": "Annoying",
+                        "lastName": "User"
+                      }
+                    },
+                    {
+                      "id": 1,
+                      "achievement": "Another achievement",
+                      "blocker": "Baddass, no blockers for now",
+                      "recommendation": "No recommendation for now",
+                      "task": {
+                        "id": 3,
+                        "title": "Room library article written in Java",
+                        "creatorUserId": 1,
+                        "createdBy": "aliyu Olad",
+                        "startDate": "2023-05-06T19:59:50.376+01:00",
+                        "endDate": "2023-05-20T21:59:50.376+01:00"
+                      },
+                      "mentorManager": {
+                        "id": 5,
+                        "firstName": "Annoying",
+                        "lastName": "User"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/task-reports/3/pdf": {
+      "get": {
+        "tags": [
+          "Program Reports"
+        ],
+        "summary": "Download Task Copy",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer MQ.QVByp4l9XpUni1-tjL-Rz2AGInLsRcolD9KGad85wgQHTBwyqG-AyZmyz-in"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "success",
+                  "message": "Task fetched Successfully",
+                  "result": {
+                    "id": 3,
+                    "title": "Room library article written in Java",
+                    "description": "This is another task edited",
+                    "meta": "Some metadata about the task",
+                    "creatorUserId": 1,
+                    "createdBy": "aliyu Olad",
+                    "startDate": "2023-05-06T19:59:50.376+01:00",
+                    "endDate": "2023-05-20T21:59:50.376+01:00",
+                    "typeOfReport": "Task Report",
+                    "createdAt": "2023-05-06T20:30:09.804+01:00",
+                    "updatedAt": "2023-05-06T20:38:04.212+01:00",
+                    "mentors": [
+                      {
+                        "id": 6,
+                        "firstName": "Just Another",
+                        "lastName": "User"
+                      },
+                      {
+                        "id": 7,
+                        "firstName": "Dan",
+                        "lastName": "Mike"
+                      },
+                      {
+                        "id": 8,
+                        "firstName": "Test",
+                        "lastName": "Test"
+                      }
+                    ],
+                    "mentorManagers": [
+                      {
+                        "id": 5,
+                        "firstName": "Annoying",
+                        "lastName": "User"
+                      }
+                    ],
+                    "reports": [],
+                    "mentorCount": 3,
+                    "mentorManagerCount": 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/program-reports/26": {
+      "post": {
+        "tags": [
+          "Program Reports"
+        ],
+        "summary": "Create A Program Report",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "achievement": "Another achievement recorded",
+                  "blocker": "Baddass, no blockers for now shaaa",
+                  "recommendation": "No recommendation for now shaaa"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer ODg.YP1bN6d78TGHH6KwpKWG-6gbmEKCMt8uFjY3mrmnFOhVKnFOpLmV2ZMtThB0"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "message": "Program report created",
+                  "programId": 26,
+                  "programTitle": "Test-GADS - Google Africa Developer Scholarship Search Trial 2_test",
+                  "programCreator": "Aliyu Olateju",
+                  "achievement": "Another achievement recorded",
+                  "blocker": "Baddass, no blockers for now shaaa",
+                  "recommendation": "No recommendation for now shaaa"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Program Reports"
+        ],
+        "summary": "Edit A Program Report",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "title": "Room library article written in Java",
+                  "description": "This is another task edited",
+                  "meta": "Some metadata about the task",
+                  "startDate": "2023-05-06T19:59:50.376+01:00",
+                  "endDate": "2023-05-20T21:59:50.376+01:00",
+                  "typeOfReport": "Task Report",
+                  "mentors": [
+                    6,
+                    7,
+                    8
+                  ],
+                  "mentorManagers": [
+                    5
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer ODg.YP1bN6d78TGHH6KwpKWG-6gbmEKCMt8uFjY3mrmnFOhVKnFOpLmV2ZMtThB0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "success",
+                  "message": "Task Updated Successfully",
+                  "task": {
+                    "id": 3,
+                    "title": "Room library article written in Java",
+                    "description": "This is another task edited",
+                    "meta": "Some metadata about the task",
+                    "user_id": 1,
+                    "start_date": "2023-05-06T19:59:50.376+01:00",
+                    "end_date": "2023-05-20T21:59:50.376+01:00",
+                    "type_of_report": "Task Report",
+                    "deleted_at": null,
+                    "created_at": "2023-05-06T20:30:09.804+01:00",
+                    "updated_at": "2023-05-06T20:33:07.022+01:00"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/program-reports": {
+      "get": {
+        "tags": [
+          "Program Reports"
+        ],
+        "summary": "Get all Program Reports",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer NA.1a0O5Zkb-VtDVECeWE8rfxYR_JEiJByKWBh1WxvSOQuns6iJPQbW-jrIMLq9"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "success",
+                  "message": "All Task reports fetched successfully",
+                  "responseData": [
+                    {
+                      "id": 2,
+                      "achievement": "Another achievement recorded",
+                      "blocker": "Baddass, no blockers for now shaaa",
+                      "recommendation": "No recommendation for now shaaa",
+                      "task": {
+                        "id": 26,
+                        "title": "Test-GADS - Google Africa Developer Scholarship Search Trial 2_test",
+                        "creatorUserId": 1,
+                        "createdBy": "Aliyu Olateju"
+                      },
+                      "mentorManager": {
+                        "id": 3,
+                        "firstName": "Segun",
+                        "lastName": "Oyinlola"
+                      }
+                    },
+                    {
+                      "id": 1,
+                      "achievement": "Another achievement recorded",
+                      "blocker": "Baddass, no blockers for now shaaa",
+                      "recommendation": "No recommendation for now shaaa",
+                      "task": {
+                        "id": 26,
+                        "title": "Test-GADS - Google Africa Developer Scholarship Search Trial 2_test",
+                        "creatorUserId": 1,
+                        "createdBy": "Aliyu Olateju"
+                      },
+                      "mentorManager": {
+                        "id": 5,
+                        "firstName": "Annoying",
+                        "lastName": "User"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/post/": {
+      "put": {
+        "tags": [
+          "Post"
+        ],
+        "summary": "Create A Post",
+        "requestBody": {
+          "content": {}
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/chat/6/1": {
+      "get": {
+        "tags": [
+          "General"
+        ],
+        "summary": "Get All Chats",
+        "parameters": [
+          {
+            "name": "Authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "Bearer MTU.iSYUAhpQ_yIUaFhYdZCeQSa5V-hMFKvB9CGN18BosdwF4IICOGecFRMR8Zkk"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    }
+  }
 }

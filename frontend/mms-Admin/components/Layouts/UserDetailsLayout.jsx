@@ -5,6 +5,7 @@ import { ListItem } from "../atoms/ListItem";
 import { Icons } from "../atoms/Icons";
 import Image from "next/image";
 import { Button } from "../atoms/Button";
+import { Error } from "../organisms/Error";
 import { CustomTab } from "../organisms/CustomTab";
 import { useRouter } from "next/router";
 import { fetchMentorManagers, fetchMentors } from "../../pages/api/user";
@@ -22,7 +23,7 @@ const UserDetailsLayout = ({ data, children }) => {
 
   if (isLoading) return "loading...";
 
-  if (isError) return "An error occured";
+  if (isError) return <Error />;
 
   return (
     <div className="flex">
@@ -144,7 +145,7 @@ const UserDetails = ({ children, role, users }) => {
       <div
         className={`flex flex-align-center flex-justify-between ${styles.user_details_wrapper}`}>
         <div className="flex gap-10">
-          <Image 
+          <Image
             width={90}
             height={90}
             src={avatar ? avatar : "/assets/images/user_img.svg"}
@@ -157,7 +158,10 @@ const UserDetails = ({ children, role, users }) => {
                 styles.user_name
               }>{`${userDetails?.first_name} ${userDetails?.last_name}`}</h2>
             <p className={styles.designation}>
-              {getDesignation(userDetails?.isAdmin, userDetails?.isMentorManager)}
+              {getDesignation(
+                userDetails?.isAdmin,
+                userDetails?.isMentorManager,
+              )}
             </p>
           </div>
         </div>

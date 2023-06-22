@@ -11,10 +11,13 @@ import { EditPostModal,EditCommentModal } from "./EditPostModal";
 import { useEffect, useState } from "react";
 import SuccessMessage from "./SuccessMessage";
 import NoSSRWrapper from "./DisableSSR";
+import { capitalize } from "utils/capitalize";
 
 export const PostCard = ({ data, fullPost, names }) => {
   const [showEdit, setEdit] = useState(false);
   const [success, setSuccess] = useState(false);
+
+  console.log(data) 
 
   const router = useRouter();
   const handleEdit = (e, data) => {
@@ -23,7 +26,7 @@ export const PostCard = ({ data, fullPost, names }) => {
   };
 
   const handleCommentsClick = (e, id, name) => {
-    e.preventDefault();
+    e.preventDefault(); 
     router.push({
       pathname: "/discussion-forum/[id]",
       query: {
@@ -35,10 +38,10 @@ export const PostCard = ({ data, fullPost, names }) => {
   };
   return (
     <NoSSRWrapper>
-      <Row className={styles.container_width} sm={24}>
+      <Row className="w-full">
         <Card className={styles.card}>
-          <Row span={24} className={styles.row_justify}>
-            <div className={cardStyle.about_header}>
+          <Row span={24} className="flex justify-between items-start align-center">
+            <div className="flex ">
               <Avatar
                 size={45}
                 icon={
@@ -53,7 +56,7 @@ export const PostCard = ({ data, fullPost, names }) => {
                 <p className={styles.title}>
                   {names
                     ? names
-                    : data?.user?.first_name + " " + data?.user?.last_name}
+                    : capitalize(data?.user?.first_name ) + " " + capitalize(data?.user?.last_name)}
                 </p>
                 <p className={styles.role}>{getUserRole(data?.user)}</p>
               </div>
@@ -62,7 +65,7 @@ export const PostCard = ({ data, fullPost, names }) => {
               <Iconn name="Horizon" />
             </div>
           </Row>
-
+ 
           <Link
             href={{
               pathname: "/discussion-forum/[id]",
@@ -75,7 +78,7 @@ export const PostCard = ({ data, fullPost, names }) => {
             <div>
               <div className={styles.row_mt}>
                 <p className={styles.data_title}>
-                  {data?.title?.toUpperCase()}
+                  {capitalize(data?.title)}
                 </p>
               </div>
               <Row>
@@ -95,8 +98,8 @@ export const PostCard = ({ data, fullPost, names }) => {
               </Row>
             </div>
           </Link>
-          <Row className={styles.icons_container}>
-            <Col className={styles.icons} sm={3}>
+          <Row className="pt-6 flex justify-between  items-end mt-4">
+            <div className="flex  w-32 justify-between" >
               <div onClick={handleCommentsClick}>
                 <Iconn name="Comment" />
               </div>
@@ -106,17 +109,16 @@ export const PostCard = ({ data, fullPost, names }) => {
               <div>
                 <Iconn name="BookMark" />
               </div>
-            </Col>
-            <Col sm={21} className={styles.clock_icon}>
-              <div>
-                <span>
+            </div>
+          
+              <div className="flex justify-end items-center" >
+                <div>
                   <Iconn name="Clock" />
-                </span>
-                <span className={styles.clock}>
+                </div>
+                <div className={styles.clock}>
                   {moment(data.created_at).fromNow(true)}
-                </span>
+                </div>
               </div>
-            </Col>
           </Row>
         </Card>
 
