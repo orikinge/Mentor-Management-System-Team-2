@@ -2,6 +2,21 @@ import { DateTime } from 'luxon'
 import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
 import User from './User'
 
+
+/**
+ * @swagger
+ * components:
+ * schemas:
+ *      User:
+ *        type: object
+ *        properties:
+ *          name:
+ *            type: string
+ *          email:
+ *            type: string
+ *
+ */
+
 export default class BroadcastMessage extends BaseModel {
   @column({ isPrimary: true })
   public id: number

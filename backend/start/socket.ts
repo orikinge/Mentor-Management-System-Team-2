@@ -10,7 +10,7 @@ Ws.io.on('connection', (socket) => {
 
   socket.on('emit', () => {})
 })
-console.log('test socket')
+
 Ws.io.use((socket, next) => {
   const username = socket.handshake.auth.username
   if (!username) {

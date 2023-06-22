@@ -8,6 +8,7 @@
     "build"
   ],
   "compilerOptions": {
+    "removeComments": false,
     "outDir": "build",
     "rootDir": "./",
     "sourceMap": true,
@@ -36,7 +37,8 @@
       "@adonisjs/auth",
       "@adonisjs/mail",
       "@adonisjs/ally",
-      "adonis5-swagger"
+      "adonis5-swagger",
+      "@adonisjs/view"
     ]
   }
 }
