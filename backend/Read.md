@@ -1,26 +1,32 @@
-# Mentor-Management-System
+# [Mentor-Management-System](https://mms-team-2.ue.r.appspot.com/)
 
-Mentors Management system is a people management app that enables proper.
-coordination of mentors needed to execute projects, ranging from recruitment to off-boarding. Ensue to go through the app doc below to read more and follow all the instructions.
+Mentors Management system is a people management app that enables proper coordination of mentors needed to execute projects, ranging from recruitment to off-boarding. Ensue to go through the app doc below to read more and follow all the instructions.
 
-[Contributor's wiki](https://github.com/ALCOpenSource/Mentor-Management-System-Team-2/wiki)
+### Server url: https://server-dot-mms-team-2.ue.r.appspot.com/api/v1/
+### Documentation url: https://server-dot-mms-team-2.ue.r.appspot.com/docs
+
+## Prerequisites
+
+- Node.js (Version 12 or higher)
+- npm (Node package manager)
 
 ## Techonologies
 
-- Frontend
-- Backend
-- Database
-- Deployment env
+- [AdonisJs](https://adonisjs.com/) 
+- [PostgreSQL](https://www.postgresql.org/)
+- [Pusher](https://pusher.com/)
 
 ## How to contributing to this project
 
 To get it up and running on your local machine, follow the steps below:
 
-- Clone the repo with the command \`git clonn
+- Fork the Project [here](https://github.com/ALCOpenSource/Mentor-Management-System-Team-2)
+  
+- Clone the repo 
 
 - Indicate your interest to work on any issue. "eg. I want to work on this issue or I am interested in this issue"
 
-- EOpen a feature branch from the 'develop' branch. eg feat/
+- Open a feature branch from the 'develop' branch. eg feat/
 
 - Make sure the name is descriptive for your branch but not too long. Lead with what the the branch is doing eg new feature or bug but follow this pattern `type/branch-description` eg `feature/add-login-functionality`.
 
@@ -32,7 +38,7 @@ To get it up and running on your local machine, follow the steps below:
 
 - Open a pull request against the develop branch and request a review from your
 
-### Frontend
+### [Frontend](https://mms-team-2.ue.r.appspot.com/)
 
 - Navigate to the project directory with the command `cd Mentor-Management-System-Team-1`
 
@@ -44,9 +50,19 @@ To get it up and running on your local machine, follow the steps below:
 
 - Start the app with the command `npm run dev`
 
-- Navigate to the app on your browser with the url `http://localhost:****` where \*\*\*\* is the port number displayed on your terminal.#### Backend
+- Navigate to the app on your browser with the url `http://localhost:****` where \*\*\*\* is the port number displayed on your terminal.
 
-Backend
+### [Backend](https://server-dot-mms-team-2.ue.r.appspot.com/api/v1/)
+
+- Navigate to the project directory with the command `cd Mentor-Management-System-Team-2`
+
+- Navigate to the backend directory with the command `cd backend`
+
+- Install all the dependencies with the command `npm install`
+
+- Start the app with the command `npm run dev`
+
+- Interact with the API on this url `http://localhost:****/api/v1/[endpoint]` where \*\*\*\* is the port number displayed on your terminal.
 
 #### Design
 
@@ -63,41 +79,34 @@ Raise any identified issue with your mentor.
 
 ##### Local Database Setup
 
-1.  Install and create a MySQL database (Can be change)
+1.  Install and create a PostgreSQL database
 2.  Create a .env file in the root directory
 3.  Set the environment variables with your local database credentials (see .env.example for reference)
 
 ##### Installation
 
 ```bash
-$yarn install
+$npm install
 ```
 
 ##### Running the app
 
 ```bash
 # development
-$ yarn start
+$ npm run start
 
 # watch mode
-$ yarn dev
+$ npm run dev
 
 # production mode
-$ yarn start:prod
+$ npm run build
 ```
 
 ##### Test
 
 ```bash
 # unit tests
-$ yarn run test
-
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
-```
+$ npm run test
 
 ##### Contributors
 
