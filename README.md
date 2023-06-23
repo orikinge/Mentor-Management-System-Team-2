@@ -8,6 +8,8 @@ coordination of mentors needed to execute projects, ranging from recruitment to 
 ## Techonologies
 
 *   Frontend
+This section lists major frameworks/libraries used for this project.
+
 [![React][react.dev]][react-url]
 [![Nextjs][nextjs]][next-url]
 [![Tailwind][tailwind]][tailwind-url]
@@ -22,8 +24,6 @@ coordination of mentors needed to execute projects, ranging from recruitment to 
     - Node.js (Version 16 or higher)
     - npm (Node package manager)
 
-    ## Techonologies
-
     - [AdonisJs](https://adonisjs.com/) 
     - [Pusher](https://pusher.com/)
 
@@ -31,8 +31,9 @@ coordination of mentors needed to execute projects, ranging from recruitment to 
     - [PostgreSQL](https://www.postgresql.org/)
 
 DOCUMENTATION CAN BE FOUND
-[Frontend Documentation](/frontend/mms-Admin/README.md)
-[Backend Documentation](/backend/README.md)
+
+- [Frontend Documentation](/frontend/mms-Admin/README.md)
+- [Backend Documentation](/backend/README.md)
 
 ## How to contributing to this project
 
