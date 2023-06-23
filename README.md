@@ -8,9 +8,31 @@ coordination of mentors needed to execute projects, ranging from recruitment to 
 ## Techonologies
 
 *   Frontend
+[![React][react.dev]][react-url]
+[![Nextjs][nextjs]][next-url]
+[![Tailwind][tailwind]][tailwind-url]
+[![Antd][antd]][antd-url]
+
+    - [React](https://react.dev)
+    - [Nextjs](https://nextjs.org)
+    - [Tailwindcss](https://tailwindcss.com/)
+    - [Ant Design](https://ant.design)
+
 *   Backend
+    - Node.js (Version 16 or higher)
+    - npm (Node package manager)
+
+    ## Techonologies
+
+    - [AdonisJs](https://adonisjs.com/) 
+    - [Pusher](https://pusher.com/)
+
 *   Database
-*   Deployment env
+    - [PostgreSQL](https://www.postgresql.org/)
+
+DOCUMENTATION CAN BE FOUND
+[Frontend Documentation](/frontend/mms-Admin/README.md)
+[Backend Documentation](/backend/README.md)
 
 ## How to contributing to this project
 
