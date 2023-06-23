@@ -2,11 +2,10 @@ import { Modal, Row, Col, Input, message, Upload } from "antd";
 import { useState, useEffect } from "react";
 import SuccessMessage from "./SuccessMessage";
 import {
-  CustomButton,
   CustomInput,
   CustomTextArea,
 } from "./formInputs/CustomInput";
-import Button from "./Buttons/PrimaryBtn"
+import {Button} from "./atoms/Button"
 import styles from "../styles/admin/discussionForum.module.css";
 import { Icon } from "./Icon/Icon";
 import EmojiPicker from "emoji-picker-react";
@@ -110,13 +109,13 @@ export const CustomFormModal = ({
           onOk={handleSubmit}
           width={866}
           footer={
-            <CustomButton
+            <Button
               loading={confirmLoading}
               onClick={handleSubmit}
               variant="normal"
               size="large">
               Post to forum
-            </CustomButton>
+            </Button>
           }
           confirmLoading={confirmLoading}
           closable={false}>

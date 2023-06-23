@@ -39,9 +39,8 @@
 }
 
 .button {
-  background-color: #058b94;
-  border-color: none;
   box-shadow: none;
+  background-color: #058b94;
   border: none;
   height: 47px;
   border-radius: 10px;

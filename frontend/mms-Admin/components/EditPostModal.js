@@ -1,16 +1,16 @@
-import { Button, Modal, Row, Col, Input, message, Upload } from "antd";
+import { Modal, Row, Col, Input, message, Upload } from "antd";
 import { useState, useEffect } from "react";
 import SuccessMessage from "./SuccessMessage";
 import {
-  CustomButton,
   CustomInput,
   CustomTextArea,
 } from "./formInputs/CustomInput";
-
+import { Button } from "./atoms/Button";
 import styles from "../styles/admin/discussionForum.module.css";
 import { Icon } from "./Icon/Icon";
 import EmojiPicker from "emoji-picker-react";
 import { editPost } from "pages/api/forum";
+
 
 export const EditPostModal = ({
   newTopic,
@@ -107,9 +107,9 @@ export const EditPostModal = ({
         onOk={handleSubmit}
         width={866}
         footer={
-          <CustomButton loading={confirmLoading} onClick={handleSubmit}>
+          <Button  variant='normal' size="large" loading={confirmLoading} onClick={handleSubmit}>
             Save Changes
-          </CustomButton>
+          </Button>
         }
         confirmLoading={confirmLoading}
         closable={false}>

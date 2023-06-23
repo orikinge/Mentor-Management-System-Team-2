@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
-import { Row, Col, Input, Button, message } from "antd";
+import { Row, Col, Input,  message } from "antd";
+import { Button } from "components/atoms/Button";
 import SplashScreen from "../components/SplashScreen";
 import SuccessMessage from "../components/SuccessMessage";
 import styles from "../components/componentStyles/passwordreset.module.css";
@@ -13,8 +14,8 @@ function NewPassword() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newPass, setNewPassword] = useState("");
   const [token, setToken] = useState("");
-  const [loading, setLoading]= useState(false)
-  const [message, setMessage]=useState("")
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
 
   const router = useRouter();
   useEffect(() => {
@@ -33,32 +34,31 @@ function NewPassword() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const valid = validateInputs({ newPass });
-     if(!newPass){
-      setLoading(false)
-      return 
-     }
+    if (!newPass) {
+      setLoading(false);
+      return;
+    }
     if (valid) {
       try {
-        setLoading(true)
+        setLoading(true);
 
         const response = await newPassword({
           password: newPassword,
           token: token,
         });
         if (response.status === 200) {
-          setLoading(false)
+          setLoading(false);
 
           setIsModalOpen(true);
         }
 
         if (response.status === 401 || response.status === 400) {
-          setLoading(false)
+          setLoading(false);
 
           setMessage(response.message);
         }
       } catch (e) {
-        setLoading(false)
-
+        setLoading(false);
       }
     }
   };
@@ -87,7 +87,12 @@ function NewPassword() {
               password.
             </p>
 
-            <Button loading ={loading} onClick={handleSubmit} className={styles.button}>
+            <Button
+              variant="normal"
+              size="large"
+              loading={loading}
+              onClick={handleSubmit}
+              className={styles.button}>
               Reset Password
             </Button>
           </div>

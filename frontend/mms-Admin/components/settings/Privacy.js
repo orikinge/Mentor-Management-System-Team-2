@@ -3,6 +3,8 @@ import debounce from "lodash.debounce";
 import styles from "../componentStyles/privacy.module.scss"
 import ToggleInput from "components/ToggleInput";
 import SuccessMessage from "components/SuccessMessage";
+import {  CustomLoader } from "components/atoms/Loader";
+
 
 import { fetchPrivacySettings, updatePrivacySettings } from "pages/api/setting";
 import { useStateValue } from "store/context";
@@ -41,6 +43,8 @@ const Privacy = () => {
   const [settings, setSettings] = useState(initialSettings);
   const [modalOpen, setModalOpen] = useState(false);
   const { dispatch } = useStateValue();
+  const [isUpdating, setIsUpdating]= useState(false)
+
 
   useEffect(() => {
     const getSettings = async () => {
@@ -56,6 +60,8 @@ const Privacy = () => {
   const handleChange = (name) => {
     setSettings((prevState) => {
       handleUpdate({ ...prevState, [name]: !prevState[name] });
+      setIsUpdating(true)
+
       return {
         ...prevState, [name]: !prevState[name]
       }
@@ -77,29 +83,33 @@ const Privacy = () => {
           type: "UPDATE_PRIVACY_SETTINGS",
           payload: response?.data
         });
+        setIsUpdating(false)
         setModalOpen(true);
       }
     } catch (error) {}
   }, 4000);
 
   return (
-    <div className={styles.main}>
-      {inputFields.map((field) => (
-        <ToggleInput
-          key={field.name}
-          label={field.label}
-          checked={settings[field.name]}
-          handleChange={() => handleChange(field.name)} />
-      ))}
+    <>
+    {isUpdating ? <CustomLoader text="Updating Privacy Settings, please wait...."/>: <div className={styles.main}>
+    {inputFields.map((field) => (
+      <ToggleInput
+        key={field.name}
+        label={field.label}
+        checked={settings[field.name]}
+        handleChange={() => handleChange(field.name)} />
+    ))}
 
-      <SuccessMessage
-        image={"/assets/images/success.png"}
-        message={"Notification Settings Saved Successfully"}
-        isModalOpen={modalOpen}
-        setIsModalOpen={handleModal}
-      />
-    </div>
+    <SuccessMessage
+      image={"/assets/images/success.png"}
+      message={"Notification Settings Saved Successfully"}
+      isModalOpen={modalOpen}
+      setIsModalOpen={handleModal}
+    />
+  </div>}
+  </>
   );
+  
 }
 
 export default Privacy;
