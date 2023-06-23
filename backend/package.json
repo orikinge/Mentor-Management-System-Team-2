@@ -19,8 +19,7 @@
     "model": "node ace make:model",
     "prepare": "cd ../../ && husky install",
     "precommit": "npm run prepare && npm run lint && npm run build",
-    "deploy": "ls && npm install && npm run build && cd build &&  ls && npm run start",
-    "postbuild": "node ace swagger:generate && cp -a docs/ build/docs"
+    "deploy": "ls && npm install && npm run build && cd build &&  ls && npm run start"
   },
   "eslintConfig": {
     "extends": [
