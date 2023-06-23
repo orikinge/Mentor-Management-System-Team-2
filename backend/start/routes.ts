@@ -215,5 +215,5 @@ Route.get('/doc/swagger.json', async ({ view }) => {
 })
 Route.get('/documentation', async ({ view }) => {
   const specUrl = '/doc/swagger.json'
-  return view.render('swagger', {specUrl})
+  return view.render('swagger', { specUrl })
 })
