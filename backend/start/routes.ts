@@ -211,7 +211,6 @@ Route.group(() => {
   })
 }).prefix('api/v1')
 Route.get('/doc/swagger.json', async ({ view }) => {
-  const specUrl = '/swagger.json'
   return view.renderRaw(fs.readFileSync(path.join(__dirname, '../docs/swagger.json')).toString())
 })
 Route.get('/documentation', async ({ view }) => {
